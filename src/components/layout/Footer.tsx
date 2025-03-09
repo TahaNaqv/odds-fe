@@ -1,4 +1,5 @@
-import { GithubIcon, Globe, Heart } from 'lucide-react';
+
+import { Twitter, Globe, Heart } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 
 const Footer = () => {
@@ -21,13 +22,13 @@ const Footer = () => {
             <Globe className="h-4 w-4" />
           </a>
           <a 
-            href="#" 
+            href="https://x.com/odds_dev" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="GitHub"
+            aria-label="Twitter"
           >
-            <GithubIcon className="h-4 w-4" />
+            <Twitter className="h-4 w-4" />
           </a>
         </div>
         
