@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Exchange, MinusCircle, PlusCircle, Ticket } from 'lucide-react';
+import { MinusCircle, PlusCircle, Ticket } from 'lucide-react';
 import { TOKENS } from '@/utils/constants';
 import useRaffle from '@/hooks/useRaffle';
 import useWallet from '@/hooks/useWallet';
