@@ -31,6 +31,11 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center">
+          <div className="font-bold text-xl text-raffle-blue">Ødds</div>
+        </Link>
+        
         {/* Navigation */}
         <nav className="hidden md:flex items-center space-x-1">
           <Link to="/">
