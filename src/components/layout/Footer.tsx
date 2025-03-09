@@ -1,4 +1,3 @@
-
 import { GithubIcon, Globe, Heart } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 
@@ -8,7 +7,7 @@ const Footer = () => {
       <Separator className="mb-6" />
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <span>© 2023 Ødds</span>
+          <span>© 2025 Ødds</span>
         </div>
         
         <div className="flex items-center gap-3">
