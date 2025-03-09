@@ -31,14 +31,6 @@ const Header = () => {
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="flex items-center">
-          <div className="flex items-center gap-2">
-            <img src="/lovable-uploads/bc184728-1779-4a59-a49f-5e98b5862224.png" alt="Ødds Logo" className="h-9 w-9" />
-            <div className="font-bold text-lg hidden sm:block">Ødds</div>
-          </div>
-        </Link>
-        
         {/* Navigation */}
         <nav className="hidden md:flex items-center space-x-1">
           <Link to="/">
