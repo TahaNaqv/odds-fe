@@ -92,13 +92,19 @@ const AutoEnroll = () => {
                   {formattedDate}
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
+              <PopoverContent 
+                className="w-auto p-0 pointer-events-auto" 
+                align="start"
+                side="bottom"
+                sideOffset={5}
+              >
                 <Calendar
                   mode="single"
                   selected={date}
                   onSelect={handleDateSelect}
                   disabled={(date) => date < today || date > maxDate}
                   initialFocus
+                  className="pointer-events-auto"
                 />
               </PopoverContent>
             </Popover>
