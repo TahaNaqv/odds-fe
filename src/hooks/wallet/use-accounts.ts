@@ -1,97 +1,95 @@
 
 import { useCallback } from 'react';
 import { toast } from '@/hooks/use-toast';
-import { formatAddress } from '@/utils/helpers';
 import { NETWORK } from '@/utils/constants';
+import { WalletState } from './wallet-types';
+
+type WalletStateUpdater = React.Dispatch<React.SetStateAction<WalletState>>;
 
 export const useAccounts = (
-  setWalletState: (updater: (prev: any) => any) => void,
-  checkNetwork: (chainId: number) => boolean
+  setWalletState: WalletStateUpdater,
+  checkNetworkStatus: () => void
 ) => {
-  // Handle account changed event
-  const handleAccountsChanged = useCallback((accounts: string[]) => {
-    if (accounts.length === 0) {
-      // User has disconnected their wallet
-      setWalletState(prev => ({
-        ...prev,
-        address: null,
-        isConnected: false,
-      }));
-      toast({
-        title: 'Wallet disconnected',
-        description: 'Your wallet has been disconnected.',
-      });
-    } else {
-      setWalletState(prev => ({
-        ...prev,
-        address: accounts[0],
-        isConnected: true,
-      }));
-    }
-  }, [setWalletState]);
+  // Handle accounts changed event
+  const handleAccountsChanged = useCallback(
+    (accounts: string[]) => {
+      console.log('Accounts changed:', accounts);
+      
+      if (accounts.length === 0) {
+        // User has disconnected all accounts
+        setWalletState(prev => ({
+          ...prev,
+          address: null,
+          isConnected: false,
+        }));
+        
+        toast({
+          title: 'Wallet disconnected',
+          description: 'Your wallet has been disconnected.',
+        });
+      } else {
+        // User has connected or switched accounts
+        const newAddress = accounts[0];
+        
+        setWalletState(prev => ({
+          ...prev,
+          address: newAddress,
+          isConnected: true,
+        }));
+        
+        checkNetworkStatus();
+        
+        toast({
+          title: 'Wallet connected',
+          description: `Connected to address: ${newAddress.slice(0, 6)}...${newAddress.slice(-4)}`,
+        });
+      }
+    },
+    [setWalletState, checkNetworkStatus]
+  );
 
   // Connect wallet
   const connectWallet = useCallback(async () => {
     if (!window.ethereum) {
       toast({
-        title: 'Wallet not found',
-        description: 'Please install MetaMask or another Web3 wallet.',
+        title: 'No wallet detected',
+        description: 'Please install MetaMask or another compatible wallet.',
         variant: 'destructive',
       });
       return;
     }
-
-    setWalletState(prev => ({ ...prev, isConnecting: true }));
-
+    
+    setWalletState(prev => ({
+      ...prev,
+      isConnecting: true,
+    }));
+    
     try {
-      // Request account access
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      
-      // Get the current chain ID
-      const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-      const chainIdNum = parseInt(chainId, 16);
-      const isCorrectNetwork = checkNetwork(chainIdNum);
-
-      setWalletState({
-        address: accounts[0],
-        isConnecting: false,
-        isConnected: true,
-        chainId: chainIdNum,
-        isCorrectNetwork,
-      });
-
-      // If not on the correct network, prompt to switch
-      if (!isCorrectNetwork) {
-        toast({
-          title: 'Wrong network',
-          description: `Please switch to the ${NETWORK.chainName} network.`,
-          variant: 'destructive',
-        });
-      } else {
-        toast({
-          title: 'Wallet connected',
-          description: `Connected to ${formatAddress(accounts[0])}`,
-        });
-      }
+      handleAccountsChanged(accounts);
     } catch (error) {
       console.error('Error connecting wallet:', error);
-      setWalletState({
-        address: null,
-        isConnecting: false,
-        isConnected: false,
-        chainId: null,
-        isCorrectNetwork: false,
-      });
+      let errorMessage = 'Failed to connect wallet';
+      
+      // @ts-ignore
+      if (error && error.code === 4001) {
+        errorMessage = 'You rejected the connection request';
+      }
       
       toast({
         title: 'Connection failed',
-        description: 'Failed to connect wallet. Please try again.',
+        description: errorMessage,
         variant: 'destructive',
       });
+      
+      setWalletState(prev => ({
+        ...prev,
+        isConnecting: false,
+      }));
     }
-  }, [checkNetwork, setWalletState]);
+  }, [setWalletState, handleAccountsChanged]);
 
-  // Disconnect wallet (for UI purposes only)
+  // Disconnect wallet (for UI purposes only, can't force disconnect from MetaMask)
   const disconnectWallet = useCallback(() => {
     setWalletState({
       address: null,
@@ -103,13 +101,13 @@ export const useAccounts = (
     
     toast({
       title: 'Wallet disconnected',
-      description: 'You have been disconnected from your wallet.',
+      description: 'You have disconnected your wallet from the app.',
     });
   }, [setWalletState]);
 
   return {
     handleAccountsChanged,
     connectWallet,
-    disconnectWallet
+    disconnectWallet,
   };
 };

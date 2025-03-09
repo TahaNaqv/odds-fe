@@ -2,71 +2,118 @@
 import { useCallback } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { NETWORK } from '@/utils/constants';
-import { switchToBaseNetwork } from '@/utils/helpers';
+import { WalletState } from './wallet-types';
 
-export const useNetwork = (
-  setWalletState: (updater: (prev: any) => any) => void, 
-  checkNetwork: (chainId: number) => boolean
-) => {
-  // Handle chain changed event
-  const handleChainChanged = useCallback((chainId: string) => {
-    const chainIdNum = parseInt(chainId, 16);
+type WalletStateUpdater = React.Dispatch<React.SetStateAction<WalletState>>;
+
+export const useNetwork = (setWalletState: WalletStateUpdater) => {
+  // Check if connected to the correct network
+  const checkNetworkStatus = useCallback(async () => {
+    if (!window.ethereum) return;
     
-    setWalletState(prev => ({
-      ...prev,
-      chainId: chainIdNum,
-      isCorrectNetwork: checkNetwork(chainIdNum),
-    }));
-
-    if (!checkNetwork(chainIdNum)) {
-      toast({
-        title: 'Network changed',
-        description: `Please switch to the ${NETWORK.chainName} network.`,
-        variant: 'destructive',
-      });
-    }
-  }, [checkNetwork, setWalletState]);
-
-  // Switch to Base network
-  const switchNetwork = useCallback(async () => {
     try {
-      await switchToBaseNetwork();
+      const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+      const chainIdNumber = parseInt(chainId, 16);
       
-      // Check the current chain ID after switching
-      const chainId = await window.ethereum?.request({ method: 'eth_chainId' });
-      if (chainId) {
-        const chainIdNum = parseInt(chainId, 16);
-        
-        setWalletState(prev => ({
-          ...prev,
-          chainId: chainIdNum,
-          isCorrectNetwork: checkNetwork(chainIdNum),
-        }));
-        
+      setWalletState(prev => ({
+        ...prev,
+        chainId: chainIdNumber,
+        isCorrectNetwork: chainIdNumber === NETWORK.chainId,
+      }));
+      
+      return chainIdNumber === NETWORK.chainId;
+    } catch (error) {
+      console.error('Error checking network status:', error);
+      return false;
+    }
+  }, [setWalletState]);
+
+  // Handle chain changed event
+  const handleChainChanged = useCallback(
+    (chainId: string) => {
+      console.log('Chain changed:', chainId);
+      
+      const chainIdNumber = parseInt(chainId, 16);
+      
+      setWalletState(prev => ({
+        ...prev,
+        chainId: chainIdNumber,
+        isCorrectNetwork: chainIdNumber === NETWORK.chainId,
+      }));
+      
+      // Provide feedback to user
+      if (chainIdNumber === NETWORK.chainId) {
         toast({
-          title: 'Network switched',
-          description: `Successfully switched to ${NETWORK.chainName} network.`,
+          title: 'Network changed',
+          description: `Connected to ${NETWORK.chainName} network.`,
+        });
+      } else {
+        toast({
+          title: 'Wrong network',
+          description: `Please switch to ${NETWORK.chainName} network.`,
+          variant: 'destructive',
         });
       }
-    } catch (error) {
-      console.error('Error switching network:', error);
-      
+    },
+    [setWalletState]
+  );
+
+  // Switch to the correct network
+  const switchNetwork = useCallback(async () => {
+    if (!window.ethereum) {
       toast({
-        title: 'Network switch failed',
-        description: 'Failed to switch networks. Please try again.',
+        title: 'No wallet detected',
+        description: 'Please install MetaMask or another compatible wallet.',
         variant: 'destructive',
       });
+      return;
     }
-  }, [checkNetwork, setWalletState]);
-
-  // Check if the wallet is on the correct network
-  const checkNetworkStatus = useCallback((chainId: number) => {
-    return chainId === NETWORK.chainId;
+    
+    try {
+      // Try to switch to the network
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: `0x${NETWORK.chainId.toString(16)}` }],
+      });
+    } catch (error: any) {
+      console.error('Error switching network:', error);
+      
+      // If the network is not added yet, try to add it
+      if (error.code === 4902) {
+        try {
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [
+              {
+                chainId: `0x${NETWORK.chainId.toString(16)}`,
+                chainName: NETWORK.chainName,
+                nativeCurrency: NETWORK.nativeCurrency,
+                rpcUrls: NETWORK.rpcUrls,
+                blockExplorerUrls: NETWORK.blockExplorerUrls,
+              },
+            ],
+          });
+        } catch (addError) {
+          console.error('Error adding network:', addError);
+          toast({
+            title: 'Network switch failed',
+            description: 'Failed to add the network to your wallet.',
+            variant: 'destructive',
+          });
+        }
+      } else {
+        toast({
+          title: 'Network switch failed',
+          description: 'Failed to switch networks. Please try manually.',
+          variant: 'destructive',
+        });
+      }
+    }
   }, []);
 
-  return { 
-    handleChainChanged, 
-    switchNetwork, 
-    checkNetworkStatus 
+  return {
+    handleChainChanged,
+    switchNetwork,
+    checkNetworkStatus,
   };
 };

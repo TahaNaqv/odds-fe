@@ -1,43 +1,50 @@
 
 import { useEffect } from 'react';
-import { WalletEvents } from './wallet-types';
+import { WalletEvents, WalletState } from './wallet-types';
 
 export const useWalletListeners = (
   events: WalletEvents,
-  checkNetwork: (chainId: number) => boolean,
-  setWalletState: (updater: (prev: any) => any) => void
+  checkNetworkStatus: () => void,
+  setWalletState: React.Dispatch<React.SetStateAction<WalletState>>
 ) => {
-  // Set up event listeners
+  // Set up event listeners when component mounts
   useEffect(() => {
-    if (window.ethereum) {
-      // Check if wallet is already connected
-      window.ethereum.request({ method: 'eth_accounts' })
-        .then((accounts: string[]) => {
-          if (accounts.length > 0) {
-            window.ethereum?.request({ method: 'eth_chainId' })
-              .then((chainId: string) => {
-                const chainIdNum = parseInt(chainId, 16);
-                setWalletState({
-                  address: accounts[0],
-                  isConnecting: false,
-                  isConnected: true,
-                  chainId: chainIdNum,
-                  isCorrectNetwork: checkNetwork(chainIdNum),
-                });
-              });
-          }
-        })
-        .catch(console.error);
-
-      // Set up event listeners
-      window.ethereum.on('accountsChanged', events.handleAccountsChanged);
-      window.ethereum.on('chainChanged', events.handleChainChanged);
-      
-      // Clean up event listeners
-      return () => {
-        window.ethereum?.removeListener('accountsChanged', events.handleAccountsChanged);
-        window.ethereum?.removeListener('chainChanged', events.handleChainChanged);
-      };
-    }
-  }, [events.handleAccountsChanged, events.handleChainChanged, checkNetwork, setWalletState]);
+    if (!window.ethereum) return;
+    
+    // Setup event listeners for wallet
+    const { ethereum } = window;
+    
+    // Check initial connection state
+    const checkInitialState = async () => {
+      try {
+        const accounts = await ethereum.request({ method: 'eth_accounts' });
+        
+        if (accounts.length > 0) {
+          setWalletState(prev => ({
+            ...prev,
+            address: accounts[0],
+            isConnected: true,
+          }));
+          
+          checkNetworkStatus();
+        }
+      } catch (error) {
+        console.error('Error checking initial wallet state:', error);
+      }
+    };
+    
+    checkInitialState();
+    
+    // Add event listeners
+    ethereum.on('accountsChanged', events.handleAccountsChanged);
+    ethereum.on('chainChanged', events.handleChainChanged);
+    
+    // Cleanup: remove event listeners when component unmounts
+    return () => {
+      if (ethereum.removeListener) {
+        ethereum.removeListener('accountsChanged', events.handleAccountsChanged);
+        ethereum.removeListener('chainChanged', events.handleChainChanged);
+      }
+    };
+  }, [events, checkNetworkStatus, setWalletState]);
 };

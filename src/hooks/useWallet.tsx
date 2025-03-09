@@ -20,7 +20,7 @@ const useWallet = () => {
     handleChainChanged, 
     switchNetwork, 
     checkNetworkStatus 
-  } = useNetwork(setWalletState, checkNetworkStatus);
+  } = useNetwork(setWalletState);
 
   // Initialize account related functionality
   const { 
