@@ -1,12 +1,12 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
 import { Calendar as CalendarIcon, Repeat } from 'lucide-react';
-import { format } from 'date-fns';
+import { format, addMonths } from 'date-fns';
 import useRaffle from '@/hooks/useRaffle';
 import useWallet from '@/hooks/useWallet';
 import { RAFFLE } from '@/utils/constants';
@@ -17,13 +17,18 @@ const AutoEnroll = () => {
   const [isEnabled, setIsEnabled] = useState(autoEnrollSettings.enabled);
   const [date, setDate] = useState<Date | undefined>(autoEnrollSettings.endDate || undefined);
   
-  // Calculate maximum auto-enroll date (30 days from now)
-  const maxDate = new Date();
-  maxDate.setDate(maxDate.getDate() + RAFFLE.maxAutoEnrollDays);
+  // Calculate the date range for auto-enrollment
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Set to beginning of day
   
-  // Calculate minimum auto-enroll date (tomorrow)
-  const minDate = new Date();
-  minDate.setDate(minDate.getDate() + 1);
+  // Maximum date is 3 months from today
+  const maxDate = addMonths(today, 3);
+  
+  useEffect(() => {
+    // Update state if autoEnrollSettings change (e.g., from external updates)
+    setIsEnabled(autoEnrollSettings.enabled);
+    setDate(autoEnrollSettings.endDate || undefined);
+  }, [autoEnrollSettings]);
   
   // Handle auto-enroll toggle
   const handleToggle = (checked: boolean) => {
@@ -92,7 +97,7 @@ const AutoEnroll = () => {
                   mode="single"
                   selected={date}
                   onSelect={handleDateSelect}
-                  disabled={(date) => date < minDate || date > maxDate}
+                  disabled={(date) => date < today || date > maxDate}
                   initialFocus
                 />
               </PopoverContent>
