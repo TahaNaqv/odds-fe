@@ -34,10 +34,8 @@ const Header = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center">
           <div className="flex items-center gap-2">
-            <div className="h-9 w-9 rounded-xl bg-raffle-blue flex items-center justify-center shadow-subtle">
-              <Ticket className="h-5 w-5 text-white" />
-            </div>
-            <div className="font-bold text-lg hidden sm:block">RaffleRiver</div>
+            <img src="/lovable-uploads/bc184728-1779-4a59-a49f-5e98b5862224.png" alt="Ødds Logo" className="h-9 w-9" />
+            <div className="font-bold text-lg hidden sm:block">Ødds</div>
           </div>
         </Link>
         

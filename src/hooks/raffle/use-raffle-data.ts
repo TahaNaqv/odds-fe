@@ -1,39 +1,34 @@
 
 import { useState, useCallback } from 'react';
-import { toast } from '@/hooks/use-toast';
 import { MOCK_CURRENT_RAFFLE, MOCK_PAST_RAFFLES, MOCK_USER_ACTIVITY } from '@/utils/constants';
 import { RaffleData, UserActivity } from './raffle-types';
 
-export const useRaffleData = (address: string | null) => {
-  const [isLoading, setIsLoading] = useState(false);
+export const useRaffleData = () => {
   const [currentRaffle, setCurrentRaffle] = useState<RaffleData>(MOCK_CURRENT_RAFFLE);
   const [pastRaffles, setPastRaffles] = useState<RaffleData[]>(MOCK_PAST_RAFFLES);
-  const [userActivity, setUserActivity] = useState<UserActivity[]>(MOCK_USER_ACTIVITY);
+  const [userActivity, setUserActivity] = useState<UserActivity[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Fetch current raffle
+  // Initialize user activity from mock data, ensuring type compatibility
+  useState(() => {
+    const typedActivity: UserActivity[] = MOCK_USER_ACTIVITY.map(activity => ({
+      ...activity,
+      type: activity.type as "purchase" | "win", // Ensure type property is correctly typed
+      token: activity.token as "USDC" | "USDT" | undefined // Ensure token property is correctly typed
+    }));
+    setUserActivity(typedActivity);
+  });
+
+  // Fetch current raffle data
   const fetchCurrentRaffle = useCallback(async () => {
-    // In a real app, this would fetch from the smart contract
     setIsLoading(true);
-    
     try {
-      // Simulating API call
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      // For now, just use the mock data with a dynamic timestamp
-      const mockRaffle = {
-        ...MOCK_CURRENT_RAFFLE,
-        startTime: new Date(Date.now() - 12 * 3600 * 1000).toISOString(),
-        endTime: new Date(Date.now() + 12 * 3600 * 1000).toISOString(),
-      };
-      
-      setCurrentRaffle(mockRaffle);
+      // In a real app, this would be an API call to get current raffle data
+      // For now, we'll simulate a delay and use mock data
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setCurrentRaffle(MOCK_CURRENT_RAFFLE);
     } catch (error) {
       console.error('Error fetching current raffle:', error);
-      toast({
-        title: 'Failed to load raffle',
-        description: 'Unable to fetch the current raffle information.',
-        variant: 'destructive',
-      });
     } finally {
       setIsLoading(false);
     }
@@ -41,22 +36,14 @@ export const useRaffleData = (address: string | null) => {
 
   // Fetch past raffles
   const fetchPastRaffles = useCallback(async () => {
-    // In a real app, this would fetch from the smart contract
     setIsLoading(true);
-    
     try {
-      // Simulating API call
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      // Just use mock data for now
+      // In a real app, this would be an API call to get past raffle data
+      // For now, we'll simulate a delay and use mock data
+      await new Promise(resolve => setTimeout(resolve, 1000));
       setPastRaffles(MOCK_PAST_RAFFLES);
     } catch (error) {
       console.error('Error fetching past raffles:', error);
-      toast({
-        title: 'Failed to load history',
-        description: 'Unable to fetch the raffle history.',
-        variant: 'destructive',
-      });
     } finally {
       setIsLoading(false);
     }
@@ -64,36 +51,32 @@ export const useRaffleData = (address: string | null) => {
 
   // Fetch user activity
   const fetchUserActivity = useCallback(async () => {
-    if (!address) return;
-    
-    // In a real app, this would fetch from the smart contract based on the user's address
     setIsLoading(true);
-    
     try {
-      // Simulating API call
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // In a real app, this would be an API call to get user activity data
+      // For now, we'll simulate a delay and use mock data
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Just use mock data for now
-      setUserActivity(MOCK_USER_ACTIVITY);
+      // Convert mock data to properly typed UserActivity objects
+      const typedActivity: UserActivity[] = MOCK_USER_ACTIVITY.map(activity => ({
+        ...activity,
+        type: activity.type as "purchase" | "win",
+        token: activity.token as "USDC" | "USDT" | undefined
+      }));
+      
+      setUserActivity(typedActivity);
     } catch (error) {
       console.error('Error fetching user activity:', error);
-      toast({
-        title: 'Failed to load activity',
-        description: 'Unable to fetch your activity history.',
-        variant: 'destructive',
-      });
     } finally {
       setIsLoading(false);
     }
-  }, [address]);
+  }, []);
 
   return {
-    isLoading,
     currentRaffle,
-    setCurrentRaffle,
     pastRaffles,
     userActivity,
-    setUserActivity,
+    isLoading,
     fetchCurrentRaffle,
     fetchPastRaffles,
     fetchUserActivity
