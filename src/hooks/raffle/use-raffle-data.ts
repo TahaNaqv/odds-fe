@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react';
 import { MOCK_CURRENT_RAFFLE, MOCK_PAST_RAFFLES, MOCK_USER_ACTIVITY } from '@/utils/constants';
 import { RaffleData, UserActivity } from './raffle-types';
 
-export const useRaffleData = () => {
+export const useRaffleData = (address?: string | null) => {
   const [currentRaffle, setCurrentRaffle] = useState<RaffleData>(MOCK_CURRENT_RAFFLE);
   const [pastRaffles, setPastRaffles] = useState<RaffleData[]>(MOCK_PAST_RAFFLES);
   const [userActivity, setUserActivity] = useState<UserActivity[]>([]);
@@ -74,8 +74,10 @@ export const useRaffleData = () => {
 
   return {
     currentRaffle,
+    setCurrentRaffle,
     pastRaffles,
     userActivity,
+    setUserActivity,
     isLoading,
     fetchCurrentRaffle,
     fetchPastRaffles,
