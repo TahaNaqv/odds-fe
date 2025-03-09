@@ -40,6 +40,11 @@ const AutoEnroll = () => {
     } else if (date) {
       // If enabling and date is selected, update
       setAutoEnroll({ enabled: true, endDate: date });
+    } else if (checked) {
+      // If enabling without a date, prompt user visually but don't enable yet
+      // The user will need to select a date and then use the Update button
+      console.log("Date selection required before auto-enrollment can be activated");
+      // We don't call setAutoEnroll here as we need a date first
     }
   };
   
