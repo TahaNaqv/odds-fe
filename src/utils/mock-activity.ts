@@ -13,6 +13,7 @@ export interface AutoEnrollment {
   endDate: Date;
   dailyTickets: number;
   token: string;
+  status: 'active' | 'inactive';
 }
 
 export function generateMockActivities(): AutoEnrolledActivity[] {
