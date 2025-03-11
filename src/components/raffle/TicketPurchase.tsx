@@ -27,7 +27,7 @@ const TicketPurchase = () => {
   // Handle ticket count change from input
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
-    if (!isNaN(value) && value >= 1 && value <= 100) {
+    if (!isNaN(value) && value >= 1) {
       setTicketCount(value);
     }
   };
@@ -75,22 +75,20 @@ const TicketPurchase = () => {
                   value={ticketCount}
                   onChange={handleInputChange}
                   min={1}
-                  max={100}
                   className="w-16 h-8 text-center"
                 />
                 <Button
                   variant="outline"
                   size="icon"
                   className="h-6 w-6 rounded-full"
-                  onClick={() => setTicketCount(Math.min(100, ticketCount + 1))}
-                  disabled={ticketCount >= 100}
+                  onClick={() => setTicketCount(ticketCount + 1)}
                 >
                   <PlusCircle className="h-3 w-3" />
                 </Button>
               </div>
             </div>
             <Slider 
-              value={[ticketCount]} 
+              value={[Math.min(ticketCount, 100)]} 
               min={1} 
               max={100} 
               step={1} 
@@ -98,8 +96,11 @@ const TicketPurchase = () => {
             />
             <div className="flex justify-between text-xs text-muted-foreground">
               <span>1 ticket</span>
-              <span>100 tickets</span>
+              <span>100+ tickets</span>
             </div>
+            <p className="text-xs text-muted-foreground text-center">
+              Slider sets up to 100 tickets. Use input field for larger amounts.
+            </p>
           </div>
           
           {/* Token Selection */}
