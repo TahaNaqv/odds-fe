@@ -1,12 +1,9 @@
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+
 import { useState, useMemo } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowDown, ArrowUp, Filter } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import ActivityItem from "../activity/ActivityItem";
 import { UserActivity } from "@/hooks/raffle/raffle-types";
+import ActivityItem from "../activity/ActivityItem";
+import ListHeader from "./ListHeader";
+import SortingBar from "./SortingBar";
 
 interface AutoEnrolledActivity extends UserActivity {
   isAutoEnrolled?: boolean;
@@ -75,72 +72,20 @@ const ActivityList = ({ activities, limit }: ActivityListProps) => {
   
   const displayActivities = limit ? filteredAndSortedActivities.slice(0, limit) : filteredAndSortedActivities;
   
-  const SortIcon = ({ field }: { field: SortField }) => {
-    if (sortField !== field) return null;
-    return sortDirection === "asc" ? 
-      <ArrowUp className="h-3 w-3 ml-1" /> : 
-      <ArrowDown className="h-3 w-3 ml-1" />;
-  };
-  
   return (
     <div className="space-y-4 mb-4">
-      <div className="flex flex-col md:flex-row gap-4 mb-4">
-        <div className="flex-1">
-          <Input
-            placeholder="Search by raffle ID or token"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full"
-          />
-        </div>
-        <div className="flex gap-2 items-center">
-          <Filter className="h-4 w-4 text-muted-foreground" />
-          <Select 
-            value={filterType} 
-            onValueChange={(value: FilterOption) => setFilterType(value)}
-          >
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Filter by type" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Purchases</SelectItem>
-              <SelectItem value="auto">Auto-enrolled only</SelectItem>
-              <SelectItem value="manual">Manual only</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
+      <ListHeader 
+        filterType={filterType}
+        searchTerm={searchTerm}
+        onFilterChange={setFilterType}
+        onSearchChange={setSearchTerm}
+      />
       
-      <div className="flex justify-between items-center px-4 py-2 bg-muted rounded-md text-sm font-medium">
-        <div className="w-1/2">
-          <Button 
-            variant="ghost" 
-            onClick={() => handleSort("date")}
-            className="text-xs h-6 px-2 flex items-center"
-          >
-            Date
-            <SortIcon field="date" />
-          </Button>
-        </div>
-        <div className="w-1/2 text-right flex justify-end gap-2">
-          <Button 
-            variant="ghost" 
-            onClick={() => handleSort("tickets")}
-            className="text-xs h-6 px-2 flex items-center"
-          >
-            Tickets
-            <SortIcon field="tickets" />
-          </Button>
-          <Button 
-            variant="ghost" 
-            onClick={() => handleSort("amount")}
-            className="text-xs h-6 px-2 flex items-center"
-          >
-            Amount
-            <SortIcon field="amount" />
-          </Button>
-        </div>
-      </div>
+      <SortingBar 
+        sortField={sortField} 
+        sortDirection={sortDirection} 
+        onSort={handleSort}
+      />
       
       {displayActivities.length === 0 ? (
         <div className="text-center py-8 text-muted-foreground">
