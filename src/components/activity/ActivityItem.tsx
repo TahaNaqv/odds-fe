@@ -19,6 +19,7 @@ interface ActivityItemProps {
     winningTicket?: number;
     ticketIds?: number[];
     isAutoEnrolled?: boolean;
+    autoEnrollId?: string;
   };
 }
 
@@ -26,6 +27,16 @@ const ActivityItem = ({ activity }: ActivityItemProps) => {
   const isPurchase = activity.type === 'purchase';
   const isWin = activity.type === 'win';
   const isAutoEnrolled = activity.isAutoEnrolled;
+  const autoEnrollId = activity.autoEnrollId;
+  
+  // Get the auto-enrollment number from the ID
+  const getAutoEnrollmentNumber = () => {
+    if (!autoEnrollId) return '';
+    
+    // Extract the number from the auto-enroll ID (e.g., "auto-enroll-1" -> "1")
+    const match = autoEnrollId.match(/\d+$/);
+    return match ? ` #${match[0]}` : '';
+  };
   
   return (
     <Card className="shadow-subtle border border-raffle-light-gray">
@@ -59,7 +70,7 @@ const ActivityItem = ({ activity }: ActivityItemProps) => {
                       : 'bg-indigo-50 text-indigo-700'
                   } border-none flex items-center gap-1`}>
                     {isAutoEnrolled && <Zap className="h-3 w-3" />}
-                    {isAutoEnrolled ? 'Auto' : 'Manual'}
+                    {isAutoEnrolled ? `Auto${getAutoEnrollmentNumber()}` : 'Manual'}
                   </Badge>
                 )}
               </div>
