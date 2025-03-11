@@ -5,7 +5,7 @@ import { Progress } from '@/components/ui/progress';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { Ticket, Timer, Trophy } from 'lucide-react';
-import { formatTimeRemaining, calculateProgress, formatCurrency } from '@/utils/helpers';
+import { formatTimeRemaining, formatCurrency } from '@/utils/helpers';
 
 interface RaffleCardProps {
   raffle: {
@@ -24,7 +24,6 @@ interface RaffleCardProps {
 
 const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardProps) => {
   const [timeRemaining, setTimeRemaining] = useState(formatTimeRemaining(raffle.endTime));
-  const progress = calculateProgress(raffle.ticketsSold, raffle.maxTickets);
   
   // Update time remaining
   useEffect(() => {
@@ -87,14 +86,13 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
           <div className="flex items-center gap-1">
             <Ticket className="h-4 w-4 text-raffle-blue" />
             <span className="text-sm font-medium">
-              {raffle.ticketsSold} / {raffle.maxTickets} tickets sold
+              {raffle.ticketsSold} tickets sold
             </span>
           </div>
           <span className="text-sm font-semibold">
-            {progress}%
+            {formatCurrency(raffle.prizePool)} prize pool
           </span>
         </div>
-        <Progress value={progress} className="h-2" />
         
         <div className="mt-4">
           <div className="bg-raffle-light-blue rounded-xl p-4 flex items-center justify-between border border-raffle-blue/20">
@@ -131,7 +129,7 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
           <span>
             {isPast
               ? `${raffle.ticketsSold} tickets sold`
-              : `${raffle.maxTickets - raffle.ticketsSold} tickets remaining`
+              : `Unlimited entries available`
             }
           </span>
           <span>
