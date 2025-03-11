@@ -1,10 +1,10 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Clock, Ticket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { formatDate } from "@/utils/helpers";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 interface AutoEnrolledActivity {
   id: string;
@@ -22,16 +22,13 @@ interface AutoEnrolledActivity {
 const ActivityPreview = () => {
   const navigate = useNavigate();
   
-  // Mock data for auto-enrolled purchases
   const mockActivities: AutoEnrolledActivity[] = generateMockActivities();
   
-  // Calculate days between today and March 15, 2025
   const today = new Date();
   const endDate = new Date('2025-03-15');
   const diffTime = endDate.getTime() - today.getTime();
   const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   
-  // Group auto-enrollments to show them separately
   const autoEnrollments = [
     {
       id: "auto-enroll-1",
@@ -42,7 +39,7 @@ const ActivityPreview = () => {
     },
     {
       id: "auto-enroll-2",
-      startDate: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000), // 15 days ago
+      startDate: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000),
       endDate: new Date('2025-01-01'),
       dailyTickets: 3,
       token: 'USDT'
@@ -70,48 +67,59 @@ const ActivityPreview = () => {
       
       <h2 className="text-xl font-semibold mb-4">Active Auto-Enrollments</h2>
       
-      <div className="space-y-4 mb-8">
-        {autoEnrollments.map(enrollment => (
-          <Card key={enrollment.id} className="shadow-subtle border border-raffle-light-gray">
-            <CardHeader className="pb-2">
-              <div className="flex justify-between items-start">
-                <CardTitle className="text-lg">Auto-Enrollment #{enrollment.id.split('-')[2]}</CardTitle>
-                <Badge className="text-xs bg-green-100 text-green-700 border-none">
-                  Active
-                </Badge>
-              </div>
-              <CardDescription>
-                Started on {enrollment.startDate.toLocaleDateString()}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="p-4 rounded-xl bg-raffle-off-white border border-raffle-light-gray">
-                <div className="flex justify-between mb-2">
-                  <span className="text-sm text-muted-foreground">Daily Quantity:</span>
-                  <span className="text-sm font-medium">{enrollment.dailyTickets} tickets</span>
-                </div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-sm text-muted-foreground">Auto Enrollment Until:</span>
-                  <span className="text-sm font-medium">{enrollment.endDate.toLocaleDateString()}</span>
-                </div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-sm text-muted-foreground">Payment Method:</span>
-                  <span className="text-sm font-medium">{enrollment.token}</span>
-                </div>
-                <div className="flex justify-between pt-2 border-t border-raffle-light-gray">
-                  <span className="text-sm font-medium">Next Purchase:</span>
-                  <span className="text-sm font-bold flex items-center">
-                    <Clock className="h-3 w-3 mr-1" />
-                    In 24 hours
-                  </span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+      <Accordion type="single" collapsible className="space-y-4">
+        {autoEnrollments.map((enrollment, index) => (
+          <AccordionItem 
+            key={enrollment.id} 
+            value={enrollment.id}
+            className="border-none"
+          >
+            <Card className="shadow-subtle border border-raffle-light-gray">
+              <AccordionTrigger className="w-full">
+                <CardHeader className="pb-2">
+                  <div className="flex justify-between items-start">
+                    <CardTitle className="text-lg">Auto-Enrollment #{enrollment.id.split('-')[2]}</CardTitle>
+                    <Badge className="text-xs bg-green-100 text-green-700 border-none">
+                      Active
+                    </Badge>
+                  </div>
+                  <CardDescription>
+                    Started on {enrollment.startDate.toLocaleDateString()}
+                  </CardDescription>
+                </CardHeader>
+              </AccordionTrigger>
+              
+              <AccordionContent>
+                <CardContent>
+                  <div className="p-4 rounded-xl bg-raffle-off-white border border-raffle-light-gray">
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm text-muted-foreground">Daily Quantity:</span>
+                      <span className="text-sm font-medium">{enrollment.dailyTickets} tickets</span>
+                    </div>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm text-muted-foreground">Auto Enrollment Until:</span>
+                      <span className="text-sm font-medium">{enrollment.endDate.toLocaleDateString()}</span>
+                    </div>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-sm text-muted-foreground">Payment Method:</span>
+                      <span className="text-sm font-medium">{enrollment.token}</span>
+                    </div>
+                    <div className="flex justify-between pt-2 border-t border-raffle-light-gray">
+                      <span className="text-sm font-medium">Next Purchase:</span>
+                      <span className="text-sm font-bold flex items-center">
+                        <Clock className="h-3 w-3 mr-1" />
+                        In 24 hours
+                      </span>
+                    </div>
+                  </div>
+                </CardContent>
+              </AccordionContent>
+            </Card>
+          </AccordionItem>
         ))}
-      </div>
+      </Accordion>
       
-      <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
+      <h2 className="text-xl font-semibold mb-4 mt-8">Recent Activity</h2>
       
       <div className="space-y-4 mb-4">
         {mockActivities.slice(0, 5).map((activity) => (
@@ -126,7 +134,6 @@ const ActivityPreview = () => {
   );
 };
 
-// Activity Item Component for auto-enrolled tickets
 const ActivityItem = ({ activity }: { activity: AutoEnrolledActivity }) => {
   return (
     <Card className="shadow-subtle border border-raffle-light-gray">
@@ -176,26 +183,20 @@ const ActivityItem = ({ activity }: { activity: AutoEnrolledActivity }) => {
   );
 };
 
-// Function to generate mock activities for auto-enrolled tickets
 function generateMockActivities(): AutoEnrolledActivity[] {
   const activities: AutoEnrolledActivity[] = [];
   
-  // Current date for the first purchase
   const startDate = new Date();
   
-  // End date (March 15, 2025)
   const endDate = new Date('2025-03-15');
   
-  // Calculate total days
   const diffTime = endDate.getTime() - startDate.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   
-  // Generate activities for demonstration (first 10 days)
   for (let i = 0; i < Math.min(10, diffDays + 1); i++) {
     const date = new Date(startDate);
     date.setDate(date.getDate() + i);
     
-    // Create an activity for each day, alternating between two auto-enrollment plans
     const autoEnrollId = i % 2 === 0 ? "auto-enroll-1" : "auto-enroll-2";
     const ticketCount = i % 2 === 0 ? 5 : 3;
     const token = i % 2 === 0 ? 'USDC' : 'USDT';
@@ -208,7 +209,7 @@ function generateMockActivities(): AutoEnrolledActivity[] {
       ticketCount: ticketCount,
       totalSpent: ticketCount,
       token: token as 'USDC' | 'USDT',
-      isAutoEnrolled: i > 0, // First one is manual, rest are auto-enrolled
+      isAutoEnrolled: i > 0,
       autoEnrollId: i > 0 ? autoEnrollId : undefined,
       autoEnrollEndDate: i === 0 ? endDate.toISOString() : undefined
     });
