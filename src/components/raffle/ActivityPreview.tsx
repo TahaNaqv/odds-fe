@@ -24,6 +24,12 @@ const ActivityPreview = () => {
   // Mock data for auto-enrolled purchases
   const mockActivities: AutoEnrolledActivity[] = generateMockActivities();
   
+  // Calculate days between today and March 15, 2025
+  const today = new Date();
+  const endDate = new Date('2025-03-15');
+  const diffTime = endDate.getTime() - today.getTime();
+  const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
   return (
     <div className="container mx-auto max-w-4xl animate-fade-in">
       <div className="flex items-center gap-4 mb-8">
@@ -62,15 +68,15 @@ const ActivityPreview = () => {
             </div>
             <div className="flex justify-between mb-2">
               <span className="text-sm text-muted-foreground">Total Days:</span>
-              <span className="text-sm font-medium">425 days</span>
+              <span className="text-sm font-medium">{totalDays} days</span>
             </div>
             <div className="flex justify-between pt-2 border-t border-raffle-light-gray">
               <span className="text-sm font-medium">Total Tickets:</span>
-              <span className="text-sm font-bold">2,125 tickets</span>
+              <span className="text-sm font-bold">{5 * totalDays} tickets</span>
             </div>
             <div className="flex justify-between pt-2">
               <span className="text-sm font-medium">Total Cost:</span>
-              <span className="text-sm font-bold">$2,125.00</span>
+              <span className="text-sm font-bold">${(5 * totalDays).toFixed(2)}</span>
             </div>
           </div>
         </CardContent>
