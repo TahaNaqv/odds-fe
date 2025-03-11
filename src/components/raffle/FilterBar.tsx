@@ -1,7 +1,8 @@
 
-import { Filter } from "lucide-react";
+import { Filter, Zap } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 
 type FilterOption = "all" | "auto" | "manual";
 
@@ -30,12 +31,34 @@ const FilterBar = ({ filterType, searchTerm, onFilterChange, onSearchChange }: F
           onValueChange={(value: FilterOption) => onFilterChange(value)}
         >
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Filter by type" />
+            <SelectValue placeholder="Filter by type">
+              {filterType === "all" ? (
+                "All Purchases"
+              ) : filterType === "auto" ? (
+                <div className="flex items-center gap-1">
+                  <Zap className="h-3 w-3 text-emerald-600" />
+                  <span>Auto-enrolled</span>
+                </div>
+              ) : (
+                <span>Manual only</span>
+              )}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Purchases</SelectItem>
-            <SelectItem value="auto">Auto-enrolled only</SelectItem>
-            <SelectItem value="manual">Manual only</SelectItem>
+            <SelectItem value="auto">
+              <div className="flex items-center gap-1">
+                <Zap className="h-3 w-3 text-emerald-600" />
+                <span>Auto-enrolled only</span>
+                <Badge className="ml-1 bg-emerald-50 text-emerald-700 text-xs border-none">Auto</Badge>
+              </div>
+            </SelectItem>
+            <SelectItem value="manual">
+              <div className="flex items-center gap-1">
+                <span>Manual only</span>
+                <Badge className="ml-1 bg-indigo-50 text-indigo-700 text-xs border-none">Manual</Badge>
+              </div>
+            </SelectItem>
           </SelectContent>
         </Select>
       </div>

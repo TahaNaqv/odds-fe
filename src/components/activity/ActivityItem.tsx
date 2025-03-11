@@ -1,7 +1,7 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { Ticket, Trophy } from 'lucide-react';
+import { Ticket, Trophy, Zap } from 'lucide-react';
 import { formatDate } from '@/utils/helpers';
 import TicketModal from './TicketModal';
 import ActivityDetails from './ActivityDetails';
@@ -18,12 +18,14 @@ interface ActivityItemProps {
     prize?: number;
     winningTicket?: number;
     ticketIds?: number[];
+    isAutoEnrolled?: boolean;
   };
 }
 
 const ActivityItem = ({ activity }: ActivityItemProps) => {
   const isPurchase = activity.type === 'purchase';
   const isWin = activity.type === 'win';
+  const isAutoEnrolled = activity.isAutoEnrolled;
   
   return (
     <Card className="shadow-subtle border border-raffle-light-gray">
@@ -50,6 +52,16 @@ const ActivityItem = ({ activity }: ActivityItemProps) => {
                 } border-none`}>
                   {isPurchase ? 'Purchase' : 'Win'}
                 </Badge>
+                {isPurchase && (
+                  <Badge className={`text-xs ${
+                    isAutoEnrolled 
+                      ? 'bg-emerald-50 text-emerald-700'
+                      : 'bg-indigo-50 text-indigo-700'
+                  } border-none flex items-center gap-1`}>
+                    {isAutoEnrolled && <Zap className="h-3 w-3" />}
+                    {isAutoEnrolled ? 'Auto' : 'Manual'}
+                  </Badge>
+                )}
               </div>
               <p className="text-sm text-muted-foreground">
                 {formatDate(activity.timestamp)} • Raffle #{activity.raffleId.split('-')[1]}
