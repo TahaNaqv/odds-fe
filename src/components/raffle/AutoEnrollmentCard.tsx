@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock } from "lucide-react";
@@ -10,6 +9,7 @@ interface AutoEnrollment {
   endDate: Date;
   dailyTickets: number;
   token: string;
+  status: 'active' | 'inactive';
 }
 
 interface AutoEnrollmentCardProps {
@@ -28,8 +28,13 @@ const AutoEnrollmentCard = ({ enrollment }: AutoEnrollmentCardProps) => {
           <CardHeader className="pb-2">
             <div className="flex justify-between items-start">
               <CardTitle className="text-lg">Auto-Enrollment #{enrollment.id.split('-')[2]}</CardTitle>
-              <Badge className="text-xs bg-green-100 text-green-700 border-none">
-                Active
+              <Badge className={cn(
+                "text-xs border-none",
+                enrollment.status === 'active' 
+                  ? "bg-green-100 text-green-700"
+                  : "bg-gray-100 text-gray-700"
+              )}>
+                {enrollment.status === 'active' ? 'Active' : 'Inactive'}
               </Badge>
             </div>
             <CardDescription>

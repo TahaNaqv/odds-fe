@@ -57,14 +57,24 @@ export function getMockAutoEnrollments(): AutoEnrollment[] {
       startDate: new Date(),
       endDate: new Date('2025-03-15'),
       dailyTickets: 5,
-      token: 'USDC'
+      token: 'USDC',
+      status: 'active'
     },
     {
       id: "auto-enroll-2",
       startDate: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000),
       endDate: new Date('2025-01-01'),
       dailyTickets: 3,
-      token: 'USDT'
+      token: 'USDT',
+      status: 'active'
+    },
+    {
+      id: "auto-enroll-3",
+      startDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
+      endDate: new Date('2024-01-01'),
+      dailyTickets: 2,
+      token: 'USDC',
+      status: 'inactive'
     }
   ];
 }

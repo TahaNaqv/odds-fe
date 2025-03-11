@@ -1,4 +1,3 @@
-
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +31,7 @@ const ActivityPreview = () => {
         </div>
       </div>
       
-      <h2 className="text-xl font-semibold mb-4">Active Auto-Enrollments</h2>
+      <h2 className="text-xl font-semibold mb-4">Auto-Enrollments</h2>
       
       <Accordion type="single" collapsible className="space-y-4">
         {autoEnrollments.map((enrollment) => (
