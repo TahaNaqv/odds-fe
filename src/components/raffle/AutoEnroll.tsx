@@ -9,13 +9,12 @@ import { Calendar as CalendarIcon, Repeat } from 'lucide-react';
 import { format, addMonths } from 'date-fns';
 import useRaffle from '@/hooks/useRaffle';
 import useWallet from '@/hooks/useWallet';
-import { RAFFLE } from '@/utils/constants';
 
 const AutoEnroll = () => {
   const { isConnected } = useWallet();
   const { autoEnrollSettings, setAutoEnroll, isLoading } = useRaffle();
-  const [isEnabled, setIsEnabled] = useState(autoEnrollSettings.enabled);
-  const [date, setDate] = useState<Date | undefined>(autoEnrollSettings.endDate || undefined);
+  const [isEnabled, setIsEnabled] = useState(autoEnrollSettings?.enabled || false);
+  const [date, setDate] = useState<Date | undefined>(autoEnrollSettings?.endDate || undefined);
   
   // Calculate the date range for auto-enrollment
   const today = new Date();
@@ -26,8 +25,10 @@ const AutoEnroll = () => {
   
   useEffect(() => {
     // Update state if autoEnrollSettings change (e.g., from external updates)
-    setIsEnabled(autoEnrollSettings.enabled);
-    setDate(autoEnrollSettings.endDate || undefined);
+    if (autoEnrollSettings) {
+      setIsEnabled(autoEnrollSettings.enabled);
+      setDate(autoEnrollSettings.endDate || undefined);
+    }
   }, [autoEnrollSettings]);
   
   // Handle auto-enroll toggle
