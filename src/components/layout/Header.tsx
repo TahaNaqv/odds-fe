@@ -21,7 +21,8 @@ const Header = () => {
 
   // Check if a nav item is active
   const isActive = (path: string) => {
-    return location.pathname === path;
+    return location.pathname === path || 
+           (path === '/activity' && location.pathname === '/activity-preview');
   };
 
   return (
@@ -48,7 +49,7 @@ const Header = () => {
             </Button>
           </Link>
           
-          <Link to="/activity">
+          <Link to="/activity-preview">
             <Button
               variant={isActive('/activity') ? 'secondary' : 'ghost'}
               size="sm"
@@ -81,7 +82,7 @@ const Header = () => {
             </Button>
           </Link>
           
-          <Link to="/activity">
+          <Link to="/activity-preview">
             <Button
               variant={isActive('/activity') ? 'secondary' : 'ghost'}
               size="icon"
