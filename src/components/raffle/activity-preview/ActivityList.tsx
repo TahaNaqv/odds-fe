@@ -1,9 +1,9 @@
 
-import { UserActivity } from "../../../hooks/raffle/raffle-types";
+import { AutoEnrolledActivity } from "../../../hooks/raffle/raffle-types";
 import ActivityItem from "../../activity/ActivityItem";
 
 interface ActivityListProps {
-  activities: UserActivity[];
+  activities: AutoEnrolledActivity[];
 }
 
 const ActivityList = ({ activities }: ActivityListProps) => {
