@@ -62,7 +62,7 @@ const ActivityItem = ({ activity }: ActivityItemProps) => {
               <ActivityDetails {...activity} />
             </div>
             
-            {isPurchase && activity.ticketIds && (
+            {activity.ticketIds && activity.ticketIds.length > 0 && (
               <TicketModal 
                 ticketIds={activity.ticketIds} 
                 winningTicket={activity.winningTicket}

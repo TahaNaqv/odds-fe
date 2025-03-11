@@ -1,3 +1,4 @@
+
 import { UserActivity } from "@/hooks/raffle/raffle-types";
 
 interface AutoEnrolledActivity extends UserActivity {
@@ -33,10 +34,14 @@ export function generateMockActivities(): AutoEnrolledActivity[] {
     const ticketCount = i % 2 === 0 ? 5 : 3;
     const token = i % 2 === 0 ? 'USDC' : 'USDT';
     
+    // Generate unique ticket IDs for each activity
     const ticketIds = Array.from(
       { length: ticketCount }, 
       (_, index) => 1000 + (i * 10) + index
     );
+    
+    // Every third activity has a winning ticket (for demonstration)
+    const winningTicket = i % 3 === 0 ? ticketIds[0] : undefined;
     
     activities.push({
       id: `preview-activity-${i}`,
@@ -50,7 +55,7 @@ export function generateMockActivities(): AutoEnrolledActivity[] {
       autoEnrollId: i > 0 ? autoEnrollId : undefined,
       autoEnrollEndDate: i === 0 ? endDate.toISOString() : undefined,
       ticketIds: ticketIds,
-      ...(i === 2 ? { winningTicket: ticketIds[0] } : {})
+      winningTicket: winningTicket
     });
   }
   

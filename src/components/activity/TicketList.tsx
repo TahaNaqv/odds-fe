@@ -12,12 +12,21 @@ const TicketList = ({ ticketIds, winningTicket }: TicketListProps) => {
   }
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 max-h-[300px] overflow-y-auto pr-2">
       {ticketIds.map((ticketId) => (
-        <div key={ticketId} className="flex items-center gap-2 p-2 bg-muted rounded-lg">
-          <span>Ticket #{ticketId}</span>
+        <div 
+          key={ticketId} 
+          className={`flex items-center justify-between p-3 rounded-lg ${
+            winningTicket === ticketId 
+              ? 'bg-yellow-50 border border-yellow-200' 
+              : 'bg-muted'
+          }`}
+        >
+          <span className="font-medium">Ticket #{ticketId}</span>
           {winningTicket === ticketId && (
-            <span role="img" aria-label="celebration">🎉</span>
+            <Badge className="bg-yellow-100 text-yellow-800 hover:bg-yellow-200 border-none">
+              Winner 🎉
+            </Badge>
           )}
         </div>
       ))}
