@@ -1,10 +1,10 @@
-
 import { UserActivity } from "@/hooks/raffle/raffle-types";
 
 interface AutoEnrolledActivity extends UserActivity {
   isAutoEnrolled?: boolean;
   autoEnrollId?: string;
   autoEnrollEndDate?: string;
+  ticketIds?: number[];
 }
 
 export interface AutoEnrollment {
@@ -20,7 +20,6 @@ export function generateMockActivities(): AutoEnrolledActivity[] {
   const activities: AutoEnrolledActivity[] = [];
   
   const startDate = new Date();
-  
   const endDate = new Date('2025-03-15');
   
   const diffTime = endDate.getTime() - startDate.getTime();
@@ -34,6 +33,11 @@ export function generateMockActivities(): AutoEnrolledActivity[] {
     const ticketCount = i % 2 === 0 ? 5 : 3;
     const token = i % 2 === 0 ? 'USDC' : 'USDT';
     
+    const ticketIds = Array.from(
+      { length: ticketCount }, 
+      (_, index) => 1000 + (i * 10) + index
+    );
+    
     activities.push({
       id: `preview-activity-${i}`,
       type: 'purchase',
@@ -44,7 +48,9 @@ export function generateMockActivities(): AutoEnrolledActivity[] {
       token: token as 'USDC' | 'USDT',
       isAutoEnrolled: i > 0,
       autoEnrollId: i > 0 ? autoEnrollId : undefined,
-      autoEnrollEndDate: i === 0 ? endDate.toISOString() : undefined
+      autoEnrollEndDate: i === 0 ? endDate.toISOString() : undefined,
+      ticketIds: ticketIds,
+      ...(i === 2 ? { winningTicket: ticketIds[0] } : {})
     });
   }
   
