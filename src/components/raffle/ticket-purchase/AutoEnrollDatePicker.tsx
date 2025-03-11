@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar as CalendarIcon } from 'lucide-react';
-import { format, addMonths } from 'date-fns';
+import { format } from 'date-fns';
 
 interface AutoEnrollDatePickerProps {
   date: Date | undefined;
@@ -14,7 +14,6 @@ interface AutoEnrollDatePickerProps {
 const AutoEnrollDatePicker = ({ date, onDateSelect, isDisabled }: AutoEnrollDatePickerProps) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const maxDate = addMonths(today, 3);
   const formattedDate = date ? format(date, 'PPP') : 'Select a date (optional)';
 
   return (
@@ -46,7 +45,7 @@ const AutoEnrollDatePicker = ({ date, onDateSelect, isDisabled }: AutoEnrollDate
             mode="single"
             selected={date}
             onSelect={onDateSelect}
-            disabled={(date) => date < today || date > maxDate}
+            disabled={(date) => date < today}
             initialFocus
             className="pointer-events-auto"
           />
