@@ -1,8 +1,8 @@
 
-import { AutoEnrolledActivity } from "../hooks/raffle/raffle-types";
+import { UserActivity } from "../hooks/raffle/raffle-types";
 
-export function generateMockActivities(): AutoEnrolledActivity[] {
-  const activities: AutoEnrolledActivity[] = [];
+export function generateMockActivities(): UserActivity[] {
+  const activities: UserActivity[] = [];
   
   const startDate = new Date();
   const endDate = new Date('2025-03-15');
