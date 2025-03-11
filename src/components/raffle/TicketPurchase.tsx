@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Ticket } from 'lucide-react';
@@ -16,8 +16,27 @@ const TicketPurchase = () => {
   const [selectedToken, setSelectedToken] = useState<'USDC' | 'USDT'>('USDC');
   const [date, setDate] = useState<Date | undefined>(undefined);
   
+  // Calculate days for auto enrollment
+  const daysForAutoEnroll = useMemo(() => {
+    if (!date) return 0;
+    
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const diffTime = date.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    return diffDays;
+  }, [date]);
+  
+  // Calculate total cost based on tickets and days
+  const totalTickets = useMemo(() => {
+    if (daysForAutoEnroll <= 0) return ticketCount;
+    return ticketCount * (daysForAutoEnroll + 1); // +1 to include today
+  }, [ticketCount, daysForAutoEnroll]);
+  
   // Calculate cost
-  const cost = ticketCount * 1; // $1 per ticket
+  const cost = totalTickets * 1; // $1 per ticket
   
   // Handle token selection
   const handleTokenChange = (value: string) => {
@@ -64,14 +83,20 @@ const TicketPurchase = () => {
               <span className="text-sm font-medium">$1.00 per ticket</span>
             </div>
             <div className="flex justify-between mb-2">
-              <span className="text-sm text-muted-foreground">Quantity:</span>
+              <span className="text-sm text-muted-foreground">Daily Quantity:</span>
               <span className="text-sm font-medium">{ticketCount} tickets</span>
             </div>
             {date && (
-              <div className="flex justify-between mb-2">
-                <span className="text-sm text-muted-foreground">Auto Enrollment:</span>
-                <span className="text-sm font-medium">Until {date.toLocaleDateString()}</span>
-              </div>
+              <>
+                <div className="flex justify-between mb-2">
+                  <span className="text-sm text-muted-foreground">Auto Enrollment:</span>
+                  <span className="text-sm font-medium">Until {date.toLocaleDateString()} ({daysForAutoEnroll} days)</span>
+                </div>
+                <div className="flex justify-between mb-2">
+                  <span className="text-sm text-muted-foreground">Total Tickets:</span>
+                  <span className="text-sm font-medium">{totalTickets} tickets</span>
+                </div>
+              </>
             )}
             <div className="flex justify-between pt-2 border-t border-raffle-light-gray">
               <span className="text-sm font-medium">Total:</span>
@@ -91,7 +116,7 @@ const TicketPurchase = () => {
           ) : (
             <>
               <Ticket className="mr-2 h-4 w-4" />
-              Purchase {ticketCount} Ticket{ticketCount !== 1 ? 's' : ''}
+              Purchase {totalTickets} Ticket{totalTickets !== 1 ? 's' : ''}
             </>
           )}
         </Button>
