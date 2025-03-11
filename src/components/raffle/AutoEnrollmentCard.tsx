@@ -26,7 +26,7 @@ const AutoEnrollmentCard = ({ enrollment }: AutoEnrollmentCardProps) => {
       className="border-none"
     >
       <Card className="shadow-subtle border border-raffle-light-gray">
-        <AccordionTrigger className="w-full">
+        <AccordionTrigger className="w-full [&[data-state=open]]:text-current [&[data-state=open]>svg]:rotate-180 hover:no-underline">
           <CardHeader className="pb-2">
             <div className="flex justify-between items-start">
               <CardTitle className="text-lg">Auto-Enrollment #{enrollment.id.split('-')[2]}</CardTitle>
