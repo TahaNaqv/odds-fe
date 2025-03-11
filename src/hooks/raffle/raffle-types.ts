@@ -32,6 +32,7 @@ export interface AutoEnrollSettings {
 export interface PurchaseTicketParams {
   ticketCount: number;
   token: keyof typeof TOKENS;
+  autoEnrollEndDate?: Date;
 }
 
 export interface SetAutoEnrollParams {

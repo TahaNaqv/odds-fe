@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 import useWallet from './useWallet';
 import { useRaffleData } from './raffle/use-raffle-data';
 import { useTicketPurchase } from './raffle/use-ticket-purchase';
-import { useAutoEnroll } from './raffle/use-auto-enroll';
-import { PurchaseTicketParams, SetAutoEnrollParams } from './raffle/raffle-types';
+import { PurchaseTicketParams } from './raffle/raffle-types';
 
 const useRaffle = () => {
   const { address, isConnected, isCorrectNetwork } = useWallet();
@@ -30,12 +29,6 @@ const useRaffle = () => {
     setUserActivity,
     setIsLoading
   );
-  
-  const { autoEnrollSettings, setAutoEnroll } = useAutoEnroll(
-    isConnected,
-    isCorrectNetwork,
-    setIsLoading
-  );
 
   // Load initial data
   useEffect(() => {
@@ -52,9 +45,7 @@ const useRaffle = () => {
     currentRaffle,
     pastRaffles,
     userActivity,
-    autoEnrollSettings,
     purchaseTicket,
-    setAutoEnroll,
     refreshCurrentRaffle: fetchCurrentRaffle,
     refreshUserActivity: fetchUserActivity,
     refreshPastRaffles: fetchPastRaffles,

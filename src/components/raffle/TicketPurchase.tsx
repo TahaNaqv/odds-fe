@@ -5,19 +5,30 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { MinusCircle, PlusCircle, Ticket } from 'lucide-react';
+import { MinusCircle, PlusCircle, Ticket, Calendar as CalendarIcon } from 'lucide-react';
 import { TOKENS } from '@/utils/constants';
 import useRaffle from '@/hooks/useRaffle';
 import useWallet from '@/hooks/useWallet';
+import { format, addMonths } from 'date-fns';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
 
 const TicketPurchase = () => {
   const { isConnected } = useWallet();
   const { purchaseTicket, isLoading } = useRaffle();
   const [ticketCount, setTicketCount] = useState(1);
   const [selectedToken, setSelectedToken] = useState<'USDC' | 'USDT'>('USDC');
+  const [date, setDate] = useState<Date | undefined>(undefined);
   
   // Calculate cost
   const cost = ticketCount * 1; // $1 per ticket
+  
+  // Calculate the date range for auto-enrollment
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Set to beginning of day
+  
+  // Maximum date is 3 months from today
+  const maxDate = addMonths(today, 3);
   
   // Handle ticket count change from slider
   const handleSliderChange = (value: number[]) => {
@@ -37,11 +48,20 @@ const TicketPurchase = () => {
     setSelectedToken(value as 'USDC' | 'USDT');
   };
   
+  // Handle date selection
+  const handleDateSelect = (selectedDate: Date | undefined) => {
+    setDate(selectedDate);
+  };
+  
+  // Format the selected date
+  const formattedDate = date ? format(date, 'PPP') : 'Select a date (optional)';
+  
   // Handle ticket purchase
   const handlePurchase = () => {
     purchaseTicket({
       ticketCount,
       token: selectedToken,
+      autoEnrollEndDate: date
     });
   };
 
@@ -103,6 +123,48 @@ const TicketPurchase = () => {
             </p>
           </div>
           
+          {/* Auto Enrollment Date Picker */}
+          <div className="space-y-2">
+            <label htmlFor="auto-enroll-date" className="text-sm font-medium">
+              Auto Enrollment (Optional)
+            </label>
+            <p className="text-xs text-muted-foreground mb-2">
+              Pick a date until which you want to be automatically enrolled in daily raffles.
+            </p>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start text-left font-normal"
+                  disabled={!isConnected || isLoading}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {formattedDate}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent 
+                className="w-auto p-0 pointer-events-auto" 
+                align="start"
+                side="bottom"
+                sideOffset={5}
+              >
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={handleDateSelect}
+                  disabled={(date) => date < today || date > maxDate}
+                  initialFocus
+                  className="pointer-events-auto"
+                />
+              </PopoverContent>
+            </Popover>
+            {date && (
+              <p className="text-xs text-raffle-blue">
+                You will be automatically enrolled in daily raffles until {format(date, 'PPP')}.
+              </p>
+            )}
+          </div>
+          
           {/* Token Selection */}
           <Tabs defaultValue="USDC" onValueChange={handleTokenChange} className="w-full">
             <TabsList className="grid grid-cols-2">
@@ -159,6 +221,12 @@ const TicketPurchase = () => {
               <span className="text-sm text-muted-foreground">Quantity:</span>
               <span className="text-sm font-medium">{ticketCount} tickets</span>
             </div>
+            {date && (
+              <div className="flex justify-between mb-2">
+                <span className="text-sm text-muted-foreground">Auto Enrollment:</span>
+                <span className="text-sm font-medium">Until {format(date, 'PP')}</span>
+              </div>
+            )}
             <div className="flex justify-between pt-2 border-t border-raffle-light-gray">
               <span className="text-sm font-medium">Total:</span>
               <span className="text-sm font-bold">${cost.toFixed(2)}</span>

@@ -2,7 +2,6 @@
 import { useEffect } from 'react';
 import RaffleCard from '@/components/raffle/RaffleCard';
 import TicketPurchase from '@/components/raffle/TicketPurchase';
-import AutoEnroll from '@/components/raffle/AutoEnroll';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Button } from '@/components/ui/button';
@@ -78,9 +77,8 @@ const Index = () => {
         
         {/* Ticket Purchase Section */}
         <section className="container mx-auto py-12" id="purchase-section">
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="max-w-xl mx-auto">
             <TicketPurchase />
-            <AutoEnroll />
           </div>
         </section>
         

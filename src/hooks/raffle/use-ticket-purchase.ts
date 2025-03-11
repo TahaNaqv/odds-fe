@@ -13,7 +13,7 @@ export const useTicketPurchase = (
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   // Purchase ticket
-  const purchaseTicket = useCallback(async ({ ticketCount, token }: PurchaseTicketParams) => {
+  const purchaseTicket = useCallback(async ({ ticketCount, token, autoEnrollEndDate }: PurchaseTicketParams) => {
     if (!isConnected) {
       toast({
         title: 'Wallet not connected',
@@ -61,9 +61,15 @@ export const useTicketPurchase = (
       
       setUserActivity(prev => [newActivity, ...prev]);
       
+      let toastMessage = `Successfully purchased ${ticketCount} tickets for $${cost}.`;
+      
+      if (autoEnrollEndDate) {
+        toastMessage += ` Auto-enrollment active until ${autoEnrollEndDate.toLocaleDateString()}.`;
+      }
+      
       toast({
         title: 'Tickets purchased!',
-        description: `Successfully purchased ${ticketCount} tickets for $${cost}.`,
+        description: toastMessage,
       });
     } catch (error) {
       console.error('Error purchasing tickets:', error);
