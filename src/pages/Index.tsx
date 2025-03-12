@@ -20,7 +20,7 @@ const Index = () => {
       
       <main className="flex-grow px-4 pb-10">
         {/* Hero Section */}
-        <section className="container mx-auto py-8 md:py-12 animate-children">
+        <section className="container mx-auto py-6 md:py-8 animate-children">
           <div className="text-center max-w-3xl mx-auto">
             <div className="inline-block bg-raffle-light-blue px-3 py-1 rounded-full mb-6">
               <span className="text-xs font-medium text-raffle-blue">Running on Base Network</span>
@@ -34,8 +34,8 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Current Raffle Section - reduced vertical padding */}
-        <section className="container mx-auto py-4" id="raffle-section">
+        {/* Current Raffle Section - further reduced vertical padding */}
+        <section className="container mx-auto py-2" id="raffle-section">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold text-center mb-8">Current Raffle</h2>
             <RaffleCard raffle={currentRaffle} isLoading={isLoading} />
