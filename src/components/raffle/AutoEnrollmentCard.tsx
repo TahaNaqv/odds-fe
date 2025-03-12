@@ -28,10 +28,15 @@ const AutoEnrollmentCard = ({ enrollment }: AutoEnrollmentCardProps) => {
       <Card className="shadow-subtle border border-raffle-light-gray">
         <AccordionTrigger className="w-full [&[data-state=open]]:text-current [&[data-state=open]>svg]:rotate-180 hover:no-underline">
           <CardHeader className="pb-2">
-            <div className="flex justify-between items-start">
-              <CardTitle className="text-lg">Auto-Enrollment #{enrollment.id.split('-')[2]}</CardTitle>
+            <div className="flex items-center justify-between">
+              <div className="flex flex-col items-start">
+                <CardTitle className="text-lg mb-1">Auto-Enrollment #{enrollment.id.split('-')[2]}</CardTitle>
+                <CardDescription>
+                  Started on {enrollment.startDate.toLocaleDateString()}
+                </CardDescription>
+              </div>
               <Badge className={cn(
-                "text-xs border-none",
+                "text-xs border-none px-3 py-1",
                 enrollment.status === 'active' 
                   ? "bg-green-100 text-green-700"
                   : "bg-gray-100 text-gray-700"
@@ -39,9 +44,6 @@ const AutoEnrollmentCard = ({ enrollment }: AutoEnrollmentCardProps) => {
                 {enrollment.status === 'active' ? 'Active' : 'Inactive'}
               </Badge>
             </div>
-            <CardDescription>
-              Started on {enrollment.startDate.toLocaleDateString()}
-            </CardDescription>
           </CardHeader>
         </AccordionTrigger>
         
