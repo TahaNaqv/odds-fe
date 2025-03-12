@@ -41,9 +41,15 @@ const Index = () => {
             
             <div className="flex flex-col justify-center">
               <div className="bg-raffle-light-blue text-raffle-blue p-6 rounded-xl border border-raffle-blue/20 text-center shadow-subtle h-full flex items-center">
-                <p className="text-lg font-medium">
-                  💸 $88,888 in raffle winnings already claimed and counting! Winners are cashing in daily—don't be the one left out! 💰🎟️
-                </p>
+                <div className="w-full">
+                  <div className="flex justify-center mb-1">
+                    <span className="text-2xl">💰</span>
+                  </div>
+                  <p className="text-3xl font-bold mb-2">$88,888</p>
+                  <p className="text-base">
+                    in raffle winnings already claimed! Winners are cashing in daily—don't be the one left out! 🎟️
+                  </p>
+                </div>
               </div>
             </div>
           </div>
