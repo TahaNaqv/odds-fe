@@ -43,7 +43,7 @@ const Index = () => {
               <div className="bg-raffle-light-blue text-raffle-blue p-6 rounded-xl border border-raffle-blue/20 text-center shadow-subtle h-full flex items-center">
                 <div className="w-full">
                   <div className="flex justify-center mb-1">
-                    <span className="text-[4rem]">💰</span>
+                    <span className="text-[4rem] animate-bounce">💰</span>
                   </div>
                   <p className="text-3xl font-bold mb-2">$88,888</p>
                   <p className="text-base">

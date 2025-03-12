@@ -136,6 +136,11 @@ export default {
 						transform: 'translateY(-5px)',
 					},
 				},
+				'bounce': {
+					'0%, 20%, 50%, 80%, 100%': { transform: 'translateY(0)' },
+					'40%': { transform: 'translateY(-10px)' },
+					'60%': { transform: 'translateY(-5px)' }
+				},
 				'scale-in': {
 					'0%': {
 						transform: 'scale(0.95)',
@@ -162,6 +167,7 @@ export default {
 				'fade-out': 'fade-out 0.5s ease-out',
 				'pulse-subtle': 'pulse-subtle 3s infinite ease-in-out',
 				'float': 'float 6s infinite ease-in-out',
+				'bounce': 'bounce 3s infinite ease-in-out',
 				'scale-in': 'scale-in 0.3s ease-out',
 				'shimmer': 'shimmer 2s infinite linear',
 				'ripple': 'ripple 0.7s ease-out'
