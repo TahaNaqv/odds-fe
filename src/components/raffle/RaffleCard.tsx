@@ -97,11 +97,6 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
             </Badge>
           )}
         </div>
-        {!isPast && (
-          <CardDescription className="mt-2">
-            Started on {new Date(raffle.startTime).toLocaleDateString()}
-          </CardDescription>
-        )}
         {isPast && (
           <CardDescription>
             Ended on {new Date(raffle.endTime).toLocaleDateString()}
