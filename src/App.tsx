@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "./pages/Index";
 import PastActivity from "./pages/PastActivity";
 import RaffleHistory from "./pages/RaffleHistory";
@@ -14,7 +15,7 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="app">
+    <ThemeProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Toaster />
@@ -30,7 +31,7 @@ function App() {
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>
-    </div>
+    </ThemeProvider>
   );
 }
 
