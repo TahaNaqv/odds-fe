@@ -1,3 +1,4 @@
+
 import { useState, useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -73,27 +74,27 @@ const TicketPurchase = () => {
           
           <div className="p-4 rounded-xl bg-raffle-off-white border border-raffle-light-gray">
             <div className="flex justify-between mb-2">
-              <span className="text-sm text-muted-foreground">Ticket Price:</span>
+              <span className="text-sm font-medium text-gray-700">Ticket Price:</span>
               <span className="text-sm font-medium">$1.00 per ticket</span>
             </div>
             <div className="flex justify-between mb-2">
-              <span className="text-sm text-muted-foreground">Daily Quantity:</span>
+              <span className="text-sm font-medium text-gray-700">Daily Quantity:</span>
               <span className="text-sm font-medium">{ticketCount} tickets</span>
             </div>
             {date && (
               <>
                 <div className="flex justify-between mb-2">
-                  <span className="text-sm text-muted-foreground">Auto Enrollment:</span>
+                  <span className="text-sm font-medium text-gray-700">Auto Enrollment:</span>
                   <span className="text-sm font-medium">Until {date.toLocaleDateString()} ({daysForAutoEnroll} days)</span>
                 </div>
                 <div className="flex justify-between mb-2">
-                  <span className="text-sm text-muted-foreground">Total Tickets:</span>
+                  <span className="text-sm font-medium text-gray-700">Total Tickets:</span>
                   <span className="text-sm font-medium">{totalTickets} tickets</span>
                 </div>
               </>
             )}
             <div className="flex justify-between pt-2 border-t border-raffle-light-gray">
-              <span className="text-sm font-medium">Total:</span>
+              <span className="text-sm font-bold text-gray-700">Total:</span>
               <span className="text-sm font-bold">${cost.toFixed(2)}</span>
             </div>
           </div>

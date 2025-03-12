@@ -1,4 +1,5 @@
 
+
 @import url('https://rsms.me/inter/inter.css');
 
 @tailwind base;
@@ -68,4 +69,26 @@
   .button-glow:hover {
     @apply shadow-[0_0_25px_rgba(155,135,245,0.4)];
   }
+  
+  /* New high contrast text utilities */
+  .text-high-contrast {
+    @apply text-white font-medium;
+  }
+  
+  .text-medium-contrast {
+    @apply text-gray-200;
+  }
+}
+
+/* Additional color classes for better contrast */
+.raffle-light-gray {
+  @apply bg-gray-200 text-gray-800;
+}
+
+.raffle-off-white {
+  @apply bg-gray-100 text-gray-800;
+}
+
+.text-muted-high-contrast {
+  @apply text-gray-300;
 }
