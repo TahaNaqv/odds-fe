@@ -26,7 +26,7 @@ const Index = () => {
               <span className="text-xs font-medium text-raffle-blue">Running on Base Network</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-              Daily Raffles on the Base Network
+              Daily Raffles
             </h1>
             <p className="text-lg text-muted-foreground mb-8">
               Enter daily raffles with $1 tickets using USDC or USDT. Buy multiple tickets to increase your chances of winning.
