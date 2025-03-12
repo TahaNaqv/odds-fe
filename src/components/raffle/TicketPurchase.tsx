@@ -1,4 +1,3 @@
-
 import { useState, useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -16,7 +15,6 @@ const TicketPurchase = () => {
   const [selectedToken, setSelectedToken] = useState<'USDC' | 'USDT'>('USDC');
   const [date, setDate] = useState<Date | undefined>(undefined);
   
-  // Calculate days for auto enrollment
   const daysForAutoEnroll = useMemo(() => {
     if (!date) return 0;
     
@@ -29,21 +27,17 @@ const TicketPurchase = () => {
     return diffDays;
   }, [date]);
   
-  // Calculate total cost based on tickets and days
   const totalTickets = useMemo(() => {
     if (daysForAutoEnroll <= 0) return ticketCount;
-    return ticketCount * (daysForAutoEnroll + 1); // +1 to include today
+    return ticketCount * (daysForAutoEnroll + 1);
   }, [ticketCount, daysForAutoEnroll]);
   
-  // Calculate cost
-  const cost = totalTickets * 1; // $1 per ticket
+  const cost = totalTickets * 1;
   
-  // Handle token selection
   const handleTokenChange = (value: string) => {
     setSelectedToken(value as 'USDC' | 'USDT');
   };
   
-  // Handle ticket purchase
   const handlePurchase = () => {
     purchaseTicket({
       ticketCount,
@@ -107,7 +101,7 @@ const TicketPurchase = () => {
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button 
-          className="w-full bg-raffle-blue hover:bg-raffle-blue/90 text-white shadow-subtle font-medium rounded-xl"
+          className="w-full bg-app-purple hover:bg-app-purple/90 text-white shadow-subtle font-medium rounded-xl"
           disabled={!isConnected || isLoading}
           onClick={handlePurchase}
         >
