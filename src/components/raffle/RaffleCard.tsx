@@ -6,6 +6,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { Ticket, Timer, Trophy } from 'lucide-react';
 import { formatTimeRemaining, getTimeRemaining } from '@/utils/helpers';
+import TicketModal from '@/components/activity/TicketModal';
+import useRaffle from '@/hooks/useRaffle';
 
 // Helper function for formatting currency
 const formatCurrency = (amount: number) => {
@@ -29,6 +31,12 @@ interface RaffleCardProps {
 
 const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardProps) => {
   const [timeRemaining, setTimeRemaining] = useState('');
+  const { userActivity } = useRaffle();
+  
+  // Find user tickets for current raffle
+  const currentRaffleTickets = userActivity
+    .filter(activity => activity.raffleId === raffle.id && activity.ticketIds && activity.ticketIds.length > 0)
+    .flatMap(activity => activity.ticketIds || []);
   
   useEffect(() => {
     if (isPast) return;
@@ -97,6 +105,14 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
               {raffle.ticketsSold} tickets sold
             </span>
           </div>
+          
+          {/* Add ticket modal button if user has tickets */}
+          {currentRaffleTickets.length > 0 && (
+            <TicketModal 
+              ticketIds={currentRaffleTickets} 
+              winningTicket={raffle.winningTicket}
+            />
+          )}
         </div>
         
         <div className="mt-4">

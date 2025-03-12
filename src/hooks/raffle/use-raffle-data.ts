@@ -13,8 +13,12 @@ export const useRaffleData = (address?: string | null) => {
   useState(() => {
     const typedActivity: UserActivity[] = MOCK_USER_ACTIVITY.map(activity => ({
       ...activity,
-      type: activity.type as "purchase" | "win", // Ensure type property is correctly typed
-      token: activity.token as "USDC" | "USDT" | undefined // Ensure token property is correctly typed
+      type: activity.type as "purchase" | "win", 
+      token: activity.token as "USDC" | "USDT" | undefined,
+      // Ensure ticket IDs are present (adding mock values if not in the data)
+      ticketIds: activity.ticketIds || (activity.ticketCount ? 
+        Array.from({ length: activity.ticketCount }, (_, i) => 1000 + i + Math.floor(Math.random() * 1000)) 
+        : [])
     }));
     setUserActivity(typedActivity);
   });
@@ -61,7 +65,11 @@ export const useRaffleData = (address?: string | null) => {
       const typedActivity: UserActivity[] = MOCK_USER_ACTIVITY.map(activity => ({
         ...activity,
         type: activity.type as "purchase" | "win",
-        token: activity.token as "USDC" | "USDT" | undefined
+        token: activity.token as "USDC" | "USDT" | undefined,
+        // Generate mock ticket IDs if they don't exist
+        ticketIds: activity.ticketIds || (activity.ticketCount ? 
+          Array.from({ length: activity.ticketCount }, (_, i) => 1000 + i + Math.floor(Math.random() * 1000)) 
+          : [])
       }));
       
       setUserActivity(typedActivity);

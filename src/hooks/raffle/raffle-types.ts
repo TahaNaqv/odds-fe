@@ -22,6 +22,7 @@ export interface UserActivity {
   token?: 'USDC' | 'USDT';
   prize?: number;
   winningTicket?: number;
+  ticketIds?: number[];
 }
 
 export interface AutoEnrollSettings {
