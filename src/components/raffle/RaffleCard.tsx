@@ -74,9 +74,16 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
     <Card className="w-full overflow-hidden animate-fade-in shadow-subtle border border-raffle-light-gray">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-xl font-semibold">
-            {isPast ? `Raffle #${raffle.id.split('-')[1]}` : 'Current Raffle'}
-          </CardTitle>
+          <div>
+            <CardTitle className="text-xl font-semibold">
+              {isPast ? `Raffle #${raffle.id.split('-')[1]}` : 'Current Raffle'}
+            </CardTitle>
+            {!isPast && (
+              <CardDescription className="text-sm">
+                Raffle #{raffle.id.split('-')[1]}
+              </CardDescription>
+            )}
+          </div>
           {!isPast && (
             <Badge variant="outline" className="bg-raffle-light-blue text-raffle-blue border-none px-3 py-1.5 flex items-center gap-2">
               <Timer className="h-4 w-4" />
@@ -90,12 +97,16 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
             </Badge>
           )}
         </div>
-        <CardDescription>
-          {isPast
-            ? `Ended on ${new Date(raffle.endTime).toLocaleDateString()}`
-            : `Started on ${new Date(raffle.startTime).toLocaleDateString()}`
-          }
-        </CardDescription>
+        {!isPast && (
+          <CardDescription className="mt-2">
+            Started on {new Date(raffle.startTime).toLocaleDateString()}
+          </CardDescription>
+        )}
+        {isPast && (
+          <CardDescription>
+            Ended on {new Date(raffle.endTime).toLocaleDateString()}
+          </CardDescription>
+        )}
       </CardHeader>
       <CardContent className="pb-3">
         <div className="flex justify-between items-center mt-2 mb-1">
