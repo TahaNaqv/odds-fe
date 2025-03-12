@@ -71,7 +71,7 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
   }
   
   return (
-    <Card className="w-full overflow-hidden animate-fade-in shadow-subtle border border-raffle-light-gray">
+    <Card className="w-full overflow-hidden animate-fade-in shadow-subtle border border-raffle-light-gray transition-all duration-300 hover:shadow-hover">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <div>
@@ -85,7 +85,7 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
             )}
           </div>
           {!isPast && (
-            <Badge variant="outline" className="bg-raffle-light-blue text-raffle-blue border-none px-3 py-1.5 flex items-center gap-2">
+            <Badge variant="outline" className="bg-raffle-light-blue text-raffle-blue border-none px-3 py-1.5 flex items-center gap-2 animate-pulse-subtle">
               <Timer className="h-4 w-4" />
               <span className="text-base font-medium tracking-wide">{timeRemaining}</span>
             </Badge>
@@ -121,7 +121,7 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
           )}
         </div>
         
-        <div className="mt-4">
+        <div className="mt-4 transition-all duration-500 hover:transform hover:scale-[1.02]">
           <div className="bg-raffle-light-blue rounded-xl p-4 flex items-center justify-between border border-raffle-blue/20">
             <div>
               <p className="text-xs font-medium text-raffle-blue/70">Current Prize Pool</p>
@@ -129,14 +129,14 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
                 {formatCurrency(raffle.prizePool)}
               </p>
             </div>
-            <div className="h-12 w-12 rounded-full bg-raffle-blue/10 flex items-center justify-center">
-              <Trophy className="h-6 w-6 text-raffle-blue animate-pulse-subtle" />
+            <div className="h-12 w-12 rounded-full bg-raffle-blue/10 flex items-center justify-center animate-float">
+              <Trophy className="h-6 w-6 text-raffle-blue" />
             </div>
           </div>
         </div>
         
         {isPast && raffle.winner && (
-          <div className="mt-4 bg-raffle-off-white rounded-xl p-4 border border-raffle-light-gray">
+          <div className="mt-4 bg-raffle-off-white rounded-xl p-4 border border-raffle-light-gray animate-scale-in">
             <p className="text-xs font-medium text-raffle-dark-gray mb-2">Winner Information</p>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between">

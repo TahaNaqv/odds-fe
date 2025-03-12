@@ -16,7 +16,7 @@ export const useRaffleData = (address?: string | null) => {
       type: activity.type as "purchase" | "win", 
       token: activity.token as "USDC" | "USDT" | undefined,
       // Ensure ticket IDs are present (adding mock values if not in the data)
-      ticketIds: Array.isArray(activity.ticketIds) ? activity.ticketIds : 
+      ticketIds: activity.ticketIds ? [...activity.ticketIds] : 
         (activity.ticketCount ? 
           Array.from({ length: activity.ticketCount }, (_, i) => 1000 + i + Math.floor(Math.random() * 1000)) 
           : [])
@@ -68,7 +68,7 @@ export const useRaffleData = (address?: string | null) => {
         type: activity.type as "purchase" | "win",
         token: activity.token as "USDC" | "USDT" | undefined,
         // Generate mock ticket IDs if they don't exist
-        ticketIds: Array.isArray(activity.ticketIds) ? activity.ticketIds : 
+        ticketIds: activity.ticketIds ? [...activity.ticketIds] : 
           (activity.ticketCount ? 
             Array.from({ length: activity.ticketCount }, (_, i) => 1000 + i + Math.floor(Math.random() * 1000)) 
             : [])
