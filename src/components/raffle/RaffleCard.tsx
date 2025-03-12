@@ -1,11 +1,10 @@
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { Ticket, Timer, Trophy } from 'lucide-react';
-import { formatTimeRemaining, formatCurrency } from '@/utils/helpers';
+import { formatTimeRemaining, getTimeRemaining } from '@/utils/helpers';
 
 interface RaffleCardProps {
   raffle: {
@@ -23,15 +22,18 @@ interface RaffleCardProps {
 }
 
 const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardProps) => {
-  const [timeRemaining, setTimeRemaining] = useState(formatTimeRemaining(raffle.endTime));
+  const [timeRemaining, setTimeRemaining] = useState('');
   
-  // Update time remaining
   useEffect(() => {
     if (isPast) return;
     
-    const timer = setInterval(() => {
-      setTimeRemaining(formatTimeRemaining(raffle.endTime));
-    }, 1000);
+    const updateTimer = () => {
+      const { hours, minutes, seconds } = getTimeRemaining(raffle.endTime);
+      setTimeRemaining(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+    };
+
+    updateTimer(); // Initial update
+    const timer = setInterval(updateTimer, 1000);
     
     return () => clearInterval(timer);
   }, [raffle.endTime, isPast]);
@@ -62,9 +64,9 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
             {isPast ? `Raffle #${raffle.id.split('-')[1]}` : 'Current Raffle'}
           </CardTitle>
           {!isPast && (
-            <Badge variant="outline" className="bg-raffle-light-blue text-raffle-blue border-none px-2 py-1 flex items-center gap-1">
-              <Timer className="h-3 w-3" />
-              <span className="text-xs font-medium">{timeRemaining}</span>
+            <Badge variant="outline" className="bg-raffle-light-blue text-raffle-blue border-none px-3 py-1.5 flex items-center gap-2">
+              <Timer className="h-4 w-4" />
+              <span className="text-base font-medium tracking-wide">{timeRemaining}</span>
             </Badge>
           )}
           {isPast && raffle.winner && (
@@ -89,7 +91,6 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
               {raffle.ticketsSold} tickets sold
             </span>
           </div>
-          {/* Removed the redundant prize pool text that was here */}
         </div>
         
         <div className="mt-4">
