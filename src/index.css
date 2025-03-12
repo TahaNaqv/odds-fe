@@ -1,3 +1,4 @@
+
 @import url('https://rsms.me/inter/inter.css');
 
 @tailwind base;
@@ -6,6 +7,7 @@
 
 @layer base {
   :root {
+    /* Light mode colors */
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
     --card: 0 0% 100%;
@@ -29,9 +31,10 @@
   }
 
   .dark {
+    /* Dark mode colors with improved contrast */
     --background: 260 22% 15%;
     --foreground: 0 0% 100%;
-    --card: 0 0% 8%;
+    --card: 260 25% 11%;
     --card-foreground: 0 0% 100%;
     --popover: 260 22% 15%;
     --popover-foreground: 0 0% 100%;
@@ -40,13 +43,13 @@
     --secondary: 240 12% 24%;
     --secondary-foreground: 0 0% 100%;
     --muted: 240 12% 24%;
-    --muted-foreground: 240 5% 75%;
-    --accent: 194 100% 50%;
+    --muted-foreground: 240 5% 85%;
+    --accent: 194 100% 65%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 240 12% 24%;
-    --input: 240 12% 24%;
+    --border: 240 12% 27%;
+    --input: 240 12% 27%;
     --ring: 255 70% 74%;
   }
 }
@@ -71,11 +74,11 @@
 
 @layer utilities {
   .glass {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-glass;
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-glass dark:bg-gray-900/30 dark:border-white/5;
   }
 
   .glass-card {
-    @apply bg-app-card/80 backdrop-blur-sm border border-white/5 shadow-elevated;
+    @apply bg-app-card/80 backdrop-blur-sm border border-white/5 shadow-elevated dark:bg-gray-900/60 dark:border-white/5;
   }
 
   .text-gradient {
@@ -90,51 +93,97 @@
     @apply shadow-[0_0_25px_rgba(155,135,245,0.4)];
   }
   
-  /* New high contrast text utilities */
+  /* High contrast text utilities */
   .text-high-contrast {
-    @apply text-white font-medium;
+    @apply text-gray-900 dark:text-white font-medium;
   }
   
   .text-medium-contrast {
-    @apply text-gray-200;
+    @apply text-gray-700 dark:text-gray-200;
+  }
+  
+  /* Dialog and modal contrast improvements */
+  .dialog-content {
+    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700;
   }
 }
 
 /* Additional color classes for better contrast */
 .raffle-light-gray {
-  @apply bg-gray-200 text-gray-800;
+  @apply bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200;
 }
 
 .raffle-off-white {
-  @apply bg-gray-100 text-gray-800;
+  @apply bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200;
 }
 
 .text-muted-high-contrast {
-  @apply text-gray-300;
+  @apply text-gray-700 dark:text-gray-300;
 }
 
-/* Additional contrast utilities for dark mode */
-.dark .text-high-contrast {
-  @apply text-white font-medium;
+/* Raffle color themes for dark/light mode */
+.raffle-blue {
+  @apply text-blue-600 dark:text-blue-400;
 }
 
-.dark .text-medium-contrast {
-  @apply text-gray-200;
+.raffle-light-blue {
+  @apply bg-blue-100 dark:bg-blue-900/50;
 }
 
-.dark .text-muted-high-contrast {
-  @apply text-gray-300;
+/* Animation for fading elements in */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
-/* Light mode contrast adjustments */
-.light .text-high-contrast {
-  @apply text-gray-900 font-medium;
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }
 
-.light .text-medium-contrast {
-  @apply text-gray-700;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.light .text-muted-high-contrast {
-  @apply text-gray-600;
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Shadow utilities */
+.shadow-glass {
+  @apply shadow-lg shadow-gray-900/5 dark:shadow-gray-900/30;
+}
+
+.shadow-elevated {
+  @apply shadow-md shadow-gray-900/10 dark:shadow-black/30;
+}
+
+.shadow-subtle {
+  @apply shadow-sm shadow-gray-900/5 dark:shadow-black/40;
+}
+
+/* Component-specific contrast adjustments */
+.card-high-contrast {
+  @apply bg-white text-gray-900 dark:bg-gray-800 dark:text-white border border-gray-200 dark:border-gray-700;
+}
+
+.input-high-contrast {
+  @apply bg-gray-50 border-gray-300 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white;
+}
+
+.button-high-contrast {
+  @apply bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600;
 }

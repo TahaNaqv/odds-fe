@@ -15,7 +15,7 @@ const TicketModal = ({ ticketIds, winningTicket }: TicketModalProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="whitespace-nowrap shadow-subtle font-medium">
+        <Button variant="outline" size="sm" className="whitespace-nowrap shadow-subtle font-medium dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
           {hasWinningTicket ? (
             <>
               <PartyPopper className="h-4 w-4 mr-2 text-yellow-500" />
@@ -29,7 +29,7 @@ const TicketModal = ({ ticketIds, winningTicket }: TicketModalProps) => {
           )}
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-popover border-border">
+      <DialogContent className="bg-popover border-border dialog-content">
         <DialogHeader>
           <DialogTitle className="text-high-contrast text-xl">
             {hasWinningTicket ? 'Winning Ticket' : 'Ticket Numbers'}

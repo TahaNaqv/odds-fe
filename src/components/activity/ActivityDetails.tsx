@@ -16,7 +16,7 @@ const ActivityDetails = ({ type, ticketCount, totalSpent, token, prize, winningT
   if (isPurchase) {
     return (
       <>
-        <p className="font-semibold">
+        <p className="font-semibold text-high-contrast">
           {ticketCount} Ticket{ticketCount !== 1 ? 's' : ''}
         </p>
         <p className="text-sm text-muted-foreground">
@@ -28,7 +28,7 @@ const ActivityDetails = ({ type, ticketCount, totalSpent, token, prize, winningT
 
   return (
     <>
-      <p className="font-semibold text-green-600">
+      <p className="font-semibold text-green-600 dark:text-green-400">
         {formatCurrency(prize!)}
       </p>
       <p className="text-sm text-muted-foreground">

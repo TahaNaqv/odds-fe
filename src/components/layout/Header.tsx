@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import WalletConnect from '@/components/ui/WalletConnect';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { Ticket, Clock, History } from 'lucide-react';
 
 const Header = () => {
@@ -28,13 +29,13 @@ const Header = () => {
   return (
     <header 
       className={`sticky top-0 z-50 w-full transition-all duration-300 backdrop-blur-md ${
-        scrolled ? 'bg-white/10 shadow-subtle' : 'bg-transparent'
+        scrolled ? 'bg-background/80 shadow-subtle dark:bg-background/80' : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo with increased font size */}
         <Link to="/" className="flex items-center">
-          <div className="font-bold text-2xl text-raffle-blue">Ødds</div>
+          <div className="font-bold text-2xl text-raffle-blue dark:text-primary">Ødds</div>
         </Link>
         
         {/* Navigation */}
@@ -43,7 +44,7 @@ const Header = () => {
             <Button
               variant={isActive('/') ? 'secondary' : 'ghost'}
               size="sm"
-              className={`rounded-lg ${isActive('/') ? 'bg-raffle-light-blue text-raffle-blue font-medium' : ''}`}
+              className={`rounded-lg ${isActive('/') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
             >
               <Ticket className="mr-2 h-4 w-4" /> Current Raffle
             </Button>
@@ -53,7 +54,7 @@ const Header = () => {
             <Button
               variant={isActive('/activity') ? 'secondary' : 'ghost'}
               size="sm"
-              className={`rounded-lg ${isActive('/activity') ? 'bg-raffle-light-blue text-raffle-blue font-medium' : ''}`}
+              className={`rounded-lg ${isActive('/activity') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
             >
               <Clock className="mr-2 h-4 w-4" /> My Activity
             </Button>
@@ -63,11 +64,13 @@ const Header = () => {
             <Button
               variant={isActive('/history') ? 'secondary' : 'ghost'}
               size="sm"
-              className={`rounded-lg ${isActive('/history') ? 'bg-raffle-light-blue text-raffle-blue font-medium' : ''}`}
+              className={`rounded-lg ${isActive('/history') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
             >
               <History className="mr-2 h-4 w-4" /> Raffle History
             </Button>
           </Link>
+          
+          <ThemeToggle />
         </nav>
         
         {/* Mobile Navigation */}
@@ -76,7 +79,7 @@ const Header = () => {
             <Button
               variant={isActive('/') ? 'secondary' : 'ghost'}
               size="icon"
-              className={`rounded-lg ${isActive('/') ? 'bg-raffle-light-blue text-raffle-blue' : ''}`}
+              className={`rounded-lg ${isActive('/') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast' : ''}`}
             >
               <Ticket className="h-4 w-4" />
             </Button>
@@ -86,7 +89,7 @@ const Header = () => {
             <Button
               variant={isActive('/activity') ? 'secondary' : 'ghost'}
               size="icon"
-              className={`rounded-lg ${isActive('/activity') ? 'bg-raffle-light-blue text-raffle-blue' : ''}`}
+              className={`rounded-lg ${isActive('/activity') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast' : ''}`}
             >
               <Clock className="h-4 w-4" />
             </Button>
@@ -96,11 +99,13 @@ const Header = () => {
             <Button
               variant={isActive('/history') ? 'secondary' : 'ghost'}
               size="icon"
-              className={`rounded-lg ${isActive('/history') ? 'bg-raffle-light-blue text-raffle-blue' : ''}`}
+              className={`rounded-lg ${isActive('/history') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast' : ''}`}
             >
               <History className="h-4 w-4" />
             </Button>
           </Link>
+          
+          <ThemeToggle />
         </div>
         
         {/* Wallet Connection */}

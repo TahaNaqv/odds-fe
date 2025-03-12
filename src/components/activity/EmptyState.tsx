@@ -49,17 +49,17 @@ const EmptyState = ({ type }: EmptyStateProps) => {
   };
   
   return (
-    <Card className="shadow-subtle border border-raffle-light-gray">
+    <Card className="shadow-subtle card-high-contrast">
       <CardContent className="py-8">
         <div className="text-center">
           {getIcon()}
-          <h3 className="text-lg font-medium mb-2">{getTitle()}</h3>
+          <h3 className="text-lg font-medium mb-2 text-high-contrast">{getTitle()}</h3>
           <p className="text-muted-foreground mb-4 max-w-md mx-auto">
             {getMessage()}
           </p>
           <Button 
             onClick={() => navigate('/')}
-            className="bg-raffle-blue hover:bg-raffle-blue/90 text-white px-6 rounded-xl font-medium shadow-subtle"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 rounded-xl font-medium shadow-subtle dark:bg-blue-500 dark:hover:bg-blue-600"
           >
             {getButtonText()}
             <ArrowRight className="ml-2 h-4 w-4" />
