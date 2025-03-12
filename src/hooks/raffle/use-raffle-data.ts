@@ -1,4 +1,3 @@
-
 import { useState, useCallback } from 'react';
 import { MOCK_CURRENT_RAFFLE, MOCK_PAST_RAFFLES, MOCK_USER_ACTIVITY } from '@/utils/constants';
 import { RaffleData, UserActivity } from './raffle-types';
@@ -16,10 +15,7 @@ export const useRaffleData = (address?: string | null) => {
       type: activity.type as "purchase" | "win", 
       token: activity.token as "USDC" | "USDT" | undefined,
       // Ensure ticket IDs are present (adding mock values if not in the data)
-      ticketIds: activity.ticketIds ? [...activity.ticketIds] : 
-        (activity.ticketCount ? 
-          Array.from({ length: activity.ticketCount }, (_, i) => 1000 + i + Math.floor(Math.random() * 1000)) 
-          : [])
+      ticketIds: Array.from({ length: activity.ticketCount || 0 }, (_, i) => 1000 + i + Math.floor(Math.random() * 1000))
     }));
     setUserActivity(typedActivity);
   });
@@ -67,11 +63,8 @@ export const useRaffleData = (address?: string | null) => {
         ...activity,
         type: activity.type as "purchase" | "win",
         token: activity.token as "USDC" | "USDT" | undefined,
-        // Generate mock ticket IDs if they don't exist
-        ticketIds: activity.ticketIds ? [...activity.ticketIds] : 
-          (activity.ticketCount ? 
-            Array.from({ length: activity.ticketCount }, (_, i) => 1000 + i + Math.floor(Math.random() * 1000)) 
-            : [])
+        // Generate mock ticket IDs
+        ticketIds: Array.from({ length: activity.ticketCount || 0 }, (_, i) => 1000 + i + Math.floor(Math.random() * 1000))
       }));
       
       setUserActivity(typedActivity);
