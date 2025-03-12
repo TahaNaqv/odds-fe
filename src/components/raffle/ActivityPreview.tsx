@@ -20,19 +20,19 @@ const ActivityPreview = () => {
           variant="outline" 
           size="icon" 
           onClick={() => navigate('/')}
-          className="h-9 w-9 rounded-full"
+          className="h-9 w-9 rounded-full shadow-subtle"
         >
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold">Activity Preview</h1>
-          <p className="text-muted-foreground mt-1">
+          <h1 className="text-3xl font-bold text-high-contrast">Activity Preview</h1>
+          <p className="text-medium-contrast mt-1">
             Here's what your activity will look like with auto-enrollment
           </p>
         </div>
       </div>
       
-      <h2 className="text-xl font-semibold mb-4">Auto-Enrollments</h2>
+      <h2 className="text-xl font-semibold mb-4 text-high-contrast">Auto-Enrollments</h2>
       
       <Accordion type="single" collapsible className="space-y-4">
         {autoEnrollments.map((enrollment) => (
@@ -40,7 +40,7 @@ const ActivityPreview = () => {
         ))}
       </Accordion>
       
-      <h2 className="text-xl font-semibold mb-4 mt-8">Recent Activity</h2>
+      <h2 className="text-xl font-semibold mb-4 mt-8 text-high-contrast">Recent Activity</h2>
       
       <ActivityList activities={mockActivities} limit={5} />
     </div>
