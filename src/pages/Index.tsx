@@ -15,38 +15,38 @@ const Index = () => {
   const { currentRaffle, isLoading } = useRaffle();
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-app-dark">
       <Header />
       
       <main className="flex-grow px-4 pb-10">
         {/* Hero Section */}
-        <section className="container mx-auto py-6 md:py-8 animate-children">
+        <section className="container mx-auto py-12 md:py-16 animate-children">
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-block bg-raffle-light-blue px-3 py-1 rounded-full mb-6">
-              <span className="text-xs font-medium text-raffle-blue">Base Network</span>
+            <div className="inline-block glass px-4 py-1.5 rounded-full mb-8">
+              <span className="text-sm font-medium text-gradient">Base Network</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-gradient">
               Daily Raffles
             </h1>
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               Enter daily raffles with $1 tickets using USDC or USDT. Buy multiple tickets and auto-enroll to increase your chances of winning.
             </p>
           </div>
         </section>
         
-        {/* Current Raffle and Marketing Message Section - side by side */}
-        <section className="container mx-auto py-2">
+        {/* Current Raffle and Marketing Message Section */}
+        <section className="container mx-auto py-4">
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
             <RaffleCard raffle={currentRaffle} isLoading={isLoading} />
             
             <div className="flex flex-col justify-center">
-              <div className="bg-raffle-light-blue text-raffle-blue p-6 rounded-xl border border-raffle-blue/20 text-center shadow-subtle h-full flex items-center">
+              <div className="glass-card p-8 rounded-xl text-center h-full flex items-center">
                 <div className="w-full">
-                  <div className="flex justify-center mb-1">
+                  <div className="flex justify-center mb-2">
                     <span className="text-[4rem] animate-float">💰</span>
                   </div>
-                  <p className="text-3xl font-bold mb-2">$88,888</p>
-                  <p className="text-base">
+                  <p className="text-3xl font-bold mb-3 text-gradient">$88,888</p>
+                  <p className="text-base text-muted-foreground leading-relaxed">
                     in raffle winnings already claimed! Winners are cashing in daily—don't be the one left out! 🎟️
                   </p>
                 </div>
@@ -56,46 +56,44 @@ const Index = () => {
         </section>
         
         {/* Ticket Purchase Section */}
-        <section className="container mx-auto py-8" id="purchase-section">
+        <section className="container mx-auto py-12" id="purchase-section">
           <div className="max-w-xl mx-auto">
             <TicketPurchase />
           </div>
         </section>
         
         {/* How It Works Section */}
-        <section className="container mx-auto py-10">
+        <section className="container mx-auto py-16">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-center mb-8">How It Works</h2>
+            <h2 className="text-3xl font-bold text-center mb-12 text-gradient">How It Works</h2>
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="rounded-xl p-6 border border-raffle-light-gray bg-white shadow-subtle">
-                <div className="h-12 w-12 rounded-full bg-raffle-light-blue flex items-center justify-center mb-4">
-                  <span className="text-raffle-blue font-bold">1</span>
+              {[
+                {
+                  step: 1,
+                  title: "Buy Tickets",
+                  description: "Purchase $1 raffle tickets using USDC or USDT. Buy multiple tickets to increase your chances."
+                },
+                {
+                  step: 2,
+                  title: "Wait for Draw",
+                  description: "Each raffle lasts for 24 hours. The smart contract randomly selects a winning ticket."
+                },
+                {
+                  step: 3,
+                  title: "Collect Winnings",
+                  description: "If your ticket wins, the prize pool is automatically transferred to your wallet."
+                }
+              ].map((item) => (
+                <div key={item.step} className="glass-card p-6 rounded-xl">
+                  <div className="h-12 w-12 rounded-full bg-app-purple/10 flex items-center justify-center mb-4">
+                    <span className="text-app-purple font-bold">{item.step}</span>
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 text-white">{item.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold mb-2">Buy Tickets</h3>
-                <p className="text-muted-foreground">
-                  Purchase $1 raffle tickets using USDC or USDT. Buy multiple tickets to increase your chances.
-                </p>
-              </div>
-              
-              <div className="rounded-xl p-6 border border-raffle-light-gray bg-white shadow-subtle">
-                <div className="h-12 w-12 rounded-full bg-raffle-light-blue flex items-center justify-center mb-4">
-                  <span className="text-raffle-blue font-bold">2</span>
-                </div>
-                <h3 className="text-lg font-bold mb-2">Wait for Draw</h3>
-                <p className="text-muted-foreground">
-                  Each raffle lasts for 24 hours. The smart contract randomly selects a winning ticket.
-                </p>
-              </div>
-              
-              <div className="rounded-xl p-6 border border-raffle-light-gray bg-white shadow-subtle">
-                <div className="h-12 w-12 rounded-full bg-raffle-light-blue flex items-center justify-center mb-4">
-                  <span className="text-raffle-blue font-bold">3</span>
-                </div>
-                <h3 className="text-lg font-bold mb-2">Collect Winnings</h3>
-                <p className="text-muted-foreground">
-                  If your ticket wins, the prize pool is automatically transferred to your wallet.
-                </p>
-              </div>
+              ))}
             </div>
           </div>
         </section>

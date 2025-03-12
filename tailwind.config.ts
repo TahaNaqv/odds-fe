@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -56,26 +55,13 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				},
-				raffle: {
-					blue: '#0066FF',
-					'light-blue': '#EBF5FF',
-					cyan: '#00C2FF',
-					black: '#151515',
-					white: '#FFFFFF',
-					'off-white': '#F8F9FC',
-					'light-gray': '#E5E7EB',
-					gray: '#9CA3AF',
-					'dark-gray': '#4B5563',
+				app: {
+					'dark': '#1F1D2C',
+					'card': '#151515',
+					'navy': '#1A1F2C',
+					'purple': '#9B87F5',
+					'blue': '#00C2FF',
+					'green': '#4AE3B5',
 				}
 			},
 			borderRadius: {
@@ -185,6 +171,7 @@ export default {
 				'subtle': '0 2px 10px rgba(0, 0, 0, 0.05)',
 				'elevated': '0 10px 30px rgba(0, 0, 0, 0.08)',
 				'hover': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05)',
+				'glow': '0 0 20px rgba(155, 135, 245, 0.2)',
 			},
 			transitionProperty: {
 				'height': 'height',
