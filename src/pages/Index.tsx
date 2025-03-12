@@ -4,8 +4,7 @@ import RaffleCard from '@/components/raffle/RaffleCard';
 import TicketPurchase from '@/components/raffle/TicketPurchase';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Calendar, Wallet } from 'lucide-react';
+import { Calendar, Wallet } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import useRaffle from '@/hooks/useRaffle';
 import useWallet from '@/hooks/useWallet';
@@ -32,38 +31,6 @@ const Index = () => {
             <p className="text-lg text-muted-foreground mb-8">
               Enter daily raffles with $1 tickets using USDC or USDT. Buy multiple tickets to increase your chances of winning.
             </p>
-            <div className="flex items-center justify-center gap-4">
-              {!isConnected ? (
-                <Button
-                  onClick={connectWallet}
-                  className="bg-raffle-blue hover:bg-raffle-blue/90 text-white px-8 py-6 rounded-xl text-lg font-medium shadow-subtle"
-                >
-                  <Wallet className="mr-2 h-5 w-5" />
-                  Connect Wallet to Play
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => {
-                    const ticketSection = document.getElementById('purchase-section');
-                    if (ticketSection) {
-                      ticketSection.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                  className="bg-raffle-blue hover:bg-raffle-blue/90 text-white px-8 py-6 rounded-xl text-lg font-medium shadow-subtle"
-                >
-                  Enter Current Raffle
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              )}
-              <Button
-                variant="outline"
-                onClick={() => navigate('/history')}
-                className="border-raffle-light-gray rounded-xl font-medium px-6 py-6 text-lg shadow-subtle"
-              >
-                <Calendar className="mr-2 h-5 w-5" />
-                View Past Raffles
-              </Button>
-            </div>
           </div>
         </section>
         
