@@ -89,9 +89,7 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
               {raffle.ticketsSold} tickets sold
             </span>
           </div>
-          <span className="text-sm font-semibold">
-            {formatCurrency(raffle.prizePool)} prize pool
-          </span>
+          {/* Removed the redundant prize pool text that was here */}
         </div>
         
         <div className="mt-4">
