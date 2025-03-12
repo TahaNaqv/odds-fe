@@ -23,7 +23,7 @@ const Index = () => {
         <section className="container mx-auto py-6 md:py-8 animate-children">
           <div className="text-center max-w-3xl mx-auto">
             <div className="inline-block bg-raffle-light-blue px-3 py-1 rounded-full mb-6">
-              <span className="text-xs font-medium text-raffle-blue">Running on Base Network</span>
+              <span className="text-xs font-medium text-raffle-blue">Base Network</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
               Daily Raffles

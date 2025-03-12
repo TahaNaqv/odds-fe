@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -5,6 +6,11 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { Ticket, Timer, Trophy } from 'lucide-react';
 import { formatTimeRemaining, getTimeRemaining } from '@/utils/helpers';
+
+// Helper function for formatting currency
+const formatCurrency = (amount: number) => {
+  return `$${amount.toLocaleString('en-US', { maximumFractionDigits: 2 })}`;
+};
 
 interface RaffleCardProps {
   raffle: {
