@@ -37,10 +37,7 @@ const Index = () => {
         {/* Current Raffle and Marketing Message Section - side by side */}
         <section className="container mx-auto py-2">
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
-            <div>
-              <h2 className="text-2xl font-bold text-center mb-6">Current Raffle</h2>
-              <RaffleCard raffle={currentRaffle} isLoading={isLoading} />
-            </div>
+            <RaffleCard raffle={currentRaffle} isLoading={isLoading} />
             
             <div className="flex flex-col justify-center">
               <div className="bg-raffle-light-blue text-raffle-blue p-6 rounded-xl border border-raffle-blue/20 text-center shadow-subtle h-full flex items-center">
