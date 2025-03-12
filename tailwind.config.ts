@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -128,11 +129,14 @@ export default {
 					},
 				},
 				'float': {
-					'0%, 100%': {
-						transform: 'translateY(0)',
+					'0%': {
+						transform: 'translateY(0px)',
 					},
 					'50%': {
-						transform: 'translateY(-5px)',
+						transform: 'translateY(-6px)',
+					},
+					'100%': {
+						transform: 'translateY(0px)',
 					},
 				},
 				'bounce': {
@@ -166,7 +170,7 @@ export default {
 				'fade-in': 'fade-in 0.5s ease-out',
 				'fade-out': 'fade-out 0.5s ease-out',
 				'pulse-subtle': 'pulse-subtle 3s infinite ease-in-out',
-				'float': 'float 6s infinite ease-in-out',
+				'float': 'float 4s infinite cubic-bezier(0.41, 0.01, 0.24, 1)',
 				'bounce': 'bounce 2s cubic-bezier(0.25, 0.1, 0.25, 1) infinite',
 				'scale-in': 'scale-in 0.3s ease-out',
 				'shimmer': 'shimmer 2s infinite linear',
