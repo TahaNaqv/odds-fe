@@ -34,20 +34,21 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Current Raffle Section - further reduced vertical padding */}
-        <section className="container mx-auto py-2" id="raffle-section">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-center mb-8">Current Raffle</h2>
-            <RaffleCard raffle={currentRaffle} isLoading={isLoading} />
-          </div>
-        </section>
-        
-        {/* Marketing Message */}
-        <section className="container mx-auto py-6">
-          <div className="max-w-4xl mx-auto bg-raffle-light-blue text-raffle-blue p-6 rounded-xl border border-raffle-blue/20 text-center shadow-subtle">
-            <p className="text-lg font-medium">
-              💸 $88,888 in raffle winnings already claimed and counting! Winners are cashing in daily—don't be the one left out! 💰🎟️
-            </p>
+        {/* Current Raffle and Marketing Message Section - side by side */}
+        <section className="container mx-auto py-2">
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
+            <div>
+              <h2 className="text-2xl font-bold text-center mb-6">Current Raffle</h2>
+              <RaffleCard raffle={currentRaffle} isLoading={isLoading} />
+            </div>
+            
+            <div className="flex flex-col justify-center">
+              <div className="bg-raffle-light-blue text-raffle-blue p-6 rounded-xl border border-raffle-blue/20 text-center shadow-subtle h-full flex items-center">
+                <p className="text-lg font-medium">
+                  💸 $88,888 in raffle winnings already claimed and counting! Winners are cashing in daily—don't be the one left out! 💰🎟️
+                </p>
+              </div>
+            </div>
           </div>
         </section>
         
