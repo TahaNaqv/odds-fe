@@ -29,7 +29,7 @@ const Index = () => {
               Daily Raffles
             </h1>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              Enter daily raffles with $1 tickets using USDC or USDT. Buy multiple tickets and auto-enroll to increase your chances of winning.
+              Play every day with $1 tickets in USDC! Buy more to increase your odds and opt in for automatic daily entries!
             </p>
           </div>
         </section>
