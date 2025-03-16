@@ -7,7 +7,6 @@ import useRaffle from '@/hooks/useRaffle';
 import useWallet from '@/hooks/useWallet';
 import TicketCountSelector from './ticket-purchase/TicketCountSelector';
 import AutoEnrollDatePicker from './ticket-purchase/AutoEnrollDatePicker';
-import TokenSelector from './ticket-purchase/TokenSelector';
 
 const TicketPurchase = () => {
   const { isConnected } = useWallet();
@@ -60,8 +59,6 @@ const TicketPurchase = () => {
             onDateSelect={setDate}
             isDisabled={!isConnected || isLoading}
           />
-          
-          <TokenSelector cost={cost} />
           
           <div className="p-4 rounded-xl bg-raffle-off-white border border-raffle-light-gray">
             <div className="flex justify-between mb-2">
