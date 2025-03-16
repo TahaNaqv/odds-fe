@@ -1,0 +1,40 @@
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-glass dark:bg-gray-900/30 dark:border-white/5;
+  }
+
+  .glass-card {
+    @apply bg-app-card/80 backdrop-blur-sm border border-white/5 shadow-elevated dark:bg-gray-900/60 dark:border-white/5;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-app-purple to-app-blue bg-clip-text text-transparent;
+  }
+
+  .base-network-gradient {
+    @apply bg-gradient-to-r from-indigo-400 via-blue-500 to-blue-400 bg-clip-text text-transparent;
+  }
+
+  .button-glow {
+    @apply shadow-glow transition-shadow duration-300;
+  }
+
+  .button-glow:hover {
+    @apply shadow-[0_0_25px_rgba(155,135,245,0.4)];
+  }
+  
+  /* High contrast text utilities */
+  .text-high-contrast {
+    @apply text-gray-900 dark:text-white font-medium;
+  }
+  
+  .text-medium-contrast {
+    @apply text-gray-700 dark:text-gray-200;
+  }
+  
+  /* Dialog and modal contrast improvements */
+  .dialog-content {
+    @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700;
+  }
+}
