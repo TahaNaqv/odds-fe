@@ -56,7 +56,7 @@ export const useTicketPurchase = (
         timestamp: new Date().toISOString(),
         ticketCount,
         totalSpent: cost,
-        token,
+        token: 'USDC',
       };
       
       setUserActivity(prev => [newActivity, ...prev]);

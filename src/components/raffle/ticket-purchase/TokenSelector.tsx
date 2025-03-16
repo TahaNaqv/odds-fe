@@ -1,20 +1,30 @@
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent } from '@/components/ui/card';
+import { TOKENS } from '@/utils/constants';
+import { CreditCard } from 'lucide-react';
 
 interface TokenSelectorProps {
-  selectedToken: 'USDC' | 'USDT';
   cost: number;
-  onTokenChange: (value: string) => void;
 }
 
-const TokenSelector = ({ selectedToken, cost, onTokenChange }: TokenSelectorProps) => {
+const TokenSelector = ({ cost }: TokenSelectorProps) => {
   return (
-    <Tabs defaultValue={selectedToken} onValueChange={onTokenChange} className="w-full">
-      <TabsList className="grid grid-cols-2">
-        <TabsTrigger value="USDC" className="rounded-lg">USDC</TabsTrigger>
-        <TabsTrigger value="USDT" className="rounded-lg">USDT</TabsTrigger>
-      </TabsList>
-    </Tabs>
+    <Card className="border border-raffle-light-gray">
+      <CardContent className="p-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="h-8 w-8 rounded-full bg-[#2775CA] flex items-center justify-center">
+              <CreditCard className="h-4 w-4 text-white" />
+            </div>
+            <div>
+              <p className="font-medium">USDC</p>
+              <p className="text-xs text-muted-foreground">{TOKENS.USDC.name}</p>
+            </div>
+          </div>
+          <p className="font-medium">${cost.toFixed(2)}</p>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 

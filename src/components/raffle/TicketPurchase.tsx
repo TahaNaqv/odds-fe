@@ -13,7 +13,6 @@ const TicketPurchase = () => {
   const { isConnected } = useWallet();
   const { purchaseTicket, isLoading } = useRaffle();
   const [ticketCount, setTicketCount] = useState(1);
-  const [selectedToken, setSelectedToken] = useState<'USDC' | 'USDT'>('USDC');
   const [date, setDate] = useState<Date | undefined>(undefined);
   
   const daysForAutoEnroll = useMemo(() => {
@@ -35,14 +34,10 @@ const TicketPurchase = () => {
   
   const cost = totalTickets * 1;
   
-  const handleTokenChange = (value: string) => {
-    setSelectedToken(value as 'USDC' | 'USDT');
-  };
-  
   const handlePurchase = () => {
     purchaseTicket({
       ticketCount,
-      token: selectedToken,
+      token: 'USDC',
       autoEnrollEndDate: date
     });
   };
@@ -51,7 +46,7 @@ const TicketPurchase = () => {
     <Card className="w-full animate-fade-in shadow-subtle border border-raffle-light-gray">
       <CardHeader>
         <CardTitle className="text-xl font-semibold">Purchase Tickets</CardTitle>
-        <CardDescription>Select the number of tickets and token to purchase.</CardDescription>
+        <CardDescription>Select the number of tickets to purchase with USDC.</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
@@ -66,11 +61,7 @@ const TicketPurchase = () => {
             isDisabled={!isConnected || isLoading}
           />
           
-          <TokenSelector 
-            selectedToken={selectedToken}
-            cost={cost}
-            onTokenChange={handleTokenChange}
-          />
+          <TokenSelector cost={cost} />
           
           <div className="p-4 rounded-xl bg-raffle-off-white border border-raffle-light-gray">
             <div className="flex justify-between mb-2">
