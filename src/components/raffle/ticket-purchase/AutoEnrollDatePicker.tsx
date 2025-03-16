@@ -2,7 +2,8 @@
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Calendar as CalendarIcon } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Calendar as CalendarIcon, HelpCircle } from 'lucide-react';
 import { format } from 'date-fns';
 
 interface AutoEnrollDatePickerProps {
@@ -18,12 +19,21 @@ const AutoEnrollDatePicker = ({ date, onDateSelect, isDisabled }: AutoEnrollDate
 
   return (
     <div className="space-y-2">
-      <label htmlFor="auto-enroll-date" className="text-sm font-medium">
-        Auto Enrollment (Optional)
-      </label>
-      <p className="text-xs text-muted-foreground mb-2">
-        Pick a date until which you want to be automatically enrolled in daily raffles.
-      </p>
+      <div className="flex items-center gap-1">
+        <label htmlFor="auto-enroll-date" className="text-sm font-medium">
+          Auto Enrollment (Optional)
+        </label>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+            </TooltipTrigger>
+            <TooltipContent className="max-w-xs">
+              <p>Pick a date until which you want to be automatically enrolled in daily raffles.</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </div>
       <Popover>
         <PopoverTrigger asChild>
           <Button
