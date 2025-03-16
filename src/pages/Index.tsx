@@ -36,7 +36,7 @@ const Index = () => {
               <span className="text-[4rem] animate-float">💰</span>
             </div>
             <div className="relative">
-              <h2 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-app-bright-purple via-app-purple to-app-blue bg-clip-text text-transparent relative z-10">
+              <h2 className="text-3xl md:text-4xl font-bold mb-2 base-network-gradient relative z-10">
                 USDC $88,888
               </h2>
               <div className="absolute inset-0 -top-10 -bottom-6 overflow-hidden">

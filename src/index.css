@@ -84,6 +84,10 @@
     @apply bg-gradient-to-r from-app-purple to-app-blue bg-clip-text text-transparent;
   }
 
+  .base-network-gradient {
+    @apply bg-gradient-to-r from-indigo-400 via-blue-500 to-blue-400 bg-clip-text text-transparent;
+  }
+
   .button-glow {
     @apply shadow-glow transition-shadow duration-300;
   }
