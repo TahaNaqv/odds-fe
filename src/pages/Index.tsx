@@ -8,7 +8,6 @@ import { Calendar, Wallet } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import useRaffle from '@/hooks/useRaffle';
 import useWallet from '@/hooks/useWallet';
-import CelebrationConfetti from '@/components/effects/CelebrationConfetti';
 import StarsBurst from '@/components/effects/StarsBurst';
 
 const Index = () => {
@@ -41,7 +40,6 @@ const Index = () => {
                 USDC $88,888
               </h2>
               <div className="absolute inset-0 -top-10 -bottom-6 overflow-hidden">
-                <CelebrationConfetti />
                 <StarsBurst />
               </div>
             </div>
