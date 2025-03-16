@@ -31,6 +31,9 @@ const Index = () => {
             <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
               Play every day with $1 tickets in USDC! Buy more to increase your odds and opt in for automatic daily entries!
             </p>
+            <div className="flex justify-center mb-2">
+              <span className="text-[4rem] animate-float">💰</span>
+            </div>
             <p className="text-muted-foreground mb-8 animate-fade-in">
               <span className="text-app-purple font-medium">$88,888</span> in raffle winnings already claimed! Winners are cashing in daily—don't be the one left out! 🎟️
             </p>
@@ -45,9 +48,6 @@ const Index = () => {
             <div className="flex flex-col justify-center">
               <div className="glass-card p-8 rounded-xl text-center h-full flex items-center">
                 <div className="w-full">
-                  <div className="flex justify-center mb-2">
-                    <span className="text-[4rem] animate-float">💰</span>
-                  </div>
                   <p className="text-xl font-bold mb-3 text-gradient">
                     Join today's raffle!
                   </p>
