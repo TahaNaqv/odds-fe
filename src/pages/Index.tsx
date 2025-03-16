@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import RaffleCard from '@/components/raffle/RaffleCard';
 import TicketPurchase from '@/components/raffle/TicketPurchase';
@@ -136,10 +135,7 @@ const Index = () => {
         <section className="container mx-auto py-16 bg-app-dark">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gradient mb-4">Frequently Asked Questions</h2>
-              <p className="text-muted-foreground">
-                Everything you need to know about our daily raffles
-              </p>
+              <h2 className="text-3xl font-bold text-gradient mb-4">FAQs</h2>
             </div>
             
             <div className="glass-card p-6 rounded-xl">
