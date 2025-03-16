@@ -39,8 +39,8 @@ const Header = () => {
             <div className="font-bold text-2xl text-raffle-blue dark:text-primary">Ødds</div>
           </Link>
           
-          {/* Navigation - Centered on mobile and desktop */}
-          <nav className="flex items-center justify-center space-x-1 mb-3 md:mb-0">
+          {/* Navigation - Centered on mobile and right-adjusted on desktop */}
+          <div className="pl-20 flex items-center justify-center space-x-1 mb-3 md:mb-0">
             <Link to="/">
               <Button
                 variant={isActive('/') ? 'secondary' : 'ghost'}
@@ -72,7 +72,7 @@ const Header = () => {
             </Link>
             
             <ThemeToggle />
-          </nav>
+          </div>
           
           {/* Wallet Connection */}
           <WalletConnect />
