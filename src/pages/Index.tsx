@@ -35,7 +35,7 @@ const Index = () => {
               <span className="text-[4rem] animate-float">💰</span>
             </div>
             <p className="text-muted-foreground mb-8 animate-fade-in">
-              <span className="text-app-purple font-medium">$88,888</span> in raffle winnings already claimed! Winners are cashing in daily—don't be the one left out! 🎟️
+              <span className="text-app-purple font-medium">$88,888</span> in raffle winnings already claimed
             </p>
           </div>
         </section>
