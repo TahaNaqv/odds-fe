@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import RaffleCard from '@/components/raffle/RaffleCard';
 import TicketPurchase from '@/components/raffle/TicketPurchase';
@@ -35,7 +36,7 @@ const Index = () => {
               <span className="text-[4rem] animate-float">💰</span>
             </div>
             <div className="relative">
-              <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient relative z-10">
+              <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient relative z-10 px-8 py-2 inline-block">
                 USDC $88,888
               </h2>
               <div className="absolute inset-0 -top-10 -bottom-6 overflow-hidden">

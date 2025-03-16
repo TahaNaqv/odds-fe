@@ -9,7 +9,7 @@
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-app-purple to-app-blue bg-clip-text text-transparent;
+    @apply bg-gradient-to-br from-app-purple via-app-bright-purple to-app-blue bg-clip-text text-transparent;
   }
 
   .base-network-gradient {
