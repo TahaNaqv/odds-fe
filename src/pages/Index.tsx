@@ -1,14 +1,14 @@
+
 import { useEffect } from 'react';
-import RaffleCard from '@/components/raffle/RaffleCard';
-import TicketPurchase from '@/components/raffle/TicketPurchase';
+import { useNavigate } from 'react-router-dom';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { Calendar, Wallet, Trophy, Ticket, Zap, HelpCircle, ShieldCheck, Clock, DollarSign, Coins } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import useRaffle from '@/hooks/useRaffle';
 import useWallet from '@/hooks/useWallet';
-import StarsBurst from '@/components/effects/StarsBurst';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import HeroSection from '@/components/home/HeroSection';
+import MarketingSection from '@/components/home/MarketingSection';
+import HowItWorksSection from '@/components/home/HowItWorksSection';
+import FAQSection from '@/components/home/FAQSection';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -20,194 +20,10 @@ const Index = () => {
       <Header />
       
       <main className="flex-grow px-4 pb-10">
-        {/* Hero Section */}
-        <section className="container mx-auto py-12 md:py-16 animate-children">
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-block glass px-4 py-1.5 rounded-full mb-8">
-              <span className="text-sm font-medium text-gradient">Base Network</span>
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-gradient">
-              Daily Raffles
-            </h1>
-            <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
-              Play every day with $1 tickets in USDC! Buy more to increase your odds and opt in for automatic daily entries!
-            </p>
-            <div className="flex justify-center mb-2">
-              <span className="text-[4rem] animate-float">💰</span>
-            </div>
-            <div className="relative">
-              <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient relative z-10 px-8 py-2 inline-block">
-                USDC $88,888
-              </h2>
-              <div className="absolute inset-0 -top-10 -bottom-6 overflow-hidden">
-                <StarsBurst />
-              </div>
-            </div>
-            <p className="text-muted-foreground mb-8 animate-fade-in">
-              in raffle winnings claimed till date
-            </p>
-          </div>
-        </section>
-        
-        {/* Current Raffle and Ticket Purchase Section - Side by Side */}
-        <section className="container mx-auto py-4">
-          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-6">
-            <div className="space-y-6">
-              <RaffleCard raffle={currentRaffle} isLoading={isLoading} />
-              
-              {/* New Graphic and Marketing Copy */}
-              <div className="glass-card p-6 rounded-xl bg-gradient-to-br from-app-purple/20 to-app-blue/20 border border-app-purple/30 animate-fade-in">
-                <div className="flex items-start gap-5">
-                  <div className="flex-shrink-0 relative">
-                    <div className="w-16 h-16 rounded-full bg-app-purple/30 flex items-center justify-center animate-pulse-subtle">
-                      <Trophy size={32} className="text-app-bright-purple" />
-                    </div>
-                    <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-app-blue flex items-center justify-center">
-                      <Zap size={12} className="text-white" />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-bold mb-2 text-gradient">Boost Your Chances!</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      <span className="font-medium text-white">Every USDC $1 ticket is a chance to win big.</span> The 
-                      more tickets you buy, the higher your odds of winning the daily prize pool!
-                    </p>
-                    
-                    <div className="mt-4 grid grid-cols-3 gap-3">
-                      {[
-                        { icon: <Ticket size={16} />, text: "1 ticket = 1 entry" },
-                        { icon: <Calendar size={16} />, text: "Daily drawings" },
-                        { icon: <Wallet size={16} />, text: "Instant payouts" }
-                      ].map((item, i) => (
-                        <div key={i} className="flex items-center gap-1.5">
-                          <div className="text-app-purple">{item.icon}</div>
-                          <p className="text-xs font-medium text-white">{item.text}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <TicketPurchase />
-          </div>
-        </section>
-        
-        {/* How It Works Section */}
-        <section className="container mx-auto py-16">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12 text-gradient">How It Works</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                {
-                  step: 1,
-                  title: "Buy Tickets",
-                  description: "Purchase $1 raffle tickets using USDC or USDT. Buy multiple tickets to increase your chances."
-                },
-                {
-                  step: 2,
-                  title: "Wait for Draw",
-                  description: "Each raffle lasts for 24 hours. The smart contract randomly selects a winning ticket."
-                },
-                {
-                  step: 3,
-                  title: "Collect Winnings",
-                  description: "If your ticket wins, the prize pool is automatically transferred to your wallet."
-                }
-              ].map((item) => (
-                <div key={item.step} className="glass-card p-6 rounded-xl">
-                  <div className="h-12 w-12 rounded-full bg-app-purple/10 flex items-center justify-center mb-4">
-                    <span className="text-app-purple font-bold">{item.step}</span>
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 text-white">{item.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-        
-        {/* FAQ Section */}
-        <section className="container mx-auto py-16 bg-app-dark">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gradient mb-4">FAQs</h2>
-            </div>
-            
-            <div className="glass-card p-6 rounded-xl">
-              <Accordion type="single" collapsible className="w-full">
-                {[
-                  {
-                    question: "How are winners selected?",
-                    answer: "Winners are selected through a transparent, verifiable random process on the blockchain. Each ticket has an equal chance of winning, and the selection happens automatically at the end of the 24-hour raffle period.",
-                    icon: <HelpCircle size={20} className="text-app-purple mr-2 flex-shrink-0" />
-                  },
-                  {
-                    question: "What cryptocurrencies can I use to purchase tickets?",
-                    answer: "Currently, you can purchase tickets using USDC on the Base Network. Each ticket costs $1 USDC.",
-                    icon: <Coins size={20} className="text-app-purple mr-2 flex-shrink-0" />
-                  },
-                  {
-                    question: "How do I claim my winnings?",
-                    answer: "Winnings are automatically sent to the wallet address that purchased the winning ticket. There's no need to manually claim them - they'll appear in your wallet shortly after the raffle ends.",
-                    icon: <DollarSign size={20} className="text-app-purple mr-2 flex-shrink-0" />
-                  },
-                  {
-                    question: "What is auto-enrollment?",
-                    answer: "Auto-enrollment allows you to automatically enter future raffles without having to manually purchase tickets each day. You can set up auto-enrollment with a specific number of tickets and for a chosen duration.",
-                    icon: <Calendar size={20} className="text-app-purple mr-2 flex-shrink-0" />
-                  },
-                  {
-                    question: "Can I cancel my auto-enrollment?",
-                    answer: "Yes, you can cancel your auto-enrollment at any time from the My Activity section. Any unused balance will be refunded to your wallet.",
-                    icon: <Clock size={20} className="text-app-purple mr-2 flex-shrink-0" />
-                  },
-                  {
-                    question: "Is there a maximum number of tickets I can buy?",
-                    answer: "There is no set maximum for ticket purchases. You can buy as many tickets as you'd like to increase your chances of winning.",
-                    icon: <Ticket size={20} className="text-app-purple mr-2 flex-shrink-0" />
-                  },
-                  {
-                    question: "How is the prize pool calculated?",
-                    answer: "The prize pool consists of 90% of all ticket sales for that day's raffle. The remaining 10% goes toward platform maintenance and future development.",
-                    icon: <Wallet size={20} className="text-app-purple mr-2 flex-shrink-0" />
-                  },
-                  {
-                    question: "Are the raffles secure and fair?",
-                    answer: "Yes, our raffles operate on smart contracts with verifiable randomness. The code is open-source and has been audited for security and fairness. The winner selection process is fully transparent and cannot be manipulated.",
-                    icon: <ShieldCheck size={20} className="text-app-purple mr-2 flex-shrink-0" />
-                  },
-                  {
-                    question: "What happens if no tickets are sold for a raffle?",
-                    answer: "If no tickets are sold for a particular raffle, the raffle is canceled and a new one begins for the next day. Since there's no prize pool (as no tickets were sold), there's no winner to select.",
-                    icon: <HelpCircle size={20} className="text-app-purple mr-2 flex-shrink-0" />
-                  },
-                  {
-                    question: "Can I see my past entries and results?",
-                    answer: "Yes, you can view all your past entries and results in the My Activity section. This includes information about which raffles you've entered, how many tickets you purchased, and whether you won.",
-                    icon: <Clock size={20} className="text-app-purple mr-2 flex-shrink-0" />
-                  }
-                ].map((item, i) => (
-                  <AccordionItem key={i} value={`faq-${i+1}`} className="border-b border-gray-700 py-1">
-                    <AccordionTrigger className="hover:no-underline py-4">
-                      <div className="flex items-center text-left text-white">
-                        {item.icon}
-                        <span>{item.question}</span>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground pb-4 pl-8">
-                      {item.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
-          </div>
-        </section>
+        <HeroSection />
+        <MarketingSection currentRaffle={currentRaffle} isLoading={isLoading} />
+        <HowItWorksSection />
+        <FAQSection />
       </main>
       
       <Footer />
