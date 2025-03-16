@@ -38,7 +38,7 @@ const Index = () => {
               $88,888
             </h2>
             <p className="text-muted-foreground mb-8 animate-fade-in">
-              in raffle winnings already claimed
+              in raffle winnings claimed till date
             </p>
           </div>
         </section>
