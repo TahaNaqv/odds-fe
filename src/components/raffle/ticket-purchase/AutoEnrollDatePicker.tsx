@@ -15,7 +15,7 @@ interface AutoEnrollDatePickerProps {
 const AutoEnrollDatePicker = ({ date, onDateSelect, isDisabled }: AutoEnrollDatePickerProps) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const formattedDate = date ? format(date, 'PPP') : 'Select a date (optional)';
+  const formattedDate = date ? format(date, 'PPP') : 'Select a date';
 
   return (
     <div className="space-y-2">
