@@ -162,7 +162,7 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
           <span>
             {isPast
               ? `Prize pool: ${formatCurrency(raffle.prizePool)}`
-              : `$1 per ticket`
+              : `USDC $1 per ticket`
             }
           </span>
         </div>
