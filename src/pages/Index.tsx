@@ -49,29 +49,10 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Current Raffle Section */}
+        {/* Current Raffle and Ticket Purchase Section - Side by Side */}
         <section className="container mx-auto py-4">
-          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
+          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-6">
             <RaffleCard raffle={currentRaffle} isLoading={isLoading} />
-            
-            <div className="flex flex-col justify-center">
-              <div className="glass-card p-8 rounded-xl text-center h-full flex items-center">
-                <div className="w-full">
-                  <p className="text-xl font-bold mb-3 text-gradient">
-                    Join today's raffle!
-                  </p>
-                  <p className="text-base text-muted-foreground leading-relaxed">
-                    Buy your tickets now before the timer runs out. The more tickets you buy, the higher your chances of winning!
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Ticket Purchase Section */}
-        <section className="container mx-auto py-12" id="purchase-section">
-          <div className="max-w-xl mx-auto">
             <TicketPurchase />
           </div>
         </section>
