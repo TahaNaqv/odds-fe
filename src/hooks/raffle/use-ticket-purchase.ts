@@ -49,9 +49,9 @@ export const useTicketPurchase = (
       }));
       
       // Add to user activity
-      const newActivity = {
+      const newActivity: UserActivity = {
         id: `activity-${Date.now()}`,
-        type: 'purchase' as const,
+        type: 'purchase',
         raffleId: currentRaffle.id,
         timestamp: new Date().toISOString(),
         ticketCount,
