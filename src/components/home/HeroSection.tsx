@@ -13,7 +13,7 @@ const HeroSection = () => {
           Daily Raffles
         </h1>
         <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
-          Play every day with $1 tickets in USDC! Buy more to increase your odds and opt in for automatic daily entries!
+          Play every day with $1 tickets in USDC. Buy more to increase your odds and opt in for automatic daily entries!
         </p>
         <div className="flex justify-center mb-2">
           <span className="text-[4rem] animate-float">💰</span>
