@@ -2,7 +2,13 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
-import { MinusCircle, PlusCircle } from 'lucide-react';
+import { MinusCircle, PlusCircle, HelpCircle } from 'lucide-react';
+import { 
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 interface TicketCountSelectorProps {
   ticketCount: number;
@@ -24,9 +30,23 @@ const TicketCountSelector = ({ ticketCount, setTicketCount }: TicketCountSelecto
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <label htmlFor="ticket-count" className="text-sm font-medium">
-          Number of Tickets
-        </label>
+        <div className="flex items-center gap-1.5">
+          <label htmlFor="ticket-count" className="text-sm font-medium">
+            Number of Tickets
+          </label>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-5 w-5 p-0 text-muted-foreground">
+                  <HelpCircle className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-[220px]">
+                <p className="text-xs">Slider sets up to 100 tickets. Use input field for larger amounts.</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
         <div className="flex items-center space-x-2">
           <Button
             variant="outline"
@@ -66,9 +86,6 @@ const TicketCountSelector = ({ ticketCount, setTicketCount }: TicketCountSelecto
         <span>1 ticket</span>
         <span>100+ tickets</span>
       </div>
-      <p className="text-xs text-muted-foreground text-center">
-        Slider sets up to 100 tickets. Use input field for larger amounts.
-      </p>
     </div>
   );
 };
