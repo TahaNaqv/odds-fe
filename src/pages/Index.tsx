@@ -8,6 +8,7 @@ import { Calendar, Wallet } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import useRaffle from '@/hooks/useRaffle';
 import useWallet from '@/hooks/useWallet';
+import CelebrationConfetti from '@/components/effects/CelebrationConfetti';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -34,9 +35,14 @@ const Index = () => {
             <div className="flex justify-center mb-2">
               <span className="text-[4rem] animate-float">💰</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-app-bright-purple via-app-purple to-app-blue bg-clip-text text-transparent">
-              USDC $88,888
-            </h2>
+            <div className="relative">
+              <h2 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-app-bright-purple via-app-purple to-app-blue bg-clip-text text-transparent relative z-10">
+                USDC $88,888
+              </h2>
+              <div className="absolute inset-0 -top-10 -bottom-6 overflow-hidden">
+                <CelebrationConfetti />
+              </div>
+            </div>
             <p className="text-muted-foreground mb-8 animate-fade-in">
               in raffle winnings claimed till date
             </p>
