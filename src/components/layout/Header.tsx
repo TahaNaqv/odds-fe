@@ -34,9 +34,9 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col items-center justify-between md:flex-row">
-          {/* Logo with increased font size */}
+          {/* Logo with increased font size and text-gradient */}
           <Link to="/" className="flex items-center mb-3 md:mb-0">
-            <div className="font-bold text-2xl text-raffle-blue dark:text-primary">Ødds</div>
+            <div className="font-bold text-2xl tracking-tight text-gradient">Ødds</div>
           </Link>
           
           {/* Navigation - Centered on mobile and right-adjusted on desktop */}
