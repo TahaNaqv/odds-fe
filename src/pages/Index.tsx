@@ -28,13 +28,16 @@ const Index = () => {
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-gradient">
               Daily Raffles
             </h1>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
               Play every day with $1 tickets in USDC! Buy more to increase your odds and opt in for automatic daily entries!
+            </p>
+            <p className="text-muted-foreground mb-8 animate-fade-in">
+              <span className="text-app-purple font-medium">$88,888</span> in raffle winnings already claimed! Winners are cashing in daily—don't be the one left out! 🎟️
             </p>
           </div>
         </section>
         
-        {/* Current Raffle and Marketing Message Section */}
+        {/* Current Raffle Section */}
         <section className="container mx-auto py-4">
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
             <RaffleCard raffle={currentRaffle} isLoading={isLoading} />
@@ -45,9 +48,11 @@ const Index = () => {
                   <div className="flex justify-center mb-2">
                     <span className="text-[4rem] animate-float">💰</span>
                   </div>
-                  <p className="text-3xl font-bold mb-3 text-gradient">$88,888</p>
+                  <p className="text-xl font-bold mb-3 text-gradient">
+                    Join today's raffle!
+                  </p>
                   <p className="text-base text-muted-foreground leading-relaxed">
-                    in raffle winnings already claimed! Winners are cashing in daily—don't be the one left out! 🎟️
+                    Buy your tickets now before the timer runs out. The more tickets you buy, the higher your chances of winning!
                   </p>
                 </div>
               </div>
