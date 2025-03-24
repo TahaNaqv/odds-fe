@@ -9,17 +9,17 @@ const HowItWorksSection = () => {
             {
               step: 1,
               title: "Buy Tickets",
-              description: "Purchase $1 raffle tickets using USDC or USDT. Buy multiple tickets to increase your chances."
+              description: "Purchase $1 unique raffle tickets using USDC. Each ticket has its own identifier and buying multiple tickets increases your chances."
             },
             {
               step: 2,
               title: "Wait for Draw",
-              description: "Each raffle lasts for 24 hours. The smart contract randomly selects a winning ticket."
+              description: "Each raffle lasts for 24 hours. The smart contract randomly assigns tickets to three groups with different prize allocations."
             },
             {
               step: 3,
               title: "Collect Winnings",
-              description: "If your ticket wins, the prize pool is automatically transferred to your wallet."
+              description: "If your ticket wins, your prize is automatically transferred to your wallet. Group one winners get double, group two get equal value, group three gets nothing."
             }
           ].map((item) => (
             <div key={item.step} className="glass-card p-6 rounded-xl">

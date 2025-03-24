@@ -19,8 +19,19 @@ export const TOKENS = {
 export const RAFFLE = {
   ticketPrice: 1, // $1 per ticket
   windowDuration: 86400, // 24 hours in seconds
-  maxTickets: 1000, // Maximum tickets per round
-  maxAutoEnrollDays: 30 // Maximum days for auto-enrollment
+  maxTickets: Infinity, // No maximum tickets per round
+  maxAutoEnrollDays: 30, // Maximum days for auto-enrollment
+  prizeDistribution: {
+    winners: 95, // 95% to winners
+    buybackAndBurn: 3, // 3% to buyback and burn
+    operations: 1, // 1% to operations
+    poolCreator: 1, // 1% to pool creator
+  },
+  winnerGroups: {
+    groupOne: { multiplier: 2, name: "Double" }, // Double the ticket value
+    groupTwo: { multiplier: 1, name: "Equal" },  // Equal to ticket value
+    groupThree: { multiplier: 0, name: "None" }  // No winnings
+  }
 };
 
 // Network Constants
@@ -42,7 +53,7 @@ export const MOCK_CURRENT_RAFFLE = {
   startTime: new Date(Date.now() - 12 * 3600 * 1000).toISOString(), // 12 hours ago
   endTime: new Date(Date.now() + 12 * 3600 * 1000).toISOString(), // 12 hours from now
   ticketsSold: 423,
-  maxTickets: 1000,
+  maxTickets: Infinity,
   prizePool: 423, // $423 (1 dollar per ticket)
 };
 
@@ -52,20 +63,22 @@ export const MOCK_PAST_RAFFLES = [
     startTime: new Date(Date.now() - 36 * 3600 * 1000).toISOString(),
     endTime: new Date(Date.now() - 12 * 3600 * 1000).toISOString(),
     ticketsSold: 752,
-    maxTickets: 1000,
+    maxTickets: Infinity,
     prizePool: 752,
     winner: '0x3f...a4d2',
-    winningTicket: 347
+    winningTicket: 347,
+    winnerGroup: 'Double'
   },
   {
     id: 'raffle-00-1',
     startTime: new Date(Date.now() - 60 * 3600 * 1000).toISOString(),
     endTime: new Date(Date.now() - 36 * 3600 * 1000).toISOString(),
     ticketsSold: 892,
-    maxTickets: 1000,
+    maxTickets: Infinity,
     prizePool: 892,
     winner: '0x7d...e5f1',
-    winningTicket: 621
+    winningTicket: 621,
+    winnerGroup: 'Equal'
   }
 ];
 
@@ -77,7 +90,8 @@ export const MOCK_USER_ACTIVITY = [
     timestamp: new Date(Date.now() - 5 * 3600 * 1000).toISOString(),
     ticketCount: 5,
     totalSpent: 5,
-    token: 'USDC'
+    token: 'USDC',
+    ticketIds: [1001, 1002, 1003, 1004, 1005]
   },
   {
     id: 'activity-000',
@@ -85,7 +99,8 @@ export const MOCK_USER_ACTIVITY = [
     raffleId: 'raffle-00-1',
     timestamp: new Date(Date.now() - 37 * 3600 * 1000).toISOString(),
     prize: 892,
-    winningTicket: 621
+    winningTicket: 621,
+    winnerGroup: 'Equal'
   },
   {
     id: 'activity-00-1',
@@ -94,6 +109,7 @@ export const MOCK_USER_ACTIVITY = [
     timestamp: new Date(Date.now() - 50 * 3600 * 1000).toISOString(),
     ticketCount: 10,
     totalSpent: 10,
-    token: 'USDT'
+    token: 'USDT',
+    ticketIds: [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010]
   }
 ];

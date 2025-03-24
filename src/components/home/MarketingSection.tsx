@@ -1,7 +1,7 @@
 
 import RaffleCard from '@/components/raffle/RaffleCard';
 import TicketPurchase from '@/components/raffle/TicketPurchase';
-import { Trophy, Zap, Ticket, Calendar, Wallet } from 'lucide-react';
+import { Trophy, Zap, Ticket, Calendar, Wallet, Users } from 'lucide-react';
 import { RaffleData } from '@/hooks/raffle/raffle-types';
 
 interface MarketingSectionProps {
@@ -29,17 +29,16 @@ const MarketingSection = ({ currentRaffle, isLoading }: MarketingSectionProps) =
               </div>
               
               <div>
-                <h3 className="text-xl font-bold mb-2 text-gradient">Boost Your Chances!</h3>
+                <h3 className="text-xl font-bold mb-2 text-gradient">Three Ways to Win!</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  <span className="font-medium text-white">Every USDC $1 ticket is a chance to win big.</span> The 
-                  more tickets you buy, the higher your odds of winning the daily prize pool!
+                  <span className="font-medium text-white">Each $1 ticket is a unique chance to win big.</span> Your ticket could be randomly selected for the double-prize group, equal-prize group, or try again next time!
                 </p>
                 
                 <div className="mt-4 grid grid-cols-3 gap-3">
                   {[
-                    { icon: <Ticket size={16} />, text: "1 ticket = 1 entry" },
-                    { icon: <Calendar size={16} />, text: "Daily drawings" },
-                    { icon: <Wallet size={16} />, text: "Instant payouts" }
+                    { icon: <Users size={16} />, text: "Three prize groups" },
+                    { icon: <Trophy size={16} />, text: "2x prize possible" },
+                    { icon: <Wallet size={16} />, text: "95% to winners" }
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-1.5">
                       <div className="text-app-purple">{item.icon}</div>

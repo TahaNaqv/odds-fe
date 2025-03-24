@@ -6,12 +6,12 @@ const FAQSection = () => {
   const faqItems = [
     {
       question: "How are winners selected?",
-      answer: "Winners are selected through a transparent, verifiable random process on the blockchain. Each ticket has an equal chance of winning, and the selection happens automatically at the end of the 24-hour raffle period.",
+      answer: "Winners are selected through a transparent, verifiable random process on the blockchain. Each ticket is randomly assigned to one of three groups. Group one winners receive double their ticket value, group two winners receive the same as their ticket value, and group three receives nothing. 95% of the prize pool is distributed to winners this way.",
       icon: <HelpCircle size={20} className="text-app-purple mr-2 flex-shrink-0" />
     },
     {
       question: "What cryptocurrencies can I use to purchase tickets?",
-      answer: "Currently, you can purchase tickets using USDC on the Base Network. Each ticket costs $1 USDC.",
+      answer: "Currently, you can purchase tickets using USDC on the Base Network. Each ticket costs $1 USDC and is uniquely identified.",
       icon: <Coins size={20} className="text-app-purple mr-2 flex-shrink-0" />
     },
     {
@@ -31,12 +31,12 @@ const FAQSection = () => {
     },
     {
       question: "Is there a maximum number of tickets I can buy?",
-      answer: "There is no set maximum for ticket purchases. You can buy as many tickets as you'd like to increase your chances of winning.",
+      answer: "There is no set maximum for ticket purchases. You can buy as many unique tickets as you'd like to increase your chances of winning.",
       icon: <Ticket size={20} className="text-app-purple mr-2 flex-shrink-0" />
     },
     {
       question: "How is the prize pool calculated?",
-      answer: "The prize pool consists of 90% of all ticket sales for that day's raffle. The remaining 10% goes toward platform maintenance and future development.",
+      answer: "The prize pool is distributed as follows: 95% goes to winners, 3% goes to a buy back and burn wallet, 1% goes toward platform operations, and 1% goes to the pool creator.",
       icon: <Wallet size={20} className="text-app-purple mr-2 flex-shrink-0" />
     },
     {
