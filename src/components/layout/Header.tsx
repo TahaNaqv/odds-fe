@@ -37,9 +37,13 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col items-center justify-between md:flex-row">
-          {/* Logo with increased font size and text-gradient */}
+          {/* Logo replaced with image */}
           <Link to="/" className="flex items-center mb-3 md:mb-0">
-            <div className="font-bold text-2xl tracking-tight text-gradient">Ødds</div>
+            <img 
+              src="/lovable-uploads/c955157a-772b-4ee5-b0e0-e45ef31ea9e0.png" 
+              alt="Ødds Logo" 
+              className="h-8 md:h-9" 
+            />
           </Link>
           
           {/* Navigation - Centered on mobile and right-adjusted on desktop */}
