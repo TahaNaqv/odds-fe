@@ -10,6 +10,7 @@ import PastActivity from "./pages/PastActivity";
 import RaffleHistory from "./pages/RaffleHistory";
 import NotFound from "./pages/NotFound";
 import ActivityPreviewPage from "./pages/ActivityPreviewPage";
+import ActivityCalendarPage from "./pages/ActivityCalendarPage";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ function App() {
               <Route path="/history" element={<RaffleHistory />} />
               <Route path="/activity" element={<PastActivity />} />
               <Route path="/activity-preview" element={<ActivityPreviewPage />} />
+              <Route path="/activity-calendar" element={<ActivityCalendarPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
