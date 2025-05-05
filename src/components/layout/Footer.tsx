@@ -1,5 +1,5 @@
 
-import { Twitter, Globe, Heart, FileText, Info } from 'lucide-react';
+import { Twitter, Globe, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -12,21 +12,14 @@ const Footer = () => {
             <div className="text-sm text-gray-400 font-medium">
               © 2025 copyright Ødds
             </div>
-            <div className="flex flex-col space-y-2">
-              <Link 
-                to="/terms" 
-                className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 text-sm"
-              >
-                <FileText className="h-4 w-4" />
-                Terms and Conditions
-              </Link>
+            <div className="text-sm text-gray-400 flex items-center">
+              Built with <Heart className="h-4 w-4 mx-1 text-red-500 fill-current" /> on Base
             </div>
           </div>
           
           {/* Disclaimer section */}
           <div className="space-y-2">
-            <h4 className="text-sm font-semibold flex items-center gap-2">
-              <Info className="h-4 w-4" />
+            <h4 className="text-sm font-semibold">
               Disclaimer
             </h4>
             <p className="text-xs text-gray-400">
@@ -34,7 +27,7 @@ const Footer = () => {
             </p>
           </div>
           
-          {/* Social links and Built with love */}
+          {/* Social links and Terms */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <a 
@@ -56,8 +49,13 @@ const Footer = () => {
                 <Twitter className="h-5 w-5" />
               </a>
             </div>
-            <div className="text-sm text-gray-400 flex items-center">
-              Built with <Heart className="h-4 w-4 mx-1 text-red-500 fill-current" /> on Base
+            <div className="flex flex-col space-y-2">
+              <Link 
+                to="/terms" 
+                className="text-gray-400 hover:text-white transition-colors text-sm"
+              >
+                Terms and Conditions
+              </Link>
             </div>
           </div>
         </div>
