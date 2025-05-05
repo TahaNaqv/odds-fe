@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Ticket, Trophy, TrendingUp, Award, Users } from "lucide-react";
+import { Ticket, Trophy, TrendingUp } from "lucide-react";
 import useRaffle from "@/hooks/useRaffle";
 import useWallet from "@/hooks/useWallet";
 
@@ -15,10 +15,6 @@ const ActivityStats = () => {
     totalWon: 0,
     winRate: 0,
     mostTicketsDay: "",
-    participationRate: 0,
-    totalRaffles: 0,
-    averageTicketsPerRaffle: 0,
-    bestWinningStreak: 0,
   });
   
   useEffect(() => {
@@ -51,40 +47,6 @@ const ActivityStats = () => {
       // Calculate win rate
       const winRate = totalTickets > 0 ? (wins.length / totalTickets) * 100 : 0;
       
-      // Calculate total unique raffles participated
-      const uniqueRaffleIds = new Set(
-        userActivity.map(activity => activity.raffleId)
-      );
-      const totalRaffles = uniqueRaffleIds.size;
-      
-      // Calculate participation rate (assume 1 raffle per week for 52 weeks)
-      const participationRate = Math.min(100, (totalRaffles / 52) * 100);
-      
-      // Calculate average tickets per raffle
-      const averageTicketsPerRaffle = totalRaffles > 0 ? totalTickets / totalRaffles : 0;
-      
-      // Calculate best winning streak
-      let currentStreak = 0;
-      let maxStreak = 0;
-      
-      // Sort activities by date
-      const sortedActivities = [...userActivity].sort(
-        (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-      );
-      
-      // Find the longest streak of consecutive winning raffles
-      let lastRaffleId = "";
-      sortedActivities.forEach(activity => {
-        if (activity.type === "win" && activity.raffleId !== lastRaffleId) {
-          currentStreak++;
-          maxStreak = Math.max(maxStreak, currentStreak);
-          lastRaffleId = activity.raffleId;
-        } else if (activity.type === "purchase" && !wins.some(win => win.raffleId === activity.raffleId)) {
-          // Reset streak on non-winning raffle
-          currentStreak = 0;
-        }
-      });
-      
       setStats({
         totalTickets,
         totalWins: wins.length,
@@ -92,10 +54,6 @@ const ActivityStats = () => {
         totalWon,
         winRate,
         mostTicketsDay,
-        participationRate,
-        totalRaffles,
-        averageTicketsPerRaffle,
-        bestWinningStreak: maxStreak,
       });
     }
   }, [userActivity]);
@@ -159,60 +117,6 @@ const ActivityStats = () => {
           </div>
           <div className="mt-2 text-sm text-medium-contrast">
             Most active: {stats.mostTicketsDay || "N/A"}
-          </div>
-        </CardContent>
-      </Card>
-      
-      {/* New stat cards */}
-      <Card className="shadow-subtle bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-950/30 dark:to-purple-900/20 border-purple-200 dark:border-purple-800">
-        <CardContent className="p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-purple-600 dark:text-purple-400">Participation</p>
-              <h3 className="text-2xl font-bold text-high-contrast mt-1">{stats.participationRate.toFixed(2)}%</h3>
-            </div>
-            <div className="h-12 w-12 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center">
-              <Users className="h-6 w-6 text-purple-600 dark:text-purple-400" />
-            </div>
-          </div>
-          <div className="mt-2 text-sm text-medium-contrast">
-            <span className="font-medium">{stats.totalRaffles}</span> total raffles joined
-          </div>
-        </CardContent>
-      </Card>
-      
-      <Card className="shadow-subtle bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-950/30 dark:to-orange-900/20 border-orange-200 dark:border-orange-800">
-        <CardContent className="p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-orange-600 dark:text-orange-400">Win Streak</p>
-              <h3 className="text-2xl font-bold text-high-contrast mt-1">{stats.bestWinningStreak}</h3>
-            </div>
-            <div className="h-12 w-12 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">
-              <Award className="h-6 w-6 text-orange-600 dark:text-orange-400" />
-            </div>
-          </div>
-          <div className="mt-2 text-sm text-medium-contrast">
-            Your best consecutive wins
-          </div>
-        </CardContent>
-      </Card>
-      
-      <Card className="shadow-subtle bg-gradient-to-br from-cyan-50 to-cyan-100 dark:from-cyan-950/30 dark:to-cyan-900/20 border-cyan-200 dark:border-cyan-800">
-        <CardContent className="p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-cyan-600 dark:text-cyan-400">Avg. Tickets</p>
-              <h3 className="text-2xl font-bold text-high-contrast mt-1">
-                {stats.averageTicketsPerRaffle.toFixed(1)}
-              </h3>
-            </div>
-            <div className="h-12 w-12 rounded-full bg-cyan-100 dark:bg-cyan-900/30 flex items-center justify-center">
-              <Ticket className="h-6 w-6 text-cyan-600 dark:text-cyan-400" />
-            </div>
-          </div>
-          <div className="mt-2 text-sm text-medium-contrast">
-            Average tickets per raffle
           </div>
         </CardContent>
       </Card>
