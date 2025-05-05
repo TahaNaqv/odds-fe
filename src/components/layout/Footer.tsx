@@ -1,7 +1,6 @@
 
-import { Heart } from 'lucide-react';
+import { Heart, MessageCircle, Twitter } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Telegram, Twitter } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -38,7 +37,7 @@ const Footer = () => {
                 className="text-white hover:text-gray-300 transition-colors"
                 aria-label="Telegram"
               >
-                <Telegram className="h-5 w-5" />
+                <MessageCircle className="h-5 w-5" />
               </a>
               <a 
                 href="https://x.com/odds_dev" 
