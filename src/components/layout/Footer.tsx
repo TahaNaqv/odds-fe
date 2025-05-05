@@ -1,6 +1,7 @@
 
-import { Twitter, Globe, Heart } from 'lucide-react';
+import { Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Telegram, Twitter } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -9,13 +10,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Copyright and links section */}
           <div className="space-y-4">
-            <div className="flex flex-col space-y-2">
-              <Link 
-                to="/terms" 
-                className="text-gray-400 hover:text-white transition-colors text-sm"
-              >
-                Terms and Conditions
-              </Link>
+            <div className="text-sm text-gray-400 font-medium">
+              © 2025 copyright Ødds
             </div>
             <div className="text-sm text-gray-400 flex items-center">
               Built with <Heart className="h-4 w-4 mx-1 text-red-500 fill-current" /> on Base
@@ -40,9 +36,9 @@ const Footer = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-white hover:text-gray-300 transition-colors"
-                aria-label="Website"
+                aria-label="Telegram"
               >
-                <Globe className="h-5 w-5" />
+                <Telegram className="h-5 w-5" />
               </a>
               <a 
                 href="https://x.com/odds_dev" 
@@ -54,8 +50,13 @@ const Footer = () => {
                 <Twitter className="h-5 w-5" />
               </a>
             </div>
-            <div className="text-sm text-gray-400 font-medium">
-              © 2025 copyright Ødds
+            <div className="flex flex-col space-y-2">
+              <Link 
+                to="/terms" 
+                className="text-gray-400 hover:text-white transition-colors text-sm"
+              >
+                Terms and Conditions
+              </Link>
             </div>
           </div>
         </div>
