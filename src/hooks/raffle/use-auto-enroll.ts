@@ -18,7 +18,7 @@ export const useAutoEnroll = (
     if (!isConnected) {
       toast({
         title: 'Wallet not connected',
-        description: 'Please connect your wallet to set auto-enrollment.',
+        description: 'Please connect your wallet to set auto-entry.',
         variant: 'destructive',
       });
       return;
@@ -27,7 +27,7 @@ export const useAutoEnroll = (
     if (!isCorrectNetwork) {
       toast({
         title: 'Wrong network',
-        description: 'Please switch to the Base network to set auto-enrollment.',
+        description: 'Please switch to the Base network to set auto-entry.',
         variant: 'destructive',
       });
       return;
@@ -46,16 +46,16 @@ export const useAutoEnroll = (
       });
       
       toast({
-        title: enabled ? 'Auto-enroll enabled' : 'Auto-enroll disabled',
+        title: enabled ? 'Auto-Entry enabled' : 'Auto-Entry disabled',
         description: enabled
-          ? `You will be automatically enrolled in daily raffles until ${endDate?.toLocaleDateString()}.`
-          : 'You have disabled auto-enrollment for future raffles.',
+          ? `You will be automatically entered in daily raffles until ${endDate?.toLocaleDateString()}.`
+          : 'You have disabled auto-entry for future raffles.',
       });
     } catch (error) {
-      console.error('Error setting auto-enroll:', error);
+      console.error('Error setting auto-entry:', error);
       toast({
         title: 'Setting failed',
-        description: 'Failed to update auto-enrollment settings. Please try again.',
+        description: 'Failed to update auto-entry settings. Please try again.',
         variant: 'destructive',
       });
     } finally {

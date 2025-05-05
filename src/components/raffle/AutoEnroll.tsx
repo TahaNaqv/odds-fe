@@ -44,7 +44,7 @@ const AutoEnroll = () => {
     } else if (checked) {
       // If enabling without a date, prompt user visually but don't enable yet
       // The user will need to select a date and then use the Update button
-      console.log("Date selection required before auto-enrollment can be activated");
+      console.log("Date selection required before auto-entry can be activated");
       // We don't call setAutoEnroll here as we need a date first
     }
   };
@@ -54,7 +54,7 @@ const AutoEnroll = () => {
     setDate(selectedDate);
     
     if (selectedDate && isEnabled) {
-      // If date is selected and auto-enroll is enabled, update
+      // If date is selected and auto-entry is enabled, update
       setAutoEnroll({ enabled: true, endDate: selectedDate });
     }
   };
@@ -67,7 +67,7 @@ const AutoEnroll = () => {
       <CardHeader>
         <div className="flex items-start justify-between">
           <div>
-            <CardTitle className="text-xl font-semibold">Auto Enrollment</CardTitle>
+            <CardTitle className="text-xl font-semibold">Auto-Entry</CardTitle>
             <CardDescription className="mt-1">
               Automatically enter future raffles until your selected date.
             </CardDescription>
@@ -122,12 +122,12 @@ const AutoEnroll = () => {
                 <Repeat className="h-5 w-5 text-raffle-blue" />
               </div>
               <div>
-                <h4 className="font-medium text-raffle-blue">How Auto Enrollment Works</h4>
+                <h4 className="font-medium text-raffle-blue">How Auto-Entry Works</h4>
                 <ul className="mt-2 text-sm space-y-2 text-raffle-dark-gray">
                   <li>• Your wallet will be charged $1 per ticket each day</li>
                   <li>• You'll automatically enter each new raffle with 1 ticket</li>
-                  <li>• Auto enrollment will continue until your selected end date</li>
-                  <li>• You can disable auto enrollment at any time</li>
+                  <li>• Auto-Entry will continue until your selected end date</li>
+                  <li>• You can disable Auto-Entry at any time</li>
                 </ul>
               </div>
             </div>
@@ -141,7 +141,7 @@ const AutoEnroll = () => {
           disabled={!isConnected || !isEnabled || !date || isLoading}
           onClick={() => setAutoEnroll({ enabled: true, endDate: date })}
         >
-          {isLoading ? 'Saving...' : 'Update Auto Enrollment'}
+          {isLoading ? 'Saving...' : 'Update Auto-Entry'}
         </Button>
       </CardFooter>
     </Card>

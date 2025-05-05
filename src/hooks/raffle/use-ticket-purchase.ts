@@ -61,10 +61,12 @@ export const useTicketPurchase = (
       
       setUserActivity(prev => [newActivity, ...prev]);
       
-      let toastMessage = `Successfully purchased ${ticketCount} tickets for $${cost}.`;
+      // Success message
+      let toastMessage = "Bravo! May the Ødds be in your favor";
       
+      // Add Auto-Entry information if enabled
       if (autoEnrollEndDate) {
-        toastMessage += ` Auto-enrollment active until ${autoEnrollEndDate.toLocaleDateString()}.`;
+        toastMessage += `\n\n✅ Auto-Entry activated! You'll receive ${ticketCount} ticket(s) daily until ${autoEnrollEndDate.toLocaleDateString()}.`;
       }
       
       toast({

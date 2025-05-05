@@ -74,7 +74,7 @@ const ActivityItem = ({ activity }: ActivityItemProps) => {
                       : 'bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300'
                   } border-none flex items-center gap-1`}>
                     {isAutoEnrolled && <Zap className="h-3 w-3" />}
-                    {isAutoEnrolled ? `Auto${getAutoEnrollmentNumber()}` : 'Manual'}
+                    {isAutoEnrolled ? `Auto-Entry${getAutoEnrollmentNumber()}` : 'Manual'}
                   </Badge>
                 )}
               </div>

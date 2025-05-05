@@ -21,7 +21,7 @@ const AutoEnrollDatePicker = ({ date, onDateSelect, isDisabled }: AutoEnrollDate
     <div className="space-y-2">
       <div className="flex items-center gap-1">
         <label htmlFor="auto-enroll-date" className="text-sm font-medium">
-          Auto Enrollment (Optional)
+          Auto-Entry (Optional)
         </label>
         <TooltipProvider>
           <Tooltip>
@@ -29,7 +29,7 @@ const AutoEnrollDatePicker = ({ date, onDateSelect, isDisabled }: AutoEnrollDate
               <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
             </TooltipTrigger>
             <TooltipContent className="max-w-xs">
-              <p>Pick a date until which you want to be automatically enrolled in daily raffles.</p>
+              <p>Buy tickets daily, automatically. Set it and forget it.</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -63,7 +63,7 @@ const AutoEnrollDatePicker = ({ date, onDateSelect, isDisabled }: AutoEnrollDate
       </Popover>
       {date && (
         <p className="text-xs text-raffle-blue">
-          You will be automatically enrolled in daily raffles until {format(date, 'PPP')}.
+          You will be automatically entered in daily raffles until {format(date, 'PPP')}.
         </p>
       )}
     </div>

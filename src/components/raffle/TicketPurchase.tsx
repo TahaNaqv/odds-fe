@@ -72,7 +72,7 @@ const TicketPurchase = () => {
             {date && (
               <>
                 <div className="flex justify-between mb-2">
-                  <span className="text-sm font-medium text-gray-700">Auto Enrollment:</span>
+                  <span className="text-sm font-medium text-gray-700">Auto-Entry:</span>
                   <span className="text-sm font-medium">Until {date.toLocaleDateString()} ({daysForAutoEnroll} days)</span>
                 </div>
                 <div className="flex justify-between mb-2">
