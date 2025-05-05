@@ -11,15 +11,9 @@ import RaffleHistory from "./pages/RaffleHistory";
 import NotFound from "./pages/NotFound";
 import ActivityPreviewPage from "./pages/ActivityPreviewPage";
 import ActivityCalendarPage from "./pages/ActivityCalendarPage";
+import TermsPage from "./pages/TermsPage";
 
-// New imports for footer pages
-const TermsPage = () => (
-  <div className="container mx-auto py-10">
-    <h1 className="text-3xl font-bold mb-6">Terms and Conditions</h1>
-    <p className="text-muted-foreground">This page contains the terms and conditions for using our service.</p>
-  </div>
-);
-
+// New imports for other footer pages
 const PrivacyPage = () => (
   <div className="container mx-auto py-10">
     <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
