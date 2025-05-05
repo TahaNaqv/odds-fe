@@ -9,8 +9,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Copyright and links section */}
           <div className="space-y-4">
-            <div className="text-sm text-gray-400 font-medium">
-              © 2025 copyright Ødds
+            <div className="flex flex-col space-y-2">
+              <Link 
+                to="/terms" 
+                className="text-gray-400 hover:text-white transition-colors text-sm"
+              >
+                Terms and Conditions
+              </Link>
             </div>
             <div className="text-sm text-gray-400 flex items-center">
               Built with <Heart className="h-4 w-4 mx-1 text-red-500 fill-current" /> on Base
@@ -49,13 +54,8 @@ const Footer = () => {
                 <Twitter className="h-5 w-5" />
               </a>
             </div>
-            <div className="flex flex-col space-y-2">
-              <Link 
-                to="/terms" 
-                className="text-gray-400 hover:text-white transition-colors text-sm"
-              >
-                Terms and Conditions
-              </Link>
+            <div className="text-sm text-gray-400 font-medium">
+              © 2025 copyright Ødds
             </div>
           </div>
         </div>
