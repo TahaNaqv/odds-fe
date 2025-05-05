@@ -23,7 +23,10 @@ const Header = () => {
   // Check if a nav item is active
   const isActive = (path: string) => {
     return location.pathname === path || 
-           (path === '/activity' && location.pathname === '/activity-preview');
+           (path === '/activity-calendar' && (
+             location.pathname === '/activity-preview' || 
+             location.pathname === '/activity'
+           ));
   };
 
   return (
@@ -51,11 +54,11 @@ const Header = () => {
               </Button>
             </Link>
             
-            <Link to="/activity-preview">
+            <Link to="/activity-calendar">
               <Button
-                variant={isActive('/activity') ? 'secondary' : 'ghost'}
+                variant={isActive('/activity-calendar') ? 'secondary' : 'ghost'}
                 size="sm"
-                className={`rounded-lg ${isActive('/activity') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
+                className={`rounded-lg ${isActive('/activity-calendar') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
               >
                 <Clock className="mr-2 h-4 w-4" /> My Activity
               </Button>
