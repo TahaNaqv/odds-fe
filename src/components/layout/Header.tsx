@@ -37,12 +37,12 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col items-center justify-between md:flex-row">
-          {/* Logo with more impactful size */}
+          {/* Logo with doubled size */}
           <Link to="/" className="flex items-center mb-3 md:mb-0">
             <img 
               src="/lovable-uploads/c955157a-772b-4ee5-b0e0-e45ef31ea9e0.png" 
               alt="Ødds Logo" 
-              className="h-8 md:h-10" 
+              className="h-16 md:h-20" 
               style={{ background: 'transparent' }}
             />
           </Link>
