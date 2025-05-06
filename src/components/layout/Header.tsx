@@ -37,12 +37,12 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col items-center justify-between md:flex-row">
-          {/* Logo with increased size (25% bigger than previous) */}
+          {/* Logo with reduced size (50% smaller than previous) */}
           <Link to="/" className="flex items-center mb-3 md:mb-0">
             <img 
               src="/lovable-uploads/c955157a-772b-4ee5-b0e0-e45ef31ea9e0.png" 
               alt="Ødds Logo" 
-              className="h-15 md:h-[17.5rem]" 
+              className="h-7.5 md:h-[8.75rem]" 
               style={{ background: 'transparent' }}
             />
           </Link>
@@ -91,4 +91,3 @@ const Header = () => {
 };
 
 export default Header;
-
