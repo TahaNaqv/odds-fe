@@ -3,6 +3,8 @@ import { useCallback } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { RAFFLE } from '@/utils/constants';
 import { PurchaseTicketParams, RaffleData, UserActivity } from './raffle-types';
+import { generateReferralCode, formatReferralLink } from '@/utils/helpers';
+import { showReferralToast } from '@/components/raffle/ReferralShareToast';
 
 export const useTicketPurchase = (
   isConnected: boolean,
@@ -61,18 +63,24 @@ export const useTicketPurchase = (
       
       setUserActivity(prev => [newActivity, ...prev]);
       
-      // Success message
-      let toastMessage = "Bravo! May the Ødds be in your favor";
+      // Generate referral code based on wallet address (in a real app, this would come from the connected wallet)
+      // Using a mock address for demonstration
+      const mockWalletAddress = "0x742d35Cc6634C0532925a3b844Bc454e4438f44e";
+      const referralCode = generateReferralCode(mockWalletAddress);
+      const referralLink = formatReferralLink(referralCode);
       
-      // Add Auto-Entry information if enabled
+      // Show toast with referral link and social sharing
+      showReferralToast(
+        currentRaffle.id.replace('raffle-', ''), 
+        ticketCount, 
+        referralLink
+      );
+      
+      // If auto-enroll is enabled, add that information in console (in a real implementation this would update state)
       if (autoEnrollEndDate) {
-        toastMessage += `\n\n✅ Auto-Entry activated! You'll receive ${ticketCount} ticket(s) daily until ${autoEnrollEndDate.toLocaleDateString()}.`;
+        console.log(`Auto-Entry activated until ${autoEnrollEndDate.toLocaleDateString()}`);
       }
       
-      toast({
-        title: 'Tickets purchased!',
-        description: toastMessage,
-      });
     } catch (error) {
       console.error('Error purchasing tickets:', error);
       toast({

@@ -106,3 +106,46 @@ export function truncateText(text: string, maxLength: number): string {
   if (!text || text.length <= maxLength) return text;
   return `${text.substring(0, maxLength)}...`;
 }
+
+// Generate a referral code from a wallet address
+export function generateReferralCode(address: string): string {
+  if (!address) return '';
+  // Take first 4 chars and last 4 chars of the address and join them
+  const prefix = address.substring(2, 6);
+  const suffix = address.substring(address.length - 4);
+  return `${prefix}${suffix}`.toLowerCase();
+}
+
+// Format referral link for sharing
+export function formatReferralLink(referralCode: string): string {
+  const baseUrl = window.location.origin;
+  return `${baseUrl}/?ref=${referralCode}`;
+}
+
+// Format social share message for Twitter and Telegram
+export function formatSocialShareMessage(raffleId: string, ticketCount: number, referralLink: string): string {
+  return `I'm in Raffle #${raffleId} with ${ticketCount} ticket(s) on Ødds 🎲\nOne ticket. One shot. One win. 💸\n👉 ${referralLink}`;
+}
+
+// Open Twitter share dialog
+export function shareOnTwitter(message: string): void {
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}`;
+  window.open(twitterUrl, '_blank', 'width=550,height=420');
+}
+
+// Open Telegram share dialog
+export function shareOnTelegram(message: string): void {
+  const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(window.location.origin)}&text=${encodeURIComponent(message)}`;
+  window.open(telegramUrl, '_blank');
+}
+
+// Copy text to clipboard
+export async function copyToClipboard(text: string): Promise<boolean> {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (error) {
+    console.error('Failed to copy text:', error);
+    return false;
+  }
+}
