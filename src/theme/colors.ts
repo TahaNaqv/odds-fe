@@ -49,7 +49,7 @@ const colors = {
       'dark-charcoal': '#1A1A1D',
       'crimson': '#C3073F',
       'maroon': '#6F2232',
-      // Digital Gold color palette
+      // Digital Gold color palette - enhanced FFD700 usage
       'gold': '#FFD700',
       'orange': '#FFA500',
       'dark-orange': '#FF8C00',

@@ -14,9 +14,9 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90 dark:bg-red-500 dark:text-white dark:hover:bg-red-600 neon:bg-[#C3073F] neon:text-white neon:hover:bg-[#C3073F]/90 gold:bg-[#FF4500] gold:text-white gold:hover:bg-[#FF4500]/90",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground dark:border-gray-700 dark:hover:bg-gray-800 neon:border-[#6F2232] neon:hover:bg-[#6F2232]/20 gold:border-[#FF8C00] gold:hover:bg-[#FF8C00]/20",
+          "border border-input bg-background hover:bg-accent hover:text-accent-foreground dark:border-gray-700 dark:hover:bg-gray-800 neon:border-[#6F2232] neon:hover:bg-[#6F2232]/20 gold:border-[#FFD700] gold:hover:bg-[#FFD700]/20",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 neon:bg-[#6F2232] neon:text-white neon:hover:bg-[#6F2232]/90 gold:bg-[#FF8C00] gold:text-black gold:hover:bg-[#FF8C00]/90",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 neon:bg-[#6F2232] neon:text-white neon:hover:bg-[#6F2232]/90 gold:bg-[#FFA500] gold:text-black gold:hover:bg-[#FFA500]/90",
         ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-gray-800 neon:hover:bg-[#C3073F]/20 neon:hover:text-white gold:hover:bg-[#FFD700]/20 gold:hover:text-white",
         link: "text-primary underline-offset-4 hover:underline dark:text-blue-400 dark:hover:text-blue-300 neon:text-[#C3073F] neon:hover:text-[#C3073F]/80 gold:text-[#FFD700] gold:hover:text-[#FFD700]/80",
       },
