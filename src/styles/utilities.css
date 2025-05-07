@@ -37,4 +37,25 @@
   .dialog-content {
     @apply bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700;
   }
+
+  /* Neon theme specific utilities */
+  .neon .text-gradient {
+    @apply bg-gradient-to-br from-[#C3073F] via-[#950740] to-[#6F2232] bg-clip-text text-transparent;
+  }
+
+  .neon .button-glow {
+    @apply shadow-[0_0_15px_rgba(195,7,63,0.3)] transition-shadow duration-300;
+  }
+
+  .neon .button-glow:hover {
+    @apply shadow-[0_0_25px_rgba(195,7,63,0.6)];
+  }
+  
+  .neon-border {
+    @apply border border-[#C3073F] shadow-[0_0_8px_rgba(195,7,63,0.6)];
+  }
+
+  .neon-text {
+    @apply text-[#C3073F] drop-shadow-[0_0_8px_rgba(195,7,63,0.6)];
+  }
 }

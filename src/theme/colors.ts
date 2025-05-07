@@ -44,6 +44,11 @@ const colors = {
       'bright-purple': '#8B5CF6',
       'vivid-orange': '#F97316',
       'bright-blue': '#1EAEDB',
+      // Neon Nights color palette
+      'jet-black': '#0F0F0F',
+      'dark-charcoal': '#1A1A1D',
+      'crimson': '#C3073F',
+      'maroon': '#6F2232',
     },
   }
 };

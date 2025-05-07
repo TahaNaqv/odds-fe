@@ -46,3 +46,36 @@
 .button-high-contrast {
   @apply bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600;
 }
+
+/* Neon Nights specific styles */
+.neon .raffle-blue {
+  @apply text-[#C3073F];
+}
+
+.neon .raffle-light-blue {
+  @apply bg-[#6F2232]/30;
+}
+
+.neon .card-high-contrast {
+  @apply bg-[#1A1A1D] text-white border-[#C3073F]/50;
+}
+
+.neon .input-high-contrast {
+  @apply bg-[#1A1A1D] border-[#6F2232] text-white;
+}
+
+.neon .button-high-contrast {
+  @apply bg-[#C3073F] hover:bg-[#950740] text-white;
+}
+
+.neon .shadow-glass {
+  @apply shadow-[0_4px_20px_rgba(195,7,63,0.2)];
+}
+
+.neon .shadow-elevated {
+  @apply shadow-[0_2px_10px_rgba(195,7,63,0.15)];
+}
+
+.neon .shadow-subtle {
+  @apply shadow-[0_1px_5px_rgba(195,7,63,0.1)];
+}

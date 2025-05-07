@@ -52,6 +52,38 @@
     --input: 240 12% 27%;
     --ring: 255 70% 74%;
   }
+
+  /* Neon Nights theme colors */
+  .neon {
+    /* Jet Black */
+    --background: 0 0% 6%;
+    --foreground: 0 0% 98%;
+
+    /* Dark Charcoal */
+    --card: 240 5% 10%;
+    --card-foreground: 0 0% 100%;
+    --popover: 240 5% 10%;
+    --popover-foreground: 0 0% 100%;
+
+    /* Crimson Red */
+    --primary: 346 94% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Deep Maroon */
+    --secondary: 345 53% 31%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Additional styles for Neon Nights */
+    --muted: 345 20% 20%;
+    --muted-foreground: 0 0% 80%;
+    --accent: 346 94% 40%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 345 30% 25%;
+    --input: 345 30% 25%;
+    --ring: 346 94% 40%;
+  }
 }
 
 @layer base {

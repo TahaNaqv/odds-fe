@@ -149,3 +149,8 @@ export async function copyToClipboard(text: string): Promise<boolean> {
     return false;
   }
 }
+
+// Navigate to the theme preview
+export function previewNeonTheme() {
+  window.location.href = '/theme/neon-nights';
+}
