@@ -66,7 +66,7 @@ const TicketPurchase = () => {
               <span className="text-sm font-medium">USDC $1.00 per ticket</span>
             </div>
             <div className="flex justify-between mb-2">
-              <span className="text-sm font-medium text-gray-700">Daily Quantity:</span>
+              <span className="text-sm font-medium text-gray-700">Quantity:</span>
               <span className="text-sm font-medium">{ticketCount} tickets</span>
             </div>
             {date && (
