@@ -112,3 +112,36 @@
 .gold .shadow-subtle {
   @apply shadow-[0_1px_5px_rgba(255,215,0,0.1)];
 }
+
+/* Vibrant Gradient specific styles */
+.vibrant .raffle-blue {
+  @apply text-[#FF6F61];
+}
+
+.vibrant .raffle-light-blue {
+  @apply bg-[#F7CAC9]/30;
+}
+
+.vibrant .card-high-contrast {
+  @apply bg-white text-[#6B5B95] border-[#FF6F61]/30;
+}
+
+.vibrant .input-high-contrast {
+  @apply bg-white border-[#F7CAC9] text-[#6B5B95];
+}
+
+.vibrant .button-high-contrast {
+  @apply bg-[#FF6F61] hover:bg-[#FF6F61]/90 text-white;
+}
+
+.vibrant .shadow-glass {
+  @apply shadow-[0_4px_20px_rgba(255,111,97,0.15)];
+}
+
+.vibrant .shadow-elevated {
+  @apply shadow-[0_2px_10px_rgba(255,111,97,0.1)];
+}
+
+.vibrant .shadow-subtle {
+  @apply shadow-[0_1px_5px_rgba(255,111,97,0.05)];
+}

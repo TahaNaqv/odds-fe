@@ -79,4 +79,25 @@
   .gold-text {
     @apply text-[#FFD700] drop-shadow-[0_0_8px_rgba(255,215,0,0.6)];
   }
+  
+  /* Vibrant theme specific utilities */
+  .vibrant .text-gradient {
+    @apply bg-gradient-to-br from-[#FF6F61] via-[#F7CAC9] to-[#6B5B95] bg-clip-text text-transparent;
+  }
+
+  .vibrant .button-glow {
+    @apply shadow-[0_0_15px_rgba(255,111,97,0.3)] transition-shadow duration-300;
+  }
+
+  .vibrant .button-glow:hover {
+    @apply shadow-[0_0_25px_rgba(255,111,97,0.6)];
+  }
+  
+  .vibrant-border {
+    @apply border border-[#FF6F61] shadow-[0_0_8px_rgba(255,111,97,0.6)];
+  }
+
+  .vibrant-text {
+    @apply text-[#FF6F61] drop-shadow-[0_0_8px_rgba(255,111,97,0.6)];
+  }
 }

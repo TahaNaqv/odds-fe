@@ -54,6 +54,11 @@ const colors = {
       'orange': '#FFA500',
       'dark-orange': '#FF8C00',
       'orange-red': '#FF4500',
+      // Vibrant Gradient color palette
+      'coral': '#FF6F61',
+      'royal-purple': '#6B5B95',
+      'olive-green': '#88B04B',
+      'light-pink': '#F7CAC9',
     },
   }
 };

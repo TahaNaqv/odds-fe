@@ -24,9 +24,11 @@ export const ThemePreviewBanner = ({ themeName }: ThemePreviewBannerProps) => {
               ? "text-[#C3073F] font-bold" 
               : themeName === "gold" 
                 ? "text-[#FFD700] font-bold" 
-                : ""
+                : themeName === "vibrant"
+                  ? "text-[#FF6F61] font-bold"
+                  : ""
           }>
-            {themeName === "neon" ? "Neon Nights" : themeName === "gold" ? "Digital Gold" : themeName}
+            {themeName === "neon" ? "Neon Nights" : themeName === "gold" ? "Digital Gold" : themeName === "vibrant" ? "Vibrant Gradient" : themeName}
           </span>{" "}
           theme
         </p>

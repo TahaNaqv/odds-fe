@@ -47,12 +47,19 @@ const ThemeManager = () => {
       setTheme('gold');
       return;
     }
+    
+    // If we're on the vibrant-gradient preview route, set theme to vibrant
+    if (location.pathname === '/theme/vibrant-gradient') {
+      setTheme('vibrant');
+      return;
+    }
   }, [location.pathname, setTheme]);
 
   return (
     <>
       {location.pathname === '/theme/neon-nights' && <ThemePreviewBanner themeName="neon" />}
       {location.pathname === '/theme/digital-gold' && <ThemePreviewBanner themeName="gold" />}
+      {location.pathname === '/theme/vibrant-gradient' && <ThemePreviewBanner themeName="vibrant" />}
     </>
   );
 };
@@ -78,6 +85,7 @@ function App() {
               <Route path="/legality" element={<LegalityPage />} />
               <Route path="/theme/neon-nights" element={<Index />} />
               <Route path="/theme/digital-gold" element={<Index />} />
+              <Route path="/theme/vibrant-gradient" element={<Index />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <ThemeManager />
