@@ -1,4 +1,3 @@
-
 @import url('https://rsms.me/inter/inter.css');
 
 @tailwind base;
@@ -147,6 +146,38 @@
     --border: 6 30% 85%;
     --input: 6 30% 85%;
     --ring: 6 79% 56%;
+  }
+  
+  /* Cyberpunk Glow theme colors */
+  .cyber {
+    /* Dark Gray background */
+    --background: 0 0% 18%;
+    --foreground: 0 0% 100%;
+    
+    /* Slightly lighter gray for cards */
+    --card: 0 0% 22%;
+    --card-foreground: 180 100% 50%;
+    --popover: 0 0% 22%;
+    --popover-foreground: 180 100% 50%;
+    
+    /* Magenta as primary color */
+    --primary: 300 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Cyan as secondary color */
+    --secondary: 180 100% 50%;
+    --secondary-foreground: 0 0% 18%;
+    
+    /* Additional styles for Cyberpunk Glow */
+    --muted: 0 0% 25%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 300 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 300 100% 50%;
+    --input: 0 0% 30%;
+    --ring: 180 100% 50%;
   }
 }
 

@@ -145,3 +145,36 @@
 .vibrant .shadow-subtle {
   @apply shadow-[0_1px_5px_rgba(255,111,97,0.05)];
 }
+
+/* Cyberpunk Glow specific styles */
+.cyber .raffle-blue {
+  @apply text-[#00FFFF];
+}
+
+.cyber .raffle-light-blue {
+  @apply bg-[#00FFFF]/20;
+}
+
+.cyber .card-high-contrast {
+  @apply bg-[#2E2E2E] text-[#00FFFF] border-[#FF00FF]/50;
+}
+
+.cyber .input-high-contrast {
+  @apply bg-[#2E2E2E] border-[#FF00FF] text-[#00FFFF];
+}
+
+.cyber .button-high-contrast {
+  @apply bg-[#2E2E2E] hover:bg-[#3E3E3E] text-[#00FFFF] border border-[#00FFFF];
+}
+
+.cyber .shadow-glass {
+  @apply shadow-[0_4px_20px_rgba(0,255,255,0.2)];
+}
+
+.cyber .shadow-elevated {
+  @apply shadow-[0_2px_10px_rgba(0,255,255,0.15)];
+}
+
+.cyber .shadow-subtle {
+  @apply shadow-[0_1px_5px_rgba(0,255,255,0.1)];
+}

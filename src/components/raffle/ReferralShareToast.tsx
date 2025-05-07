@@ -49,20 +49,25 @@ const ReferralShareToast = ({ raffleId, ticketCount, referralLink, message }: Re
   // Determine button styles and border classes based on theme
   const twitterBgClass = theme === 'neon' ? 'bg-[#1DA1F2] hover:bg-[#1a94e0]' : 
                           theme === 'gold' ? 'bg-[#1DA1F2] hover:bg-[#1a94e0]' : 
+                          theme === 'cyber' ? 'bg-[#1DA1F2] hover:bg-[#1a94e0]' :
                           'bg-[#1DA1F2] hover:bg-[#1a94e0]';
                           
   const telegramBgClass = theme === 'neon' ? 'bg-[#0088cc] hover:bg-[#007ab8]' : 
-                           theme === 'gold' ? 'bg-[#0088cc] hover:bg-[#007ab8]' : 
+                           theme === 'gold' ? 'bg-[#0088cc] hover:bg-[#007ab8]' :
+                           theme === 'cyber' ? 'bg-[#0088cc] hover:bg-[#007ab8]' : 
                            'bg-[#0088cc] hover:bg-[#007ab8]';
                            
   const borderClass = theme === 'neon' ? 'neon-border' : 
-                       theme === 'gold' ? 'gold-border' : '';
+                       theme === 'gold' ? 'gold-border' : 
+                       theme === 'cyber' ? 'cyber-border' : '';
                        
   const hoverBgClass = theme === 'neon' ? 'hover:bg-[#C3073F]/20' : 
-                        theme === 'gold' ? 'hover:bg-[#FFD700]/20' : '';
+                        theme === 'gold' ? 'hover:bg-[#FFD700]/20' : 
+                        theme === 'cyber' ? 'hover:bg-[#00FFFF]/20' : '';
                         
   const textColorClass = theme === 'neon' ? 'text-[#C3073F]' : 
-                          theme === 'gold' ? 'text-[#FFD700]' : '';
+                          theme === 'gold' ? 'text-[#FFD700]' :
+                          theme === 'cyber' ? 'text-[#00FFFF]' : '';
   
   return (
     <div className="flex flex-col space-y-3">

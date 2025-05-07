@@ -53,6 +53,12 @@ const ThemeManager = () => {
       setTheme('vibrant');
       return;
     }
+    
+    // If we're on the cyberpunk-glow preview route, set theme to cyber
+    if (location.pathname === '/theme/cyberpunk-glow') {
+      setTheme('cyber');
+      return;
+    }
   }, [location.pathname, setTheme]);
 
   return (
@@ -60,6 +66,7 @@ const ThemeManager = () => {
       {location.pathname === '/theme/neon-nights' && <ThemePreviewBanner themeName="neon" />}
       {location.pathname === '/theme/digital-gold' && <ThemePreviewBanner themeName="gold" />}
       {location.pathname === '/theme/vibrant-gradient' && <ThemePreviewBanner themeName="vibrant" />}
+      {location.pathname === '/theme/cyberpunk-glow' && <ThemePreviewBanner themeName="cyber" />}
     </>
   );
 };
@@ -86,6 +93,7 @@ function App() {
               <Route path="/theme/neon-nights" element={<Index />} />
               <Route path="/theme/digital-gold" element={<Index />} />
               <Route path="/theme/vibrant-gradient" element={<Index />} />
+              <Route path="/theme/cyberpunk-glow" element={<Index />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <ThemeManager />

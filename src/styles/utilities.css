@@ -100,4 +100,25 @@
   .vibrant-text {
     @apply text-[#FF6F61] drop-shadow-[0_0_8px_rgba(255,111,97,0.6)];
   }
+
+  /* Cyberpunk Glow theme specific utilities */
+  .cyber .text-gradient {
+    @apply bg-gradient-to-br from-[#FF00FF] via-[#9900FF] to-[#00FFFF] bg-clip-text text-transparent;
+  }
+
+  .cyber .button-glow {
+    @apply shadow-[0_0_15px_rgba(0,255,255,0.3)] transition-shadow duration-300;
+  }
+
+  .cyber .button-glow:hover {
+    @apply shadow-[0_0_25px_rgba(0,255,255,0.6)];
+  }
+  
+  .cyber-border {
+    @apply border border-[#00FFFF] shadow-[0_0_8px_rgba(0,255,255,0.6)];
+  }
+
+  .cyber-text {
+    @apply text-[#00FFFF] drop-shadow-[0_0_8px_rgba(0,255,255,0.6)];
+  }
 }

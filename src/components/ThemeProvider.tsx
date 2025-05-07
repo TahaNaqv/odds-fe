@@ -2,7 +2,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ThemeToggle } from './ThemeToggle';
 
-type Theme = 'dark' | 'light' | 'neon' | 'gold' | 'vibrant' | 'system';
+type Theme = 'dark' | 'light' | 'neon' | 'gold' | 'vibrant' | 'cyber' | 'system';
 
 const ThemeContext = createContext<{
   theme: Theme;
@@ -24,7 +24,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const root = window.document.documentElement;
     
     // Remove all theme classes first
-    root.classList.remove('light', 'dark', 'neon', 'gold', 'vibrant');
+    root.classList.remove('light', 'dark', 'neon', 'gold', 'vibrant', 'cyber');
 
     // Handle system preference
     if (theme === 'system') {
@@ -47,7 +47,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const handleChange = () => {
       if (theme === 'system') {
         const root = window.document.documentElement;
-        root.classList.remove('light', 'dark', 'neon', 'gold', 'vibrant');
+        root.classList.remove('light', 'dark', 'neon', 'gold', 'vibrant', 'cyber');
         root.classList.add(mediaQuery.matches ? 'dark' : 'light');
       }
     };

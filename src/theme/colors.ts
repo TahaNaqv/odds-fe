@@ -59,6 +59,11 @@ const colors = {
       'royal-purple': '#6B5B95',
       'olive-green': '#88B04B',
       'light-pink': '#F7CAC9',
+      // Cyberpunk Glow color palette
+      'dark-gray': '#2E2E2E',
+      'magenta': '#FF00FF',
+      'cyan': '#00FFFF',
+      'white': '#FFFFFF',
     },
   }
 };
