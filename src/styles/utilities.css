@@ -58,4 +58,25 @@
   .neon-text {
     @apply text-[#C3073F] drop-shadow-[0_0_8px_rgba(195,7,63,0.6)];
   }
+  
+  /* Gold theme specific utilities */
+  .gold .text-gradient {
+    @apply bg-gradient-to-br from-[#FFD700] via-[#FFA500] to-[#FF8C00] bg-clip-text text-transparent;
+  }
+
+  .gold .button-glow {
+    @apply shadow-[0_0_15px_rgba(255,215,0,0.3)] transition-shadow duration-300;
+  }
+
+  .gold .button-glow:hover {
+    @apply shadow-[0_0_25px_rgba(255,215,0,0.6)];
+  }
+  
+  .gold-border {
+    @apply border border-[#FFD700] shadow-[0_0_8px_rgba(255,215,0,0.6)];
+  }
+
+  .gold-text {
+    @apply text-[#FFD700] drop-shadow-[0_0_8px_rgba(255,215,0,0.6)];
+  }
 }

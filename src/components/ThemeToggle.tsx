@@ -1,15 +1,16 @@
 
-import { Moon, Sun, Sparkles } from "lucide-react";
+import { Moon, Sun, Sparkles, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "./ThemeProvider";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
-  // Cycle through themes: light -> dark -> neon -> light
+  // Cycle through themes: light -> dark -> neon -> gold -> light
   const cycleTheme = () => {
     if (theme === 'light') setTheme('dark');
     else if (theme === 'dark') setTheme('neon');
+    else if (theme === 'neon') setTheme('gold');
     else setTheme('light');
   };
 
@@ -24,6 +25,8 @@ export function ThemeToggle() {
         <Moon className="h-5 w-5 text-slate-900 transition-all" />
       ) : theme === 'neon' ? (
         <Sparkles className="h-5 w-5 text-red-500 transition-all" />
+      ) : theme === 'gold' ? (
+        <Trophy className="h-5 w-5 text-yellow-500 transition-all" />
       ) : (
         <Sun className="h-5 w-5 text-yellow-500 transition-all" />
       )}

@@ -49,6 +49,11 @@ const colors = {
       'dark-charcoal': '#1A1A1D',
       'crimson': '#C3073F',
       'maroon': '#6F2232',
+      // Digital Gold color palette
+      'gold': '#FFD700',
+      'orange': '#FFA500',
+      'dark-orange': '#FF8C00',
+      'orange-red': '#FF4500',
     },
   }
 };

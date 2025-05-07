@@ -79,3 +79,36 @@
 .neon .shadow-subtle {
   @apply shadow-[0_1px_5px_rgba(195,7,63,0.1)];
 }
+
+/* Digital Gold specific styles */
+.gold .raffle-blue {
+  @apply text-[#FFD700];
+}
+
+.gold .raffle-light-blue {
+  @apply bg-[#FF8C00]/30;
+}
+
+.gold .card-high-contrast {
+  @apply bg-[#2C1E0F] text-[#FFD700] border-[#FFD700]/50;
+}
+
+.gold .input-high-contrast {
+  @apply bg-[#2C1E0F] border-[#FF8C00] text-[#FFD700];
+}
+
+.gold .button-high-contrast {
+  @apply bg-[#FFD700] hover:bg-[#FFA500] text-[#2C1E0F];
+}
+
+.gold .shadow-glass {
+  @apply shadow-[0_4px_20px_rgba(255,215,0,0.2)];
+}
+
+.gold .shadow-elevated {
+  @apply shadow-[0_2px_10px_rgba(255,215,0,0.15)];
+}
+
+.gold .shadow-subtle {
+  @apply shadow-[0_1px_5px_rgba(255,215,0,0.1)];
+}

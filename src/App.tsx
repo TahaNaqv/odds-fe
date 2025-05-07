@@ -41,10 +41,19 @@ const ThemeManager = () => {
       setTheme('neon');
       return;
     }
+    
+    // If we're on the digital-gold preview route, set theme to gold
+    if (location.pathname === '/theme/digital-gold') {
+      setTheme('gold');
+      return;
+    }
   }, [location.pathname, setTheme]);
 
   return (
-    location.pathname === '/theme/neon-nights' && <ThemePreviewBanner themeName="neon" />
+    <>
+      {location.pathname === '/theme/neon-nights' && <ThemePreviewBanner themeName="neon" />}
+      {location.pathname === '/theme/digital-gold' && <ThemePreviewBanner themeName="gold" />}
+    </>
   );
 };
 
@@ -68,6 +77,7 @@ function App() {
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/legality" element={<LegalityPage />} />
               <Route path="/theme/neon-nights" element={<Index />} />
+              <Route path="/theme/digital-gold" element={<Index />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <ThemeManager />

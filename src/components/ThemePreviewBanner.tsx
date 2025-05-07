@@ -19,8 +19,14 @@ export const ThemePreviewBanner = ({ themeName }: ThemePreviewBannerProps) => {
       <div>
         <p className="font-medium">
           Previewing{" "}
-          <span className={themeName === "neon" ? "text-[#C3073F] font-bold" : ""}>
-            {themeName === "neon" ? "Neon Nights" : themeName}
+          <span className={
+            themeName === "neon" 
+              ? "text-[#C3073F] font-bold" 
+              : themeName === "gold" 
+                ? "text-[#FFD700] font-bold" 
+                : ""
+          }>
+            {themeName === "neon" ? "Neon Nights" : themeName === "gold" ? "Digital Gold" : themeName}
           </span>{" "}
           theme
         </p>

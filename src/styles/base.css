@@ -84,6 +84,38 @@
     --input: 345 30% 25%;
     --ring: 346 94% 40%;
   }
+  
+  /* Digital Gold theme colors */
+  .gold {
+    /* Dark background with gold accents */
+    --background: 30 30% 12%;
+    --foreground: 51 100% 70%;
+    
+    /* Card styling */
+    --card: 30 30% 15%;
+    --card-foreground: 48 100% 70%;
+    --popover: 30 30% 15%;
+    --popover-foreground: 48 100% 70%;
+    
+    /* Gold as primary color */
+    --primary: 51 100% 50%;
+    --primary-foreground: 0 0% 10%;
+    
+    /* Orange as secondary color */
+    --secondary: 39 100% 50%;
+    --secondary-foreground: 0 0% 10%;
+    
+    /* Additional styles for Digital Gold */
+    --muted: 36 25% 25%;
+    --muted-foreground: 39 100% 80%;
+    --accent: 32 100% 50%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 16 100% 50%;
+    --destructive-foreground: 0 0% 10%;
+    --border: 36 60% 30%;
+    --input: 36 60% 30%;
+    --ring: 51 100% 50%;
+  }
 }
 
 @layer base {
