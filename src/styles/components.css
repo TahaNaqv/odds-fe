@@ -178,3 +178,36 @@
 .cyber .shadow-subtle {
   @apply shadow-[0_1px_5px_rgba(0,255,255,0.1)];
 }
+
+/* Trusty Blues specific styles */
+.trusty .raffle-blue {
+  @apply text-[#6699CC];
+}
+
+.trusty .raffle-light-blue {
+  @apply bg-[#99CCFF]/30;
+}
+
+.trusty .card-high-contrast {
+  @apply bg-[#003366] text-[#99CCFF] border-[#336699]/50;
+}
+
+.trusty .input-high-contrast {
+  @apply bg-[#003366] border-[#336699] text-[#99CCFF];
+}
+
+.trusty .button-high-contrast {
+  @apply bg-[#003366] hover:bg-[#003366]/90 text-white;
+}
+
+.trusty .shadow-glass {
+  @apply shadow-[0_4px_20px_rgba(102,153,204,0.2)];
+}
+
+.trusty .shadow-elevated {
+  @apply shadow-[0_2px_10px_rgba(102,153,204,0.15)];
+}
+
+.trusty .shadow-subtle {
+  @apply shadow-[0_1px_5px_rgba(102,153,204,0.1)];
+}

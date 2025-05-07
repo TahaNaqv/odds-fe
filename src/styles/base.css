@@ -1,3 +1,4 @@
+
 @import url('https://rsms.me/inter/inter.css');
 
 @tailwind base;
@@ -178,6 +179,38 @@
     --border: 300 100% 50%;
     --input: 0 0% 30%;
     --ring: 180 100% 50%;
+  }
+  
+  /* Trusty Blues theme colors */
+  .trusty {
+    /* Dark blue background */
+    --background: 210 100% 20%;
+    --foreground: 210 100% 98%;
+    
+    /* Medium blue for cards */
+    --card: 210 50% 25%;
+    --card-foreground: 210 100% 95%;
+    --popover: 210 50% 25%;
+    --popover-foreground: 210 100% 95%;
+    
+    /* Dark blue as primary color */
+    --primary: 210 100% 20%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Medium blue as secondary color */
+    --secondary: 210 50% 40%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Additional styles for Trusty Blues */
+    --muted: 210 30% 30%;
+    --muted-foreground: 210 15% 85%;
+    --accent: 210 75% 75%;
+    --accent-foreground: 210 100% 10%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 50% 40%;
+    --input: 210 30% 30%;
+    --ring: 210 100% 50%;
   }
 }
 

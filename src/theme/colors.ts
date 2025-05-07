@@ -64,6 +64,11 @@ const colors = {
       'magenta': '#FF00FF',
       'cyan': '#00FFFF',
       'white': '#FFFFFF',
+      // Trusty Blues color palette
+      'dark-blue': '#003366',
+      'medium-blue': '#336699',
+      'light-blue': '#6699CC',
+      'sky-blue': '#99CCFF',
     },
   }
 };
