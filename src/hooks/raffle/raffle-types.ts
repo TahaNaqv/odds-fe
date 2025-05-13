@@ -4,10 +4,12 @@ import { TOKENS } from "@/utils/constants";
 export interface RaffleData {
   id: string;
   startTime: string;
-  endTime: string;
+  endTime: string | null; // Now can be null as the raffle ends when target is reached
   ticketsSold: number;
   maxTickets: number;
+  targetAmount: number; // Target amount to reach ($1000)
   prizePool: number;
+  progress: number; // Percentage of target reached
   winner?: string;
   winningTicket?: number;
 }

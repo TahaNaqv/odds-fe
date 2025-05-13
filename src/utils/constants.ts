@@ -18,8 +18,8 @@ export const TOKENS = {
 // Raffle Constants
 export const RAFFLE = {
   ticketPrice: 1, // $1 per ticket
-  windowDuration: 86400, // 24 hours in seconds
-  maxTickets: Infinity, // No maximum tickets per round
+  targetAmount: 1000, // $1000 per raffle round
+  maxTickets: 1000, // Max tickets per round (equal to target amount / ticket price)
   maxAutoEnrollDays: 30, // Maximum days for auto-enrollment
   prizeDistribution: {
     winners: 95, // 95% to winners
@@ -51,10 +51,12 @@ export const NETWORK = {
 export const MOCK_CURRENT_RAFFLE = {
   id: 'raffle-001',
   startTime: new Date(Date.now() - 12 * 3600 * 1000).toISOString(), // 12 hours ago
-  endTime: new Date(Date.now() + 12 * 3600 * 1000).toISOString(), // 12 hours from now
+  endTime: null, // No fixed end time, ends when target amount is reached
   ticketsSold: 423,
-  maxTickets: Infinity,
+  maxTickets: 1000,
+  targetAmount: 1000,
   prizePool: 423, // $423 (1 dollar per ticket)
+  progress: 42.3, // Percentage of target amount reached
 };
 
 export const MOCK_PAST_RAFFLES = [
@@ -63,8 +65,10 @@ export const MOCK_PAST_RAFFLES = [
     startTime: new Date(Date.now() - 36 * 3600 * 1000).toISOString(),
     endTime: new Date(Date.now() - 12 * 3600 * 1000).toISOString(),
     ticketsSold: 752,
-    maxTickets: Infinity,
-    prizePool: 752,
+    maxTickets: 1000,
+    targetAmount: 1000,
+    prizePool: 1000, // Raffle completed at $1000
+    progress: 100,
     winner: '0x3f...a4d2',
     winningTicket: 347,
     winnerGroup: 'Double'
@@ -73,9 +77,11 @@ export const MOCK_PAST_RAFFLES = [
     id: 'raffle-00-1',
     startTime: new Date(Date.now() - 60 * 3600 * 1000).toISOString(),
     endTime: new Date(Date.now() - 36 * 3600 * 1000).toISOString(),
-    ticketsSold: 892,
-    maxTickets: Infinity,
-    prizePool: 892,
+    ticketsSold: 1000,
+    maxTickets: 1000,
+    targetAmount: 1000,
+    prizePool: 1000,
+    progress: 100,
     winner: '0x7d...e5f1',
     winningTicket: 621,
     winnerGroup: 'Equal'

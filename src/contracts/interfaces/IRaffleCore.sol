@@ -15,6 +15,7 @@ interface IRaffleCore {
         uint256 startTime;
         uint256 endTime;
         uint256 ticketsSold;
+        uint256 targetAmount;
         uint256 prizePool;
         address winner;
         uint256 winningTicketId;
@@ -22,12 +23,12 @@ interface IRaffleCore {
         RaffleState state;
     }
     
-    event RaffleStarted(uint256 indexed raffleId, uint256 startTime, uint256 endTime);
+    event RaffleStarted(uint256 indexed raffleId, uint256 startTime, uint256 targetAmount);
     event RaffleCompleted(uint256 indexed raffleId, address winner, uint256 ticketId, WinnerGroup group, uint256 prize);
     event TicketsPurchased(address indexed buyer, uint256 indexed raffleId, uint256 count, uint256 startId, uint256 endId);
     
     /**
-     * @dev Creates a new raffle round
+     * @dev Creates a new raffle round with the target amount
      */
     function startNewRaffle() external;
     
@@ -40,6 +41,7 @@ interface IRaffleCore {
     
     /**
      * @dev Triggers the drawing process for the current raffle
+     * This is called automatically when the target amount is reached
      */
     function drawRaffle() external;
     
@@ -53,4 +55,9 @@ interface IRaffleCore {
      * @dev Returns the current raffle ID
      */
     function getCurrentRaffleId() external view returns (uint256);
+    
+    /**
+     * @dev Returns the target amount for raffles
+     */
+    function getTargetAmount() external view returns (uint256);
 }

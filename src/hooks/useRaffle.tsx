@@ -48,6 +48,19 @@ const useRaffle = () => {
     }
   }, [fetchCurrentRaffle, fetchPastRaffles, fetchUserActivity, isConnected]);
 
+  // Check if the raffle has completed and needs to refresh
+  useEffect(() => {
+    if (currentRaffle?.endTime) {
+      // If the raffle has ended (reached target), refresh after a short delay
+      const timer = setTimeout(() => {
+        fetchCurrentRaffle();
+        fetchPastRaffles();
+      }, 3000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [currentRaffle?.endTime, fetchCurrentRaffle, fetchPastRaffles]);
+
   return {
     isLoading,
     currentRaffle,

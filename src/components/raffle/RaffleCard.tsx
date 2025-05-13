@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Progress } from '@/components/ui/progress';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
-import { Ticket, Timer, Trophy } from 'lucide-react';
+import { Ticket, Trophy, DollarSign } from 'lucide-react';
 import { formatTimeRemaining, getTimeRemaining } from '@/utils/helpers';
 import TicketModal from '@/components/activity/TicketModal';
 import useRaffle from '@/hooks/useRaffle';
@@ -18,10 +18,12 @@ interface RaffleCardProps {
   raffle: {
     id: string;
     startTime: string;
-    endTime: string;
+    endTime: string | null;
     ticketsSold: number;
     maxTickets: number;
+    targetAmount: number;
     prizePool: number;
+    progress: number;
     winner?: string;
     winningTicket?: number;
   };
@@ -30,27 +32,12 @@ interface RaffleCardProps {
 }
 
 const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardProps) => {
-  const [timeRemaining, setTimeRemaining] = useState('');
   const { userActivity } = useRaffle();
   
   // Find user tickets for current raffle
   const currentRaffleTickets = userActivity
     .filter(activity => activity.raffleId === raffle.id && activity.ticketIds && activity.ticketIds.length > 0)
     .flatMap(activity => activity.ticketIds || []);
-  
-  useEffect(() => {
-    if (isPast) return;
-    
-    const updateTimer = () => {
-      const { hours, minutes, seconds } = getTimeRemaining(raffle.endTime);
-      setTimeRemaining(`${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
-    };
-
-    updateTimer(); // Initial update
-    const timer = setInterval(updateTimer, 1000);
-    
-    return () => clearInterval(timer);
-  }, [raffle.endTime, isPast]);
   
   if (isLoading) {
     return (
@@ -85,9 +72,11 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
             )}
           </div>
           {!isPast && (
-            <Badge variant="outline" className="bg-raffle-light-blue text-raffle-blue border-none px-3 py-1.5 flex items-center gap-2 animate-pulse-subtle">
-              <Timer className="h-4 w-4" />
-              <span className="text-base font-medium tracking-wide">{timeRemaining}</span>
+            <Badge variant="outline" className="bg-raffle-light-blue text-raffle-blue border-none px-3 py-1.5 flex items-center gap-2">
+              <DollarSign className="h-4 w-4" />
+              <span className="text-base font-medium tracking-wide">
+                Target: {formatCurrency(raffle.targetAmount)}
+              </span>
             </Badge>
           )}
           {isPast && raffle.winner && (
@@ -99,7 +88,7 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
         </div>
         {isPast && (
           <CardDescription>
-            Ended on {new Date(raffle.endTime).toLocaleDateString()}
+            Ended on {new Date(raffle.endTime || '').toLocaleDateString()}
           </CardDescription>
         )}
       </CardHeader>
@@ -121,12 +110,33 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
           )}
         </div>
         
+        {/* Progress bar showing progress towards target */}
+        <div className="mt-2">
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>{formatCurrency(raffle.prizePool)}</span>
+            <span>{formatCurrency(raffle.targetAmount)}</span>
+          </div>
+          <Progress 
+            value={raffle.progress} 
+            max={100} 
+            className="h-2 mt-1"
+          />
+          <div className="flex justify-end mt-1">
+            <span className="text-xs text-muted-foreground">
+              {raffle.progress.toFixed(1)}% complete
+            </span>
+          </div>
+        </div>
+        
         <div className="mt-4 transition-all duration-500 hover:transform hover:scale-[1.02]">
           <div className="bg-raffle-light-blue rounded-xl p-4 flex items-center justify-between border border-raffle-blue/20">
             <div>
               <p className="text-xs font-medium text-raffle-blue/70">Current Prize Pool</p>
               <p className="text-2xl font-bold text-raffle-blue mt-1">
                 {formatCurrency(raffle.prizePool)}
+              </p>
+              <p className="text-xs text-raffle-blue/70 mt-1">
+                {formatCurrency(raffle.targetAmount - raffle.prizePool)} to go
               </p>
             </div>
             <div className="h-12 w-12 rounded-full bg-raffle-blue/10 flex items-center justify-center animate-float">
@@ -156,7 +166,7 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
           <span>
             {isPast
               ? `${raffle.ticketsSold} tickets bought`
-              : `Unlimited entries available`
+              : `${raffle.maxTickets - raffle.ticketsSold} tickets remaining`
             }
           </span>
           <span>

@@ -34,6 +34,25 @@ export const useTicketPurchase = (
       return;
     }
 
+    // Check if buying these tickets would exceed the target amount
+    const remainingTickets = currentRaffle.targetAmount - currentRaffle.ticketsSold;
+    if (ticketCount > remainingTickets) {
+      toast({
+        title: 'Too many tickets',
+        description: `Only ${remainingTickets} tickets are available for this raffle.`,
+        variant: 'destructive',
+      });
+      
+      // Automatically adjust to the remaining amount
+      ticketCount = remainingTickets;
+      if (ticketCount <= 0) return;
+      
+      toast({
+        title: 'Adjusted ticket count',
+        description: `Your purchase has been adjusted to ${ticketCount} tickets.`,
+      });
+    }
+
     setIsLoading(true);
     
     try {
@@ -43,12 +62,26 @@ export const useTicketPurchase = (
       // Update mock data (in a real app, this would be a transaction to the smart contract)
       const cost = ticketCount * RAFFLE.ticketPrice;
       
+      // Check if this purchase completes the raffle
+      const newTicketsSold = currentRaffle.ticketsSold + ticketCount;
+      const raffleCompleted = newTicketsSold >= currentRaffle.targetAmount;
+      
       // Update current raffle
-      setCurrentRaffle(prev => ({
-        ...prev,
-        ticketsSold: prev.ticketsSold + ticketCount,
-        prizePool: prev.prizePool + cost,
-      }));
+      setCurrentRaffle(prev => {
+        const updated = {
+          ...prev,
+          ticketsSold: newTicketsSold,
+          prizePool: prev.prizePool + cost,
+          progress: (newTicketsSold / prev.targetAmount) * 100,
+        };
+        
+        // If the raffle is completed, set the end time
+        if (raffleCompleted) {
+          updated.endTime = new Date().toISOString();
+        }
+        
+        return updated;
+      });
       
       // Add to user activity
       const newActivity: UserActivity = {
@@ -81,6 +114,24 @@ export const useTicketPurchase = (
         console.log(`Auto-Entry activated until ${autoEnrollEndDate.toLocaleDateString()}`);
       }
       
+      // If the raffle is completed, simulate drawing and starting a new raffle
+      if (raffleCompleted) {
+        // Show toast that raffle has completed
+        toast({
+          title: 'Raffle Complete!',
+          description: 'The raffle has reached its target amount. Drawing winner...',
+        });
+        
+        // Simulate delay for drawing
+        setTimeout(() => {
+          // In a real implementation, this would trigger the smart contract to draw the raffle
+          console.log("Raffle completed, drawing winner and starting new raffle...");
+          
+          // In a real app, this would be handled by the smart contract events
+          // For this simulation, we'll handle it in the next user activity fetch
+        }, 2000);
+      }
+      
     } catch (error) {
       console.error('Error purchasing tickets:', error);
       toast({
@@ -91,7 +142,7 @@ export const useTicketPurchase = (
     } finally {
       setIsLoading(false);
     }
-  }, [isConnected, isCorrectNetwork, currentRaffle.id, setCurrentRaffle, setUserActivity, setIsLoading]);
+  }, [isConnected, isCorrectNetwork, currentRaffle, setCurrentRaffle, setUserActivity, setIsLoading]);
 
   return { purchaseTicket };
 };
