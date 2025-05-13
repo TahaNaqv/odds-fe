@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import WalletConnect from '@/components/ui/WalletConnect';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { Ticket, Clock, History, Trophy } from 'lucide-react';
 
 const Header = () => {
@@ -88,8 +87,6 @@ const Header = () => {
                 <Trophy className="mr-2 h-4 w-4" /> Referrals
               </Button>
             </Link>
-            
-            <ThemeToggle />
           </div>
           
           {/* Wallet Connection */}
