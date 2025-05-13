@@ -13,7 +13,7 @@ interface NumberCounterProps {
 
 /**
  * A component that animates counting from 0 to a target number
- * with a smooth easing effect that starts fast and slows down.
+ * with individual digit animations for a more engaging effect.
  */
 const NumberCounter = ({
   end,
@@ -28,6 +28,7 @@ const NumberCounter = ({
   const startTime = useRef<number | null>(null);
   const animationFrameId = useRef<number | null>(null);
   const isMounted = useRef(true);
+  const previousDigits = useRef<string[]>([]);
 
   // Format number with commas and decimals
   const formatNumber = (value: number): string => {
@@ -35,6 +36,12 @@ const NumberCounter = ({
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals
     });
+  };
+
+  // Convert number to array of digit characters
+  const getDigitsArray = (value: number): string[] => {
+    const formatted = formatNumber(value);
+    return formatted.split('');
   };
 
   useEffect(() => {
@@ -71,11 +78,33 @@ const NumberCounter = ({
       }
     };
   }, [end, duration, easingFn]);
+
+  // Get current digits
+  const digits = getDigitsArray(displayValue);
   
-  // Adding specific class for number animation
+  // Determine which digits have changed
+  const changedDigits = digits.map((digit, index) => {
+    const hasChanged = !previousDigits.current[index] || previousDigits.current[index] !== digit;
+    return hasChanged;
+  });
+  
+  // Update previous digits reference
+  useEffect(() => {
+    previousDigits.current = digits;
+  }, [digits]);
+  
   return (
     <span className={`number-counter ${className}`}>
-      {prefix}{formatNumber(displayValue)}{suffix}
+      {prefix}
+      {digits.map((digit, index) => (
+        <span 
+          key={`${index}-${digit}`} 
+          className={`digit-container ${changedDigits[index] ? 'digit-roll' : ''}`}
+        >
+          {digit}
+        </span>
+      ))}
+      {suffix}
     </span>
   );
 };

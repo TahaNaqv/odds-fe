@@ -28,19 +28,35 @@
 
 /* Number counter styles and animations */
 .number-counter {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.1s ease;
 }
 
 .number-counter-hero {
-  display: inline-block;
+  display: inline-flex;
   font-weight: inherit;
   color: inherit;
+  gap: 1px;
 }
 
+/* Individual digit container styling */
+.digit-container {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  min-width: 0.6em;
+  text-align: center;
+}
+
+/* Animation for each digit */
 .digit-roll {
   display: inline-block;
-  animation: digitRoll 0.3s ease-out;
+  animation: digitRoll 0.5s ease-out;
+  position: relative;
+  color: var(--color-primary, #ffffff);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 @keyframes fadeIn {
@@ -79,9 +95,17 @@
   0% {
     transform: translateY(100%);
     opacity: 0;
+    filter: blur(2px);
+  }
+  20% {
+    filter: blur(1px);
+  }
+  60% {
+    filter: blur(0.5px);
   }
   100% {
     transform: translateY(0);
     opacity: 1;
+    filter: blur(0);
   }
 }

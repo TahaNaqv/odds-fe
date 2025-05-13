@@ -23,7 +23,7 @@ const HeroSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient relative z-10 px-8 py-2 inline-block">
             USDC $<NumberCounter 
               end={88888} 
-              duration={2500} 
+              duration={3000} 
               className="number-counter-hero"
             />
           </h2>
