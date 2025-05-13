@@ -11,6 +11,7 @@
   transform: translateZ(0);
   will-change: transform, opacity, color;
   height: 1.2em;
+  perspective: 1000px; /* Add 3D perspective for better slot effect */
 }
 
 /* Different styling based on digit count */
@@ -30,7 +31,7 @@
   min-width: 0.75em;
 }
 
-/* Slot machine digit styles */
+/* Slot machine digit styles with enhanced 3D effect */
 .digit-slot {
   position: relative;
   height: 100%;
@@ -41,14 +42,18 @@
   align-items: center;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 4px;
-  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 
+    inset 0 0 4px rgba(0, 0, 0, 0.5),
+    0 2px 4px rgba(255, 215, 0, 0.2); /* Gold glow at bottom */
+  transform-style: preserve-3d;
 }
 
 .digit-reel {
   position: absolute;
   display: flex;
   flex-direction: column;
-  animation: slotRoll 0.6s ease-out forwards;
+  animation: slotRoll 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; /* Bouncy easing */
+  backface-visibility: hidden; /* Reduce flickering */
 }
 
 .digit-value {
@@ -65,7 +70,7 @@
     0 0 20px rgba(255, 242, 0, 0.8);
 }
 
-/* Animation for each digit */
+/* Animation for each digit with enhanced glow */
 .digit-roll {
   color: white; /* Start with bright white */
   text-shadow: 
@@ -76,4 +81,9 @@
 
 .is-animating .digit-container {
   animation: pulse 2s infinite; /* Add subtle pulse to all digits during animation */
+}
+
+/* Enhanced comma styling */
+.digit-container:has(+ .digit-container[data-digit=","]) {
+  margin-right: -3px; /* Tighten spacing before commas */
 }

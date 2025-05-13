@@ -1,8 +1,11 @@
 
-/* New slot machine roll animation */
+/* New slot machine roll animation with improved timing */
 @keyframes slotRoll {
   0% {
     transform: translateY(-1100%);
+  }
+  50% {
+    transform: translateY(-500%);
   }
   70% {
     transform: translateY(-120%);
@@ -72,4 +75,39 @@
     transform: scale(1.05);
     filter: brightness(1.3);
   }
+}
+
+/* New staggered delay animation for multi-digit effects */
+.digit-container:nth-child(1) .digit-reel {
+  animation-delay: 0ms;
+}
+
+.digit-container:nth-child(2) .digit-reel {
+  animation-delay: 100ms;
+}
+
+.digit-container:nth-child(3) .digit-reel {
+  animation-delay: 200ms;
+}
+
+.digit-container:nth-child(4) .digit-reel {
+  animation-delay: 300ms;
+}
+
+.digit-container:nth-child(5) .digit-reel {
+  animation-delay: 400ms;
+}
+
+/* Celebration flash when animation completes */
+@keyframes celebrationFlash {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.5);
+  }
+}
+
+.number-counter[data-animating="false"] {
+  animation: celebrationFlash 0.5s ease-in-out 1;
 }

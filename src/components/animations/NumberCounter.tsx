@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 
 interface NumberCounterProps {
+  start?: number;
   end: number;
   duration?: number;
   className?: string;
@@ -14,22 +15,22 @@ interface NumberCounterProps {
 }
 
 /**
- * A component that animates counting from 0 to a target number
+ * A component that animates counting from a start value to a target number
  * with individual digit animations for a more engaging slot-machine effect.
  */
 const NumberCounter = ({
+  start = 0,
   end,
   duration = 2000,
   className = '',
   prefix = '',
   suffix = '',
   decimals = 0,
-  easingFn = (t) => 1 - Math.pow(1 - t, 3), // Default cubic ease-out
+  easingFn = (t) => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1, // Custom easing for better deceleration
   loop = false,
   loopCount = 1
 }: NumberCounterProps) => {
-  // Always start from 0, but ensure we have the right number of digits for display
-  const [displayValue, setDisplayValue] = useState(0);
+  const [displayValue, setDisplayValue] = useState(start);
   const startTime = useRef<number | null>(null);
   const animationFrameId = useRef<number | null>(null);
   const isMounted = useRef(true);
@@ -57,8 +58,8 @@ const NumberCounter = ({
   };
 
   useEffect(() => {
-    // Reset the counter to zero whenever the end value changes
-    setDisplayValue(0);
+    // Reset to start value whenever props change
+    setDisplayValue(start);
     startTime.current = null;
     
     // Animation function using requestAnimationFrame
@@ -73,8 +74,8 @@ const NumberCounter = ({
       const easedProgress = easingFn(progress);
       
       // Calculate the current value based on progress
-      // Always animate from 0 to end value
-      const currentValue = Math.floor(easedProgress * end);
+      const range = end - start;
+      const currentValue = Math.floor(start + (easedProgress * range));
       
       setDisplayValue(currentValue);
       
@@ -85,7 +86,7 @@ const NumberCounter = ({
         // Reset for another loop
         startTime.current = null;
         loopCounter.current += 1;
-        setDisplayValue(0); // Reset to zero for the next loop
+        setDisplayValue(start); // Reset to start for the next loop
         animationFrameId.current = requestAnimationFrame(animate);
       } else {
         // Ensure we land exactly on the target number
@@ -105,7 +106,7 @@ const NumberCounter = ({
       }
       setIsAnimating(false);
     };
-  }, [end, duration, easingFn, loop, loopCount]);
+  }, [start, end, duration, easingFn, loop, loopCount]);
 
   // Get current digits
   const digits = getDigitsArray(displayValue);

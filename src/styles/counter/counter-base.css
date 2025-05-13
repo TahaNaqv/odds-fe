@@ -13,7 +13,7 @@
   display: inline-flex;
   font-weight: 900; /* Extra bold for better visibility */
   color: white; /* Basic color for better accessibility */
-  gap: 8px; /* Increased gap between digits for better visibility */
+  gap: 4px; /* Gap between digits for better visibility */
   font-size: 1.2em; /* Make digits larger than surrounding text */
   margin-left: 6px; /* Add space after dollar sign */
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)); /* Add glow effect around all digits */
@@ -40,9 +40,10 @@
   position: relative;
 }
 
-/* Animation indicator */
+/* Animation indicator dot - removed from regular display but still available for debugging */
 .animation-indicator {
   z-index: 60;
+  display: none; /* Hide the indicator in production */
 }
 
 /* Counter container styling */
@@ -54,4 +55,23 @@
     0 0 30px rgba(255, 215, 0, 0.4),
     inset 0 0 15px rgba(255, 215, 0, 0.25);
   border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+/* Add a subtle shine effect */
+.counter-inner::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(-45deg);
+  pointer-events: none;
+  z-index: -1;
 }
