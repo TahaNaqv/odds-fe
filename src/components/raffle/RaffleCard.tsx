@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -73,7 +72,6 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
           </div>
           {!isPast && (
             <Badge variant="outline" className="bg-raffle-light-blue text-raffle-blue border-none px-3 py-1.5 flex items-center gap-2">
-              <DollarSign className="h-4 w-4" />
               <span className="text-base font-medium tracking-wide">
                 Target: $1,000
               </span>
