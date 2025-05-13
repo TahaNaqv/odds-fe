@@ -26,6 +26,12 @@
   animation: float 3s ease-in-out infinite;
 }
 
+/* Number counter digit animation */
+.digit-roll {
+  display: inline-block;
+  animation: digitRoll 0.3s ease-out;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -55,5 +61,16 @@
   }
   50% {
     opacity: 0.8;
+  }
+}
+
+@keyframes digitRoll {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

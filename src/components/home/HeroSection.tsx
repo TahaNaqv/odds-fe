@@ -1,6 +1,7 @@
 
 import { Wallet, Trophy } from 'lucide-react';
 import StarsBurst from '@/components/effects/StarsBurst';
+import NumberCounter from '@/components/animations/NumberCounter';
 
 const HeroSection = () => {
   return (
@@ -20,7 +21,11 @@ const HeroSection = () => {
         </div>
         <div className="relative">
           <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient relative z-10 px-8 py-2 inline-block">
-            USDC $88,888
+            USDC $<NumberCounter 
+              end={88888} 
+              duration={2500} 
+              className="inline-block"
+            />
           </h2>
           <div className="absolute inset-0 -top-10 -bottom-6 overflow-hidden">
             <StarsBurst />
