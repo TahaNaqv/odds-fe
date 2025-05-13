@@ -1,4 +1,3 @@
-
 import { useState, useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -81,17 +80,17 @@ const TicketPurchase = () => {
           {/* Referral Code Input */}
           <div className="space-y-2">
             <label htmlFor="referralCode" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              Referral Code <span className="text-app-coral">*</span>
+              Referral Code <span className="text-app-light-pink">*</span>
             </label>
             <Input
               id="referralCode"
               placeholder="Enter 8-character referral code"
               value={referralCode}
               onChange={(e) => setReferralCode(e.target.value)}
-              className={referralError ? "border-app-coral" : ""}
+              className={referralError ? "border-app-light-pink" : ""}
             />
             {referralError && (
-              <div className="flex items-center text-xs text-app-coral mt-1">
+              <div className="flex items-center text-xs text-app-purple/70 mt-1">
                 <AlertCircle className="h-3 w-3 mr-1" />
                 {referralError}
               </div>
