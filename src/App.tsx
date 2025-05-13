@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import ActivityPreviewPage from "./pages/ActivityPreviewPage";
 import ActivityCalendarPage from "./pages/ActivityCalendarPage";
 import TermsPage from "./pages/TermsPage";
+import ReferralLeaderboardPage from "./pages/ReferralLeaderboardPage";
 import { useEffect } from "react";
 
 // New imports for other footer pages
@@ -97,6 +98,7 @@ function App() {
               <Route path="/terms" element={<TermsPage />} />
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/legality" element={<LegalityPage />} />
+              <Route path="/referrals" element={<ReferralLeaderboardPage />} />
               <Route path="/theme/neon-nights" element={<Index />} />
               <Route path="/theme/digital-gold" element={<Index />} />
               <Route path="/theme/vibrant-gradient" element={<Index />} />

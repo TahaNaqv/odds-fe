@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import WalletConnect from '@/components/ui/WalletConnect';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { Ticket, Clock, History } from 'lucide-react';
+import { Ticket, Clock, History, Trophy } from 'lucide-react';
 
 const Header = () => {
   const location = useLocation();
@@ -76,6 +76,16 @@ const Header = () => {
                 className={`rounded-lg ${isActive('/history') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
               >
                 <History className="mr-2 h-4 w-4" /> Raffle History
+              </Button>
+            </Link>
+            
+            <Link to="/referrals">
+              <Button
+                variant={isActive('/referrals') ? 'secondary' : 'ghost'}
+                size="sm"
+                className={`rounded-lg ${isActive('/referrals') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
+              >
+                <Trophy className="mr-2 h-4 w-4" /> Referrals
               </Button>
             </Link>
             
