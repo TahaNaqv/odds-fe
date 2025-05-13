@@ -102,7 +102,9 @@ const NumberCounter = ({
           className={`digit-container ${changedDigits[index] ? 'digit-roll' : ''}`}
           style={{ 
             display: 'inline-block',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            fontSize: '1.2em', // Slightly larger digits
+            padding: '0 2px'   // Add padding for better spacing
           }}
         >
           {digit}

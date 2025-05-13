@@ -1,4 +1,5 @@
 
+
 @layer utilities {
   .animate-pulse-subtle {
     animation: pulseSlight 2s ease-in-out infinite;
@@ -38,7 +39,7 @@
   display: inline-flex;
   font-weight: inherit;
   color: inherit;
-  gap: 2px;
+  gap: 4px; /* Increased gap between digits */
 }
 
 /* Individual digit container styling */
@@ -55,9 +56,9 @@
   display: inline-block;
   animation: digitRoll 0.5s ease-out;
   position: relative;
-  color: #FFFFFF;
-  text-shadow: 0 0 12px rgba(155, 135, 245, 0.9);
-  font-weight: bold;
+  color: #FFFF00; /* Bright yellow for better visibility */
+  text-shadow: 0 0 15px rgba(255, 255, 0, 0.9); /* Yellow glow */
+  font-weight: 900; /* Extra bold */
 }
 
 @keyframes fadeIn {
@@ -96,25 +97,28 @@
   0% {
     transform: translateY(100%);
     opacity: 0;
-    filter: blur(3px);
-    background: linear-gradient(to bottom, #9B87F5, #00C2FF);
+    filter: blur(4px);
+    background: linear-gradient(to bottom, #FFFF00, #FF0000); /* Yellow to red gradient */
     -webkit-background-clip: text;
     background-clip: text;
-    text-shadow: 0 0 15px rgba(155, 135, 245, 1);
+    text-shadow: 0 0 20px rgba(255, 255, 0, 1); /* Stronger glow */
+    color: transparent; /* Make text transparent to show gradient */
   }
   20% {
-    filter: blur(2px);
-    text-shadow: 0 0 12px rgba(155, 135, 245, 0.9);
+    filter: blur(3px);
+    text-shadow: 0 0 18px rgba(255, 255, 0, 0.9);
   }
   60% {
-    filter: blur(1px);
-    text-shadow: 0 0 10px rgba(155, 135, 245, 0.8);
+    filter: blur(2px);
+    text-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
   }
   100% {
     transform: translateY(0);
     opacity: 1;
     filter: blur(0);
-    text-shadow: 0 0 8px rgba(155, 135, 245, 0.7);
-    color: #F97316;
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.7);
+    color: #FF0000; /* End with bright red */
+    font-weight: 900;
   }
 }
+
