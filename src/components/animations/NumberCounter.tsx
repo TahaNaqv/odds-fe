@@ -29,6 +29,9 @@ const NumberCounter = ({
   const animationFrameId = useRef<number | null>(null);
   const isMounted = useRef(true);
   const previousDigits = useRef<string[]>([]);
+  
+  // Debug flag
+  const [isAnimating, setIsAnimating] = useState(false);
 
   // Format number with commas and decimals
   const formatNumber = (value: number): string => {
@@ -47,7 +50,10 @@ const NumberCounter = ({
   useEffect(() => {
     // Animation function using requestAnimationFrame
     const animate = (timestamp: number) => {
-      if (!startTime.current) startTime.current = timestamp;
+      if (!startTime.current) {
+        startTime.current = timestamp;
+        setIsAnimating(true); // Set animation flag to true when starting
+      }
       
       const elapsed = timestamp - startTime.current;
       const progress = Math.min(elapsed / duration, 1);
@@ -64,6 +70,7 @@ const NumberCounter = ({
       } else {
         // Ensure we land exactly on the target number
         setDisplayValue(end);
+        setIsAnimating(false); // Animation complete
       }
     };
     
@@ -76,6 +83,7 @@ const NumberCounter = ({
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
       }
+      setIsAnimating(false);
     };
   }, [end, duration, easingFn]);
 
@@ -94,7 +102,7 @@ const NumberCounter = ({
   }, [digits]);
   
   return (
-    <span className={`number-counter ${className}`}>
+    <span className={`number-counter ${className} ${isAnimating ? 'is-animating' : ''}`}>
       {prefix}
       {digits.map((digit, index) => (
         <span 
@@ -102,9 +110,11 @@ const NumberCounter = ({
           className={`digit-container ${changedDigits[index] ? 'digit-roll' : ''}`}
           style={{ 
             display: 'inline-block',
-            fontWeight: 'bold',
-            fontSize: '1.2em', // Slightly larger digits
-            padding: '0 2px'   // Add padding for better spacing
+            fontWeight: '900', // Extra bold
+            fontSize: '1.4em', // Larger digits
+            padding: '0 2px',  // Add padding for better spacing
+            position: 'relative',
+            zIndex: 20 // Ensure digits are above backgrounds
           }}
         >
           {digit}

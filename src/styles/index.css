@@ -1,5 +1,4 @@
 
-
 /* Import all CSS files */
 @import './base.css';
 @import './utilities.css';
@@ -8,6 +7,5 @@
 
 /* Make sure to force reload CSS */
 :root {
-  --refresh-marker: 5;
+  --refresh-marker: 6;
 }
-

@@ -19,16 +19,18 @@ const HeroSection = () => {
         <div className="flex justify-center mb-2">
           <span className="text-[4rem] animate-float">💰</span>
         </div>
-        <div className="relative">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2 text-gradient relative z-10 px-8 py-2 inline-block">
-            USDC $<NumberCounter 
-              end={88888} 
-              duration={3000} 
-              className="number-counter-hero"
-            />
-          </h2>
+        <div className="relative z-10 mb-4">
+          <div className="counter-container glass px-6 py-3 inline-block rounded-lg relative z-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-0">
+              USDC $<NumberCounter 
+                end={88888} 
+                duration={3000} 
+                className="number-counter-hero counter-highlight"
+              />
+            </h2>
+          </div>
           <div className="absolute inset-0 -top-10 -bottom-6 overflow-hidden">
-            <StarsBurst />
+            <StarsBurst className="z-0" />
           </div>
         </div>
         <p className="text-muted-foreground mb-8 animate-fade-in">
