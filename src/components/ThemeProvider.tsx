@@ -1,13 +1,15 @@
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ThemeToggle } from './ThemeToggle';
 
 type Theme = 'dark' | 'light' | 'neon' | 'gold' | 'vibrant' | 'cyber' | 'trusty' | 'system';
 
-const ThemeContext = createContext<{
+interface ThemeContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
-}>({
+}
+
+const ThemeContext = createContext<ThemeContextType>({
   theme: 'system',
   setTheme: () => {},
 });
@@ -16,11 +18,16 @@ export const useTheme = () => useContext(ThemeContext);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
-    const savedTheme = localStorage.getItem('theme');
-    return (savedTheme as Theme) || 'system';
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme');
+      return (savedTheme as Theme) || 'system';
+    }
+    return 'system';
   });
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const root = window.document.documentElement;
     
     // Remove all theme classes first
@@ -42,6 +49,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   // Listen for system preference changes
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     
     const handleChange = () => {
@@ -63,10 +72,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export const ThemeProviderWithToggle = ({ children }: { children: React.ReactNode }) => {
+export function ThemeProviderWithToggle({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider>
-      {children}
+      <div className="flex flex-col min-h-screen">
+        {children}
+        <div className="fixed bottom-4 right-4">
+          <ThemeToggle />
+        </div>
+      </div>
     </ThemeProvider>
   );
-};
+}
