@@ -108,7 +108,7 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
           <div className="flex items-center gap-1">
             <Ticket className="h-4 w-4 text-raffle-blue" />
             <span className="text-sm font-medium">
-              {raffle.ticketsSold} tickets sold
+              {raffle.ticketsSold} tickets bought
             </span>
           </div>
           
@@ -155,7 +155,7 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
         <div className="w-full flex justify-between items-center text-sm text-muted-foreground">
           <span>
             {isPast
-              ? `${raffle.ticketsSold} tickets sold`
+              ? `${raffle.ticketsSold} tickets bought`
               : `Unlimited entries available`
             }
           </span>
