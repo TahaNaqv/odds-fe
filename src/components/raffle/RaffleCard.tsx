@@ -75,7 +75,7 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
             <Badge variant="outline" className="bg-raffle-light-blue text-raffle-blue border-none px-3 py-1.5 flex items-center gap-2">
               <DollarSign className="h-4 w-4" />
               <span className="text-base font-medium tracking-wide">
-                Target: {formatCurrency(raffle.targetAmount)}
+                Target: {formatCurrency(raffle.targetAmount).substring(1)}
               </span>
             </Badge>
           )}
@@ -97,7 +97,7 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
           <div className="flex items-center gap-1">
             <Ticket className="h-4 w-4 text-raffle-blue" />
             <span className="text-sm font-medium">
-              {raffle.ticketsSold} tickets bought
+              {currentRaffleTickets.length > 0 ? `${currentRaffleTickets.length} tickets bought` : 'No tickets purchased yet'}
             </span>
           </div>
           

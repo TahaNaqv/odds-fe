@@ -25,7 +25,7 @@ const TicketModal = ({ ticketIds, winningTicket }: TicketModalProps) => {
           ) : (
             <>
               <Ticket className="h-4 w-4 mr-2" />
-              {ticketCount} {ticketCount === 1 ? 'Ticket' : 'Tickets'}
+              Tickets
             </>
           )}
         </Button>
