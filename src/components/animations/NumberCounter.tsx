@@ -127,7 +127,20 @@ const NumberCounter = ({
           className={`digit-container ${changedDigits[index] ? 'digit-roll' : ''}`}
           data-digit={digit}
         >
-          {digit}
+          <div className="digit-slot">
+            {/* Render the full slot reel for each changing digit */}
+            {changedDigits[index] && (
+              <div className="digit-reel">
+                {/* Generate numbers 0-9 for the slot reel effect */}
+                {Array.from({ length: 10 }).map((_, i) => (
+                  <div key={i} className="digit-value">{i}</div>
+                ))}
+                <div className="digit-value final">{digit}</div>
+              </div>
+            )}
+            {/* Static display for non-changing digits */}
+            {!changedDigits[index] && digit}
+          </div>
         </span>
       ))}
       {suffix}

@@ -73,29 +73,58 @@
 .digit-container {
   display: inline-block;
   position: relative;
-  overflow: visible; /* Allow glow to extend outside */
+  overflow: hidden; /* Contain the rolling animation */
   min-width: 0.8em;
   text-align: center;
-  transform-origin: center center;
   padding: 0 2px;
   font-weight: 900;
   transform: translateZ(0);
   will-change: transform, opacity, color;
+  height: 1.2em;
+}
+
+/* Slot machine digit styles */
+.digit-slot {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.digit-reel {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  animation: slotRoll 0.6s ease-out forwards;
+}
+
+.digit-value {
+  height: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.digit-value.final {
+  color: #FFF200; /* Final number is bright yellow */
+  text-shadow: 
+    0 0 10px rgba(255, 242, 0, 0.9),
+    0 0 20px rgba(255, 242, 0, 0.8);
 }
 
 /* Animation for each digit */
 .digit-roll {
-  display: inline-block;
-  animation: digitRoll 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  color: #FFF200; /* Extremely bright yellow */
+  color: white; /* Start with bright white */
   text-shadow: 
-    0 0 10px rgba(255, 242, 0, 0.9),
-    0 0 20px rgba(255, 242, 0, 0.8),
-    0 0 30px rgba(255, 64, 0, 0.7),
-    0 0 40px rgba(255, 64, 0, 0.6);
+    0 0 10px rgba(255, 255, 255, 0.9),
+    0 0 20px rgba(255, 255, 255, 0.8);
   font-weight: 900; /* Extra bold */
-  transform-style: preserve-3d;
 }
 
 /* Animation indicator */
@@ -116,6 +145,25 @@
 
 .is-animating .digit-container {
   animation: pulse 2s infinite; /* Add subtle pulse to all digits during animation */
+}
+
+/* New slot machine roll animation */
+@keyframes slotRoll {
+  0% {
+    transform: translateY(-1100%);
+  }
+  70% {
+    transform: translateY(-120%);
+  }
+  85% {
+    transform: translateY(-90%);
+  }
+  95% {
+    transform: translateY(-105%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
 }
 
 @keyframes fadeIn {
@@ -160,6 +208,7 @@
   }
 }
 
+/* Keeping existing digitRoll animation for compatibility */
 @keyframes digitRoll {
   0% {
     transform: translateY(100%) scale(1.5);
