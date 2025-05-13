@@ -72,8 +72,9 @@ const NumberCounter = ({
     };
   }, [end, duration, easingFn]);
   
+  // Adding specific class for number animation
   return (
-    <span className={className}>
+    <span className={`number-counter ${className}`}>
       {prefix}{formatNumber(displayValue)}{suffix}
     </span>
   );

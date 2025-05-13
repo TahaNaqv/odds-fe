@@ -26,7 +26,18 @@
   animation: float 3s ease-in-out infinite;
 }
 
-/* Number counter digit animation */
+/* Number counter styles and animations */
+.number-counter {
+  display: inline-block;
+  transition: all 0.1s ease;
+}
+
+.number-counter-hero {
+  display: inline-block;
+  font-weight: inherit;
+  color: inherit;
+}
+
 .digit-roll {
   display: inline-block;
   animation: digitRoll 0.3s ease-out;

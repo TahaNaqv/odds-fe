@@ -4,3 +4,8 @@
 @import './utilities.css';
 @import './animations.css';
 @import './components.css';
+
+/* Make sure to force reload CSS */
+:root {
+  --refresh-marker: 1;
+}

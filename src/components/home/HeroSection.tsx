@@ -24,7 +24,7 @@ const HeroSection = () => {
             USDC $<NumberCounter 
               end={88888} 
               duration={2500} 
-              className="inline-block"
+              className="number-counter-hero"
             />
           </h2>
           <div className="absolute inset-0 -top-10 -bottom-6 overflow-hidden">
