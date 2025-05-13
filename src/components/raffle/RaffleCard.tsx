@@ -75,7 +75,7 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
             <Badge variant="outline" className="bg-raffle-light-blue text-raffle-blue border-none px-3 py-1.5 flex items-center gap-2">
               <DollarSign className="h-4 w-4" />
               <span className="text-base font-medium tracking-wide">
-                Target: {formatCurrency(raffle.targetAmount).substring(1)}
+                Target: $1,000
               </span>
             </Badge>
           )}
