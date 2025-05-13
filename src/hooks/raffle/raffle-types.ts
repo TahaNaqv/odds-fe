@@ -25,6 +25,7 @@ export interface UserActivity {
   prize?: number;
   winningTicket?: number;
   ticketIds?: number[];
+  referralCode?: string; // Added referralCode property
 }
 
 export interface AutoEnrollSettings {
@@ -36,6 +37,7 @@ export interface PurchaseTicketParams {
   ticketCount: number;
   token: keyof typeof TOKENS;
   autoEnrollEndDate?: Date;
+  referralCode: string; // Added referralCode property
 }
 
 export interface SetAutoEnrollParams {

@@ -102,7 +102,7 @@ export const useTicketPurchase = (
         ticketCount,
         totalSpent: cost,
         token: 'USDC',
-        referralCode, // Store the referral code used
+        referralCode, // Include the referral code
       };
       
       setUserActivity(prev => [newActivity, ...prev]);
