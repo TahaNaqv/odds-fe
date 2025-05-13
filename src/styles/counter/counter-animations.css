@@ -1,17 +1,20 @@
 
-/* New slot machine roll animation with improved timing */
+/* New slot machine roll animation with improved timing and visibility */
 @keyframes slotRoll {
   0% {
     transform: translateY(-1100%);
+  }
+  30% {
+    transform: translateY(-800%);
   }
   50% {
     transform: translateY(-500%);
   }
   70% {
-    transform: translateY(-120%);
+    transform: translateY(-250%);
   }
   85% {
-    transform: translateY(-90%);
+    transform: translateY(-120%);
   }
   95% {
     transform: translateY(-105%);
@@ -77,25 +80,25 @@
   }
 }
 
-/* New staggered delay animation for multi-digit effects */
+/* New staggered delay animation for multi-digit effects - more pronounced delays */
 .digit-container:nth-child(1) .digit-reel {
   animation-delay: 0ms;
 }
 
 .digit-container:nth-child(2) .digit-reel {
-  animation-delay: 100ms;
+  animation-delay: 150ms;
 }
 
 .digit-container:nth-child(3) .digit-reel {
-  animation-delay: 200ms;
-}
-
-.digit-container:nth-child(4) .digit-reel {
   animation-delay: 300ms;
 }
 
+.digit-container:nth-child(4) .digit-reel {
+  animation-delay: 450ms;
+}
+
 .digit-container:nth-child(5) .digit-reel {
-  animation-delay: 400ms;
+  animation-delay: 600ms;
 }
 
 /* Celebration flash when animation completes */
@@ -111,3 +114,4 @@
 .number-counter[data-animating="false"] {
   animation: celebrationFlash 0.5s ease-in-out 1;
 }
+

@@ -48,11 +48,12 @@
   transform-style: preserve-3d;
 }
 
+/* The reel that spins */
 .digit-reel {
   position: absolute;
   display: flex;
   flex-direction: column;
-  animation: slotRoll 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; /* Bouncy easing */
+  animation: slotRoll 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; /* Slower animation to be more visible */
   backface-visibility: hidden; /* Reduce flickering */
 }
 
@@ -70,8 +71,15 @@
     0 0 20px rgba(255, 242, 0, 0.8);
 }
 
+.digit-static {
+  height: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Animation for each digit with enhanced glow */
-.digit-roll {
+.digit-changing {
   color: white; /* Start with bright white */
   text-shadow: 
     0 0 10px rgba(255, 255, 255, 0.9),

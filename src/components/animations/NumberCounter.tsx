@@ -61,12 +61,12 @@ const NumberCounter = ({
     // Reset to start value whenever props change
     setDisplayValue(start);
     startTime.current = null;
+    setIsAnimating(true); // Ensure animation state is active when starting
     
     // Animation function using requestAnimationFrame
     const animate = (timestamp: number) => {
       if (!startTime.current) {
         startTime.current = timestamp;
-        setIsAnimating(true); // Set animation flag to true when starting
       }
       
       const elapsed = timestamp - startTime.current;
@@ -104,18 +104,15 @@ const NumberCounter = ({
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
       }
-      setIsAnimating(false);
     };
   }, [start, end, duration, easingFn, loop, loopCount]);
 
   // Get current digits
   const digits = getDigitsArray(displayValue);
   
-  // Determine which digits have changed
-  const changedDigits = digits.map((digit, index) => {
-    const hasChanged = !previousDigits.current[index] || previousDigits.current[index] !== digit;
-    return hasChanged;
-  });
+  // Always treat all digits as changed during animation
+  // This ensures we get the slot machine effect for all digits
+  const changedDigits = digits.map(() => isAnimating);
   
   // Update previous digits reference
   useEffect(() => {
@@ -132,12 +129,11 @@ const NumberCounter = ({
       {digits.map((digit, index) => (
         <span 
           key={`${index}-${digit}`} 
-          className={`digit-container ${changedDigits[index] ? 'digit-roll' : ''}`}
+          className={`digit-container ${changedDigits[index] ? 'digit-changing' : ''}`}
           data-digit={digit}
         >
           <div className="digit-slot">
-            {/* Render the full slot reel for each changing digit */}
-            {changedDigits[index] && (
+            {changedDigits[index] ? (
               <div className="digit-reel">
                 {/* Generate numbers 0-9 for the slot reel effect */}
                 {Array.from({ length: 10 }).map((_, i) => (
@@ -145,9 +141,9 @@ const NumberCounter = ({
                 ))}
                 <div className="digit-value final">{digit}</div>
               </div>
+            ) : (
+              <div className="digit-static">{digit}</div>
             )}
-            {/* Static display for non-changing digits */}
-            {!changedDigits[index] && digit}
           </div>
         </span>
       ))}

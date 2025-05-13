@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Wallet, Trophy, RepeatIcon, Play } from 'lucide-react';
+import { Play } from 'lucide-react';
 import StarsBurst from '@/components/effects/StarsBurst';
 import NumberCounter from '@/components/animations/NumberCounter';
 import { Button } from '@/components/ui/button';
