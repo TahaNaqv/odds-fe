@@ -10,7 +10,7 @@ interface TotalTicketsCardProps {
 const TotalTicketsCard = ({ totalTickets, totalSpent }: TotalTicketsCardProps) => {
   return (
     <StatCard
-      title="Total Tickets"
+      title="My Tickets"
       value={totalTickets}
       subtitle={<span>$<span className="font-medium">{totalSpent.toFixed(2)}</span> total spent</span>}
       icon={Ticket}
