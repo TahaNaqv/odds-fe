@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 const HeroSection = () => {
   const [key, setKey] = useState(0);
   const [isAnimating, setIsAnimating] = useState(true);
+  const prizeAmount = 88888; // Current prize winnings amount
 
   const resetAnimation = () => {
     setIsAnimating(true);
@@ -39,7 +40,7 @@ const HeroSection = () => {
                 USDC $
                 <NumberCounter 
                   key={key}
-                  end={88888} 
+                  end={prizeAmount} 
                   duration={3000}
                   className="number-counter-hero counter-highlight"
                   loop={true}

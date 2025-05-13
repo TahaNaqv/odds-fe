@@ -28,7 +28,7 @@ const NumberCounter = ({
   loop = false,
   loopCount = 3
 }: NumberCounterProps) => {
-  // Always start from 0
+  // Always start from 0, but ensure we have the right number of digits for display
   const [displayValue, setDisplayValue] = useState(0);
   const startTime = useRef<number | null>(null);
   const animationFrameId = useRef<number | null>(null);
@@ -38,6 +38,9 @@ const NumberCounter = ({
   
   // Animation state flag
   const [isAnimating, setIsAnimating] = useState(true);
+
+  // Calculate the number of digits in the end value (excluding commas and decimal point)
+  const numDigits = Math.max(1, Math.floor(Math.log10(Math.abs(end))) + 1);
 
   // Format number with commas and decimals
   const formatNumber = (value: number): string => {
@@ -125,6 +128,7 @@ const NumberCounter = ({
     <span 
       className={`number-counter ${className} ${isAnimating ? 'is-animating' : ''}`}
       data-animating={isAnimating ? "true" : "false"}
+      data-digits={numDigits}
     >
       {prefix}
       {digits.map((digit, index) => (

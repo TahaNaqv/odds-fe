@@ -54,6 +54,23 @@
   height: 1.2em;
 }
 
+/* Different styling based on digit count */
+.number-counter[data-digits="3"] .digit-container {
+  min-width: 0.9em;
+}
+
+.number-counter[data-digits="4"] .digit-container {
+  min-width: 0.85em;
+}
+
+.number-counter[data-digits="5"] .digit-container {
+  min-width: 0.8em;
+}
+
+.number-counter[data-digits="6"] .digit-container {
+  min-width: 0.75em;
+}
+
 /* Slot machine digit styles */
 .digit-slot {
   position: relative;
