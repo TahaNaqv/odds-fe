@@ -38,7 +38,7 @@
   display: inline-flex;
   font-weight: inherit;
   color: inherit;
-  gap: 1px;
+  gap: 2px;
 }
 
 /* Individual digit container styling */
@@ -55,8 +55,9 @@
   display: inline-block;
   animation: digitRoll 0.5s ease-out;
   position: relative;
-  color: var(--color-primary, #ffffff);
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  color: #FFFFFF;
+  text-shadow: 0 0 12px rgba(155, 135, 245, 0.9);
+  font-weight: bold;
 }
 
 @keyframes fadeIn {
@@ -95,17 +96,25 @@
   0% {
     transform: translateY(100%);
     opacity: 0;
-    filter: blur(2px);
+    filter: blur(3px);
+    background: linear-gradient(to bottom, #9B87F5, #00C2FF);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 0 15px rgba(155, 135, 245, 1);
   }
   20% {
-    filter: blur(1px);
+    filter: blur(2px);
+    text-shadow: 0 0 12px rgba(155, 135, 245, 0.9);
   }
   60% {
-    filter: blur(0.5px);
+    filter: blur(1px);
+    text-shadow: 0 0 10px rgba(155, 135, 245, 0.8);
   }
   100% {
     transform: translateY(0);
     opacity: 1;
     filter: blur(0);
+    text-shadow: 0 0 8px rgba(155, 135, 245, 0.7);
+    color: #F97316;
   }
 }

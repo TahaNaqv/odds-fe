@@ -100,6 +100,10 @@ const NumberCounter = ({
         <span 
           key={`${index}-${digit}`} 
           className={`digit-container ${changedDigits[index] ? 'digit-roll' : ''}`}
+          style={{ 
+            display: 'inline-block',
+            fontWeight: 'bold'
+          }}
         >
           {digit}
         </span>
