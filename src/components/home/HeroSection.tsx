@@ -2,9 +2,17 @@
 import { useState } from 'react';
 import { Wallet, Trophy, RepeatIcon, Play } from 'lucide-react';
 import StarsBurst from '@/components/effects/StarsBurst';
+import NumberCounter from '@/components/animations/NumberCounter';
 import { Button } from '@/components/ui/button';
 
 const HeroSection = () => {
+  const [key, setKey] = useState(0);
+  const prizeAmount = 88888; // Current prize winnings amount
+
+  const resetAnimation = () => {
+    setKey(prevKey => prevKey + 1);
+  };
+
   return (
     <section className="container mx-auto py-12 md:py-16 animate-children">
       <div className="text-center max-w-3xl mx-auto">
@@ -21,13 +29,19 @@ const HeroSection = () => {
           <span className="text-[4rem] animate-float">💰</span>
         </div>
         
-        {/* Static prize counter section */}
+        {/* Animated prize counter section */}
         <div className="relative z-10 mb-4">
           <div className="counter-backdrop absolute inset-0 bg-black/40 blur-sm rounded-xl -z-10"></div>
           <div className="counter-container glass-prize px-6 py-4 inline-block rounded-lg relative z-10">
             <div className="counter-inner relative">
               <h2 className="text-3xl md:text-4xl font-bold mb-0 text-white">
-                USDC $ <span className="counter-highlight">88,888</span>
+                USDC $ 
+                <NumberCounter 
+                  key={key}
+                  end={prizeAmount} 
+                  duration={2500}
+                  className="number-counter-hero counter-highlight"
+                />
               </h2>
             </div>
           </div>
@@ -40,6 +54,16 @@ const HeroSection = () => {
         <p className="text-muted-foreground mb-4 animate-fade-in">
           in raffle winnings claimed till date
         </p>
+        
+        {/* Reset animation button */}
+        <Button 
+          variant="outline" 
+          size="sm" 
+          onClick={resetAnimation}
+          className="mb-4"
+        >
+          <Play className="w-4 h-4 mr-2" /> Replay Animation
+        </Button>
       </div>
     </section>
   );

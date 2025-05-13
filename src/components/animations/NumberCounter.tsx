@@ -15,7 +15,7 @@ interface NumberCounterProps {
 
 /**
  * A component that animates counting from 0 to a target number
- * with individual digit animations for a more engaging effect.
+ * with individual digit animations for a more engaging slot-machine effect.
  */
 const NumberCounter = ({
   end,
@@ -26,7 +26,7 @@ const NumberCounter = ({
   decimals = 0,
   easingFn = (t) => 1 - Math.pow(1 - t, 3), // Default cubic ease-out
   loop = false,
-  loopCount = 3
+  loopCount = 1
 }: NumberCounterProps) => {
   // Always start from 0, but ensure we have the right number of digits for display
   const [displayValue, setDisplayValue] = useState(0);
@@ -66,7 +66,6 @@ const NumberCounter = ({
       if (!startTime.current) {
         startTime.current = timestamp;
         setIsAnimating(true); // Set animation flag to true when starting
-        console.log("Counter animation started");
       }
       
       const elapsed = timestamp - startTime.current;
@@ -87,13 +86,11 @@ const NumberCounter = ({
         startTime.current = null;
         loopCounter.current += 1;
         setDisplayValue(0); // Reset to zero for the next loop
-        console.log(`Counter loop ${loopCounter.current} of ${loopCount}`);
         animationFrameId.current = requestAnimationFrame(animate);
       } else {
         // Ensure we land exactly on the target number
         setDisplayValue(end);
         setIsAnimating(false); // Animation complete
-        console.log("Counter animation completed");
       }
     };
     
