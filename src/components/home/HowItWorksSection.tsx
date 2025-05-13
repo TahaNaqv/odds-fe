@@ -14,7 +14,7 @@ const HowItWorksSection = () => {
             {
               step: 2,
               title: "Wait for Draw",
-              description: "Each raffle lasts for 24 hours. The smart contract randomly assigns tickets to three groups with different prize allocations."
+              description: "Each raffle lasts until the Current Raffle is sold out. The smart contract randomly assigns tickets to three groups with different prize allocations."
             },
             {
               step: 3,
