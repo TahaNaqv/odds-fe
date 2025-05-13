@@ -9,6 +9,8 @@ interface NumberCounterProps {
   suffix?: string;
   decimals?: number;
   easingFn?: (t: number) => number;
+  loop?: boolean;
+  loopCount?: number;
 }
 
 /**
@@ -22,16 +24,19 @@ const NumberCounter = ({
   prefix = '',
   suffix = '',
   decimals = 0,
-  easingFn = (t) => 1 - Math.pow(1 - t, 3) // Default cubic ease-out
+  easingFn = (t) => 1 - Math.pow(1 - t, 3), // Default cubic ease-out
+  loop = false,
+  loopCount = 3
 }: NumberCounterProps) => {
   const [displayValue, setDisplayValue] = useState(0);
   const startTime = useRef<number | null>(null);
   const animationFrameId = useRef<number | null>(null);
   const isMounted = useRef(true);
   const previousDigits = useRef<string[]>([]);
+  const loopCounter = useRef(0);
   
-  // Debug flag
-  const [isAnimating, setIsAnimating] = useState(false);
+  // Animation state flag
+  const [isAnimating, setIsAnimating] = useState(true);
 
   // Format number with commas and decimals
   const formatNumber = (value: number): string => {
@@ -53,6 +58,7 @@ const NumberCounter = ({
       if (!startTime.current) {
         startTime.current = timestamp;
         setIsAnimating(true); // Set animation flag to true when starting
+        console.log("Counter animation started");
       }
       
       const elapsed = timestamp - startTime.current;
@@ -67,10 +73,18 @@ const NumberCounter = ({
       // Continue animation until we reach the end
       if (progress < 1 && isMounted.current) {
         animationFrameId.current = requestAnimationFrame(animate);
+      } else if (loop && loopCounter.current < loopCount && isMounted.current) {
+        // Reset for another loop
+        startTime.current = null;
+        loopCounter.current += 1;
+        setDisplayValue(0); // Reset to zero for the next loop
+        console.log(`Counter loop ${loopCounter.current} of ${loopCount}`);
+        animationFrameId.current = requestAnimationFrame(animate);
       } else {
         // Ensure we land exactly on the target number
         setDisplayValue(end);
         setIsAnimating(false); // Animation complete
+        console.log("Counter animation completed");
       }
     };
     
@@ -85,7 +99,7 @@ const NumberCounter = ({
       }
       setIsAnimating(false);
     };
-  }, [end, duration, easingFn]);
+  }, [end, duration, easingFn, loop, loopCount]);
 
   // Get current digits
   const digits = getDigitsArray(displayValue);
@@ -102,20 +116,16 @@ const NumberCounter = ({
   }, [digits]);
   
   return (
-    <span className={`number-counter ${className} ${isAnimating ? 'is-animating' : ''}`}>
+    <span 
+      className={`number-counter ${className} ${isAnimating ? 'is-animating' : ''}`}
+      data-animating={isAnimating ? "true" : "false"}
+    >
       {prefix}
       {digits.map((digit, index) => (
         <span 
           key={`${index}-${digit}`} 
           className={`digit-container ${changedDigits[index] ? 'digit-roll' : ''}`}
-          style={{ 
-            display: 'inline-block',
-            fontWeight: '900', // Extra bold
-            fontSize: '1.4em', // Larger digits
-            padding: '0 2px',  // Add padding for better spacing
-            position: 'relative',
-            zIndex: 20 // Ensure digits are above backgrounds
-          }}
+          data-digit={digit}
         >
           {digit}
         </span>

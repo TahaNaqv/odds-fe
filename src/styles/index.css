@@ -7,5 +7,27 @@
 
 /* Make sure to force reload CSS */
 :root {
-  --refresh-marker: 6;
+  --refresh-marker: 7; /* Increment to force CSS refresh */
+}
+
+/* Debug style to identify animation state */
+[data-animating="true"] {
+  position: relative;
+}
+
+[data-animating="true"]::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
