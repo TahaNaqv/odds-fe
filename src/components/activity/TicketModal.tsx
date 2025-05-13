@@ -11,6 +11,7 @@ interface TicketModalProps {
 
 const TicketModal = ({ ticketIds, winningTicket }: TicketModalProps) => {
   const hasWinningTicket = ticketIds.includes(winningTicket || -1);
+  const ticketCount = ticketIds.length;
 
   return (
     <Dialog>
@@ -24,7 +25,7 @@ const TicketModal = ({ ticketIds, winningTicket }: TicketModalProps) => {
           ) : (
             <>
               <Ticket className="h-4 w-4 mr-2" />
-              Tickets
+              {ticketCount} {ticketCount === 1 ? 'Ticket' : 'Tickets'}
             </>
           )}
         </Button>
@@ -32,7 +33,7 @@ const TicketModal = ({ ticketIds, winningTicket }: TicketModalProps) => {
       <DialogContent className="bg-popover border-border dialog-content">
         <DialogHeader>
           <DialogTitle className="text-high-contrast text-xl">
-            {hasWinningTicket ? 'Winning Ticket' : 'Ticket Numbers'}
+            {hasWinningTicket ? 'Winning Ticket' : `${ticketCount} ${ticketCount === 1 ? 'Ticket' : 'Tickets'}`}
           </DialogTitle>
           <DialogDescription className="text-medium-contrast">
             {hasWinningTicket 
