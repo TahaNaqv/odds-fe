@@ -1,0 +1,5 @@
+
+/* Import all counter CSS files */
+@import './counter-base.css';
+@import './counter-digits.css';
+@import './counter-animations.css';

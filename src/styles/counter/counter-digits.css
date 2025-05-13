@@ -1,0 +1,79 @@
+
+/* Individual digit container styling */
+.digit-container {
+  display: inline-block;
+  position: relative;
+  overflow: hidden; /* Contain the rolling animation */
+  min-width: 0.8em;
+  text-align: center;
+  padding: 0 2px;
+  font-weight: 900;
+  transform: translateZ(0);
+  will-change: transform, opacity, color;
+  height: 1.2em;
+}
+
+/* Different styling based on digit count */
+.number-counter[data-digits="3"] .digit-container {
+  min-width: 0.9em;
+}
+
+.number-counter[data-digits="4"] .digit-container {
+  min-width: 0.85em;
+}
+
+.number-counter[data-digits="5"] .digit-container {
+  min-width: 0.8em;
+}
+
+.number-counter[data-digits="6"] .digit-container {
+  min-width: 0.75em;
+}
+
+/* Slot machine digit styles */
+.digit-slot {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.digit-reel {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  animation: slotRoll 0.6s ease-out forwards;
+}
+
+.digit-value {
+  height: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.digit-value.final {
+  color: #FFF200; /* Final number is bright yellow */
+  text-shadow: 
+    0 0 10px rgba(255, 242, 0, 0.9),
+    0 0 20px rgba(255, 242, 0, 0.8);
+}
+
+/* Animation for each digit */
+.digit-roll {
+  color: white; /* Start with bright white */
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.9),
+    0 0 20px rgba(255, 255, 255, 0.8);
+  font-weight: 900; /* Extra bold */
+}
+
+.is-animating .digit-container {
+  animation: pulse 2s infinite; /* Add subtle pulse to all digits during animation */
+}
