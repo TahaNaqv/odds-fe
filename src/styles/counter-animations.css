@@ -1,0 +1,183 @@
+
+/* Number counter styles and animations */
+.number-counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease;
+  position: relative;
+  z-index: 50; /* Ensure digits appear above all backgrounds */
+}
+
+.number-counter-hero {
+  display: inline-flex;
+  font-weight: 900; /* Extra bold for better visibility */
+  color: white; /* Basic color for better accessibility */
+  gap: 8px; /* Increased gap between digits for better visibility */
+  font-size: 1.2em; /* Make digits larger than surrounding text */
+  margin-left: 6px; /* Add space after dollar sign */
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8)); /* Add glow effect around all digits */
+}
+
+/* Counter highlight utility class */
+.counter-highlight {
+  color: white !important;
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 20px rgba(255, 255, 255, 0.6),
+    0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+/* Special backdrop for the prize counter */
+.glass-prize {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  box-shadow: 
+    0 0 30px rgba(255, 215, 0, 0.4),
+    inset 0 0 15px rgba(255, 215, 0, 0.3);
+  border: 2px solid rgba(255, 215, 0, 0.4);
+  z-index: 30;
+  position: relative;
+}
+
+/* Individual digit container styling */
+.digit-container {
+  display: inline-block;
+  position: relative;
+  overflow: hidden; /* Contain the rolling animation */
+  min-width: 0.8em;
+  text-align: center;
+  padding: 0 2px;
+  font-weight: 900;
+  transform: translateZ(0);
+  will-change: transform, opacity, color;
+  height: 1.2em;
+}
+
+/* Slot machine digit styles */
+.digit-slot {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.digit-reel {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  animation: slotRoll 0.6s ease-out forwards;
+}
+
+.digit-value {
+  height: 1.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.digit-value.final {
+  color: #FFF200; /* Final number is bright yellow */
+  text-shadow: 
+    0 0 10px rgba(255, 242, 0, 0.9),
+    0 0 20px rgba(255, 242, 0, 0.8);
+}
+
+/* Animation for each digit */
+.digit-roll {
+  color: white; /* Start with bright white */
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.9),
+    0 0 20px rgba(255, 255, 255, 0.8);
+  font-weight: 900; /* Extra bold */
+}
+
+/* Animation indicator */
+.animation-indicator {
+  z-index: 60;
+}
+
+/* Counter container styling */
+.counter-container {
+  position: relative;
+  z-index: 15;
+  backdrop-filter: blur(8px);
+  box-shadow: 
+    0 0 30px rgba(255, 215, 0, 0.4),
+    inset 0 0 15px rgba(255, 215, 0, 0.25);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.is-animating .digit-container {
+  animation: pulse 2s infinite; /* Add subtle pulse to all digits during animation */
+}
+
+/* New slot machine roll animation */
+@keyframes slotRoll {
+  0% {
+    transform: translateY(-1100%);
+  }
+  70% {
+    transform: translateY(-120%);
+  }
+  85% {
+    transform: translateY(-90%);
+  }
+  95% {
+    transform: translateY(-105%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+/* Keeping existing digitRoll animation for compatibility */
+@keyframes digitRoll {
+  0% {
+    transform: translateY(100%) scale(1.5);
+    opacity: 0;
+    filter: blur(10px) brightness(1.5);
+    color: #FFFFFF; /* Start with bright white */
+    text-shadow: 
+      0 0 30px rgba(255, 255, 255, 1),
+      0 0 60px rgba(255, 165, 0, 0.8),
+      0 0 90px rgba(255, 165, 0, 0.6);
+  }
+  
+  20% {
+    filter: blur(8px) brightness(1.4);
+    transform: translateY(50%) scale(1.3);
+    text-shadow: 
+      0 0 25px rgba(255, 255, 0, 1),
+      0 0 50px rgba(255, 165, 0, 0.9),
+      0 0 75px rgba(255, 165, 0, 0.7);
+    color: #FFFF00; /* Bright yellow */
+  }
+  
+  60% {
+    filter: blur(4px) brightness(1.2);
+    transform: translateY(10%) scale(1.1);
+    text-shadow: 
+      0 0 20px rgba(255, 215, 0, 1),
+      0 0 40px rgba(255, 69, 0, 0.8),
+      0 0 60px rgba(255, 69, 0, 0.6);
+    color: #FFA500; /* Orange */
+  }
+  
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    filter: blur(0) brightness(1);
+    color: #FF4500; /* Ending with bright orange-red */
+    text-shadow: 
+      0 0 15px rgba(255, 69, 0, 0.9),
+      0 0 30px rgba(255, 69, 0, 0.7),
+      0 0 45px rgba(255, 0, 0, 0.5);
+  }
+}

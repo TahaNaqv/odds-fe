@@ -3,11 +3,12 @@
 @import './base.css';
 @import './utilities.css';
 @import './animations.css';
+@import './counter-animations.css';
 @import './components.css';
 
 /* Make sure to force reload CSS */
 :root {
-  --refresh-marker: 7; /* Increment to force CSS refresh */
+  --refresh-marker: 8; /* Increment to force CSS refresh */
 }
 
 /* Debug style to identify animation state */
