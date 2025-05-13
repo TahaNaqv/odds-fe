@@ -2,9 +2,11 @@
 import { useState, useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Ticket } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Ticket, AlertCircle } from 'lucide-react';
 import useRaffle from '@/hooks/useRaffle';
 import useWallet from '@/hooks/useWallet';
+import { isValidReferralCode } from '@/lib/utils';
 import TicketCountSelector from './ticket-purchase/TicketCountSelector';
 import AutoEnrollDatePicker from './ticket-purchase/AutoEnrollDatePicker';
 
@@ -13,6 +15,25 @@ const TicketPurchase = () => {
   const { purchaseTicket, isLoading } = useRaffle();
   const [ticketCount, setTicketCount] = useState(1);
   const [date, setDate] = useState<Date | undefined>(undefined);
+  const [referralCode, setReferralCode] = useState<string>('');
+  const [referralError, setReferralError] = useState<string | null>(null);
+  
+  const isValidCode = useMemo(() => {
+    if (!referralCode) {
+      setReferralError('Referral code is required');
+      return false;
+    }
+    
+    // Check if the code format is valid
+    const isValid = isValidReferralCode(referralCode.toLowerCase());
+    if (!isValid) {
+      setReferralError('Invalid referral code format');
+      return false;
+    }
+    
+    setReferralError(null);
+    return true;
+  }, [referralCode]);
   
   const daysForAutoEnroll = useMemo(() => {
     if (!date) return 0;
@@ -34,10 +55,13 @@ const TicketPurchase = () => {
   const cost = totalTickets * 1;
   
   const handlePurchase = () => {
+    if (!isValidCode) return;
+    
     purchaseTicket({
       ticketCount,
       token: 'USDC',
-      autoEnrollEndDate: date
+      autoEnrollEndDate: date,
+      referralCode: referralCode.toLowerCase()
     });
   };
 
@@ -53,6 +77,26 @@ const TicketPurchase = () => {
             ticketCount={ticketCount} 
             setTicketCount={setTicketCount} 
           />
+          
+          {/* Referral Code Input */}
+          <div className="space-y-2">
+            <label htmlFor="referralCode" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+              Referral Code <span className="text-red-500">*</span>
+            </label>
+            <Input
+              id="referralCode"
+              placeholder="Enter 8-character referral code"
+              value={referralCode}
+              onChange={(e) => setReferralCode(e.target.value)}
+              className={referralError ? "border-red-500" : ""}
+            />
+            {referralError && (
+              <div className="flex items-center text-xs text-red-500 mt-1">
+                <AlertCircle className="h-3 w-3 mr-1" />
+                {referralError}
+              </div>
+            )}
+          </div>
           
           <AutoEnrollDatePicker 
             date={date}
@@ -91,7 +135,7 @@ const TicketPurchase = () => {
       <CardFooter className="flex justify-between">
         <Button 
           className="w-full bg-app-purple hover:bg-app-purple/90 text-white shadow-subtle font-medium rounded-xl"
-          disabled={!isConnected || isLoading}
+          disabled={!isConnected || isLoading || !isValidCode}
           onClick={handlePurchase}
         >
           {isLoading ? (

@@ -116,6 +116,13 @@ export function generateReferralCode(address: string): string {
   return `${prefix}${suffix}`.toLowerCase();
 }
 
+// Validate a referral code format
+export function isValidReferralCode(code: string): boolean {
+  // Check if the code follows the pattern of first 4 chars + last 4 chars from an address
+  // Expected pattern: 8 alphanumeric characters, lowercase
+  return /^[a-f0-9]{8}$/.test(code);
+}
+
 // Format referral link for sharing
 export function formatReferralLink(referralCode: string): string {
   const baseUrl = window.location.origin;

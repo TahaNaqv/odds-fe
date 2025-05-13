@@ -1,7 +1,7 @@
 
 import RaffleCard from '@/components/raffle/RaffleCard';
 import TicketPurchase from '@/components/raffle/TicketPurchase';
-import { Trophy, Zap, Ticket, Calendar, Wallet, Users } from 'lucide-react';
+import { Trophy, Zap, Ticket, Calendar, Wallet, Users, Link } from 'lucide-react';
 import { RaffleData } from '@/hooks/raffle/raffle-types';
 
 interface MarketingSectionProps {
@@ -47,6 +47,17 @@ const MarketingSection = ({ currentRaffle, isLoading }: MarketingSectionProps) =
                   ))}
                 </div>
               </div>
+            </div>
+            
+            {/* New referral code explainer */}
+            <div className="mt-4 border-t border-app-purple/30 pt-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Link size={16} className="text-app-bright-purple" />
+                <h4 className="text-sm font-bold text-white">Need a referral code?</h4>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                All tickets require a valid referral code from an existing player. When you purchase tickets, you'll receive your own referral code to share with others.
+              </p>
             </div>
           </div>
         </div>

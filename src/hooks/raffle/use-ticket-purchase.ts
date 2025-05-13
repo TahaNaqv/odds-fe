@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { toast } from '@/hooks/use-toast';
 import { RAFFLE } from '@/utils/constants';
 import { PurchaseTicketParams, RaffleData, UserActivity } from './raffle-types';
-import { generateReferralCode, formatReferralLink } from '@/utils/helpers';
+import { generateReferralCode, formatReferralLink, isValidReferralCode } from '@/utils/helpers';
 import { showReferralToast } from '@/components/raffle/ReferralShareToast';
 
 export const useTicketPurchase = (
@@ -15,7 +15,7 @@ export const useTicketPurchase = (
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   // Purchase ticket
-  const purchaseTicket = useCallback(async ({ ticketCount, token, autoEnrollEndDate }: PurchaseTicketParams) => {
+  const purchaseTicket = useCallback(async ({ ticketCount, token, autoEnrollEndDate, referralCode }: PurchaseTicketParams) => {
     if (!isConnected) {
       toast({
         title: 'Wallet not connected',
@@ -29,6 +29,16 @@ export const useTicketPurchase = (
       toast({
         title: 'Wrong network',
         description: 'Please switch to the Base network to purchase tickets.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    
+    // Validate referral code
+    if (!referralCode || !isValidReferralCode(referralCode)) {
+      toast({
+        title: 'Invalid referral code',
+        description: 'Please enter a valid referral code to purchase tickets.',
         variant: 'destructive',
       });
       return;
@@ -92,6 +102,7 @@ export const useTicketPurchase = (
         ticketCount,
         totalSpent: cost,
         token: 'USDC',
+        referralCode, // Store the referral code used
       };
       
       setUserActivity(prev => [newActivity, ...prev]);
@@ -99,8 +110,8 @@ export const useTicketPurchase = (
       // Generate referral code based on wallet address (in a real app, this would come from the connected wallet)
       // Using a mock address for demonstration
       const mockWalletAddress = "0x742d35Cc6634C0532925a3b844Bc454e4438f44e";
-      const referralCode = generateReferralCode(mockWalletAddress);
-      const referralLink = formatReferralLink(referralCode);
+      const newReferralCode = generateReferralCode(mockWalletAddress);
+      const referralLink = formatReferralLink(newReferralCode);
       
       // Show toast with referral link and social sharing
       showReferralToast(
