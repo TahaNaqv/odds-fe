@@ -7,5 +7,5 @@
 
 /* Make sure to force reload CSS */
 :root {
-  --refresh-marker: 1;
+  --refresh-marker: 2;
 }
