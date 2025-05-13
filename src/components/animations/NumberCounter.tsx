@@ -28,6 +28,7 @@ const NumberCounter = ({
   loop = false,
   loopCount = 3
 }: NumberCounterProps) => {
+  // Always start from 0
   const [displayValue, setDisplayValue] = useState(0);
   const startTime = useRef<number | null>(null);
   const animationFrameId = useRef<number | null>(null);
@@ -53,6 +54,10 @@ const NumberCounter = ({
   };
 
   useEffect(() => {
+    // Reset the counter to zero whenever the end value changes
+    setDisplayValue(0);
+    startTime.current = null;
+    
     // Animation function using requestAnimationFrame
     const animate = (timestamp: number) => {
       if (!startTime.current) {
@@ -66,6 +71,7 @@ const NumberCounter = ({
       const easedProgress = easingFn(progress);
       
       // Calculate the current value based on progress
+      // Always animate from 0 to end value
       const currentValue = Math.floor(easedProgress * end);
       
       setDisplayValue(currentValue);
