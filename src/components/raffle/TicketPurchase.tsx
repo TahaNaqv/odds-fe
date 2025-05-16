@@ -1,4 +1,3 @@
-
 import { useState, useMemo, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -36,10 +35,11 @@ const TicketPurchase = () => {
     return true;
   }, [referralCode]);
   
+  // Calculate the total number of tickets based on ticketCount and autoDays
   const totalTickets = useMemo(() => {
-    if (!autoDays) return ticketCount;
-    return ticketCount * (autoDays + 1); // +1 for today's ticket
-  }, [ticketCount, autoDays]);
+    // Just return the selected ticket count - auto enrollment will happen separately
+    return ticketCount;
+  }, [ticketCount]);
   
   const cost = totalTickets * 1;
   
@@ -106,16 +106,10 @@ const TicketPurchase = () => {
               <span className="text-sm font-medium">{ticketCount} tickets</span>
             </div>
             {autoDays && (
-              <>
-                <div className="flex justify-between mb-2">
-                  <span className="text-sm font-medium text-gray-700">Auto-Entry:</span>
-                  <span className="text-sm font-medium">For {autoDays} {autoDays === 1 ? 'day' : 'days'}</span>
-                </div>
-                <div className="flex justify-between mb-2">
-                  <span className="text-sm font-medium text-gray-700">Total Tickets:</span>
-                  <span className="text-sm font-medium">{totalTickets} tickets</span>
-                </div>
-              </>
+              <div className="flex justify-between mb-2">
+                <span className="text-sm font-medium text-gray-700">Auto-Entry:</span>
+                <span className="text-sm font-medium">For {autoDays} {autoDays === 1 ? 'day' : 'days'}</span>
+              </div>
             )}
             <div className="flex justify-between pt-2 border-t border-raffle-light-gray">
               <span className="text-sm font-bold text-gray-700">Total:</span>
@@ -135,7 +129,7 @@ const TicketPurchase = () => {
           ) : (
             <>
               <Ticket className="mr-2 h-4 w-4" />
-              Purchase {totalTickets} Ticket{totalTickets !== 1 ? 's' : ''}
+              Purchase {ticketCount} Ticket{ticketCount !== 1 ? 's' : ''}
             </>
           )}
         </Button>
