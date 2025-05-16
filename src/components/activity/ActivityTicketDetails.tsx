@@ -52,6 +52,7 @@ const ActivityTicketDetails = ({ activities, date }: ActivityTicketDetailsProps)
               <span className="text-sm font-medium flex items-center">
                 <Ticket className="h-3.5 w-3.5 mr-1.5 text-primary" />
                 {activity.ticketCount} Ticket{activity.ticketCount !== 1 ? 's' : ''} Purchased
+                {activity.referralCode ? "" : " via Auto-entry"}
               </span>
               <span className="text-xs text-muted-foreground">
                 {format(new Date(activity.timestamp), "h:mm a")}
