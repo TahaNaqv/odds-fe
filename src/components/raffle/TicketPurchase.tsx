@@ -93,7 +93,7 @@ const TicketPurchase = () => {
           <AutoEnrollDatePicker 
             days={autoDays}
             onDaysSelect={setAutoDays}
-            isDisabled={!isConnected || isLoading}
+            isDisabled={false}
           />
           
           <div className="p-4 rounded-xl bg-raffle-off-white border border-raffle-light-gray">

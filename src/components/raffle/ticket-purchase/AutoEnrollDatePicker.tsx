@@ -44,7 +44,6 @@ const AutoEnrollDatePicker = ({ days, onDaysSelect, isDisabled }: AutoEnrollDate
       <Select
         value={days?.toString() || "0"}
         onValueChange={(value) => onDaysSelect(value === "0" ? null : parseInt(value))}
-        disabled={isDisabled}
       >
         <SelectTrigger
           id="auto-enroll-days"
