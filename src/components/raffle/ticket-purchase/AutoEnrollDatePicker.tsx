@@ -56,19 +56,19 @@ const AutoEnrollDatePicker = ({ days, onDaysSelect, isDisabled }: AutoEnrollDate
           id="auto-enroll-days"
           className="w-full"
         >
-          <SelectValue placeholder="Select number of days" />
+          <SelectValue placeholder="Select number of entries" />
         </SelectTrigger>
         <SelectContent>
           {dayOptions.map((day) => (
             <SelectItem key={day} value={day.toString()}>
-              {day} {day === 1 ? 'day' : 'days'}
+              {day} {day === 1 ? 'entry' : 'entries'}
             </SelectItem>
           ))}
         </SelectContent>
       </Select>
       {days && (
         <p className="text-xs text-raffle-blue">
-          You will be automatically entered in daily raffles for {days} {days === 1 ? 'day' : 'days'} (until {endDate?.toLocaleDateString()}).
+          You will be automatically entered in daily raffles for {days} {days === 1 ? 'entry' : 'entries'} (until {endDate?.toLocaleDateString()}).
         </p>
       )}
     </div>

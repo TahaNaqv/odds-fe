@@ -1,4 +1,3 @@
-
 import { useState, useMemo, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -113,7 +112,7 @@ const TicketPurchase = () => {
             {autoDays && autoDays > 0 && (
               <div className="flex justify-between mb-2">
                 <span className="text-sm font-medium text-gray-700">Auto-Entry:</span>
-                <span className="text-sm font-medium">For {autoDays} {autoDays === 1 ? 'day' : 'days'}</span>
+                <span className="text-sm font-medium">For {autoDays} {autoDays === 1 ? 'entry' : 'entries'}</span>
               </div>
             )}
             <div className="flex justify-between pt-2 border-t border-raffle-light-gray">
