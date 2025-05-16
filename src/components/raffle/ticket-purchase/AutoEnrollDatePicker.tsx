@@ -1,5 +1,4 @@
 
-import { Button } from '@/components/ui/button';
 import { 
   Select,
   SelectContent,
@@ -8,8 +7,9 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Calendar as CalendarIcon, HelpCircle } from 'lucide-react';
+import { HelpCircle } from 'lucide-react';
 import { addDays } from 'date-fns';
+import { useEffect } from 'react';
 
 interface AutoEnrollDatePickerProps {
   days: number | null;
@@ -23,6 +23,13 @@ const AutoEnrollDatePicker = ({ days, onDaysSelect, isDisabled }: AutoEnrollDate
   
   // Calculate the end date based on selected days
   const endDate = days ? addDays(new Date(), days) : null;
+
+  // Set default to 1 day if no selection
+  useEffect(() => {
+    if (days === null) {
+      onDaysSelect(1);
+    }
+  }, [days, onDaysSelect]);
 
   return (
     <div className="space-y-2">
@@ -42,8 +49,8 @@ const AutoEnrollDatePicker = ({ days, onDaysSelect, isDisabled }: AutoEnrollDate
         </TooltipProvider>
       </div>
       <Select
-        value={days?.toString() || "0"}
-        onValueChange={(value) => onDaysSelect(value === "0" ? null : parseInt(value))}
+        value={days?.toString() || "1"}
+        onValueChange={(value) => onDaysSelect(parseInt(value))}
       >
         <SelectTrigger
           id="auto-enroll-days"
@@ -52,7 +59,6 @@ const AutoEnrollDatePicker = ({ days, onDaysSelect, isDisabled }: AutoEnrollDate
           <SelectValue placeholder="Select number of days" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="0">No auto-entry</SelectItem>
           {dayOptions.map((day) => (
             <SelectItem key={day} value={day.toString()}>
               {day} {day === 1 ? 'day' : 'days'}

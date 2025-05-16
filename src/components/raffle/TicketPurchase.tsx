@@ -1,5 +1,5 @@
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,7 +15,7 @@ const TicketPurchase = () => {
   const { isConnected } = useWallet();
   const { purchaseTicket, isLoading } = useRaffle();
   const [ticketCount, setTicketCount] = useState(1);
-  const [autoDays, setAutoDays] = useState<number | null>(null);
+  const [autoDays, setAutoDays] = useState<number | null>(1); // Set default to 1 day
   const [referralCode, setReferralCode] = useState<string>('');
   const [referralError, setReferralError] = useState<string | null>(null);
   
