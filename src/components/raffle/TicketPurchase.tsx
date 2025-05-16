@@ -1,3 +1,4 @@
+
 import { useState, useMemo, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,14 +10,16 @@ import { isValidReferralCode } from '@/lib/utils';
 import TicketCountSelector from './ticket-purchase/TicketCountSelector';
 import AutoEnrollDatePicker from './ticket-purchase/AutoEnrollDatePicker';
 import { addDays } from 'date-fns';
+import { toast } from '@/hooks/use-toast';
 
 const TicketPurchase = () => {
   const { isConnected } = useWallet();
-  const { purchaseTicket, isLoading } = useRaffle();
+  const { purchaseTicket, isLoading, currentRaffle } = useRaffle();
   const [ticketCount, setTicketCount] = useState(1);
-  const [autoDays, setAutoDays] = useState<number | null>(1); // Set default to 1 day
+  const [autoDays, setAutoDays] = useState<number | null>(1); // Set default to 1 entry
   const [referralCode, setReferralCode] = useState<string>('');
   const [referralError, setReferralError] = useState<string | null>(null);
+  const [maxTicketsError, setMaxTicketsError] = useState<string | null>(null);
   
   const isValidCode = useMemo(() => {
     if (!referralCode) {
@@ -38,19 +41,43 @@ const TicketPurchase = () => {
   // Calculate the immediate ticket purchase count
   const immediateTickets = ticketCount;
   
-  // Calculate the total number of tickets including auto-enrollment for future days
+  // Calculate the total number of tickets including auto-enrollment for future entries
   const totalTickets = useMemo(() => {
-    // For auto-enrollment, we multiply the ticket count by the number of days
+    // For auto-enrollment, we multiply the ticket count by the number of entries
     return autoDays ? (autoDays * ticketCount) : ticketCount;
   }, [ticketCount, autoDays]);
   
   // Calculate the total cost 
   const totalCost = totalTickets * 1; // $1 per ticket
   
+  // Check if purchase exceeds maximum available tickets
+  useEffect(() => {
+    if (!currentRaffle) return;
+    
+    const remainingTickets = currentRaffle.targetAmount - currentRaffle.ticketsSold;
+    
+    if (ticketCount > remainingTickets) {
+      setMaxTicketsError(`Only ${remainingTickets} tickets are available`);
+    } else {
+      setMaxTicketsError(null);
+    }
+  }, [ticketCount, currentRaffle]);
+  
   const handlePurchase = () => {
     if (!isValidCode) return;
     
-    // Calculate end date based on selected days
+    // Validate ticket count against remaining tickets
+    const remainingTickets = currentRaffle.targetAmount - currentRaffle.ticketsSold;
+    if (ticketCount > remainingTickets) {
+      toast({
+        title: 'Too many tickets',
+        description: `Only ${remainingTickets} tickets are available for this raffle.`,
+        variant: 'destructive',
+      });
+      return;
+    }
+    
+    // Calculate end date based on selected entries
     const autoEnrollEndDate = autoDays ? addDays(new Date(), autoDays) : undefined;
     
     purchaseTicket({
@@ -73,6 +100,16 @@ const TicketPurchase = () => {
             ticketCount={ticketCount} 
             setTicketCount={setTicketCount} 
           />
+          
+          {maxTicketsError && (
+            <div className="p-3 bg-red-50 border border-red-200 rounded-md text-red-700 text-sm flex items-start">
+              <AlertCircle className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="font-medium">Maximum tickets exceeded</p>
+                <p className="mt-1">{maxTicketsError}</p>
+              </div>
+            </div>
+          )}
           
           {/* Referral Code Input */}
           <div className="space-y-2">
@@ -125,7 +162,7 @@ const TicketPurchase = () => {
       <CardFooter className="flex justify-between">
         <Button 
           className="w-full bg-app-purple hover:bg-app-purple/90 text-white shadow-subtle font-medium rounded-xl"
-          disabled={!isConnected || isLoading || !isValidCode}
+          disabled={!isConnected || isLoading || !isValidCode || !!maxTicketsError}
           onClick={handlePurchase}
         >
           {isLoading ? (

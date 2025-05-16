@@ -52,15 +52,7 @@ export const useTicketPurchase = (
         description: `Only ${remainingTickets} tickets are available for this raffle.`,
         variant: 'destructive',
       });
-      
-      // Automatically adjust to the remaining amount
-      ticketCount = remainingTickets;
-      if (ticketCount <= 0) return;
-      
-      toast({
-        title: 'Adjusted ticket count',
-        description: `Your purchase has been adjusted to ${ticketCount} tickets.`,
-      });
+      return;
     }
 
     setIsLoading(true);
