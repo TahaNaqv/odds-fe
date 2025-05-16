@@ -1,5 +1,5 @@
 
-import { HelpCircle, Coins, DollarSign, Calendar, Clock, Ticket, Wallet, ShieldCheck } from 'lucide-react';
+import { HelpCircle, Coins, DollarSign, Calendar, Clock, Ticket, Wallet, ShieldCheck, RefreshCcw } from 'lucide-react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const FAQSection = () => {
@@ -15,13 +15,18 @@ const FAQSection = () => {
       icon: <Coins size={20} className="text-app-purple mr-2 flex-shrink-0" />
     },
     {
+      question: "Do I need a referral code to purchase tickets?",
+      answer: "Yes, you need a valid referral code to purchase tickets. This helps grow our community through word-of-mouth. After your first purchase, you'll receive your own referral code that you can share with others.",
+      icon: <RefreshCcw size={20} className="text-app-purple mr-2 flex-shrink-0" />
+    },
+    {
       question: "How do I claim my winnings?",
       answer: "Winnings are automatically sent to the wallet address that purchased the winning ticket. There's no need to manually claim them - they'll appear in your wallet shortly after the raffle ends.",
       icon: <DollarSign size={20} className="text-app-purple mr-2 flex-shrink-0" />
     },
     {
       question: "What is auto-enrollment?",
-      answer: "Auto-enrollment allows you to automatically enter future raffles without having to manually purchase tickets each day. You can set up auto-enrollment with a specific number of tickets and for a chosen duration.",
+      answer: "Auto-enrollment allows you to automatically enter future raffles without having to manually purchase tickets each time. You can set up auto-enrollment with a specific number of tickets and for a chosen number of entries.",
       icon: <Calendar size={20} className="text-app-purple mr-2 flex-shrink-0" />
     },
     {
@@ -31,7 +36,7 @@ const FAQSection = () => {
     },
     {
       question: "Is there a maximum number of tickets I can buy?",
-      answer: "There is no set maximum for ticket purchases. You can buy as many unique tickets as you'd like to increase your chances of winning.",
+      answer: "Yes, you can only purchase as many tickets as are available in the current raffle pool. The maximum target for each raffle is typically 1,000 tickets.",
       icon: <Ticket size={20} className="text-app-purple mr-2 flex-shrink-0" />
     },
     {
@@ -45,8 +50,8 @@ const FAQSection = () => {
       icon: <ShieldCheck size={20} className="text-app-purple mr-2 flex-shrink-0" />
     },
     {
-      question: "What happens if no tickets are sold for a raffle?",
-      answer: "If no tickets are sold for a particular raffle, the raffle is canceled and a new one begins for the next day. Since there's no prize pool (as no tickets were sold), there's no winner to select.",
+      question: "What happens when a raffle reaches its target amount?",
+      answer: "When a raffle reaches its target amount (typically 1,000 tickets sold), it automatically closes and a winner is selected. A new raffle then begins immediately for the next cycle.",
       icon: <HelpCircle size={20} className="text-app-purple mr-2 flex-shrink-0" />
     },
     {
