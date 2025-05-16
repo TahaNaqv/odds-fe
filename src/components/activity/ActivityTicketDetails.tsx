@@ -1,11 +1,8 @@
 
 import { format } from "date-fns";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+import { Ticket, Calendar } from "lucide-react";
 import { UserActivity } from "@/hooks/raffle/raffle-types";
-import { Trophy, Ticket, Clock } from "lucide-react";
-import { formatCurrency } from "@/utils/helpers";
-import TicketList from "../activity/TicketList";
+import TicketModal from "./TicketModal";
 
 interface ActivityTicketDetailsProps {
   activities: UserActivity[];
@@ -13,89 +10,61 @@ interface ActivityTicketDetailsProps {
 }
 
 const ActivityTicketDetails = ({ activities, date }: ActivityTicketDetailsProps) => {
-  // Group by activity type
-  const purchases = activities.filter(activity => activity.type === "purchase");
-  const wins = activities.filter(activity => activity.type === "win");
+  // Filter to just purchase activities
+  const purchaseActivities = activities.filter(activity => activity.type === "purchase");
   
-  // Calculate totals
-  const totalTickets = purchases.reduce((sum, activity) => sum + (activity.ticketCount || 0), 0);
-  const totalSpent = purchases.reduce((sum, activity) => sum + (activity.totalSpent || 0), 0);
-  const totalWon = wins.reduce((sum, activity) => sum + (activity.prize || 0), 0);
+  // Extract all ticket IDs from the purchase activities
+  const ticketIds: number[] = [];
   
+  purchaseActivities.forEach(activity => {
+    // Generate mock ticket IDs for this activity based on the activity ID
+    // In a real app, these would come from the blockchain
+    const activityNumber = parseInt(activity.id.split('-')[1]);
+    const baseTicketId = activityNumber * 1000;
+    
+    for (let i = 0; i < (activity.ticketCount || 0); i++) {
+      ticketIds.push(baseTicketId + i);
+    }
+  });
+  
+  // Get any winning activities for this date
+  const winActivity = activities.find(activity => activity.type === "win");
+  const winningTicket = winActivity ? (parseInt(winActivity.id.split('-')[1]) * 1000) : undefined;
+
   return (
-    <div className="p-4">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="font-semibold text-lg flex items-center gap-2">
-          <Clock className="h-4 w-4 text-muted-foreground" />
-          {format(date, "MMMM d, yyyy")}
-        </h3>
-        <Badge variant="outline" className="font-medium">
-          {totalTickets} Tickets
-        </Badge>
+    <div className="p-4 space-y-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center">
+          <Calendar className="h-4 w-4 mr-2 text-primary" />
+          <h3 className="text-sm font-semibold">{format(date, "MMMM d, yyyy")}</h3>
+        </div>
+        <TicketModal 
+          ticketIds={ticketIds} 
+          winningTicket={winningTicket}
+          purchaseDate={date.toISOString()} // Pass the purchase date to the modal
+        />
       </div>
       
-      {/* Summary */}
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <Ticket className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-            <span className="text-sm font-semibold text-blue-700 dark:text-blue-300">Purchases</span>
+      <div>
+        {purchaseActivities.map((activity, index) => (
+          <div key={index} className="py-2 border-t border-border/30 first:border-t-0">
+            <div className="flex justify-between items-center mb-1">
+              <span className="text-sm font-medium flex items-center">
+                <Ticket className="h-3.5 w-3.5 mr-1.5 text-primary" />
+                {activity.ticketCount} Ticket{activity.ticketCount !== 1 ? 's' : ''} Purchased
+              </span>
+              <span className="text-xs text-muted-foreground">
+                {format(new Date(activity.timestamp), "h:mm a")}
+              </span>
+            </div>
+            {activity.referralCode && (
+              <div className="text-xs text-muted-foreground mt-1">
+                Referral: {activity.referralCode}
+              </div>
+            )}
           </div>
-          <p className="text-lg font-bold">{formatCurrency(totalSpent)}</p>
-          <p className="text-xs text-muted-foreground">{purchases.length} entries</p>
-        </div>
-        
-        <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3">
-          <div className="flex items-center gap-2 mb-1">
-            <Trophy className="h-4 w-4 text-yellow-600 dark:text-yellow-400" />
-            <span className="text-sm font-semibold text-yellow-700 dark:text-yellow-300">Winnings</span>
-          </div>
-          <p className="text-lg font-bold">{formatCurrency(totalWon)}</p>
-          <p className="text-xs text-muted-foreground">{wins.length} wins</p>
-        </div>
+        ))}
       </div>
-      
-      <Separator className="my-4" />
-      
-      {/* Ticket lists */}
-      {wins.length > 0 && (
-        <div className="mb-4">
-          <h4 className="font-medium text-sm text-yellow-700 dark:text-yellow-300 mb-2">Winning Tickets</h4>
-          {wins.map((win) => (
-            <div key={win.id} className="mb-2">
-              <div className="flex justify-between text-sm mb-1">
-                <span className="text-muted-foreground">Raffle #{win.raffleId.split('-')[1]}</span>
-                <span className="text-green-600 dark:text-green-400 font-medium">{formatCurrency(win.prize || 0)}</span>
-              </div>
-              {win.ticketIds && win.winningTicket && (
-                <TicketList 
-                  ticketIds={win.ticketIds} 
-                  winningTicket={win.winningTicket} 
-                />
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-      
-      {purchases.length > 0 && (
-        <div>
-          <h4 className="font-medium text-sm text-blue-700 dark:text-blue-300 mb-2">Purchased Tickets</h4>
-          {purchases.map((purchase) => (
-            <div key={purchase.id} className="mb-2">
-              <div className="flex justify-between text-sm mb-1">
-                <span className="text-muted-foreground">Raffle #{purchase.raffleId.split('-')[1]}</span>
-                <span className="font-medium">{purchase.ticketCount} tickets • {formatCurrency(purchase.totalSpent || 0)}</span>
-              </div>
-              {purchase.ticketIds && (
-                <TicketList 
-                  ticketIds={purchase.ticketIds} 
-                />
-              )}
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 };
