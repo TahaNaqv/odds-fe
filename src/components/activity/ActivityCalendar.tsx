@@ -124,14 +124,14 @@ const ActivityCalendar = () => {
                         <Button 
                           size="sm" 
                           variant={dayData.hasWinningTicket ? "default" : "outline"}
-                          className={`h-5 px-1.5 gap-0.5 text-xs ${
+                          className={`h-5 px-1.5 text-xs ${
                             dayData.hasWinningTicket 
                               ? "bg-yellow-500 hover:bg-yellow-600 text-white" 
                               : "text-primary"
                           }`}
                         >
-                          <Ticket className="h-2.5 w-2.5" />
-                          <span>{dayData.ticketCount}</span>
+                          <Ticket className="h-2.5 w-2.5 mr-1" />
+                          {dayData.ticketCount} {dayData.ticketCount === 1 ? 'Ticket' : 'Tickets'}
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent className="w-80 p-0">
