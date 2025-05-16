@@ -1,3 +1,4 @@
+
 import { useState, useMemo } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,12 +9,13 @@ import useWallet from '@/hooks/useWallet';
 import { isValidReferralCode } from '@/lib/utils';
 import TicketCountSelector from './ticket-purchase/TicketCountSelector';
 import AutoEnrollDatePicker from './ticket-purchase/AutoEnrollDatePicker';
+import { addDays } from 'date-fns';
 
 const TicketPurchase = () => {
   const { isConnected } = useWallet();
   const { purchaseTicket, isLoading } = useRaffle();
   const [ticketCount, setTicketCount] = useState(1);
-  const [date, setDate] = useState<Date | undefined>(undefined);
+  const [autoDays, setAutoDays] = useState<number | null>(null);
   const [referralCode, setReferralCode] = useState<string>('');
   const [referralError, setReferralError] = useState<string | null>(null);
   
@@ -34,32 +36,23 @@ const TicketPurchase = () => {
     return true;
   }, [referralCode]);
   
-  const daysForAutoEnroll = useMemo(() => {
-    if (!date) return 0;
-    
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    const diffTime = date.getTime() - today.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
-    return diffDays;
-  }, [date]);
-  
   const totalTickets = useMemo(() => {
-    if (daysForAutoEnroll <= 0) return ticketCount;
-    return ticketCount * (daysForAutoEnroll + 1);
-  }, [ticketCount, daysForAutoEnroll]);
+    if (!autoDays) return ticketCount;
+    return ticketCount * (autoDays + 1); // +1 for today's ticket
+  }, [ticketCount, autoDays]);
   
   const cost = totalTickets * 1;
   
   const handlePurchase = () => {
     if (!isValidCode) return;
     
+    // Calculate end date based on selected days
+    const autoEnrollEndDate = autoDays ? addDays(new Date(), autoDays) : undefined;
+    
     purchaseTicket({
       ticketCount,
       token: 'USDC',
-      autoEnrollEndDate: date,
+      autoEnrollEndDate,
       referralCode: referralCode.toLowerCase()
     });
   };
@@ -98,8 +91,8 @@ const TicketPurchase = () => {
           </div>
           
           <AutoEnrollDatePicker 
-            date={date}
-            onDateSelect={setDate}
+            days={autoDays}
+            onDaysSelect={setAutoDays}
             isDisabled={!isConnected || isLoading}
           />
           
@@ -112,11 +105,11 @@ const TicketPurchase = () => {
               <span className="text-sm font-medium text-gray-700">Quantity:</span>
               <span className="text-sm font-medium">{ticketCount} tickets</span>
             </div>
-            {date && (
+            {autoDays && (
               <>
                 <div className="flex justify-between mb-2">
                   <span className="text-sm font-medium text-gray-700">Auto-Entry:</span>
-                  <span className="text-sm font-medium">Until {date.toLocaleDateString()} ({daysForAutoEnroll} days)</span>
+                  <span className="text-sm font-medium">For {autoDays} {autoDays === 1 ? 'day' : 'days'}</span>
                 </div>
                 <div className="flex justify-between mb-2">
                   <span className="text-sm font-medium text-gray-700">Total Tickets:</span>

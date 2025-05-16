@@ -1,27 +1,34 @@
 
 import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Calendar as CalendarIcon, HelpCircle } from 'lucide-react';
-import { format } from 'date-fns';
+import { addDays } from 'date-fns';
 
 interface AutoEnrollDatePickerProps {
-  date: Date | undefined;
-  onDateSelect: (date: Date | undefined) => void;
+  days: number | null;
+  onDaysSelect: (days: number | null) => void;
   isDisabled: boolean;
 }
 
-const AutoEnrollDatePicker = ({ date, onDateSelect, isDisabled }: AutoEnrollDatePickerProps) => {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const formattedDate = date ? format(date, 'PPP') : 'Select a date';
+const AutoEnrollDatePicker = ({ days, onDaysSelect, isDisabled }: AutoEnrollDatePickerProps) => {
+  // Create an array of options from 1 to 10 days
+  const dayOptions = Array.from({ length: 10 }, (_, i) => i + 1);
+  
+  // Calculate the end date based on selected days
+  const endDate = days ? addDays(new Date(), days) : null;
 
   return (
     <div className="space-y-2">
       <div className="flex items-center gap-1">
-        <label htmlFor="auto-enroll-date" className="text-sm font-medium">
-          Auto-Entry (Optional)
+        <label htmlFor="auto-enroll-days" className="text-sm font-medium">
+          Auto-Entry
         </label>
         <TooltipProvider>
           <Tooltip>
@@ -34,36 +41,29 @@ const AutoEnrollDatePicker = ({ date, onDateSelect, isDisabled }: AutoEnrollDate
           </Tooltip>
         </TooltipProvider>
       </div>
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            className="w-full justify-start text-left font-normal"
-            disabled={isDisabled}
-          >
-            <CalendarIcon className="mr-2 h-4 w-4" />
-            {formattedDate}
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent 
-          className="w-auto p-0 pointer-events-auto" 
-          align="start"
-          side="bottom"
-          sideOffset={5}
+      <Select
+        value={days?.toString() || ""}
+        onValueChange={(value) => onDaysSelect(value ? parseInt(value) : null)}
+        disabled={isDisabled}
+      >
+        <SelectTrigger
+          id="auto-enroll-days"
+          className="w-full"
         >
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={onDateSelect}
-            disabled={(date) => date < today}
-            initialFocus
-            className="pointer-events-auto"
-          />
-        </PopoverContent>
-      </Popover>
-      {date && (
+          <SelectValue placeholder="Select number of days" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="">No auto-entry</SelectItem>
+          {dayOptions.map((day) => (
+            <SelectItem key={day} value={day.toString()}>
+              {day} {day === 1 ? 'day' : 'days'}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      {days && (
         <p className="text-xs text-raffle-blue">
-          You will be automatically entered in daily raffles until {format(date, 'PPP')}.
+          You will be automatically entered in daily raffles for {days} {days === 1 ? 'day' : 'days'} (until {endDate?.toLocaleDateString()}).
         </p>
       )}
     </div>
