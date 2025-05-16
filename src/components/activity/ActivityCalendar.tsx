@@ -88,9 +88,6 @@ const ActivityCalendar = () => {
   // Days of the week header
   const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   
-  // Check if we're viewing May 2025 (to show our sample data)
-  const isViewingMay2025 = currentMonth.getMonth() === 4 && currentMonth.getFullYear() === 2025;
-  
   return (
     <Card className="p-4 shadow-subtle">
       <div className="flex items-center justify-between mb-4">
@@ -107,12 +104,6 @@ const ActivityCalendar = () => {
           </Button>
         </div>
       </div>
-      
-      {isViewingMay2025 && (
-        <div className="bg-blue-50 dark:bg-blue-900/10 p-3 mb-4 rounded-md text-sm">
-          Sample future entries for May 17-18, 2025 have been added to demonstrate future ticket handling.
-        </div>
-      )}
       
       {/* Calendar grid */}
       <div className="grid grid-cols-7 gap-1.5">
