@@ -41,13 +41,8 @@ const TicketPurchase = () => {
   
   // Calculate the total number of tickets including auto-enrollment for future days
   const totalTickets = useMemo(() => {
-    // Immediate tickets
-    const immediateCount = ticketCount;
-    
-    // Auto-enrollment tickets (ticketCount per day for selected number of days)
-    const autoCount = autoDays ? (autoDays * ticketCount) : 0;
-    
-    return immediateCount + autoCount;
+    // For auto-enrollment, we multiply the ticket count by the number of days
+    return autoDays ? (autoDays * ticketCount) : ticketCount;
   }, [ticketCount, autoDays]);
   
   // Calculate the total cost 
@@ -139,7 +134,7 @@ const TicketPurchase = () => {
           ) : (
             <>
               <Ticket className="mr-2 h-4 w-4" />
-              Purchase {ticketCount} Ticket{ticketCount !== 1 ? 's' : ''}
+              Purchase {totalTickets} Ticket{totalTickets !== 1 ? 's' : ''}
             </>
           )}
         </Button>
