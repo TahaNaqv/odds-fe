@@ -25,14 +25,9 @@ const FAQSection = () => {
       icon: <DollarSign size={20} className="text-app-purple mr-2 flex-shrink-0" />
     },
     {
-      question: "What is auto-enrollment?",
-      answer: "Auto-enrollment allows you to automatically enter future raffles without having to manually purchase tickets each time. You can set up auto-enrollment with a specific number of tickets and for a chosen number of entries.",
+      question: "What is auto-entry?",
+      answer: "Auto-entry allows you to automatically enter future raffles without having to manually purchase tickets each time. You can set up auto-entry with a specific number of tickets and for a chosen number of entries.",
       icon: <Calendar size={20} className="text-app-purple mr-2 flex-shrink-0" />
-    },
-    {
-      question: "Can I cancel my auto-enrollment?",
-      answer: "Yes, you can cancel your auto-enrollment at any time from the My Activity section. Any unused balance will be refunded to your wallet.",
-      icon: <Clock size={20} className="text-app-purple mr-2 flex-shrink-0" />
     },
     {
       question: "Is there a maximum number of tickets I can buy?",
