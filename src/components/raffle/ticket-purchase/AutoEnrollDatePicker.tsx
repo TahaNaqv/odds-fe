@@ -42,8 +42,8 @@ const AutoEnrollDatePicker = ({ days, onDaysSelect, isDisabled }: AutoEnrollDate
         </TooltipProvider>
       </div>
       <Select
-        value={days?.toString() || ""}
-        onValueChange={(value) => onDaysSelect(value ? parseInt(value) : null)}
+        value={days?.toString() || "0"}
+        onValueChange={(value) => onDaysSelect(value === "0" ? null : parseInt(value))}
         disabled={isDisabled}
       >
         <SelectTrigger
@@ -53,7 +53,7 @@ const AutoEnrollDatePicker = ({ days, onDaysSelect, isDisabled }: AutoEnrollDate
           <SelectValue placeholder="Select number of days" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="">No auto-entry</SelectItem>
+          <SelectItem value="0">No auto-entry</SelectItem>
           {dayOptions.map((day) => (
             <SelectItem key={day} value={day.toString()}>
               {day} {day === 1 ? 'day' : 'days'}
