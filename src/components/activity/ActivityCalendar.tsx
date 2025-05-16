@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, isToday } from "date-fns";
+import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, isToday, parseISO } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -21,6 +21,35 @@ const ActivityCalendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [calendarDays, setCalendarDays] = useState<DailyActivity[]>([]);
   
+  // Create sample future activities for May 17th and 18th, 2025
+  const sampleFutureActivities = [
+    {
+      id: "future-activity-1",
+      type: "purchase" as const,
+      raffleId: "raffle-2025",
+      timestamp: "2025-05-17T12:00:00Z",
+      ticketCount: 8,
+      totalSpent: 8,
+      token: "USDC" as const,
+      isAutoEnrolled: true,
+      autoEnrollId: "auto-enroll-future"
+    },
+    {
+      id: "future-activity-2",
+      type: "purchase" as const,
+      raffleId: "raffle-2026",
+      timestamp: "2025-05-18T12:00:00Z",
+      ticketCount: 12,
+      totalSpent: 12,
+      token: "USDT" as const,
+      isAutoEnrolled: true,
+      autoEnrollId: "auto-enroll-future"
+    }
+  ];
+  
+  // Add sample activities to userActivity for display
+  const allActivities = [...userActivity, ...sampleFutureActivities];
+  
   // Group activities by day
   useEffect(() => {
     const startDate = startOfMonth(currentMonth);
@@ -28,7 +57,7 @@ const ActivityCalendar = () => {
     const days = eachDayOfInterval({ start: startDate, end: endDate });
     
     const daysWithActivity = days.map(day => {
-      const dayActivities = userActivity.filter(activity => {
+      const dayActivities = allActivities.filter(activity => {
         const activityDate = new Date(activity.timestamp);
         return isSameDay(activityDate, day);
       });
@@ -51,13 +80,16 @@ const ActivityCalendar = () => {
     });
     
     setCalendarDays(daysWithActivity);
-  }, [userActivity, currentMonth]);
+  }, [allActivities, currentMonth]);
   
   const nextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
   const prevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
   
   // Days of the week header
   const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  
+  // Check if we're viewing May 2025 (to show our sample data)
+  const isViewingMay2025 = currentMonth.getMonth() === 4 && currentMonth.getFullYear() === 2025;
   
   return (
     <Card className="p-4 shadow-subtle">
@@ -75,6 +107,12 @@ const ActivityCalendar = () => {
           </Button>
         </div>
       </div>
+      
+      {isViewingMay2025 && (
+        <div className="bg-blue-50 dark:bg-blue-900/10 p-3 mb-4 rounded-md text-sm">
+          Sample future entries for May 17-18, 2025 have been added to demonstrate future ticket handling.
+        </div>
+      )}
       
       {/* Calendar grid */}
       <div className="grid grid-cols-7 gap-1.5">

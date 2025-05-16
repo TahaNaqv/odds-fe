@@ -1,17 +1,23 @@
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { PartyPopper, Ticket } from 'lucide-react';
+import { PartyPopper, Ticket, Clock } from 'lucide-react';
 import TicketList from './TicketList';
+import { format, isFuture } from 'date-fns';
 
 interface TicketModalProps {
-  ticketIds: number[];
+  ticketIds?: number[];
   winningTicket?: number;
+  timestamp?: string;
 }
 
-const TicketModal = ({ ticketIds, winningTicket }: TicketModalProps) => {
+const TicketModal = ({ ticketIds = [], winningTicket, timestamp }: TicketModalProps) => {
   const hasWinningTicket = ticketIds.includes(winningTicket || -1);
   const ticketCount = ticketIds.length;
+  
+  // Check if the tickets are for a future date
+  const ticketDate = timestamp ? new Date(timestamp) : null;
+  const isFutureEntry = ticketDate && isFuture(ticketDate);
 
   return (
     <Dialog>
@@ -38,10 +44,23 @@ const TicketModal = ({ ticketIds, winningTicket }: TicketModalProps) => {
           <DialogDescription className="text-medium-contrast">
             {hasWinningTicket 
               ? 'Congratulations! You have a winning ticket.' 
-              : 'Here are your ticket numbers for this raffle.'}
+              : isFutureEntry
+                ? `Auto-enrolled tickets for ${ticketDate ? format(ticketDate, 'MMMM d, yyyy') : 'future date'}`
+                : 'Here are your ticket numbers for this raffle.'}
           </DialogDescription>
         </DialogHeader>
-        <TicketList ticketIds={ticketIds} winningTicket={winningTicket} />
+        
+        {isFutureEntry ? (
+          <div className="p-8 text-center text-medium-contrast">
+            <Clock className="h-16 w-16 mx-auto mb-4 text-blue-400" />
+            <h3 className="text-lg font-medium mb-2">Future Entry</h3>
+            <p>
+              Your tickets will be generated when the raffle opens on {ticketDate ? format(ticketDate, 'MMMM d, yyyy') : 'the scheduled date'}.
+            </p>
+          </div>
+        ) : (
+          <TicketList ticketIds={ticketIds} winningTicket={winningTicket} />
+        )}
       </DialogContent>
     </Dialog>
   );

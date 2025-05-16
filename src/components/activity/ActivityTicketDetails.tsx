@@ -6,6 +6,7 @@ import { UserActivity } from "@/hooks/raffle/raffle-types";
 import { Trophy, Ticket, Clock } from "lucide-react";
 import { formatCurrency } from "@/utils/helpers";
 import TicketList from "../activity/TicketList";
+import TicketModal from "./TicketModal";
 
 interface ActivityTicketDetailsProps {
   activities: UserActivity[];
@@ -68,9 +69,10 @@ const ActivityTicketDetails = ({ activities, date }: ActivityTicketDetailsProps)
                 <span className="text-green-600 dark:text-green-400 font-medium">{formatCurrency(win.prize || 0)}</span>
               </div>
               {win.ticketIds && win.winningTicket && (
-                <TicketList 
-                  ticketIds={win.ticketIds} 
-                  winningTicket={win.winningTicket} 
+                <TicketModal
+                  ticketIds={win.ticketIds}
+                  winningTicket={win.winningTicket}
+                  timestamp={win.timestamp}
                 />
               )}
             </div>
@@ -88,8 +90,9 @@ const ActivityTicketDetails = ({ activities, date }: ActivityTicketDetailsProps)
                 <span className="font-medium">{purchase.ticketCount} tickets • {formatCurrency(purchase.totalSpent || 0)}</span>
               </div>
               {purchase.ticketIds && (
-                <TicketList 
-                  ticketIds={purchase.ticketIds} 
+                <TicketModal
+                  ticketIds={purchase.ticketIds}
+                  timestamp={purchase.timestamp}
                 />
               )}
             </div>
