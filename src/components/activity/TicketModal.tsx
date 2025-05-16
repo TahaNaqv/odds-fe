@@ -8,7 +8,7 @@ import { format, isFuture } from 'date-fns';
 interface TicketModalProps {
   ticketIds: number[];
   winningTicket?: number;
-  purchaseDate?: string; // Add date when tickets were purchased
+  purchaseDate?: string; // Date when tickets were purchased
 }
 
 const TicketModal = ({ ticketIds, winningTicket, purchaseDate }: TicketModalProps) => {
