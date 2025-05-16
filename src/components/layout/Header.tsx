@@ -54,7 +54,7 @@ const Header = () => {
                 size="sm"
                 className={`rounded-lg ${isActive('/') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
               >
-                <Ticket className="mr-2 h-4 w-4" /> Current Raffle
+                <Ticket className="mr-2 h-4 w-4" /> Raffle
               </Button>
             </Link>
             
