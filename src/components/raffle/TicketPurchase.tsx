@@ -1,3 +1,4 @@
+
 import { useState, useMemo, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -35,13 +36,19 @@ const TicketPurchase = () => {
     return true;
   }, [referralCode]);
   
-  // Calculate the total number of tickets based on ticketCount and autoDays
-  const totalTickets = useMemo(() => {
-    // Just return the selected ticket count - auto enrollment will happen separately
-    return ticketCount;
-  }, [ticketCount]);
+  // Calculate the immediate ticket purchase (for now)
+  const immediateTickets = ticketCount;
   
-  const cost = totalTickets * 1;
+  // Calculate the total cost including auto-enrollment for future days
+  const totalCost = useMemo(() => {
+    // Immediate tickets cost
+    const immediateCost = ticketCount * 1;
+    
+    // Auto-enrollment cost (1 ticket per day for selected number of days)
+    const autoCost = autoDays ? (autoDays * ticketCount * 1) : 0;
+    
+    return immediateCost + autoCost;
+  }, [ticketCount, autoDays]);
   
   const handlePurchase = () => {
     if (!isValidCode) return;
@@ -113,7 +120,7 @@ const TicketPurchase = () => {
             )}
             <div className="flex justify-between pt-2 border-t border-raffle-light-gray">
               <span className="text-sm font-bold text-gray-700">Total:</span>
-              <span className="text-sm font-bold">${cost.toFixed(2)}</span>
+              <span className="text-sm font-bold">${totalCost.toFixed(2)}</span>
             </div>
           </div>
         </div>
