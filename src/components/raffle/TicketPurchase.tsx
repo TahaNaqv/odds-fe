@@ -36,19 +36,22 @@ const TicketPurchase = () => {
     return true;
   }, [referralCode]);
   
-  // Calculate the immediate ticket purchase (for now)
+  // Calculate the immediate ticket purchase count
   const immediateTickets = ticketCount;
   
-  // Calculate the total cost including auto-enrollment for future days
-  const totalCost = useMemo(() => {
-    // Immediate tickets cost
-    const immediateCost = ticketCount * 1;
+  // Calculate the total number of tickets including auto-enrollment for future days
+  const totalTickets = useMemo(() => {
+    // Immediate tickets
+    const immediateCount = ticketCount;
     
-    // Auto-enrollment cost (1 ticket per day for selected number of days)
-    const autoCost = autoDays ? (autoDays * ticketCount * 1) : 0;
+    // Auto-enrollment tickets (ticketCount per day for selected number of days)
+    const autoCount = autoDays ? (autoDays * ticketCount) : 0;
     
-    return immediateCost + autoCost;
+    return immediateCount + autoCount;
   }, [ticketCount, autoDays]);
+  
+  // Calculate the total cost 
+  const totalCost = totalTickets * 1; // $1 per ticket
   
   const handlePurchase = () => {
     if (!isValidCode) return;
@@ -112,7 +115,7 @@ const TicketPurchase = () => {
               <span className="text-sm font-medium text-gray-700">Quantity:</span>
               <span className="text-sm font-medium">{ticketCount} tickets</span>
             </div>
-            {autoDays && (
+            {autoDays && autoDays > 0 && (
               <div className="flex justify-between mb-2">
                 <span className="text-sm font-medium text-gray-700">Auto-Entry:</span>
                 <span className="text-sm font-medium">For {autoDays} {autoDays === 1 ? 'day' : 'days'}</span>
@@ -120,7 +123,7 @@ const TicketPurchase = () => {
             )}
             <div className="flex justify-between pt-2 border-t border-raffle-light-gray">
               <span className="text-sm font-bold text-gray-700">Total:</span>
-              <span className="text-sm font-bold">${totalCost.toFixed(2)}</span>
+              <span className="text-sm font-bold">{totalTickets} tickets (${totalCost.toFixed(2)})</span>
             </div>
           </div>
         </div>
