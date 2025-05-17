@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider, useTheme } from "@/components/ThemeProvider";
 import { ThemePreviewBanner } from "@/components/ThemePreviewBanner";
-import Index from "./pages/Index";
+import Home from "./pages/Home";
 import PastActivity from "./pages/PastActivity";
 import RaffleHistory from "./pages/RaffleHistory";
 import NotFound from "./pages/NotFound";
@@ -20,14 +19,18 @@ import { useEffect } from "react";
 const PrivacyPage = () => (
   <div className="container mx-auto py-10">
     <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
-    <p className="text-muted-foreground">This page contains our privacy policy.</p>
+    <p className="text-muted-foreground">
+      This page contains our privacy policy.
+    </p>
   </div>
 );
 
 const LegalityPage = () => (
   <div className="container mx-auto py-10">
     <h1 className="text-3xl font-bold mb-6">Legality</h1>
-    <p className="text-muted-foreground">This page contains information about the legality of our service.</p>
+    <p className="text-muted-foreground">
+      This page contains information about the legality of our service.
+    </p>
   </div>
 );
 
@@ -35,46 +38,56 @@ const LegalityPage = () => (
 const ThemeManager = () => {
   const { setTheme } = useTheme();
   const location = useLocation();
-  
+
   useEffect(() => {
     // If we're on the neon-nights preview route, set theme to neon
-    if (location.pathname === '/theme/neon-nights') {
-      setTheme('neon');
+    if (location.pathname === "/theme/neon-nights") {
+      setTheme("neon");
       return;
     }
-    
+
     // If we're on the digital-gold preview route, set theme to gold
-    if (location.pathname === '/theme/digital-gold') {
-      setTheme('gold');
+    if (location.pathname === "/theme/digital-gold") {
+      setTheme("gold");
       return;
     }
-    
+
     // If we're on the vibrant-gradient preview route, set theme to vibrant
-    if (location.pathname === '/theme/vibrant-gradient') {
-      setTheme('vibrant');
+    if (location.pathname === "/theme/vibrant-gradient") {
+      setTheme("vibrant");
       return;
     }
-    
+
     // If we're on the cyberpunk-glow preview route, set theme to cyber
-    if (location.pathname === '/theme/cyberpunk-glow') {
-      setTheme('cyber');
+    if (location.pathname === "/theme/cyberpunk-glow") {
+      setTheme("cyber");
       return;
     }
-    
+
     // If we're on the trusty-blues preview route, set theme to trusty
-    if (location.pathname === '/theme/trusty-blues') {
-      setTheme('trusty');
+    if (location.pathname === "/theme/trusty-blues") {
+      setTheme("trusty");
       return;
     }
   }, [location.pathname, setTheme]);
 
   return (
     <>
-      {location.pathname === '/theme/neon-nights' && <ThemePreviewBanner themeName="neon" />}
-      {location.pathname === '/theme/digital-gold' && <ThemePreviewBanner themeName="gold" />}
-      {location.pathname === '/theme/vibrant-gradient' && <ThemePreviewBanner themeName="vibrant" />}
-      {location.pathname === '/theme/cyberpunk-glow' && <ThemePreviewBanner themeName="cyber" />}
-      {location.pathname === '/theme/trusty-blues' && <ThemePreviewBanner themeName="trusty" />}
+      {location.pathname === "/theme/neon-nights" && (
+        <ThemePreviewBanner themeName="neon" />
+      )}
+      {location.pathname === "/theme/digital-gold" && (
+        <ThemePreviewBanner themeName="gold" />
+      )}
+      {location.pathname === "/theme/vibrant-gradient" && (
+        <ThemePreviewBanner themeName="vibrant" />
+      )}
+      {location.pathname === "/theme/cyberpunk-glow" && (
+        <ThemePreviewBanner themeName="cyber" />
+      )}
+      {location.pathname === "/theme/trusty-blues" && (
+        <ThemePreviewBanner themeName="trusty" />
+      )}
     </>
   );
 };
@@ -90,20 +103,26 @@ function App() {
           <Sonner />
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Index />} />
+              <Route path="/" element={<Home />} />
               <Route path="/history" element={<RaffleHistory />} />
               <Route path="/activity" element={<PastActivity />} />
-              <Route path="/activity-preview" element={<ActivityPreviewPage />} />
-              <Route path="/activity-calendar" element={<ActivityCalendarPage />} />
+              <Route
+                path="/activity-preview"
+                element={<ActivityPreviewPage />}
+              />
+              <Route
+                path="/activity-calendar"
+                element={<ActivityCalendarPage />}
+              />
               <Route path="/terms" element={<TermsPage />} />
               <Route path="/privacy" element={<PrivacyPage />} />
               <Route path="/legality" element={<LegalityPage />} />
               <Route path="/referrals" element={<ReferralLeaderboardPage />} />
-              <Route path="/theme/neon-nights" element={<Index />} />
-              <Route path="/theme/digital-gold" element={<Index />} />
-              <Route path="/theme/vibrant-gradient" element={<Index />} />
-              <Route path="/theme/cyberpunk-glow" element={<Index />} />
-              <Route path="/theme/trusty-blues" element={<Index />} />
+              <Route path="/theme/neon-nights" element={<Home />} />
+              <Route path="/theme/digital-gold" element={<Home />} />
+              <Route path="/theme/vibrant-gradient" element={<Home />} />
+              <Route path="/theme/cyberpunk-glow" element={<Home />} />
+              <Route path="/theme/trusty-blues" element={<Home />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <ThemeManager />
