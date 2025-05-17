@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider, useTheme } from "@/components/ThemeProvider";
 import { ThemePreviewBanner } from "@/components/ThemePreviewBanner";
+import { AuthProvider } from "@/contexts/AuthContext";
 import Home from "./pages/Home";
 import PastActivity from "./pages/PastActivity";
 import RaffleHistory from "./pages/RaffleHistory";
@@ -137,39 +138,41 @@ function App() {
     <ThemeProvider>
       <WagmiProvider config={wagmiAdapter.wagmiConfig}>
         <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/history" element={<RaffleHistory />} />
-                <Route path="/activity" element={<PastActivity />} />
-                <Route
-                  path="/activity-preview"
-                  element={<ActivityPreviewPage />}
-                />
-                <Route
-                  path="/activity-calendar"
-                  element={<ActivityCalendarPage />}
-                />
-                <Route path="/terms" element={<TermsPage />} />
-                <Route path="/privacy" element={<PrivacyPage />} />
-                <Route path="/legality" element={<LegalityPage />} />
-                <Route
-                  path="/referrals"
-                  element={<ReferralLeaderboardPage />}
-                />
-                <Route path="/theme/neon-nights" element={<Home />} />
-                <Route path="/theme/digital-gold" element={<Home />} />
-                <Route path="/theme/vibrant-gradient" element={<Home />} />
-                <Route path="/theme/cyberpunk-glow" element={<Home />} />
-                <Route path="/theme/trusty-blues" element={<Home />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-              <ThemeManager />
-            </BrowserRouter>
-          </TooltipProvider>
+          <AuthProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/history" element={<RaffleHistory />} />
+                  <Route path="/activity" element={<PastActivity />} />
+                  <Route
+                    path="/activity-preview"
+                    element={<ActivityPreviewPage />}
+                  />
+                  <Route
+                    path="/activity-calendar"
+                    element={<ActivityCalendarPage />}
+                  />
+                  <Route path="/terms" element={<TermsPage />} />
+                  <Route path="/privacy" element={<PrivacyPage />} />
+                  <Route path="/legality" element={<LegalityPage />} />
+                  <Route
+                    path="/referrals"
+                    element={<ReferralLeaderboardPage />}
+                  />
+                  <Route path="/theme/neon-nights" element={<Home />} />
+                  <Route path="/theme/digital-gold" element={<Home />} />
+                  <Route path="/theme/vibrant-gradient" element={<Home />} />
+                  <Route path="/theme/cyberpunk-glow" element={<Home />} />
+                  <Route path="/theme/trusty-blues" element={<Home />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+                <ThemeManager />
+              </BrowserRouter>
+            </TooltipProvider>
+          </AuthProvider>
         </QueryClientProvider>
       </WagmiProvider>
     </ThemeProvider>

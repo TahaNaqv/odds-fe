@@ -1,4 +1,3 @@
-
 # Raffle System Documentation
 
 ## Table of Contents
@@ -278,3 +277,40 @@ The raffle system consists of two main components:
    - The current RandomnessProvider is a simplified implementation for development
    - In production, use Chainlink VRF or a similar secure oracle
    - Ensure the randomness source cannot be manipulated by validators or miners
+
+# Odds Frontend
+
+## Environment Setup
+
+The application uses environment variables for configuration. To set up your environment:
+
+1. Create a `.env` file in the root directory
+2. Add the following variables:
+
+```bash
+# API Configuration
+VITE_API_URL=http://localhost:3000  # Your backend API URL
+```
+
+### Available Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| VITE_API_URL | Backend API URL | http://localhost:3000 |
+
+### Development vs Production
+
+- In development, the API URL defaults to `http://localhost:3000`
+- In production, make sure to set the `VITE_API_URL` to your production API URL
+
+## Getting Started
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Start the development server:
+```bash
+npm run dev
+```

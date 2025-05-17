@@ -1,9 +1,8 @@
-
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 // Validate a referral code format (8 alphanumeric characters)
@@ -12,4 +11,3 @@ export function isValidReferralCode(code: string): boolean {
   // Expected pattern: 8 alphanumeric characters, lowercase
   return /^[a-f0-9]{8}$/.test(code);
 }
-
