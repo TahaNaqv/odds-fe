@@ -1,3 +1,7 @@
+import { createAppKit } from "@reown/appkit/react";
+import { WagmiProvider } from "wagmi";
+import { base, baseSepolia } from "@reown/appkit/networks";
+import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -94,41 +98,80 @@ const ThemeManager = () => {
 
 const queryClient = new QueryClient();
 
+// 1. Get projectId from https://cloud.reown.com
+const projectId = "9d02f439d5aae2419d7a7583a53fa6cd";
+
+// 2. Create a metadata object - optional
+const metadata = {
+  name: "Odds",
+  description: "Odds Dapp Lottery System",
+  url: "https://odds.fun", // origin must match your domain & subdomain
+  icons: [
+    "https://preview--raffle-river.lovable.app/lovable-uploads/c955157a-772b-4ee5-b0e0-e45ef31ea9e0.png",
+  ],
+};
+
+// 3. Set the networks
+const networks = [base, baseSepolia] as [typeof base, typeof baseSepolia];
+
+// 4. Create Wagmi Adapter
+const wagmiAdapter = new WagmiAdapter({
+  networks,
+  projectId,
+  ssr: true,
+});
+
+// 5. Create modal
+createAppKit({
+  adapters: [wagmiAdapter],
+  networks,
+  projectId,
+  metadata,
+  features: {
+    analytics: true, // Optional - defaults to your Cloud configuration
+  },
+});
+
 function App() {
   return (
     <ThemeProvider>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/history" element={<RaffleHistory />} />
-              <Route path="/activity" element={<PastActivity />} />
-              <Route
-                path="/activity-preview"
-                element={<ActivityPreviewPage />}
-              />
-              <Route
-                path="/activity-calendar"
-                element={<ActivityCalendarPage />}
-              />
-              <Route path="/terms" element={<TermsPage />} />
-              <Route path="/privacy" element={<PrivacyPage />} />
-              <Route path="/legality" element={<LegalityPage />} />
-              <Route path="/referrals" element={<ReferralLeaderboardPage />} />
-              <Route path="/theme/neon-nights" element={<Home />} />
-              <Route path="/theme/digital-gold" element={<Home />} />
-              <Route path="/theme/vibrant-gradient" element={<Home />} />
-              <Route path="/theme/cyberpunk-glow" element={<Home />} />
-              <Route path="/theme/trusty-blues" element={<Home />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-            <ThemeManager />
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
+      <WagmiProvider config={wagmiAdapter.wagmiConfig}>
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/history" element={<RaffleHistory />} />
+                <Route path="/activity" element={<PastActivity />} />
+                <Route
+                  path="/activity-preview"
+                  element={<ActivityPreviewPage />}
+                />
+                <Route
+                  path="/activity-calendar"
+                  element={<ActivityCalendarPage />}
+                />
+                <Route path="/terms" element={<TermsPage />} />
+                <Route path="/privacy" element={<PrivacyPage />} />
+                <Route path="/legality" element={<LegalityPage />} />
+                <Route
+                  path="/referrals"
+                  element={<ReferralLeaderboardPage />}
+                />
+                <Route path="/theme/neon-nights" element={<Home />} />
+                <Route path="/theme/digital-gold" element={<Home />} />
+                <Route path="/theme/vibrant-gradient" element={<Home />} />
+                <Route path="/theme/cyberpunk-glow" element={<Home />} />
+                <Route path="/theme/trusty-blues" element={<Home />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <ThemeManager />
+            </BrowserRouter>
+          </TooltipProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
     </ThemeProvider>
   );
 }
