@@ -1,25 +1,24 @@
-
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
-import ConnectWalletCard from '@/components/activity/ConnectWalletCard';
-import ActivityTabs from '@/components/activity/ActivityTabs';
-import useRaffle from '@/hooks/useRaffle';
-import useWallet from '@/hooks/useWallet';
-import { Button } from '@/components/ui/button';
-import { Eye, Calendar } from 'lucide-react';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import ConnectWalletCard from "@/components/activity/ConnectWalletCard";
+import ActivityTabs from "@/components/activity/ActivityTabs";
+import useRaffle from "@/hooks/useRaffle";
+import { Button } from "@/components/ui/button";
+import { Eye, Calendar } from "lucide-react";
+import { useAppKitAccount } from "@reown/appkit/react";
 
 const PastActivity = () => {
   const navigate = useNavigate();
-  const { isConnected, connectWallet } = useWallet();
+  const { isConnected } = useAppKitAccount();
   const { userActivity, refreshUserActivity, isLoading } = useRaffle();
-  
+
   // Handle refresh
   const handleRefresh = () => {
     refreshUserActivity();
   };
-  
+
   useEffect(() => {
     // Refresh user activity when component mounts
     if (isConnected) {
@@ -30,7 +29,7 @@ const PastActivity = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      
+
       <main className="flex-grow px-4 py-10">
         <div className="container mx-auto max-w-4xl animate-fade-in">
           <div className="flex flex-wrap gap-4 justify-between items-center mb-8">
@@ -42,7 +41,7 @@ const PastActivity = () => {
             </div>
             <div className="flex gap-3">
               <Button
-                onClick={() => navigate('/activity-calendar')}
+                onClick={() => navigate("/activity-calendar")}
                 variant="outline"
                 className="gap-2"
               >
@@ -50,7 +49,7 @@ const PastActivity = () => {
                 Calendar View
               </Button>
               <Button
-                onClick={() => navigate('/activity-preview')}
+                onClick={() => navigate("/activity-preview")}
                 variant="outline"
                 className="gap-2"
               >
@@ -59,11 +58,11 @@ const PastActivity = () => {
               </Button>
             </div>
           </div>
-          
+
           {!isConnected ? (
-            <ConnectWalletCard onConnect={connectWallet} />
+            <ConnectWalletCard />
           ) : (
-            <ActivityTabs 
+            <ActivityTabs
               userActivity={userActivity}
               isLoading={isLoading}
               onRefresh={handleRefresh}
@@ -71,7 +70,7 @@ const PastActivity = () => {
           )}
         </div>
       </main>
-      
+
       <Footer />
     </div>
   );

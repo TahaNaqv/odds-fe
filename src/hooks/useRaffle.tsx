@@ -1,15 +1,16 @@
-
-import { useState, useEffect } from 'react';
-import useWallet from './useWallet';
-import { useRaffleData } from './raffle/use-raffle-data';
-import { useTicketPurchase } from './raffle/use-ticket-purchase';
-import { useAutoEnroll } from './raffle/use-auto-enroll';
-import { PurchaseTicketParams } from './raffle/raffle-types';
+import { useState, useEffect } from "react";
+import { useRaffleData } from "./raffle/use-raffle-data";
+import { useTicketPurchase } from "./raffle/use-ticket-purchase";
+import { useAutoEnroll } from "./raffle/use-auto-enroll";
+import { useAppKitAccount, useAppKitNetwork } from "@reown/appkit/react";
+import { NETWORK } from "@/utils/constants";
 
 const useRaffle = () => {
-  const { address, isConnected, isCorrectNetwork } = useWallet();
+  const { address, isConnected } = useAppKitAccount();
+  const { chainId } = useAppKitNetwork();
+  const isCorrectNetwork = chainId === NETWORK.chainId;
   const [isLoading, setIsLoading] = useState(false);
-  
+
   // Compose smaller hooks
   const {
     currentRaffle,
@@ -19,9 +20,9 @@ const useRaffle = () => {
     setUserActivity,
     fetchCurrentRaffle,
     fetchPastRaffles,
-    fetchUserActivity
+    fetchUserActivity,
   } = useRaffleData(address);
-  
+
   const { purchaseTicket } = useTicketPurchase(
     isConnected,
     isCorrectNetwork,
@@ -42,7 +43,7 @@ const useRaffle = () => {
   useEffect(() => {
     fetchCurrentRaffle();
     fetchPastRaffles();
-    
+
     if (isConnected) {
       fetchUserActivity();
     }
@@ -56,7 +57,7 @@ const useRaffle = () => {
         fetchCurrentRaffle();
         fetchPastRaffles();
       }, 3000);
-      
+
       return () => clearTimeout(timer);
     }
   }, [currentRaffle?.endTime, fetchCurrentRaffle, fetchPastRaffles]);
