@@ -8,7 +8,6 @@ import {
 } from '@/components/ui/select';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { HelpCircle } from 'lucide-react';
-import { addDays } from 'date-fns';
 import { useEffect } from 'react';
 
 interface AutoEnrollDatePickerProps {
@@ -20,9 +19,6 @@ interface AutoEnrollDatePickerProps {
 const AutoEnrollDatePicker = ({ days, onDaysSelect, isDisabled }: AutoEnrollDatePickerProps) => {
   // Create an array of options from 1 to 10 days
   const dayOptions = Array.from({ length: 10 }, (_, i) => i + 1);
-  
-  // Calculate the end date based on selected days
-  const endDate = days ? addDays(new Date(), days) : null;
 
   // Set default to 1 day if no selection
   useEffect(() => {
@@ -68,7 +64,7 @@ const AutoEnrollDatePicker = ({ days, onDaysSelect, isDisabled }: AutoEnrollDate
       </Select>
       {days && (
         <p className="text-xs text-raffle-blue">
-          You will be automatically entered in daily raffles for {days} {days === 1 ? 'entry' : 'entries'} (until {endDate?.toLocaleDateString()}).
+          You will be automatically entered in daily raffles for {days} {days === 1 ? 'entry' : 'entries'}.
         </p>
       )}
     </div>
