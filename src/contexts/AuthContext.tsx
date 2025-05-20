@@ -3,6 +3,7 @@ import { useAuth } from "@/hooks/useAuth";
 
 interface AuthContextType {
   isConnected: boolean;
+  isAuthenticated: boolean;
   address: string | undefined;
   authenticate: () => Promise<any>;
   logout: () => void;

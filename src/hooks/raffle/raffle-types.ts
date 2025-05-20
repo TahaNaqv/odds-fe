@@ -1,4 +1,3 @@
-
 import { TOKENS } from "@/utils/constants";
 
 export interface RaffleData {
@@ -16,16 +15,19 @@ export interface RaffleData {
 
 export interface UserActivity {
   id: string;
-  type: 'purchase' | 'win';
+  type: "purchase" | "win";
   raffleId: string;
   timestamp: string;
   ticketCount?: number;
   totalSpent?: number;
-  token?: 'USDC' | 'USDT';
+  token?: "USDC" | "USDT";
   prize?: number;
   winningTicket?: number;
   ticketIds?: number[];
   referralCode?: string; // Added referralCode property
+  isAutoEnrolled?: boolean;
+  autoEnrollId?: string;
+  status?: "PENDING" | "COMPLETED" | "FAILED";
 }
 
 export interface AutoEnrollSettings {
@@ -36,8 +38,8 @@ export interface AutoEnrollSettings {
 export interface PurchaseTicketParams {
   ticketCount: number;
   token: keyof typeof TOKENS;
-  autoEnrollEndDate?: Date;
-  referralCode: string; // Added referralCode property
+  autoEntry: number;
+  referralCode: string;
 }
 
 export interface SetAutoEnrollParams {

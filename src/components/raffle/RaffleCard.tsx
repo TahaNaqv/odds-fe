@@ -1,16 +1,24 @@
-import { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Badge } from '@/components/ui/badge';
-import { Ticket, Trophy, DollarSign } from 'lucide-react';
-import { formatTimeRemaining, getTimeRemaining } from '@/utils/helpers';
-import TicketModal from '@/components/activity/TicketModal';
-import useRaffle from '@/hooks/useRaffle';
+import { useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Badge } from "@/components/ui/badge";
+import { Ticket, Trophy, DollarSign } from "lucide-react";
+import { formatTimeRemaining, getTimeRemaining } from "@/utils/helpers";
+import TicketModal from "@/components/activity/TicketModal";
+import useRaffle from "@/hooks/useRaffle";
+import { UserActivity } from "@/hooks/raffle/raffle-types";
 
 // Helper function for formatting currency
 const formatCurrency = (amount: number) => {
-  return `$${amount.toLocaleString('en-US', { maximumFractionDigits: 2 })}`;
+  return `$${amount.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
 };
 
 interface RaffleCardProps {
@@ -25,19 +33,43 @@ interface RaffleCardProps {
     progress: number;
     winner?: string;
     winningTicket?: number;
-  };
+  } | null;
   isLoading?: boolean;
   isPast?: boolean;
 }
 
-const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardProps) => {
-  const { userActivity } = useRaffle();
-  
-  // Find user tickets for current raffle
-  const currentRaffleTickets = userActivity
-    .filter(activity => activity.raffleId === raffle.id && activity.ticketIds && activity.ticketIds.length > 0)
-    .flatMap(activity => activity.ticketIds || []);
-  
+const RaffleCard = ({
+  raffle,
+  isLoading = false,
+  isPast = false,
+}: RaffleCardProps) => {
+  const { userActivity = [] } = useRaffle();
+
+  // If no raffle data is available, show a message
+  if (!raffle && !isLoading) {
+    return (
+      <Card className="w-full overflow-hidden animate-fade-in shadow-subtle border border-raffle-light-gray">
+        <CardContent className="p-6 text-center">
+          <p className="text-lg text-muted-foreground">
+            No active raffle at the moment. Check back soon!
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // Find user tickets for current raffle with proper type safety
+  const currentRaffleTickets = (userActivity as UserActivity[])
+    .filter(
+      (activity): activity is UserActivity =>
+        activity !== null &&
+        activity !== undefined &&
+        activity.raffleId === raffle?.id &&
+        Array.isArray(activity.ticketIds) &&
+        activity.ticketIds.length > 0
+    )
+    .flatMap((activity) => activity.ticketIds);
+
   if (isLoading) {
     return (
       <Card className="w-full animate-pulse shadow-subtle">
@@ -55,29 +87,35 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
       </Card>
     );
   }
-  
+
+  // At this point, we know raffle is not null
+  const safeRaffle = raffle!;
+
   return (
     <Card className="w-full overflow-hidden animate-fade-in shadow-subtle border border-raffle-light-gray transition-all duration-300 hover:shadow-hover">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="text-xl font-semibold">
-              {isPast ? `Raffle #${raffle.id.split('-')[1]}` : 'Current Raffle'}
+              {isPast ? `Raffle #${safeRaffle.id}` : "Current Raffle"}
             </CardTitle>
             {!isPast && (
               <CardDescription className="text-sm">
-                Raffle #{raffle.id.split('-')[1]}
+                Raffle #{safeRaffle.id}
               </CardDescription>
             )}
           </div>
           {!isPast && (
-            <Badge variant="outline" className="bg-raffle-light-blue text-raffle-blue border-none px-3 py-1.5 flex items-center gap-2">
+            <Badge
+              variant="outline"
+              className="bg-raffle-light-blue text-raffle-blue border-none px-3 py-1.5 flex items-center gap-2"
+            >
               <span className="text-base font-medium tracking-wide">
                 Target: $1,000
               </span>
             </Badge>
           )}
-          {isPast && raffle.winner && (
+          {isPast && safeRaffle.winner && (
             <Badge className="bg-raffle-blue text-white border-none px-2 py-1 flex items-center gap-1">
               <Trophy className="h-3 w-3" />
               <span className="text-xs font-medium">Completed</span>
@@ -86,7 +124,7 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
         </div>
         {isPast && (
           <CardDescription>
-            Ended on {new Date(raffle.endTime || '').toLocaleDateString()}
+            Ended on {new Date(safeRaffle.endTime || "").toLocaleDateString()}
           </CardDescription>
         )}
       </CardHeader>
@@ -95,46 +133,51 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
           <div className="flex items-center gap-1">
             <Ticket className="h-4 w-4 text-raffle-blue" />
             <span className="text-sm font-medium">
-              {currentRaffleTickets.length > 0 ? `${currentRaffleTickets.length} tickets bought` : 'No tickets purchased yet'}
+              {currentRaffleTickets.length > 0
+                ? `${currentRaffleTickets.length} tickets bought`
+                : "No tickets purchased yet"}
             </span>
           </div>
-          
+
           {/* Add ticket modal button if user has tickets */}
           {currentRaffleTickets.length > 0 && (
-            <TicketModal 
-              ticketIds={currentRaffleTickets} 
-              winningTicket={raffle.winningTicket}
+            <TicketModal
+              ticketIds={currentRaffleTickets}
+              winningTicket={safeRaffle.winningTicket}
             />
           )}
         </div>
-        
+
         {/* Progress bar showing progress towards target */}
         <div className="mt-2">
           <div className="flex justify-between text-xs text-muted-foreground">
-            <span>{formatCurrency(raffle.prizePool)}</span>
-            <span>{formatCurrency(raffle.targetAmount)}</span>
+            <span>{formatCurrency(safeRaffle.prizePool)}</span>
+            <span>{formatCurrency(safeRaffle.targetAmount)}</span>
           </div>
-          <Progress 
-            value={raffle.progress} 
-            max={100} 
+          <Progress
+            value={safeRaffle.progress}
+            max={100}
             className="h-2 mt-1"
           />
           <div className="flex justify-end mt-1">
             <span className="text-xs text-muted-foreground">
-              {raffle.progress.toFixed(1)}% complete
+              {safeRaffle.progress.toFixed(1)}% complete
             </span>
           </div>
         </div>
-        
+
         <div className="mt-4 transition-all duration-500 hover:transform hover:scale-[1.02]">
           <div className="bg-raffle-light-blue rounded-xl p-4 flex items-center justify-between border border-raffle-blue/20">
             <div>
-              <p className="text-xs font-medium text-raffle-blue/70">Current Prize Pool</p>
+              <p className="text-xs font-medium text-raffle-blue/70">
+                Current Prize Pool
+              </p>
               <p className="text-2xl font-bold text-raffle-blue mt-1">
-                {formatCurrency(raffle.prizePool)}
+                {formatCurrency(safeRaffle.prizePool)}
               </p>
               <p className="text-xs text-raffle-blue/70 mt-1">
-                {formatCurrency(raffle.targetAmount - raffle.prizePool)} to go
+                {formatCurrency(safeRaffle.targetAmount - safeRaffle.prizePool)}{" "}
+                to go
               </p>
             </div>
             <div className="h-12 w-12 rounded-full bg-raffle-blue/10 flex items-center justify-center animate-float">
@@ -142,18 +185,22 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
             </div>
           </div>
         </div>
-        
-        {isPast && raffle.winner && (
+
+        {isPast && safeRaffle.winner && (
           <div className="mt-4 bg-raffle-off-white rounded-xl p-4 border border-raffle-light-gray animate-scale-in">
-            <p className="text-xs font-medium text-raffle-dark-gray mb-2">Winner Information</p>
+            <p className="text-xs font-medium text-raffle-dark-gray mb-2">
+              Winner Information
+            </p>
             <div className="flex flex-col gap-2">
               <div className="flex justify-between">
                 <span className="text-sm">Winner Address:</span>
-                <span className="text-sm font-medium">{raffle.winner}</span>
+                <span className="text-sm font-medium">{safeRaffle.winner}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-sm">Winning Ticket:</span>
-                <span className="text-sm font-medium">#{raffle.winningTicket}</span>
+                <span className="text-sm font-medium">
+                  #{safeRaffle.winningTicket}
+                </span>
               </div>
             </div>
           </div>
@@ -163,15 +210,15 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
         <div className="w-full flex justify-between items-center text-sm text-muted-foreground">
           <span>
             {isPast
-              ? `${raffle.ticketsSold} tickets bought`
-              : `${raffle.maxTickets - raffle.ticketsSold} tickets remaining`
-            }
+              ? `${safeRaffle.ticketsSold} tickets bought`
+              : `${
+                  safeRaffle.maxTickets - safeRaffle.ticketsSold
+                } tickets remaining`}
           </span>
           <span>
             {isPast
-              ? `Prize pool: ${formatCurrency(raffle.prizePool)}`
-              : `USDC $1 per ticket`
-            }
+              ? `Prize pool: ${formatCurrency(safeRaffle.prizePool)}`
+              : `USDC $1 per ticket`}
           </span>
         </div>
       </CardFooter>

@@ -38,7 +38,7 @@ export const useAuth = () => {
 
       // Send to backend for verification
       const response = await axiosInstance.post("/auth/wallet", {
-        walletAddress: address,
+        walletAddress: address.toLowerCase(),
         signature,
         message,
       });

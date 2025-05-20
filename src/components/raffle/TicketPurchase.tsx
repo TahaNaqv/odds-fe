@@ -9,23 +9,31 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Ticket, AlertCircle } from "lucide-react";
+import { Ticket, AlertCircle, Loader2 } from "lucide-react";
 import useRaffle from "@/hooks/useRaffle";
 import { isValidReferralCode } from "@/lib/utils";
 import TicketCountSelector from "./ticket-purchase/TicketCountSelector";
-import AutoEnrollDatePicker from "./ticket-purchase/AutoEnrollDatePicker";
-import { addDays } from "date-fns";
 import { toast } from "@/hooks/use-toast";
 import { useAppKitAccount } from "@reown/appkit/react";
+import { useAuthContext } from "@/contexts/AuthContext";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const TicketPurchase = () => {
-  const { isConnected } = useAppKitAccount();
+  const { isConnected, address } = useAppKitAccount();
+  const { isAuthenticated, authenticate } = useAuthContext();
   const { purchaseTicket, isLoading, currentRaffle } = useRaffle();
   const [ticketCount, setTicketCount] = useState(1);
-  const [autoDays, setAutoDays] = useState<number | null>(1); // Set default to 1 entry
+  const [autoEntry, setAutoEntry] = useState(1);
   const [referralCode, setReferralCode] = useState<string>("");
   const [referralError, setReferralError] = useState<string | null>(null);
   const [maxTicketsError, setMaxTicketsError] = useState<string | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const isValidCode = useMemo(() => {
     if (!referralCode) {
@@ -33,8 +41,12 @@ const TicketPurchase = () => {
       return false;
     }
 
+    // Convert to lowercase before validation
+    const lowerCode = referralCode.toLowerCase();
+    setReferralCode(lowerCode);
+
     // Check if the code format is valid
-    const isValid = isValidReferralCode(referralCode.toLowerCase());
+    const isValid = isValidReferralCode(lowerCode);
     if (!isValid) {
       setReferralError("Invalid referral code format");
       return false;
@@ -44,14 +56,10 @@ const TicketPurchase = () => {
     return true;
   }, [referralCode]);
 
-  // Calculate the immediate ticket purchase count
-  const immediateTickets = ticketCount;
-
-  // Calculate the total number of tickets including auto-enrollment for future entries
+  // Calculate the total number of tickets including auto-entry
   const totalTickets = useMemo(() => {
-    // For auto-enrollment, we multiply the ticket count by the number of entries
-    return autoDays ? autoDays * ticketCount : ticketCount;
-  }, [ticketCount, autoDays]);
+    return autoEntry * ticketCount;
+  }, [ticketCount, autoEntry]);
 
   // Calculate the total cost
   const totalCost = totalTickets * 1; // $1 per ticket
@@ -70,8 +78,30 @@ const TicketPurchase = () => {
     }
   }, [ticketCount, currentRaffle]);
 
-  const handlePurchase = () => {
+  const handlePurchase = async () => {
     if (!isValidCode) return;
+    if (!address) {
+      toast({
+        title: "Wallet not connected",
+        description: "Please connect your wallet to purchase tickets.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Check authentication
+    if (!isAuthenticated) {
+      try {
+        await authenticate();
+      } catch (error) {
+        toast({
+          title: "Authentication failed",
+          description: "Please try connecting your wallet again.",
+          variant: "destructive",
+        });
+        return;
+      }
+    }
 
     // Validate ticket count against remaining tickets
     const remainingTickets =
@@ -85,17 +115,20 @@ const TicketPurchase = () => {
       return;
     }
 
-    // Calculate end date based on selected entries
-    const autoEnrollEndDate = autoDays
-      ? addDays(new Date(), autoDays)
-      : undefined;
+    setIsProcessing(true);
 
-    purchaseTicket({
-      ticketCount,
-      token: "USDC",
-      autoEnrollEndDate,
-      referralCode: referralCode.toLowerCase(),
-    });
+    try {
+      await purchaseTicket({
+        ticketCount,
+        token: "USDC",
+        autoEntry,
+        referralCode: referralCode.toLowerCase(),
+      });
+    } catch (error) {
+      console.error("Error in handlePurchase:", error);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -139,6 +172,7 @@ const TicketPurchase = () => {
               value={referralCode}
               onChange={(e) => setReferralCode(e.target.value)}
               className={referralError ? "border-app-light-pink" : ""}
+              disabled={isProcessing}
             />
             {referralError && (
               <div className="flex items-center text-xs text-app-purple/70 mt-1">
@@ -148,11 +182,34 @@ const TicketPurchase = () => {
             )}
           </div>
 
-          <AutoEnrollDatePicker
-            days={autoDays}
-            onDaysSelect={setAutoDays}
-            isDisabled={false}
-          />
+          {/* Auto Entry Selector */}
+          <div className="space-y-2">
+            <label
+              htmlFor="autoEntry"
+              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Auto Entry <span className="text-app-light-pink">*</span>
+            </label>
+            <Select
+              value={autoEntry.toString()}
+              onValueChange={(value) => setAutoEntry(parseInt(value))}
+              disabled={isProcessing}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select auto entry count" />
+              </SelectTrigger>
+              <SelectContent>
+                {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => (
+                  <SelectItem key={num} value={num.toString()}>
+                    {num} {num === 1 ? "Entry" : "Entries"}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <p className="text-xs text-muted-foreground">
+              Number of consecutive raffles to enter automatically
+            </p>
+          </div>
 
           <div className="p-4 rounded-xl bg-raffle-off-white border border-raffle-light-gray">
             <div className="flex justify-between mb-2">
@@ -167,13 +224,13 @@ const TicketPurchase = () => {
               </span>
               <span className="text-sm font-medium">{ticketCount} tickets</span>
             </div>
-            {autoDays && autoDays > 0 && (
+            {autoEntry > 1 && (
               <div className="flex justify-between mb-2">
                 <span className="text-sm font-medium text-gray-700">
                   Auto-Entry:
                 </span>
                 <span className="text-sm font-medium">
-                  For {autoDays} {autoDays === 1 ? "entry" : "entries"}
+                  For {autoEntry} {autoEntry === 1 ? "entry" : "entries"}
                 </span>
               </div>
             )}
@@ -190,12 +247,24 @@ const TicketPurchase = () => {
         <Button
           className="w-full bg-app-purple hover:bg-app-purple/90 text-white shadow-subtle font-medium rounded-xl"
           disabled={
-            !isConnected || isLoading || !isValidCode || !!maxTicketsError
+            !isConnected ||
+            isLoading ||
+            !isValidCode ||
+            !!maxTicketsError ||
+            isProcessing
           }
           onClick={handlePurchase}
         >
-          {isLoading ? (
-            "Processing..."
+          {isProcessing ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Processing...
+            </>
+          ) : isLoading ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Loading...
+            </>
           ) : (
             <>
               <Ticket className="mr-2 h-4 w-4" />
