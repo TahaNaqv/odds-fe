@@ -1,6 +1,6 @@
 import { createAppKit } from "@reown/appkit/react";
 import { WagmiProvider } from "wagmi";
-import { base, baseSepolia } from "@reown/appkit/networks";
+import { baseSepolia } from "@reown/appkit/networks";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -113,7 +113,7 @@ const metadata = {
 };
 
 // 3. Set the networks
-const networks = [base, baseSepolia] as [typeof base, typeof baseSepolia];
+const networks = [baseSepolia] as [typeof baseSepolia];
 
 // 4. Create Wagmi Adapter
 const wagmiAdapter = new WagmiAdapter({
