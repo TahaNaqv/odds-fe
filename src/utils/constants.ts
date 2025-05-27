@@ -1,5 +1,11 @@
 // Token Constants
 export const TOKENS = {
+  mUSDC: {
+    name: "Mock USDC",
+    symbol: "mUSDC",
+    decimals: 6,
+    address: "0x86a9fED675D2239B6D7D9f184E50C8217C41D4e6", // Base Testnet USDC address
+  },
   USDC: {
     name: "USD Coin",
     symbol: "USDC",
@@ -34,7 +40,7 @@ export const RAFFLE = {
 };
 
 // Network Constants
-export const NETWORK = {
+const BASE_MAINNET = {
   chainId: 8453, // Base Mainnet
   chainName: "Base",
   nativeCurrency: {
@@ -45,6 +51,20 @@ export const NETWORK = {
   rpcUrls: ["https://mainnet.base.org"],
   blockExplorerUrls: ["https://basescan.org"],
 };
+
+const BASE_TESTNET = {
+  chainId: 84532,
+  chainName: "Base Sepolia",
+  nativeCurrency: {
+    name: "Ethereum",
+    symbol: "ETH",
+    decimals: 18,
+  },
+  rpcUrls: ["https://sepolia.base.org"],
+  blockExplorerUrls: ["https://sepolia.basescan.org"],
+};
+
+export const NETWORK = BASE_TESTNET;
 
 // Mock Data for UI Development - will be replaced with smart contract data
 export const MOCK_CURRENT_RAFFLE = {

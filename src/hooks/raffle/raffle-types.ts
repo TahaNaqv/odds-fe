@@ -20,7 +20,7 @@ export interface UserActivity {
   timestamp: string;
   ticketCount?: number;
   totalSpent?: number;
-  token?: "USDC" | "USDT";
+  token?: "USDC" | "USDT" | "mUSDC";
   prize?: number;
   winningTicket?: number;
   ticketIds?: number[];

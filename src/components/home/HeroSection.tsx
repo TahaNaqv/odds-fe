@@ -4,7 +4,7 @@ import { useAppKitAccount } from "@reown/appkit/react";
 import { formatUnits } from "viem";
 import { useBalance } from "wagmi";
 
-const USDC_ADDRESS = TOKENS.USDC.address as `0x${string}`;
+const USDC_ADDRESS = TOKENS.mUSDC.address as `0x${string}`;
 
 const HeroSection = () => {
   const { address, isConnected } = useAppKitAccount();
