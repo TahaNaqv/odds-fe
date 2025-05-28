@@ -1,9 +1,9 @@
 
 /* Marketing2 Page - Custom Color Scheme */
 .marketing2-page {
-  /* Core Colors */
-  --deep-navy: #0A0E27;
-  --midnight-blue: #141B3C;
+  /* Core Colors - Made darker for better contrast */
+  --deep-navy: #050812;
+  --midnight-blue: #0A0E1F;
   --bright-orange: #FF5722;
   --electric-blue: #2196F3;
   --pure-white: #FFFFFF;
@@ -13,7 +13,7 @@
   --light-gray: #94A3B8;
   --success-green: #10B981;
   --warning-amber: #F59E0B;
-  --surface-dark: #1E293B;
+  --surface-dark: #0F1629;
 }
 
 /* Page Background */
@@ -22,41 +22,41 @@
   color: var(--pure-white);
 }
 
-/* Seamless Section Gradients */
+/* Seamless Section Gradients - Darker tones */
 .marketing2-section-hero {
   background: linear-gradient(180deg, var(--deep-navy) 0%, var(--midnight-blue) 100%);
 }
 
 .marketing2-section-problem {
-  background: linear-gradient(180deg, var(--midnight-blue) 0%, #1A2650 50%, var(--surface-dark) 100%);
+  background: linear-gradient(180deg, var(--midnight-blue) 0%, #0D1435 50%, var(--surface-dark) 100%);
 }
 
 .marketing2-section-vision {
-  background: linear-gradient(180deg, var(--surface-dark) 0%, #253048 50%, var(--midnight-blue) 100%);
+  background: linear-gradient(180deg, var(--surface-dark) 0%, #121A2F 50%, var(--midnight-blue) 100%);
 }
 
 .marketing2-section-howitworks {
-  background: linear-gradient(180deg, var(--midnight-blue) 0%, #1A2650 50%, var(--surface-dark) 100%);
+  background: linear-gradient(180deg, var(--midnight-blue) 0%, #0D1435 50%, var(--surface-dark) 100%);
 }
 
 .marketing2-section-roadmap {
-  background: linear-gradient(180deg, var(--surface-dark) 0%, #253048 50%, var(--midnight-blue) 100%);
+  background: linear-gradient(180deg, var(--surface-dark) 0%, #121A2F 50%, var(--midnight-blue) 100%);
 }
 
 .marketing2-section-whybase {
-  background: linear-gradient(180deg, var(--midnight-blue) 0%, #1A2650 50%, var(--surface-dark) 100%);
+  background: linear-gradient(180deg, var(--midnight-blue) 0%, #0D1435 50%, var(--surface-dark) 100%);
 }
 
 .marketing2-section-techstack {
-  background: linear-gradient(180deg, var(--surface-dark) 0%, #253048 50%, var(--midnight-blue) 100%);
+  background: linear-gradient(180deg, var(--surface-dark) 0%, #121A2F 50%, var(--midnight-blue) 100%);
 }
 
 .marketing2-section-token {
-  background: linear-gradient(180deg, var(--midnight-blue) 0%, #1A2650 50%, var(--surface-dark) 100%);
+  background: linear-gradient(180deg, var(--midnight-blue) 0%, #0D1435 50%, var(--surface-dark) 100%);
 }
 
 .marketing2-section-join {
-  background: linear-gradient(180deg, var(--surface-dark) 0%, #253048 50%, var(--midnight-blue) 100%);
+  background: linear-gradient(180deg, var(--surface-dark) 0%, #121A2F 50%, var(--midnight-blue) 100%);
 }
 
 .marketing2-section-footer-cta {
@@ -72,7 +72,7 @@
   background: linear-gradient(180deg, var(--deep-navy) 0%, var(--midnight-blue) 100%);
 }
 
-/* Card Styling */
+/* Card Styling - Darker backgrounds */
 .marketing2-card {
   background: var(--surface-dark);
   border: 1px solid rgba(33, 150, 243, 0.2);
@@ -82,7 +82,7 @@
 .marketing2-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 40px rgba(33, 150, 243, 0.3);
-  background: #253048; /* Slightly lighter blue-tinted surface */
+  background: #1A2040; /* Slightly lighter blue-tinted surface but still dark */
 }
 
 /* Text Hierarchy */
@@ -149,9 +149,9 @@
   background: linear-gradient(135deg, var(--electric-blue) 0%, #3F51B5 100%);
 }
 
-/* Header & Footer */
+/* Header & Footer - Darker backgrounds */
 .marketing2-header {
-  background: rgba(10, 14, 39, 0.95);
+  background: rgba(5, 8, 18, 0.95);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(33, 150, 243, 0.2);
 }
