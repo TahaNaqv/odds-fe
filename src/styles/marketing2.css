@@ -1,0 +1,134 @@
+
+/* Marketing2 Page - Custom Color Scheme */
+.marketing2-page {
+  /* Core Colors */
+  --deep-navy: #0A0E27;
+  --midnight-blue: #141B3C;
+  --bright-orange: #FF5722;
+  --electric-blue: #2196F3;
+  --pure-white: #FFFFFF;
+  
+  /* Supporting Colors */
+  --slate-gray: #64748B;
+  --light-gray: #94A3B8;
+  --success-green: #10B981;
+  --warning-amber: #F59E0B;
+  --surface-dark: #1E293B;
+}
+
+/* Page Background */
+.marketing2-page {
+  background: var(--deep-navy);
+  color: var(--pure-white);
+}
+
+/* Section Backgrounds */
+.marketing2-section {
+  background: var(--deep-navy);
+}
+
+.marketing2-section-alt {
+  background: linear-gradient(180deg, var(--deep-navy) 0%, var(--midnight-blue) 100%);
+}
+
+/* Card Styling */
+.marketing2-card {
+  background: var(--surface-dark);
+  border: 1px solid rgba(33, 150, 243, 0.2);
+  color: var(--pure-white);
+}
+
+.marketing2-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(33, 150, 243, 0.3);
+}
+
+/* Text Hierarchy */
+.marketing2-headline {
+  color: var(--pure-white);
+}
+
+.marketing2-body {
+  color: var(--light-gray);
+}
+
+.marketing2-emphasized {
+  color: var(--slate-gray);
+}
+
+.marketing2-accent {
+  color: var(--bright-orange);
+}
+
+.marketing2-secondary-accent {
+  color: var(--electric-blue);
+}
+
+/* Buttons */
+.marketing2-btn-primary {
+  background: var(--bright-orange);
+  color: var(--pure-white);
+  border: none;
+}
+
+.marketing2-btn-primary:hover {
+  background: rgba(255, 87, 34, 0.9);
+  transform: translateY(-2px);
+}
+
+.marketing2-btn-secondary {
+  background: transparent;
+  border: 2px solid var(--electric-blue);
+  color: var(--electric-blue);
+}
+
+.marketing2-btn-secondary:hover {
+  background: rgba(33, 150, 243, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Special Effects */
+.marketing2-glow-orange {
+  box-shadow: 0 0 40px rgba(255, 87, 34, 0.5);
+}
+
+.marketing2-glow-blue {
+  box-shadow: 0 0 40px rgba(33, 150, 243, 0.5);
+}
+
+/* Gradient Accents */
+.marketing2-gradient-orange {
+  background: linear-gradient(135deg, var(--bright-orange) 0%, #FF006E 100%);
+}
+
+.marketing2-gradient-blue {
+  background: linear-gradient(135deg, var(--electric-blue) 0%, #3F51B5 100%);
+}
+
+/* Header & Footer */
+.marketing2-header {
+  background: rgba(10, 14, 39, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(33, 150, 243, 0.2);
+}
+
+.marketing2-footer {
+  background: var(--surface-dark);
+  border-top: 1px solid rgba(33, 150, 243, 0.2);
+}
+
+/* Badge Styling */
+.marketing2-badge {
+  background: var(--electric-blue);
+  color: var(--pure-white);
+}
+
+.marketing2-badge-success {
+  background: var(--success-green);
+  color: var(--pure-white);
+}
+
+.marketing2-badge-warning {
+  background: var(--warning-amber);
+  color: var(--pure-white);
+}

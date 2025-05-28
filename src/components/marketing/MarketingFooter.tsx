@@ -4,25 +4,25 @@ import { Link } from 'react-router-dom';
 
 const MarketingFooter = () => {
   return (
-    <footer className="w-full py-6 px-4 mt-auto bg-gray-900 text-white">
+    <footer className="marketing2-footer w-full py-6 px-4 mt-auto">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Copyright and links section */}
           <div className="space-y-4">
-            <div className="text-sm text-gray-400 font-medium">
+            <div className="text-sm marketing2-emphasized font-medium">
               © 2025 copyright Ødds
             </div>
-            <div className="text-sm text-gray-400 flex items-center">
-              Built with <Heart className="h-4 w-4 mx-1 text-red-500 fill-current" /> on Base
+            <div className="text-sm marketing2-body flex items-center">
+              Built with <Heart className="h-4 w-4 mx-1 marketing2-accent fill-current" /> on Base
             </div>
           </div>
           
           {/* Disclaimer section */}
           <div className="space-y-2">
-            <h4 className="text-sm font-semibold">
+            <h4 className="text-sm font-semibold marketing2-headline">
               Disclaimer
             </h4>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs marketing2-body">
               This game may be habit forming or financially risky. Play responsibly.
             </p>
           </div>
@@ -34,7 +34,7 @@ const MarketingFooter = () => {
                 href="#" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white hover:text-gray-300 transition-colors"
+                className="marketing2-headline hover:marketing2-secondary-accent transition-colors"
                 aria-label="Telegram"
               >
                 <MessageCircle className="h-5 w-5" />
@@ -43,7 +43,7 @@ const MarketingFooter = () => {
                 href="https://x.com/odds_dev" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white hover:text-gray-300 transition-colors"
+                className="marketing2-headline hover:marketing2-secondary-accent transition-colors"
                 aria-label="Twitter"
               >
                 <Twitter className="h-5 w-5" />
@@ -52,7 +52,7 @@ const MarketingFooter = () => {
             <div className="flex flex-col space-y-2">
               <Link 
                 to="/terms" 
-                className="text-gray-400 hover:text-white transition-colors text-sm"
+                className="marketing2-body hover:marketing2-headline transition-colors text-sm"
               >
                 Terms and Conditions
               </Link>

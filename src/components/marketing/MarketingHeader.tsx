@@ -30,8 +30,8 @@ const MarketingHeader = () => {
 
   return (
     <header 
-      className={`sticky top-0 z-50 w-full transition-all duration-300 backdrop-blur-md ${
-        scrolled ? 'bg-background/80 shadow-subtle dark:bg-background/80' : 'bg-transparent'
+      className={`marketing2-header sticky top-0 z-50 w-full transition-all duration-300 ${
+        scrolled ? 'shadow-lg' : ''
       }`}
     >
       <div className="container mx-auto px-4 py-4">
@@ -52,7 +52,7 @@ const MarketingHeader = () => {
               <Button
                 variant={isActive('/') ? 'secondary' : 'ghost'}
                 size="sm"
-                className={`rounded-lg ${isActive('/') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
+                className={`rounded-lg marketing2-btn-secondary ${isActive('/') ? 'marketing2-btn-primary' : ''}`}
               >
                 <Ticket className="mr-2 h-4 w-4" /> Raffle
               </Button>
@@ -62,7 +62,7 @@ const MarketingHeader = () => {
               <Button
                 variant={isActive('/marketing') ? 'secondary' : 'ghost'}
                 size="sm"
-                className={`rounded-lg ${isActive('/marketing') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
+                className={`rounded-lg marketing2-btn-secondary ${isActive('/marketing') ? 'marketing2-btn-primary' : ''}`}
               >
                 <Megaphone className="mr-2 h-4 w-4" /> About
               </Button>
@@ -72,7 +72,7 @@ const MarketingHeader = () => {
               <Button
                 variant={isActive('/activity-calendar') ? 'secondary' : 'ghost'}
                 size="sm"
-                className={`rounded-lg ${isActive('/activity-calendar') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
+                className={`rounded-lg marketing2-btn-secondary ${isActive('/activity-calendar') ? 'marketing2-btn-primary' : ''}`}
               >
                 <Clock className="mr-2 h-4 w-4" /> My Activity
               </Button>
@@ -82,7 +82,7 @@ const MarketingHeader = () => {
               <Button
                 variant={isActive('/history') ? 'secondary' : 'ghost'}
                 size="sm"
-                className={`rounded-lg ${isActive('/history') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
+                className={`rounded-lg marketing2-btn-secondary ${isActive('/history') ? 'marketing2-btn-primary' : ''}`}
               >
                 <History className="mr-2 h-4 w-4" /> Raffle History
               </Button>
@@ -92,7 +92,7 @@ const MarketingHeader = () => {
               <Button
                 variant={isActive('/referrals') ? 'secondary' : 'ghost'}
                 size="sm"
-                className={`rounded-lg ${isActive('/referrals') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
+                className={`rounded-lg marketing2-btn-secondary ${isActive('/referrals') ? 'marketing2-btn-primary' : ''}`}
               >
                 <Trophy className="mr-2 h-4 w-4" /> Referrals
               </Button>
