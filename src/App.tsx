@@ -15,6 +15,7 @@ import ActivityCalendarPage from "./pages/ActivityCalendarPage";
 import TermsPage from "./pages/TermsPage";
 import ReferralLeaderboardPage from "./pages/ReferralLeaderboardPage";
 import MarketingLandingPage from "./pages/MarketingLandingPage";
+import MarketingLandingPage2 from "./pages/MarketingLandingPage2";
 import { useEffect } from "react";
 
 // New imports for other footer pages
@@ -93,6 +94,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/marketing" element={<MarketingLandingPage />} />
+              <Route path="/marketing2" element={<MarketingLandingPage2 />} />
               <Route path="/history" element={<RaffleHistory />} />
               <Route path="/activity" element={<PastActivity />} />
               <Route path="/activity-preview" element={<ActivityPreviewPage />} />

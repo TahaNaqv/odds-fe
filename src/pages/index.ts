@@ -7,3 +7,4 @@ export { default as ActivityPreviewPage } from './ActivityPreviewPage';
 export { default as TermsPage } from './TermsPage';
 export { default as ReferralLeaderboardPage } from './ReferralLeaderboardPage';
 export { default as MarketingLandingPage } from './MarketingLandingPage';
+export { default as MarketingLandingPage2 } from './MarketingLandingPage2';
