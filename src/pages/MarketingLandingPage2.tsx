@@ -1,7 +1,20 @@
-
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+
+// New sections
+import NewHeroSection from '@/components/marketing/NewHeroSection';
+import ProblemSection from '@/components/marketing/ProblemSection';
+import VisionSection from '@/components/marketing/VisionSection';
+import HowItWorksSection from '@/components/marketing/HowItWorksSection';
+import RoadmapSection from '@/components/marketing/RoadmapSection';
+import WhyBaseSection from '@/components/marketing/WhyBaseSection';
+import TechStackSection from '@/components/marketing/TechStackSection';
+import TokenSection from '@/components/marketing/TokenSection';
+import JoinRevolutionSection from '@/components/marketing/JoinRevolutionSection';
+import FooterCTASection from '@/components/marketing/FooterCTASection';
+
+// Existing sections
 import MarketingHeroSection from '@/components/marketing/MarketingHeroSection';
 import Web3BenefitsSection from '@/components/marketing/Web3BenefitsSection';
 import CommunityStatsSection from '@/components/marketing/CommunityStatsSection';
@@ -16,6 +29,19 @@ const MarketingLandingPage2 = () => {
       <Header />
       
       <main className="flex-grow">
+        {/* New sections */}
+        <NewHeroSection />
+        <ProblemSection />
+        <VisionSection />
+        <HowItWorksSection />
+        <RoadmapSection />
+        <WhyBaseSection />
+        <TechStackSection />
+        <TokenSection />
+        <JoinRevolutionSection />
+        <FooterCTASection />
+        
+        {/* Existing sections */}
         <MarketingHeroSection />
         <Web3BenefitsSection />
         <LiveStatsSection />
