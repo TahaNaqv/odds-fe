@@ -36,14 +36,15 @@ const MarketingHeader = () => {
     >
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col items-center justify-between md:flex-row">
-          {/* Logo with doubled size */}
+          {/* Logo with new octopus design and name */}
           <Link to="/" className="flex items-center mb-3 md:mb-0">
             <img 
-              src="/lovable-uploads/c955157a-772b-4ee5-b0e0-e45ef31ea9e0.png" 
-              alt="Ødds Logo" 
-              className="h-16 md:h-20" 
+              src="/lovable-uploads/c73e7bef-2cc3-4f2d-b867-7ebfbbb7e506.png" 
+              alt="Ø Logo" 
+              className="h-16 md:h-20 mr-3" 
               style={{ background: 'transparent' }}
             />
+            <span className="text-3xl md:text-4xl font-bold marketing2-headline">Ø</span>
           </Link>
           
           {/* Navigation - Centered on mobile and right-adjusted on desktop */}
