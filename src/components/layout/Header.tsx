@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import WalletConnect from '@/components/ui/WalletConnect';
-import { Ticket, Clock, History, Trophy } from 'lucide-react';
+import { Ticket, Clock, History, Trophy, Megaphone } from 'lucide-react';
 
 const Header = () => {
   const location = useLocation();
@@ -55,6 +55,16 @@ const Header = () => {
                 className={`rounded-lg ${isActive('/') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
               >
                 <Ticket className="mr-2 h-4 w-4" /> Raffle
+              </Button>
+            </Link>
+            
+            <Link to="/marketing">
+              <Button
+                variant={isActive('/marketing') ? 'secondary' : 'ghost'}
+                size="sm"
+                className={`rounded-lg ${isActive('/marketing') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
+              >
+                <Megaphone className="mr-2 h-4 w-4" /> About
               </Button>
             </Link>
             
