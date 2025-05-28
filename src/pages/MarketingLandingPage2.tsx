@@ -1,7 +1,7 @@
 
 import React from 'react';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
+import MarketingHeader from '@/components/marketing/MarketingHeader';
+import MarketingFooter from '@/components/marketing/MarketingFooter';
 
 // New sections only
 import NewHeroSection from '@/components/marketing/NewHeroSection';
@@ -18,7 +18,7 @@ import FooterCTASection from '@/components/marketing/FooterCTASection';
 const MarketingLandingPage2 = () => {
   return (
     <div className="flex flex-col min-h-screen bg-app-dark">
-      <Header />
+      <MarketingHeader />
       
       <main className="flex-grow">
         <NewHeroSection />
@@ -33,7 +33,7 @@ const MarketingLandingPage2 = () => {
         <FooterCTASection />
       </main>
       
-      <Footer />
+      <MarketingFooter />
     </div>
   );
 };
