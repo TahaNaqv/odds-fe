@@ -6,7 +6,7 @@ import { ArrowRight, FileText, Zap } from 'lucide-react';
 
 const NewHeroSection = () => {
   return (
-    <section className="marketing2-section relative px-4 py-20">
+    <section className="marketing2-section-hero relative px-4 py-20">
       <div className="container mx-auto text-center">
         <div className="mb-8">
           <Badge className="marketing2-badge mb-6 px-4 py-2 text-sm font-medium">

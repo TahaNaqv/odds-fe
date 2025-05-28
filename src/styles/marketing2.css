@@ -22,7 +22,48 @@
   color: var(--pure-white);
 }
 
-/* Section Backgrounds */
+/* Seamless Section Gradients */
+.marketing2-section-hero {
+  background: linear-gradient(180deg, var(--deep-navy) 0%, var(--midnight-blue) 100%);
+}
+
+.marketing2-section-problem {
+  background: linear-gradient(180deg, var(--midnight-blue) 0%, #1A2650 50%, var(--surface-dark) 100%);
+}
+
+.marketing2-section-vision {
+  background: linear-gradient(180deg, var(--surface-dark) 0%, #253048 50%, var(--midnight-blue) 100%);
+}
+
+.marketing2-section-howitworks {
+  background: linear-gradient(180deg, var(--midnight-blue) 0%, #1A2650 50%, var(--surface-dark) 100%);
+}
+
+.marketing2-section-roadmap {
+  background: linear-gradient(180deg, var(--surface-dark) 0%, #253048 50%, var(--midnight-blue) 100%);
+}
+
+.marketing2-section-whybase {
+  background: linear-gradient(180deg, var(--midnight-blue) 0%, #1A2650 50%, var(--surface-dark) 100%);
+}
+
+.marketing2-section-techstack {
+  background: linear-gradient(180deg, var(--surface-dark) 0%, #253048 50%, var(--midnight-blue) 100%);
+}
+
+.marketing2-section-token {
+  background: linear-gradient(180deg, var(--midnight-blue) 0%, #1A2650 50%, var(--surface-dark) 100%);
+}
+
+.marketing2-section-join {
+  background: linear-gradient(180deg, var(--surface-dark) 0%, #253048 50%, var(--midnight-blue) 100%);
+}
+
+.marketing2-section-footer-cta {
+  background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--deep-navy) 100%);
+}
+
+/* Legacy classes for backwards compatibility */
 .marketing2-section {
   background: var(--deep-navy);
 }

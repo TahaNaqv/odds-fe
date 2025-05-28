@@ -32,7 +32,7 @@ const HowItWorksSection = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-r from-raffle-blue/5 to-app-green/5">
+    <section className="marketing2-section-howitworks py-20 px-4">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">

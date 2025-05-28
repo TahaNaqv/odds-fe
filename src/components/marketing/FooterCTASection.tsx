@@ -6,7 +6,7 @@ import { ArrowRight, FileText } from 'lucide-react';
 
 const FooterCTASection = () => {
   return (
-    <section className="marketing2-section py-20 px-4">
+    <section className="marketing2-section-footer-cta py-20 px-4">
       <div className="container mx-auto">
         <Card className="marketing2-card marketing2-glow-blue p-8 md:p-12 text-center">
           <div className="mb-8">
