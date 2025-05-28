@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Clock, Fire, TrendingUp, Zap } from 'lucide-react';
+import { Clock, Flame, TrendingUp, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import NumberCounter from '@/components/animations/NumberCounter';
 
@@ -36,7 +36,7 @@ const LiveStatsSection = () => {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <Badge variant="destructive" className="mb-4 px-4 py-2 animate-pulse">
-            <Fire className="mr-2 h-4 w-4" />
+            <Flame className="mr-2 h-4 w-4" />
             Live Now
           </Badge>
           
@@ -92,7 +92,7 @@ const LiveStatsSection = () => {
             <CardContent>
               <div className="text-center">
                 <div className="text-5xl md:text-7xl font-bold text-app-green mb-4">
-                  <NumberCounter value={4.75} />
+                  <NumberCounter end={4.75} decimals={2} />
                   <span className="text-3xl ml-2">ETH</span>
                 </div>
                 <Badge variant="success" className="mb-4">
@@ -100,7 +100,7 @@ const LiveStatsSection = () => {
                   +12% in last hour
                 </Badge>
                 <p className="text-gray-400">
-                  <NumberCounter value={127} /> tickets sold
+                  <NumberCounter end={127} /> tickets sold
                 </p>
               </div>
             </CardContent>

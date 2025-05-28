@@ -81,7 +81,7 @@ const CommunityStatsSection = () => {
                 <stat.icon className={`h-12 w-12 mx-auto mb-4 ${stat.color}`} />
                 <div className={`text-3xl md:text-4xl font-bold mb-2 ${stat.color}`}>
                   {stat.prefix}
-                  <NumberCounter value={stat.value} />
+                  <NumberCounter end={stat.value} decimals={stat.label === "ETH Distributed" ? 1 : 0} />
                   {stat.suffix}
                 </div>
                 <p className="text-gray-400 font-medium">{stat.label}</p>
