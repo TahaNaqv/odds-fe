@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -20,7 +19,7 @@ const NewHeroSection = () => {
               <img 
                 src="/lovable-uploads/4ef4a8f3-b1a1-4393-b3da-da105ac572dc.png" 
                 alt="Ødds Mascot" 
-                className="w-18 h-18 md:w-24 md:h-24 drop-shadow-[0_0_20px_rgba(255,87,34,0.8)]"
+                className="w-27 h-27 md:w-36 md:h-36 drop-shadow-[0_0_30px_rgba(255,87,34,0.9)]"
               />
             </div>
           </div>
@@ -31,8 +30,7 @@ const NewHeroSection = () => {
           </h1>
           
           <p className="text-xl md:text-2xl marketing2-body mb-8 max-w-4xl mx-auto">
-            The first permissionless infrastructure for on-chain money games. 
-            Where 95% goes to players, and creators capture the house edge.
+            The first permissionless infrastructure for on-chain money games.
           </p>
         </div>
 
