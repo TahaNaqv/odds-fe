@@ -8,9 +8,9 @@ import NewHeroSection from '@/components/marketing/NewHeroSection';
 import ProblemSection from '@/components/marketing/ProblemSection';
 import VisionSection from '@/components/marketing/VisionSection';
 import HowItWorksSection from '@/components/marketing/HowItWorksSection';
-import RoadmapSection from '@/components/marketing/RoadmapSection';
 import TechStackSection from '@/components/marketing/TechStackSection';
 import TokenSection from '@/components/marketing/TokenSection';
+import RoadmapSection from '@/components/marketing/RoadmapSection';
 import FooterCTASection from '@/components/marketing/FooterCTASection';
 
 // Import custom styles
@@ -26,9 +26,9 @@ const MarketingLandingPage2 = () => {
         <ProblemSection />
         <VisionSection />
         <HowItWorksSection />
-        <RoadmapSection />
         <TechStackSection />
         <TokenSection />
+        <RoadmapSection />
         <FooterCTASection />
       </main>
       
