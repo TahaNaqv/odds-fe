@@ -11,7 +11,6 @@ import HowItWorksSection from '@/components/marketing/HowItWorksSection';
 import RoadmapSection from '@/components/marketing/RoadmapSection';
 import TechStackSection from '@/components/marketing/TechStackSection';
 import TokenSection from '@/components/marketing/TokenSection';
-import JoinRevolutionSection from '@/components/marketing/JoinRevolutionSection';
 import FooterCTASection from '@/components/marketing/FooterCTASection';
 
 // Import custom styles
@@ -30,7 +29,6 @@ const MarketingLandingPage2 = () => {
         <RoadmapSection />
         <TechStackSection />
         <TokenSection />
-        <JoinRevolutionSection />
         <FooterCTASection />
       </main>
       
