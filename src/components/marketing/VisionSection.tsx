@@ -54,22 +54,6 @@ const VisionSection = () => {
             </Card>
           ))}
         </div>
-
-        <div className="bg-gradient-to-r from-app-green/10 to-red-400/10 rounded-xl p-8 text-center">
-          <div className="flex flex-col md:flex-row justify-center items-center gap-12">
-            <div className="text-center">
-              <h3 className="text-2xl font-bold text-red-400 mb-2">Traditional</h3>
-              <div className="text-6xl font-bold text-red-400">30%</div>
-              <p className="text-gray-400">to players</p>
-            </div>
-            <div className="text-4xl text-gray-400">vs</div>
-            <div className="text-center">
-              <h3 className="text-2xl font-bold text-app-green mb-2">Ødds</h3>
-              <div className="text-6xl font-bold text-app-green">95%</div>
-              <p className="text-gray-400">to players</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
