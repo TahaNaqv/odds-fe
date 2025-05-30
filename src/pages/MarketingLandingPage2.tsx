@@ -24,13 +24,13 @@ const MarketingLandingPage2 = () => {
       
       <main className="flex-grow">
         <NewHeroSection />
-        <JoinRevolutionSection />
         <ProblemSection />
         <VisionSection />
         <HowItWorksSection />
         <RoadmapSection />
         <TechStackSection />
         <TokenSection />
+        <JoinRevolutionSection />
         <FooterCTASection />
       </main>
       
