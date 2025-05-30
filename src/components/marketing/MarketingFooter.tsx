@@ -6,7 +6,7 @@ const MarketingFooter = () => {
   return (
     <footer className="marketing2-footer w-full py-6 px-4 mt-auto">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Copyright and links section */}
           <div className="space-y-4">
             <div className="text-sm marketing2-emphasized font-medium">
@@ -15,16 +15,6 @@ const MarketingFooter = () => {
             <div className="text-sm marketing2-body flex items-center">
               Built with <Heart className="h-4 w-4 mx-1 marketing2-accent fill-current" /> on Base
             </div>
-          </div>
-          
-          {/* Disclaimer section */}
-          <div className="space-y-2">
-            <h4 className="text-sm font-semibold marketing2-headline">
-              Disclaimer
-            </h4>
-            <p className="text-xs marketing2-body">
-              This game may be habit forming or financially risky. Play responsibly.
-            </p>
           </div>
           
           {/* Social links and Terms */}
