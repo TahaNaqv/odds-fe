@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -19,15 +18,6 @@ const NewHeroSection = () => {
               <Zap className="mr-2 h-4 w-4" />
               Genesis Raffle Launching Q3 2025
             </Badge>
-            
-            {/* Floating Mascot positioned right next to the badge */}
-            <div className="animate-float">
-              <img 
-                src="/lovable-uploads/4ef4a8f3-b1a1-4393-b3da-da105ac572dc.png" 
-                alt="Ødds Mascot" 
-                className="w-27 h-27 md:w-36 md:h-36 drop-shadow-[0_0_30px_rgba(255,87,34,0.9)]"
-              />
-            </div>
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 marketing2-headline">
