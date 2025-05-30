@@ -39,7 +39,7 @@ const VisionSection = () => {
             What If Players Got <span className="text-app-green">95%</span> Instead of <span className="text-red-400">30%</span>?
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-12">
-            The future we're building changes everything about how money games work.
+            The future we're building changes everything about money games.
           </p>
         </div>
 
