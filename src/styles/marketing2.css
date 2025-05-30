@@ -19,6 +19,8 @@
   --gradient-mid-1: #0D1435;
   --gradient-mid-2: #121A2F;
   --gradient-mid-3: #1A2040;
+  --gradient-mid-4: #1F2951;
+  --gradient-mid-5: #0B1220;
 }
 
 /* Page Background */
@@ -27,37 +29,33 @@
   color: var(--pure-white);
 }
 
-/* Seamless Section Gradients - Smoother transitions */
+/* Seamless Section Gradients - Perfectly smooth transitions */
 .marketing2-section-hero {
-  background: linear-gradient(180deg, var(--deep-navy) 0%, var(--midnight-blue) 100%);
+  background: linear-gradient(180deg, var(--deep-navy) 0%, var(--gradient-mid-1) 100%);
 }
 
 .marketing2-section-problem {
-  background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--gradient-mid-1) 100%);
+  background: linear-gradient(180deg, var(--gradient-mid-1) 0%, var(--gradient-mid-2) 100%);
 }
 
 .marketing2-section-vision {
-  background: linear-gradient(180deg, var(--gradient-mid-1) 0%, var(--surface-dark) 100%);
+  background: linear-gradient(180deg, var(--gradient-mid-2) 0%, var(--surface-dark) 100%);
 }
 
 .marketing2-section-howitworks {
-  background: linear-gradient(180deg, var(--surface-dark) 0%, var(--gradient-mid-2) 100%);
-}
-
-.marketing2-section-roadmap {
-  background: linear-gradient(180deg, var(--gradient-mid-2) 0%, var(--gradient-mid-1) 100%);
+  background: linear-gradient(180deg, var(--surface-dark) 0%, var(--gradient-mid-3) 100%);
 }
 
 .marketing2-section-techstack {
-  background: linear-gradient(180deg, var(--gradient-mid-1) 0%, var(--surface-dark) 100%);
+  background: linear-gradient(180deg, var(--gradient-mid-3) 0%, var(--gradient-mid-4) 100%);
 }
 
 .marketing2-section-token {
-  background: linear-gradient(180deg, var(--surface-dark) 0%, var(--midnight-blue) 100%);
+  background: linear-gradient(180deg, var(--gradient-mid-4) 0%, var(--gradient-mid-5) 100%);
 }
 
-.marketing2-section-join {
-  background: linear-gradient(180deg, var(--gradient-mid-2) 0%, var(--midnight-blue) 100%);
+.marketing2-section-roadmap {
+  background: linear-gradient(180deg, var(--gradient-mid-5) 0%, var(--midnight-blue) 100%);
 }
 
 .marketing2-section-footer-cta {
