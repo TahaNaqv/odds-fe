@@ -43,10 +43,6 @@
   background: linear-gradient(180deg, var(--surface-dark) 0%, #121A2F 50%, var(--midnight-blue) 100%);
 }
 
-.marketing2-section-whybase {
-  background: linear-gradient(180deg, var(--midnight-blue) 0%, #0D1435 50%, var(--surface-dark) 100%);
-}
-
 .marketing2-section-techstack {
   background: linear-gradient(180deg, var(--surface-dark) 0%, #121A2F 50%, var(--midnight-blue) 100%);
 }

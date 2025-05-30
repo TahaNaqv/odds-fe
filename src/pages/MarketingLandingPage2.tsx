@@ -9,7 +9,6 @@ import ProblemSection from '@/components/marketing/ProblemSection';
 import VisionSection from '@/components/marketing/VisionSection';
 import HowItWorksSection from '@/components/marketing/HowItWorksSection';
 import RoadmapSection from '@/components/marketing/RoadmapSection';
-import WhyBaseSection from '@/components/marketing/WhyBaseSection';
 import TechStackSection from '@/components/marketing/TechStackSection';
 import TokenSection from '@/components/marketing/TokenSection';
 import JoinRevolutionSection from '@/components/marketing/JoinRevolutionSection';
@@ -29,7 +28,6 @@ const MarketingLandingPage2 = () => {
         <VisionSection />
         <HowItWorksSection />
         <RoadmapSection />
-        <WhyBaseSection />
         <TechStackSection />
         <TokenSection />
         <JoinRevolutionSection />
