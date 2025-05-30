@@ -23,10 +23,10 @@ const FooterCTASection = () => {
             
             <Button 
               size="lg" 
-              className="marketing2-btn-secondary px-8 py-4 text-lg"
+              className="marketing2-btn-primary px-12 py-4 text-xl font-semibold"
             >
-              <FileText className="mr-2 h-5 w-5" />
-              Read the Whitepaper
+              <FileText className="mr-2 h-6 w-6" />
+              Whitepaper
             </Button>
           </div>
         </Card>
