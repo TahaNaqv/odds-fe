@@ -28,7 +28,7 @@ const MarketingHeader = () => {
           {/* Logo with octopus design and name */}
           <Link to="/" className="flex items-center">
             <img 
-              src="/lovable-uploads/c73e7bef-2cc3-4f2d-b867-7ebfbbb7e506.png" 
+              src="/lovable-uploads/873f0dd0-339d-4807-be0d-940991e98998.png" 
               alt="Ødds Logo" 
               className="h-16 md:h-20 mr-3" 
               style={{ background: 'transparent' }}
