@@ -1,11 +1,17 @@
 
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, FileText, Zap } from 'lucide-react';
+import { ArrowRight, FileText, Zap, MessageSquare, Code, ExternalLink } from 'lucide-react';
 
 const NewHeroSection = () => {
+  const socialLinks = [
+    { name: "Discord", icon: MessageSquare },
+    { name: "Telegram", icon: MessageSquare },
+    { name: "Twitter", icon: ExternalLink },
+    { name: "GitHub", icon: Code }
+  ];
+
   return (
     <section className="marketing2-section-hero relative px-4 py-20">
       <div className="container mx-auto text-center">
@@ -46,10 +52,21 @@ const NewHeroSection = () => {
             Whitepaper
           </Button>
         </div>
+
+        <div className="text-center">
+          <h3 className="text-2xl font-bold mb-6">Join the Community</h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            {socialLinks.map((link, index) => (
+              <Button key={index} variant="outline" size="lg">
+                <link.icon className="mr-2 h-5 w-5" />
+                {link.name}
+              </Button>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
 };
 
 export default NewHeroSection;
-
