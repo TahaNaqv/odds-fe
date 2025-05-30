@@ -14,6 +14,11 @@
   --success-green: #10B981;
   --warning-amber: #F59E0B;
   --surface-dark: #0F1629;
+  
+  /* Intermediate gradient colors for smooth transitions */
+  --gradient-mid-1: #0D1435;
+  --gradient-mid-2: #121A2F;
+  --gradient-mid-3: #1A2040;
 }
 
 /* Page Background */
@@ -22,37 +27,37 @@
   color: var(--pure-white);
 }
 
-/* Seamless Section Gradients - Darker tones */
+/* Seamless Section Gradients - Smoother transitions */
 .marketing2-section-hero {
   background: linear-gradient(180deg, var(--deep-navy) 0%, var(--midnight-blue) 100%);
 }
 
 .marketing2-section-problem {
-  background: linear-gradient(180deg, var(--midnight-blue) 0%, #0D1435 50%, var(--surface-dark) 100%);
+  background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--gradient-mid-1) 100%);
 }
 
 .marketing2-section-vision {
-  background: linear-gradient(180deg, var(--surface-dark) 0%, #121A2F 50%, var(--midnight-blue) 100%);
+  background: linear-gradient(180deg, var(--gradient-mid-1) 0%, var(--surface-dark) 100%);
 }
 
 .marketing2-section-howitworks {
-  background: linear-gradient(180deg, var(--midnight-blue) 0%, #0D1435 50%, var(--surface-dark) 100%);
+  background: linear-gradient(180deg, var(--surface-dark) 0%, var(--gradient-mid-2) 100%);
 }
 
 .marketing2-section-roadmap {
-  background: linear-gradient(180deg, var(--surface-dark) 0%, #121A2F 50%, var(--midnight-blue) 100%);
+  background: linear-gradient(180deg, var(--gradient-mid-2) 0%, var(--gradient-mid-1) 100%);
 }
 
 .marketing2-section-techstack {
-  background: linear-gradient(180deg, var(--surface-dark) 0%, #121A2F 50%, var(--midnight-blue) 100%);
+  background: linear-gradient(180deg, var(--gradient-mid-1) 0%, var(--surface-dark) 100%);
 }
 
 .marketing2-section-token {
-  background: linear-gradient(180deg, var(--midnight-blue) 0%, #0D1435 50%, var(--surface-dark) 100%);
+  background: linear-gradient(180deg, var(--surface-dark) 0%, var(--gradient-mid-2) 100%);
 }
 
 .marketing2-section-join {
-  background: linear-gradient(180deg, var(--surface-dark) 0%, #121A2F 50%, var(--midnight-blue) 100%);
+  background: linear-gradient(180deg, var(--gradient-mid-2) 0%, var(--midnight-blue) 100%);
 }
 
 .marketing2-section-footer-cta {
@@ -78,7 +83,7 @@
 .marketing2-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 40px rgba(33, 150, 243, 0.3);
-  background: #1A2040; /* Slightly lighter blue-tinted surface but still dark */
+  background: var(--gradient-mid-3);
 }
 
 /* Text Hierarchy */
