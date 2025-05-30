@@ -37,7 +37,7 @@ const TechStackSection = () => {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Infrastructure You Can <span className="text-app-green">Trust</span>
+            Infrastructure You Can <span className="text-app-green">Trust</span>.
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Built on proven technology with transparency at its core.
