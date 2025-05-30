@@ -11,7 +11,7 @@ const FooterCTASection = () => {
         <Card className="marketing2-card marketing2-glow-blue p-8 md:p-12 text-center">
           <div className="mb-8">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 marketing2-headline">
-              The Future of <span className="marketing2-accent">Fair Games</span> Starts Here
+              The Future of <span className="marketing2-accent">Fair Games</span> Starts Here.
             </h2>
           </div>
 
