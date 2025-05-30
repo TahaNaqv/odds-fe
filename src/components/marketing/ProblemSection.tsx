@@ -30,7 +30,7 @@ const ProblemSection = () => {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 marketing2-headline">
-            Traditional Lotteries Keep <span className="marketing2-accent">70%</span>. We're Changing That.
+            Traditional Money Games Keep <span className="marketing2-accent">70%</span> of the Prize Pool. We're Changing That.
           </h2>
           <p className="text-xl marketing2-body max-w-3xl mx-auto">
             Three broken realities that have plagued the gaming industry for too long.
