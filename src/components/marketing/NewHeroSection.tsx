@@ -1,15 +1,12 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, FileText, Zap, MessageSquare, Code, ExternalLink } from 'lucide-react';
+import { ArrowRight, FileText, Zap, MessageSquare, ExternalLink } from 'lucide-react';
 
 const NewHeroSection = () => {
   const socialLinks = [
-    { name: "Discord", icon: MessageSquare },
     { name: "Telegram", icon: MessageSquare },
-    { name: "Twitter", icon: ExternalLink },
-    { name: "GitHub", icon: Code }
+    { name: "Twitter", icon: ExternalLink }
   ];
 
   return (
