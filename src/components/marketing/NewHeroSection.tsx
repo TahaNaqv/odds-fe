@@ -26,8 +26,8 @@ const NewHeroSection = () => {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 marketing2-headline">
-            Own the House.
-            <span className="marketing2-accent"> Create the Games.</span>
+            Create money games on Base
+            <span className="marketing2-accent"> in seconds.</span>
           </h1>
           
           <p className="text-xl md:text-2xl marketing2-body mb-8 max-w-4xl mx-auto">
