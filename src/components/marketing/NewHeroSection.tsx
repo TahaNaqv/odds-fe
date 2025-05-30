@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -39,9 +40,9 @@ const NewHeroSection = () => {
             Join the Waitlist <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
           
-          <Button size="lg" className="marketing2-btn-secondary px-8 py-4 text-lg">
+          <Button size="lg" className="bg-transparent border-0 text-white hover:bg-transparent hover:text-white px-8 py-4 text-lg">
             <FileText className="mr-2 h-5 w-5" />
-            Read the Docs
+            Whitepaper
           </Button>
         </div>
       </div>
