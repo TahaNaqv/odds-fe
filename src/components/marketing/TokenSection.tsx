@@ -47,7 +47,7 @@ const TokenSection = () => {
           </Badge>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {utilities.map((utility, index) => (
             <Card key={index} className="bg-card/50 backdrop-blur-sm border-app-vivid-orange/20">
               <CardHeader>
@@ -59,13 +59,6 @@ const TokenSection = () => {
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        <div className="bg-gradient-to-r from-app-vivid-orange/10 to-purple-400/10 rounded-xl p-8 text-center">
-          <h3 className="text-2xl font-bold mb-4">Distribution Philosophy</h3>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Fair launch. No VC dumps. Community first.
-          </p>
         </div>
       </div>
     </section>
