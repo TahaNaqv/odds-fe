@@ -19,8 +19,8 @@ const ProblemSection = () => {
     },
     {
       icon: TrendingDown,
-      title: "No Upside for Players",
-      description: "Win or lose, you'll never be the house",
+      title: "Can't Beat the House",
+      description: "Win or lose, the house keeps most of the money",
       color: "text-yellow-400"
     }
   ];
