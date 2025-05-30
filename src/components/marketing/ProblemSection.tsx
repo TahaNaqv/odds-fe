@@ -20,7 +20,7 @@ const ProblemSection = () => {
     {
       icon: TrendingDown,
       title: "No Upside for Players",
-      description: "Win or lose, you'll never own the platform",
+      description: "Win or lose, you'll never be the house",
       color: "text-yellow-400"
     }
   ];
