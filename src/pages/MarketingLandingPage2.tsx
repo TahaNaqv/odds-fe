@@ -8,6 +8,7 @@ import NewHeroSection from '@/components/marketing/NewHeroSection';
 import ProblemSection from '@/components/marketing/ProblemSection';
 import VisionSection from '@/components/marketing/VisionSection';
 import HowItWorksSection from '@/components/marketing/HowItWorksSection';
+import GameTemplatesSection from '@/components/marketing/GameTemplatesSection';
 import TechStackSection from '@/components/marketing/TechStackSection';
 import TokenSection from '@/components/marketing/TokenSection';
 import RoadmapSection from '@/components/marketing/RoadmapSection';
@@ -26,6 +27,7 @@ const MarketingLandingPage2 = () => {
         <ProblemSection />
         <VisionSection />
         <HowItWorksSection />
+        <GameTemplatesSection />
         <TechStackSection />
         <TokenSection />
         <RoadmapSection />
