@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { TrendingUp, Zap, DollarSign, Users } from 'lucide-react';
@@ -8,25 +7,25 @@ const VisionSection = () => {
     {
       icon: TrendingUp,
       title: "95% to Winners",
-      description: "Smart contracts enforce fair distribution",
+      description: "Smart contracts enforce fair distribution.",
       color: "text-app-green"
     },
     {
       icon: Zap,
       title: "Anyone Can Create",
-      description: "Deploy custom money games in minutes",
+      description: "Deploy custom money games in minutes.",
       color: "text-raffle-blue"
     },
     {
       icon: DollarSign,
       title: "Creators Earn",
-      description: "Keep up to 50% of the 5% protocol fee",
+      description: "Keep up to 50% of the 5% protocol fee.",
       color: "text-app-vivid-orange"
     },
     {
       icon: Users,
       title: "Players Own",
-      description: "Token holders govern the protocol",
+      description: "Token holders govern the protocol.",
       color: "text-purple-400"
     }
   ];
