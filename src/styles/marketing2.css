@@ -46,20 +46,24 @@
   background: linear-gradient(180deg, var(--surface-dark) 0%, var(--gradient-mid-3) 100%);
 }
 
-.marketing2-section-techstack {
+.marketing2-section-gametemplates {
   background: linear-gradient(180deg, var(--gradient-mid-3) 0%, var(--gradient-mid-4) 100%);
 }
 
-.marketing2-section-token {
+.marketing2-section-techstack {
   background: linear-gradient(180deg, var(--gradient-mid-4) 0%, var(--gradient-mid-5) 100%);
 }
 
-.marketing2-section-roadmap {
+.marketing2-section-token {
   background: linear-gradient(180deg, var(--gradient-mid-5) 0%, var(--midnight-blue) 100%);
 }
 
-.marketing2-section-footer-cta {
+.marketing2-section-roadmap {
   background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--deep-navy) 100%);
+}
+
+.marketing2-section-footer-cta {
+  background: linear-gradient(180deg, var(--deep-navy) 0%, var(--gradient-mid-1) 100%);
 }
 
 /* Legacy classes for backwards compatibility */
@@ -73,105 +77,105 @@
 
 /* Card Styling - Darker backgrounds */
 .marketing2-card {
-  background: var(--surface-dark);
-  border: 1px solid rgba(33, 150, 243, 0.2);
-  color: var(--pure-white);
+  background: var(--surface-dark) !important;
+  border: 1px solid rgba(33, 150, 243, 0.2) !important;
+  color: var(--pure-white) !important;
 }
 
 .marketing2-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 40px rgba(33, 150, 243, 0.3);
-  background: var(--gradient-mid-3);
+  transform: translateY(-2px) !important;
+  box-shadow: 0 0 40px rgba(33, 150, 243, 0.3) !important;
+  background: var(--gradient-mid-3) !important;
 }
 
 /* Text Hierarchy */
 .marketing2-headline {
-  color: var(--pure-white);
+  color: var(--pure-white) !important;
 }
 
 .marketing2-body {
-  color: var(--light-gray);
+  color: var(--light-gray) !important;
 }
 
 .marketing2-emphasized {
-  color: var(--slate-gray);
+  color: var(--slate-gray) !important;
 }
 
 .marketing2-accent {
-  color: var(--bright-orange);
+  color: var(--bright-orange) !important;
 }
 
 .marketing2-secondary-accent {
-  color: var(--electric-blue);
+  color: var(--electric-blue) !important;
 }
 
 /* Buttons */
 .marketing2-btn-primary {
-  background: var(--bright-orange);
-  color: var(--pure-white);
-  border: none;
+  background: var(--bright-orange) !important;
+  color: var(--pure-white) !important;
+  border: none !important;
 }
 
 .marketing2-btn-primary:hover {
-  background: #FF7043; /* Brighter orange tone */
-  transform: translateY(-2px);
+  background: #FF7043 !important; /* Brighter orange tone */
+  transform: translateY(-2px) !important;
 }
 
 .marketing2-btn-secondary {
-  background: transparent;
-  border: 2px solid var(--electric-blue);
-  color: var(--electric-blue);
+  background: transparent !important;
+  border: 2px solid var(--electric-blue) !important;
+  color: var(--electric-blue) !important;
 }
 
 .marketing2-btn-secondary:hover {
-  background: rgba(33, 150, 243, 0.1);
-  border-color: #1976D2; /* Darker blue tone */
-  color: #1976D2;
-  transform: translateY(-2px);
+  background: rgba(33, 150, 243, 0.1) !important;
+  border-color: #1976D2 !important; /* Darker blue tone */
+  color: #1976D2 !important;
+  transform: translateY(-2px) !important;
 }
 
 /* Special Effects */
 .marketing2-glow-orange {
-  box-shadow: 0 0 40px rgba(255, 87, 34, 0.5);
+  box-shadow: 0 0 40px rgba(255, 87, 34, 0.5) !important;
 }
 
 .marketing2-glow-blue {
-  box-shadow: 0 0 40px rgba(33, 150, 243, 0.5);
+  box-shadow: 0 0 40px rgba(33, 150, 243, 0.5) !important;
 }
 
 /* Gradient Accents */
 .marketing2-gradient-orange {
-  background: linear-gradient(135deg, var(--bright-orange) 0%, #FF006E 100%);
+  background: linear-gradient(135deg, var(--bright-orange) 0%, #FF006E 100%) !important;
 }
 
 .marketing2-gradient-blue {
-  background: linear-gradient(135deg, var(--electric-blue) 0%, #3F51B5 100%);
+  background: linear-gradient(135deg, var(--electric-blue) 0%, #3F51B5 100%) !important;
 }
 
 /* Header & Footer - Darker backgrounds */
 .marketing2-header {
-  background: rgba(5, 8, 18, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(33, 150, 243, 0.2);
+  background: rgba(5, 8, 18, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  border-bottom: 1px solid rgba(33, 150, 243, 0.2) !important;
 }
 
 .marketing2-footer {
-  background: var(--surface-dark);
-  border-top: 1px solid rgba(33, 150, 243, 0.2);
+  background: var(--surface-dark) !important;
+  border-top: 1px solid rgba(33, 150, 243, 0.2) !important;
 }
 
 /* Badge Styling */
 .marketing2-badge {
-  background: var(--electric-blue);
-  color: var(--pure-white);
+  background: var(--electric-blue) !important;
+  color: var(--pure-white) !important;
 }
 
 .marketing2-badge-success {
-  background: var(--success-green);
-  color: var(--pure-white);
+  background: var(--success-green) !important;
+  color: var(--pure-white) !important;
 }
 
 .marketing2-badge-warning {
-  background: var(--warning-amber);
-  color: var(--pure-white);
+  background: var(--warning-amber) !important;
+  color: var(--pure-white) !important;
 }

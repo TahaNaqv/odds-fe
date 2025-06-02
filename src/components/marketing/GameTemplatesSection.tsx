@@ -55,7 +55,7 @@ const GameTemplatesSection = () => {
   };
 
   return (
-    <section className="py-20 px-4" style={{ backgroundColor: '#0A0E27' }}>
+    <section className="marketing2-section-gametemplates py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
