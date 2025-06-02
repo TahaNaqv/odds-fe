@@ -7,6 +7,7 @@
   --bright-orange: #FF5722;
   --electric-blue: #2196F3;
   --pure-white: #FFFFFF;
+  --primary-purple: #7C3AED;
   
   /* Supporting Colors */
   --slate-gray: #64748B;
@@ -109,15 +110,15 @@
   color: var(--electric-blue) !important;
 }
 
-/* Buttons */
+/* Buttons - Updated to use purple */
 .marketing2-btn-primary {
-  background: var(--bright-orange) !important;
+  background: var(--primary-purple) !important;
   color: var(--pure-white) !important;
   border: none !important;
 }
 
 .marketing2-btn-primary:hover {
-  background: #FF7043 !important; /* Brighter orange tone */
+  background: #8B5CF6 !important; /* Brighter purple tone */
   transform: translateY(-2px) !important;
 }
 
