@@ -1,18 +1,18 @@
 import axiosInstance from "@/lib/axios";
 import { RaffleData, UserActivity } from "@/hooks/raffle/raffle-types";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 export const raffleApi = {
   // Get current raffle
   getCurrentRaffle: async (): Promise<RaffleData> => {
-    const response = await axiosInstance.get(`${API_BASE_URL}/raffles/current`);
+    const response = await axiosInstance.get(`${apiUrl}/raffles/current`);
     return response.data;
   },
 
   // Get past raffles with pagination
   getPastRaffles: async (page: number = 1, limit: number = 10) => {
-    const response = await axiosInstance.get(`${API_BASE_URL}/raffles/past`, {
+    const response = await axiosInstance.get(`${apiUrl}/raffles/past`, {
       params: { page, limit },
     });
     return response.data;
@@ -21,7 +21,7 @@ export const raffleApi = {
   // Get user activity
   getUserActivity: async (walletAddress: string): Promise<UserActivity[]> => {
     const response = await axiosInstance.get(
-      `${API_BASE_URL}/raffles/user/${walletAddress}/activity`
+      `${apiUrl}/raffles/user/${walletAddress}/activity`
     );
     return response.data;
   },
@@ -38,7 +38,7 @@ export const raffleApi = {
     }
   ) => {
     const response = await axiosInstance.post(
-      `${API_BASE_URL}/raffles/${raffleId}/purchase`,
+      `${apiUrl}/raffles/${raffleId}/purchase`,
       data
     );
     return response.data;
@@ -52,7 +52,7 @@ export const raffleApi = {
     token: string;
   }) => {
     const response = await axiosInstance.post(
-      `${API_BASE_URL}/raffles/auto-enroll`,
+      `${apiUrl}/raffles/auto-enroll`,
       data
     );
     return response.data;
@@ -65,7 +65,7 @@ export const raffleApi = {
     limit: number = 10
   ) => {
     const response = await axiosInstance.get(
-      `${API_BASE_URL}/raffles/${raffleId}/tickets`,
+      `${apiUrl}/raffles/${raffleId}/tickets`,
       {
         params: { page, limit },
       }
@@ -76,7 +76,7 @@ export const raffleApi = {
   // Get raffle winner
   getRaffleWinner: async (raffleId: string) => {
     const response = await axiosInstance.get(
-      `${API_BASE_URL}/raffles/${raffleId}/winner`
+      `${apiUrl}/raffles/${raffleId}/winner`
     );
     return response.data;
   },
