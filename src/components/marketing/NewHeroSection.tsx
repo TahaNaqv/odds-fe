@@ -53,7 +53,7 @@ const NewHeroSection = () => {
             <img 
               src="/lovable-uploads/7fca3aae-025c-49f8-a25d-0546338b9b97.png" 
               alt="Mascot" 
-              className="h-16 w-16"
+              className="h-20 w-20"
               style={{
                 filter: 'drop-shadow(0 4px 8px rgba(255, 87, 34, 0.6))'
               }}
