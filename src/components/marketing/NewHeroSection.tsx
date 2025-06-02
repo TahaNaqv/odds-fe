@@ -51,11 +51,11 @@ const NewHeroSection = () => {
           <h3 className="text-2xl font-bold mb-6">Join the Community</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {socialLinks.map((link, index) => (
-              <Button key={index} variant="outline" size="lg">
+              <Button key={index} variant="outline" size="lg" className="flex items-center justify-center">
                 {link.customIcon ? (
-                  <img src={link.customIcon} alt="" className="mr-2 h-5 w-5" />
+                  <img src={link.customIcon} alt="" className="h-5 w-5" />
                 ) : (
-                  <link.icon className="mr-2 h-5 w-5" />
+                  <link.icon className="h-5 w-5" />
                 )}
                 {link.name}
               </Button>
