@@ -2,12 +2,12 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, FileText, Zap, MessageSquare, Ticket } from 'lucide-react';
+import { ArrowRight, FileText, Zap, MessageSquare } from 'lucide-react';
 
 const NewHeroSection = () => {
   const socialLinks = [
     { name: "Telegram", icon: MessageSquare },
-    { name: "", icon: Ticket }
+    { name: "", icon: null, customIcon: "/lovable-uploads/20369439-3d77-4245-902b-3acfc0bae2e6.png" }
   ];
 
   return (
@@ -52,7 +52,11 @@ const NewHeroSection = () => {
           <div className="flex flex-wrap justify-center gap-4">
             {socialLinks.map((link, index) => (
               <Button key={index} variant="outline" size="lg">
-                <link.icon className="mr-2 h-5 w-5" />
+                {link.customIcon ? (
+                  <img src={link.customIcon} alt="" className="mr-2 h-5 w-5" />
+                ) : (
+                  <link.icon className="mr-2 h-5 w-5" />
+                )}
                 {link.name}
               </Button>
             ))}
