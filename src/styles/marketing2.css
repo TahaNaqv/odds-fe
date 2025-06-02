@@ -15,241 +15,163 @@
   --warning-amber: #F59E0B;
   --surface-dark: #0F1629;
   
-  /* Seamless gradient colors for perfectly smooth transitions */
-  --gradient-step-1: #060914;
-  --gradient-step-2: #070A16;
-  --gradient-step-3: #080B18;
-  --gradient-step-4: #090C1A;
-  --gradient-step-5: #0A0D1C;
-  --gradient-step-6: #0B0E1E;
-  --gradient-step-7: #0C0F20;
-  --gradient-step-8: #0D1022;
-  --gradient-step-9: #0E1124;
-  --gradient-step-10: #0F1226;
+  /* Intermediate gradient colors for smooth transitions */
+  --gradient-mid-1: #0D1435;
+  --gradient-mid-2: #121A2F;
+  --gradient-mid-3: #1A2040;
+  --gradient-mid-4: #1F2951;
+  --gradient-mid-5: #0B1220;
 }
 
 /* Page Background */
 .marketing2-page {
-  background: linear-gradient(180deg, var(--deep-navy) 0%, var(--midnight-blue) 100%);
+  background: var(--deep-navy);
   color: var(--pure-white);
 }
 
-/* Seamless Section Gradients - Ultra smooth transitions with no visible borders */
+/* Seamless Section Gradients - Perfectly smooth transitions */
 .marketing2-section-hero {
-  background: linear-gradient(180deg, 
-    var(--deep-navy) 0%, 
-    var(--gradient-step-1) 20%, 
-    var(--gradient-step-2) 40%, 
-    var(--gradient-step-3) 60%, 
-    var(--gradient-step-4) 80%, 
-    var(--gradient-step-5) 100%
-  );
+  background: linear-gradient(180deg, var(--deep-navy) 0%, var(--gradient-mid-1) 100%);
 }
 
 .marketing2-section-problem {
-  background: linear-gradient(180deg, 
-    var(--gradient-step-5) 0%, 
-    var(--gradient-step-6) 25%, 
-    var(--gradient-step-7) 50%, 
-    var(--gradient-step-8) 75%, 
-    var(--surface-dark) 100%
-  );
+  background: linear-gradient(180deg, var(--gradient-mid-1) 0%, var(--gradient-mid-2) 100%);
 }
 
 .marketing2-section-vision {
-  background: linear-gradient(180deg, 
-    var(--surface-dark) 0%, 
-    var(--gradient-step-8) 25%, 
-    var(--gradient-step-9) 50%, 
-    var(--gradient-step-10) 75%, 
-    #101328 100%
-  );
+  background: linear-gradient(180deg, var(--gradient-mid-2) 0%, var(--surface-dark) 100%);
 }
 
 .marketing2-section-howitworks {
-  background: linear-gradient(180deg, 
-    #101328 0%, 
-    #11142A 25%, 
-    #12152C 50%, 
-    #13162E 75%, 
-    #141730 100%
-  );
-}
-
-.marketing2-section-gametemplates {
-  background: linear-gradient(180deg, 
-    #141730 0%, 
-    #151832 25%, 
-    #161934 50%, 
-    #171A36 75%, 
-    #181B38 100%
-  );
+  background: linear-gradient(180deg, var(--surface-dark) 0%, var(--gradient-mid-3) 100%);
 }
 
 .marketing2-section-techstack {
-  background: linear-gradient(180deg, 
-    #181B38 0%, 
-    #191C3A 25%, 
-    #1A1D3C 50%, 
-    #1B1E3E 75%, 
-    #1C1F40 100%
-  );
+  background: linear-gradient(180deg, var(--gradient-mid-3) 0%, var(--gradient-mid-4) 100%);
 }
 
 .marketing2-section-token {
-  background: linear-gradient(180deg, 
-    #1C1F40 0%, 
-    #1D2042 25%, 
-    #1E2144 50%, 
-    #1F2246 75%, 
-    #202348 100%
-  );
+  background: linear-gradient(180deg, var(--gradient-mid-4) 0%, var(--gradient-mid-5) 100%);
 }
 
 .marketing2-section-roadmap {
-  background: linear-gradient(180deg, 
-    #202348 0%, 
-    #21244A 25%, 
-    #22254C 50%, 
-    #23264E 75%, 
-    var(--midnight-blue) 100%
-  );
+  background: linear-gradient(180deg, var(--gradient-mid-5) 0%, var(--midnight-blue) 100%);
 }
 
 .marketing2-section-footer-cta {
-  background: linear-gradient(180deg, 
-    var(--midnight-blue) 0%, 
-    #0B0F20 25%, 
-    #0C1022 50%, 
-    #0D1124 75%, 
-    var(--deep-navy) 100%
-  );
+  background: linear-gradient(180deg, var(--midnight-blue) 0%, var(--deep-navy) 100%);
 }
 
 /* Legacy classes for backwards compatibility */
 .marketing2-section {
-  background: transparent !important;
+  background: var(--deep-navy);
 }
 
 .marketing2-section-alt {
-  background: transparent !important;
+  background: linear-gradient(180deg, var(--deep-navy) 0%, var(--midnight-blue) 100%);
 }
 
 /* Card Styling - Darker backgrounds */
 .marketing2-card {
-  background: var(--surface-dark) !important;
-  border: 1px solid rgba(33, 150, 243, 0.2) !important;
-  color: var(--pure-white) !important;
+  background: var(--surface-dark);
+  border: 1px solid rgba(33, 150, 243, 0.2);
+  color: var(--pure-white);
 }
 
 .marketing2-card:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 0 40px rgba(33, 150, 243, 0.3) !important;
-  background: rgba(15, 22, 41, 0.8) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(33, 150, 243, 0.3);
+  background: var(--gradient-mid-3);
 }
 
 /* Text Hierarchy */
 .marketing2-headline {
-  color: var(--pure-white) !important;
+  color: var(--pure-white);
 }
 
 .marketing2-body {
-  color: var(--light-gray) !important;
+  color: var(--light-gray);
 }
 
 .marketing2-emphasized {
-  color: var(--slate-gray) !important;
+  color: var(--slate-gray);
 }
 
 .marketing2-accent {
-  color: var(--bright-orange) !important;
+  color: var(--bright-orange);
 }
 
 .marketing2-secondary-accent {
-  color: var(--electric-blue) !important;
+  color: var(--electric-blue);
 }
 
 /* Buttons */
 .marketing2-btn-primary {
-  background: var(--bright-orange) !important;
-  color: var(--pure-white) !important;
-  border: none !important;
+  background: var(--bright-orange);
+  color: var(--pure-white);
+  border: none;
 }
 
 .marketing2-btn-primary:hover {
-  background: #FF7043 !important; /* Brighter orange tone */
-  transform: translateY(-2px) !important;
+  background: #FF7043; /* Brighter orange tone */
+  transform: translateY(-2px);
 }
 
 .marketing2-btn-secondary {
-  background: transparent !important;
-  border: 2px solid var(--electric-blue) !important;
-  color: var(--electric-blue) !important;
+  background: transparent;
+  border: 2px solid var(--electric-blue);
+  color: var(--electric-blue);
 }
 
 .marketing2-btn-secondary:hover {
-  background: rgba(33, 150, 243, 0.1) !important;
-  border-color: #1976D2 !important; /* Darker blue tone */
-  color: #1976D2 !important;
-  transform: translateY(-2px) !important;
+  background: rgba(33, 150, 243, 0.1);
+  border-color: #1976D2; /* Darker blue tone */
+  color: #1976D2;
+  transform: translateY(-2px);
 }
 
 /* Special Effects */
 .marketing2-glow-orange {
-  box-shadow: 0 0 40px rgba(255, 87, 34, 0.5) !important;
+  box-shadow: 0 0 40px rgba(255, 87, 34, 0.5);
 }
 
 .marketing2-glow-blue {
-  box-shadow: 0 0 40px rgba(33, 150, 243, 0.5) !important;
+  box-shadow: 0 0 40px rgba(33, 150, 243, 0.5);
 }
 
 /* Gradient Accents */
 .marketing2-gradient-orange {
-  background: linear-gradient(135deg, var(--bright-orange) 0%, #FF006E 100%) !important;
+  background: linear-gradient(135deg, var(--bright-orange) 0%, #FF006E 100%);
 }
 
 .marketing2-gradient-blue {
-  background: linear-gradient(135deg, var(--electric-blue) 0%, #3F51B5 100%) !important;
+  background: linear-gradient(135deg, var(--electric-blue) 0%, #3F51B5 100%);
 }
 
 /* Header & Footer - Darker backgrounds */
 .marketing2-header {
-  background: rgba(5, 8, 18, 0.95) !important;
-  backdrop-filter: blur(10px) !important;
-  border-bottom: 1px solid rgba(33, 150, 243, 0.2) !important;
+  background: rgba(5, 8, 18, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(33, 150, 243, 0.2);
 }
 
 .marketing2-footer {
-  background: var(--surface-dark) !important;
-  border-top: 1px solid rgba(33, 150, 243, 0.2) !important;
+  background: var(--surface-dark);
+  border-top: 1px solid rgba(33, 150, 243, 0.2);
 }
 
 /* Badge Styling */
 .marketing2-badge {
-  background: var(--electric-blue) !important;
-  color: var(--pure-white) !important;
+  background: var(--electric-blue);
+  color: var(--pure-white);
 }
 
 .marketing2-badge-success {
-  background: var(--success-green) !important;
-  color: var(--pure-white) !important;
+  background: var(--success-green);
+  color: var(--pure-white);
 }
 
 .marketing2-badge-warning {
-  background: var(--warning-amber) !important;
-  color: var(--pure-white) !important;
-}
-
-/* Ensure sections have no margin/padding conflicts */
-.marketing2-page section {
-  margin: 0 !important;
-}
-
-/* Override any conflicting background colors */
-.marketing2-page * {
-  background-color: inherit;
-}
-
-.marketing2-page .container {
-  background: transparent !important;
+  background: var(--warning-amber);
+  color: var(--pure-white);
 }

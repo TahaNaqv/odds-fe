@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Calendar, Trophy, TrendingUp } from 'lucide-react';
@@ -54,7 +55,7 @@ const GameTemplatesSection = () => {
   };
 
   return (
-    <section className="marketing2-section-gametemplates py-20 px-4">
+    <section className="py-20 px-4" style={{ backgroundColor: '#0A0E27' }}>
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center mb-16">
