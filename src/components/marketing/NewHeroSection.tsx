@@ -2,11 +2,11 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, FileText, Zap, MessageSquare } from 'lucide-react';
+import { ArrowRight, FileText, Zap } from 'lucide-react';
 
 const NewHeroSection = () => {
   const socialLinks = [
-    { name: "Telegram", icon: MessageSquare },
+    { name: "", icon: null, customIcon: "/lovable-uploads/c7e26bc5-0310-409e-96fb-f8052c54ff20.png" },
     { name: "", icon: null, customIcon: "/lovable-uploads/20369439-3d77-4245-902b-3acfc0bae2e6.png" }
   ];
 
