@@ -27,7 +27,7 @@ const MarketingFooter = () => {
                 className="marketing2-headline hover:marketing2-secondary-accent transition-colors"
                 aria-label="Telegram"
               >
-                <MessageCircle className="h-5 w-5" />
+                <img src="/lovable-uploads/8e4c79f6-a11c-4c89-8f8b-525fe6b6ca3a.png" alt="Telegram" className="h-5 w-5" />
               </a>
               <a 
                 href="https://x.com/odds_dev" 
