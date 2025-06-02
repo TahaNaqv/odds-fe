@@ -8,19 +8,19 @@ const ProblemSection = () => {
     {
       icon: AlertTriangle,
       title: "Hidden Operator Tax",
-      description: "Legacy systems pocket 50-70% in \"admin costs\"",
+      description: "Legacy systems pocket 50-70% in \"admin costs\".",
       color: "marketing2-accent"
     },
     {
       icon: Lock,
       title: "Zero Creative Control",
-      description: "Can't build the games your community wants",
+      description: "Can't build the games your community wants.",
       color: "text-orange-400"
     },
     {
       icon: TrendingDown,
       title: "Can't Beat the House",
-      description: "Win or lose, the house keeps most of the money",
+      description: "Win or lose, the house keeps most of the money.",
       color: "text-yellow-400"
     }
   ];
