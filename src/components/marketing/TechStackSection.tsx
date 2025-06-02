@@ -9,25 +9,25 @@ const TechStackSection = () => {
     {
       icon: Code,
       title: "Modular Smart Contracts",
-      description: "Plug-and-play game logic",
+      description: "Plug-and-play game logic.",
       color: "text-raffle-blue"
     },
     {
       icon: Zap,
       title: "Chainlink VRF",
-      description: "Provably fair randomness",
+      description: "Provably fair randomness.",
       color: "text-app-green"
     },
     {
       icon: Shield,
       title: "Multi-Oracle Support",
-      description: "Pyth, Chainlink, UMA ready",
+      description: "Pyth, Chainlink, UMA ready.",
       color: "text-app-vivid-orange"
     },
     {
       icon: Eye,
       title: "Open Source",
-      description: "Every line will be auditable",
+      description: "Every line will be auditable.",
       color: "text-purple-400"
     }
   ];
