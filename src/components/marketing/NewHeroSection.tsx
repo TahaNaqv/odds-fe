@@ -14,8 +14,13 @@ const NewHeroSection = () => {
       <div className="container mx-auto text-center">
         <div className="mb-8">
           <div className="flex justify-center items-center gap-4 mb-6">
-            <Badge className="marketing2-badge px-4 py-2 text-sm font-medium">
-              <Zap className="mr-2 h-4 w-4" />
+            <Badge className="animate-float px-5 py-3 text-base font-medium shadow-lg" style={{
+              backgroundColor: '#10B981',
+              color: '#FFFFFF',
+              transform: 'scale(1.2)',
+              boxShadow: '0 8px 25px rgba(16, 185, 129, 0.4), 0 4px 10px rgba(16, 185, 129, 0.2)'
+            }}>
+              <Zap className="mr-2 h-5 w-5" />
               Genesis Raffle Launching Q3 2025
             </Badge>
           </div>
