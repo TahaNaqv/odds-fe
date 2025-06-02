@@ -36,7 +36,7 @@ const HowItWorksSection = () => {
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            From Idea to On-Chain Game in <span className="text-raffle-blue">Minutes</span>
+            From Idea to On-Chain Game in <span className="text-raffle-blue">Minutes</span>.
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             The creator journey simplified. Build, deploy, and earn from your community.
