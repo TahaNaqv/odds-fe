@@ -48,7 +48,17 @@ const NewHeroSection = () => {
         </div>
 
         <div className="text-center">
-          <h3 className="text-2xl font-bold mb-6">Join the Community</h3>
+          <div className="flex justify-center items-center gap-6 mb-6">
+            <h3 className="text-2xl font-bold">Join the Community</h3>
+            <img 
+              src="/lovable-uploads/7fca3aae-025c-49f8-a25d-0546338b9b97.png" 
+              alt="Mascot" 
+              className="h-16 w-16"
+              style={{
+                filter: 'drop-shadow(0 4px 8px rgba(255, 87, 34, 0.6))'
+              }}
+            />
+          </div>
           <div className="flex flex-wrap justify-center gap-4">
             {socialLinks.map((link, index) => (
               <Button key={index} variant="outline" size="lg" className="flex items-center justify-center">
