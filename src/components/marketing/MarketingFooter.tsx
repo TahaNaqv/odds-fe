@@ -36,7 +36,7 @@ const MarketingFooter = () => {
                 className="marketing2-headline hover:marketing2-secondary-accent transition-colors"
                 aria-label="Twitter"
               >
-                <Twitter className="h-5 w-5" />
+                <img src="/lovable-uploads/1fb5a741-d963-47dd-a90b-bdcd0562fccd.png" alt="Twitter" className="h-5 w-5" />
               </a>
             </div>
             <div className="flex flex-col space-y-2">
