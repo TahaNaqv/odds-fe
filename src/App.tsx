@@ -106,7 +106,7 @@ const projectId = "9d02f439d5aae2419d7a7583a53fa6cd";
 const metadata = {
   name: "Odds",
   description: "Odds Dapp Lottery System",
-  url: "https://odds.fun", // origin must match your domain & subdomain
+  url: "https://odds-fe.netlify.app",
   icons: [
     "https://preview--raffle-river.lovable.app/lovable-uploads/c955157a-772b-4ee5-b0e0-e45ef31ea9e0.png",
   ],
