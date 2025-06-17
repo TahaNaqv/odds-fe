@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -6,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Ticket, Trophy, DollarSign } from 'lucide-react';
 import { formatTimeRemaining, getTimeRemaining } from '@/utils/helpers';
 import TicketModal from '@/components/activity/TicketModal';
+import PastRaffleResultsModal from '@/components/raffle/PastRaffleResultsModal';
 import useRaffle from '@/hooks/useRaffle';
 
 // Helper function for formatting currency
@@ -143,19 +145,14 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
           </div>
         </div>
         
+        {/* Replace winner information section with modal button for past raffles */}
         {isPast && raffle.winner && (
-          <div className="mt-4 bg-raffle-off-white rounded-xl p-4 border border-raffle-light-gray animate-scale-in">
-            <p className="text-xs font-medium text-raffle-dark-gray mb-2">Winner Information</p>
-            <div className="flex flex-col gap-2">
-              <div className="flex justify-between">
-                <span className="text-sm">Winner Address:</span>
-                <span className="text-sm font-medium">{raffle.winner}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm">Winning Ticket:</span>
-                <span className="text-sm font-medium">#{raffle.winningTicket}</span>
-              </div>
-            </div>
+          <div className="mt-4">
+            <PastRaffleResultsModal 
+              raffleId={raffle.id}
+              totalTickets={raffle.ticketsSold}
+              prizePool={raffle.prizePool}
+            />
           </div>
         )}
       </CardContent>
