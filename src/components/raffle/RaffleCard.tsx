@@ -9,13 +9,34 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
-import { Ticket, Trophy } from "lucide-react";
+import { Ticket, Trophy, DollarSign, Users, Clock } from "lucide-react";
+import { formatTimeRemaining, getTimeRemaining } from "@/utils/helpers";
 import TicketModal from "@/components/activity/TicketModal";
+import PastRaffleResultsModal from "@/components/raffle/PastRaffleResultsModal";
 import useRaffle from "@/hooks/useRaffle";
 
 // Helper function for formatting currency
 const formatCurrency = (amount: number) => {
   return `$${amount.toLocaleString("en-US", { maximumFractionDigits: 2 })}`;
+};
+
+// Helper function to calculate lottery duration
+const calculateLotteryDuration = (startTime: string, endTime: string) => {
+  const start = new Date(startTime);
+  const end = new Date(endTime);
+  const diffMs = end.getTime() - start.getTime();
+
+  const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+  if (days > 0) {
+    return `${days}d ${hours}h`;
+  } else if (hours > 0) {
+    return `${hours}h ${minutes}m`;
+  } else {
+    return `${minutes}m`;
+  }
 };
 
 interface RaffleCardProps {
@@ -32,8 +53,6 @@ interface RaffleCardProps {
     referralRewards: string;
     distributedAmount: string;
     isDistributed: boolean;
-    winnerId: string | null;
-    winningTicketId: number | null;
     transactionHash: string;
     isCreated: boolean;
     tickets: Array<{
@@ -72,6 +91,11 @@ const RaffleCard = ({
       </Card>
     );
   }
+
+  // Calculate mock stats for past raffles
+  const uniqueWallets = isPast
+    ? Math.floor(raffle.totalTickets * 0.3) + Math.floor(Math.random() * 20)
+    : 0;
 
   if (isLoading) {
     return (
@@ -122,7 +146,7 @@ const RaffleCard = ({
               </span>
             </Badge>
           )}
-          {isPast && safeRaffle.winnerId && (
+          {isPast && (
             <Badge className="bg-raffle-blue text-white border-none px-2 py-1 flex items-center gap-1">
               <Trophy className="h-3 w-3" />
               <span className="text-xs font-medium">Completed</span>
@@ -150,7 +174,7 @@ const RaffleCard = ({
           {safeRaffle?.tickets?.length > 0 && (
             <TicketModal
               ticketIds={safeRaffle.tickets.map((ticket) => ticket.id)}
-              winningTicket={safeRaffle.winningTicketId}
+              winningTicket={null}
             />
           )}
         </div>
@@ -192,23 +216,45 @@ const RaffleCard = ({
           </div>
         </div>
 
-        {isPast && safeRaffle.winnerId && (
-          <div className="mt-4 bg-raffle-off-white rounded-xl p-4 border border-raffle-light-gray animate-scale-in">
-            <p className="text-xs font-medium text-raffle-dark-gray mb-2">
-              Winner Information
-            </p>
-            <div className="flex flex-col gap-2">
-              <div className="flex justify-between">
-                <span className="text-sm">Winner Address:</span>
-                <span className="text-sm font-medium">
-                  {safeRaffle.winnerId}
-                </span>
+        {/* Replace winner information section with modal button for past raffles */}
+        {isPast && (
+          <div className="mt-4">
+            <PastRaffleResultsModal
+              raffleId={String(raffle.id)}
+              totalTickets={raffle.totalTickets}
+              prizePool={raffle.maxTickets}
+            />
+          </div>
+        )}
+
+        {/* Stats section for past raffles */}
+        {isPast && (
+          <div className="mt-4 pt-4 border-t border-gray-200">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex items-center gap-2">
+                <Users className="h-4 w-4 text-muted-foreground" />
+                <div>
+                  <p className="text-sm font-medium">{uniqueWallets}</p>
+                  <p className="text-xs text-muted-foreground">
+                    Unique wallets
+                  </p>
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-sm">Winning Ticket:</span>
-                <span className="text-sm font-medium">
-                  #{safeRaffle.winningTicketId}
-                </span>
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4 text-muted-foreground" />
+                <div>
+                  <p className="text-sm font-medium">
+                    {raffle.createdAt
+                      ? calculateLotteryDuration(
+                          raffle.createdAt,
+                          raffle.updatedAt
+                        )
+                      : "N/A"}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Lottery duration
+                  </p>
+                </div>
               </div>
             </div>
           </div>
