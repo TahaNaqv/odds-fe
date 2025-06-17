@@ -16,14 +16,11 @@ import { formatAddress, copyToClipboard } from "@/utils/helpers";
 import { NETWORK } from "@/utils/constants";
 import { toast } from "@/hooks/use-toast";
 import { useAppKitAccount } from "@reown/appkit/react";
-
-// Types for our leaderboard data
-type LeaderboardEntry = {
-  wallet: string;
-  referees: number;
-  earnings: number;
-  referralCode: string;
-};
+import {
+  getLeaderboard,
+  getUserReferralStats,
+  LeaderboardEntry,
+} from "@/services/referral";
 
 // Type for sort options
 type SortField = "referees" | "earnings";
@@ -62,113 +59,42 @@ const ReferralLeaderboardPage = () => {
     });
   };
 
-  // Function to simulate fetching user referral data
+  // Fetch user referral data
   useEffect(() => {
-    if (isConnected && address) {
-      setIsLoading(true);
-      // Simulate API call delay
-      setTimeout(() => {
-        // Generate mock data based on wallet address
-        // In a real app, this would come from your backend
-        const lastDigit = parseInt(address.slice(-1), 16);
-
-        // 20% chance of not having made a purchase yet (no referral code)
-        if (lastDigit < 3) {
+    const fetchUserData = async () => {
+      if (isConnected && address) {
+        setIsLoading(true);
+        try {
+          const data = await getUserReferralStats(address);
+          setUserReferralData(data);
+        } catch (error) {
+          console.error("Error fetching user referral data:", error);
           setUserReferralData(null);
-        } else {
-          const referralCode =
-            address.substring(2, 6) + address.substring(address.length - 4);
-          setUserReferralData({
-            wallet: address,
-            referees: lastDigit * 3,
-            earnings: lastDigit * 25.5,
-            referralCode: referralCode.toLowerCase(),
-          });
+        } finally {
+          setIsLoading(false);
         }
+      } else {
+        setUserReferralData(null);
         setIsLoading(false);
-      }, 1000);
-    } else {
-      setUserReferralData(null);
-      setIsLoading(false);
-    }
+      }
+    };
+
+    fetchUserData();
   }, [isConnected, address]);
 
-  // Function to fetch leaderboard data
+  // Fetch leaderboard data
   useEffect(() => {
-    // Generate mock leaderboard data
-    const mockLeaderboard: LeaderboardEntry[] = [
-      {
-        wallet: "0x1234567890abcdef1234567890abcdef12345678",
-        referees: 128,
-        earnings: 3456.75,
-        referralCode: "1234abcd",
-      },
-      {
-        wallet: "0xabcdef1234567890abcdef1234567890abcdef12",
-        referees: 95,
-        earnings: 2580.25,
-        referralCode: "abcd5678",
-      },
-      {
-        wallet: "0x7890abcdef1234567890abcdef1234567890abcd",
-        referees: 82,
-        earnings: 1850.5,
-        referralCode: "7890cdef",
-      },
-      {
-        wallet: "0x3456789012345678901234567890123456789012",
-        referees: 76,
-        earnings: 1720.0,
-        referralCode: "3456cdef",
-      },
-      {
-        wallet: "0x9012345678901234567890123456789012345678",
-        referees: 64,
-        earnings: 1280.5,
-        referralCode: "9012def1",
-      },
-      {
-        wallet: "0x5678901234567890123456789012345678901234",
-        referees: 52,
-        earnings: 980.25,
-        referralCode: "5678cdef",
-      },
-      {
-        wallet: "0x2345678901234567890123456789012345678901",
-        referees: 41,
-        earnings: 820.75,
-        referralCode: "2345abef",
-      },
-      {
-        wallet: "0x8901234567890123456789012345678901234567",
-        referees: 32,
-        earnings: 640.0,
-        referralCode: "8901cdef",
-      },
-      {
-        wallet: "0x4567890123456789012345678901234567890123",
-        referees: 28,
-        earnings: 560.5,
-        referralCode: "4567adef",
-      },
-      {
-        wallet: "0x6789012345678901234567890123456789012345",
-        referees: 21,
-        earnings: 420.25,
-        referralCode: "6789bdef",
-      },
-    ];
-
-    // Sort the data based on the current sort field and direction
-    const sortedData = [...mockLeaderboard].sort((a, b) => {
-      if (sortDirection === "asc") {
-        return a[sortField] - b[sortField];
-      } else {
-        return b[sortField] - a[sortField];
+    const fetchLeaderboard = async () => {
+      try {
+        const data = await getLeaderboard(sortField, sortDirection);
+        setLeaderboardData(data);
+      } catch (error) {
+        console.error("Error fetching leaderboard data:", error);
+        setLeaderboardData([]);
       }
-    });
+    };
 
-    setLeaderboardData(sortedData);
+    fetchLeaderboard();
   }, [sortField, sortDirection]);
 
   return (
