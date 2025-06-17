@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
@@ -63,7 +62,7 @@ const TicketCountSelector = ({ ticketCount, setTicketCount }: TicketCountSelecto
             value={ticketCount}
             onChange={handleInputChange}
             min={1}
-            className="w-16 h-8 text-center"
+            className="w-20 h-8 text-center"
           />
           <Button
             variant="outline"
