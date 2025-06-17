@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
@@ -156,22 +155,18 @@ const RaffleCard = ({ raffle, isLoading = false, isPast = false }: RaffleCardPro
           </div>
         )}
       </CardContent>
-      <CardFooter>
-        <div className="w-full flex justify-between items-center text-sm text-muted-foreground">
-          <span>
-            {isPast
-              ? `${raffle.ticketsSold} tickets bought`
-              : `${raffle.maxTickets - raffle.ticketsSold} tickets remaining`
-            }
-          </span>
-          <span>
-            {isPast
-              ? `Prize pool: ${formatCurrency(raffle.prizePool)}`
-              : `USDC $1 per ticket`
-            }
-          </span>
-        </div>
-      </CardFooter>
+      {!isPast && (
+        <CardFooter>
+          <div className="w-full flex justify-between items-center text-sm text-muted-foreground">
+            <span>
+              {`${raffle.maxTickets - raffle.ticketsSold} tickets remaining`}
+            </span>
+            <span>
+              USDC $1 per ticket
+            </span>
+          </div>
+        </CardFooter>
+      )}
     </Card>
   );
 };
