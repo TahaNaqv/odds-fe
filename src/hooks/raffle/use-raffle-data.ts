@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { RaffleData, UserActivity } from './raffle-types';
-import { raffleApi } from '@/api/raffle';
+import { raffleApi } from '@/services/raffle';
 
 export const useRaffleData = (address?: string | null) => {
   const [currentRaffle, setCurrentRaffle] = useState<RaffleData | null>(null);

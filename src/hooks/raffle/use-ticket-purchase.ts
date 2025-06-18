@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { RAFFLE } from "@/utils/constants";
-import { raffleApi } from "@/api/raffle";
+import { raffleApi } from "@/services/raffle";
 import { RaffleData, UserActivity, PurchaseTicketParams } from "./raffle-types";
 import { useAppKitAccount } from "@reown/appkit/react";
 import { useWalletClient, usePublicClient } from "wagmi";
