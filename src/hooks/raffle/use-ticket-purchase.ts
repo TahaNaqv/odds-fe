@@ -289,11 +289,89 @@ export const useTicketPurchase = (
       } catch (error: any) {
         console.error("Error purchasing tickets:", error);
 
-        const errorMessage = decodeContractError(error);
+        // Check for specific backend errors
+        if (error.response?.data?.message) {
+          const errorMessage = error.response.data.message;
 
+          // Handle specific backend error messages
+          switch (errorMessage) {
+            case "Invalid referral code":
+              toast({
+                title: "Invalid Referral Code",
+                description:
+                  "The referral code you entered is not valid. Please check the code and try again.",
+                variant: "destructive",
+              });
+              return;
+
+            case "You cannot use your own referral code":
+              toast({
+                title: "Self-Referral Not Allowed",
+                description:
+                  "You cannot use your own referral code. Please use a referral code from another user.",
+                variant: "destructive",
+              });
+              return;
+
+            case "Raffle not found":
+              toast({
+                title: "Raffle Not Found",
+                description:
+                  "The raffle you're trying to purchase tickets for could not be found.",
+                variant: "destructive",
+              });
+              return;
+
+            case "Raffle is not active":
+              toast({
+                title: "Raffle Not Active",
+                description:
+                  "This raffle is not currently active. Please try a different raffle.",
+                variant: "destructive",
+              });
+              return;
+
+            default:
+              // Check for auto-entry related errors
+              if (
+                errorMessage.includes("Not enough future raffles available")
+              ) {
+                toast({
+                  title: "Auto-Entry Error",
+                  description: errorMessage,
+                  variant: "destructive",
+                });
+                return;
+              }
+
+              // Check for ticket availability errors
+              if (
+                errorMessage.includes("Only") &&
+                errorMessage.includes("tickets available")
+              ) {
+                toast({
+                  title: "Insufficient Tickets",
+                  description: errorMessage,
+                  variant: "destructive",
+                });
+                return;
+              }
+
+              // Handle any other backend errors
+              toast({
+                title: "Purchase Failed",
+                description: errorMessage,
+                variant: "destructive",
+              });
+              return;
+          }
+        }
+
+        // Handle contract errors
+        const contractErrorMessage = decodeContractError(error);
         toast({
           title: "Purchase failed",
-          description: errorMessage,
+          description: contractErrorMessage,
           variant: "destructive",
         });
       } finally {
