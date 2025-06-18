@@ -1,5 +1,4 @@
-
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 
 interface NumberCounterProps {
   start?: number;
@@ -22,13 +21,14 @@ const NumberCounter = ({
   start = 0,
   end,
   duration = 2000,
-  className = '',
-  prefix = '',
-  suffix = '',
+  className = "",
+  prefix = "",
+  suffix = "",
   decimals = 0,
-  easingFn = (t) => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1, // Custom easing for better deceleration
+  easingFn = (t) =>
+    t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1, // Custom easing for better deceleration
   loop = false,
-  loopCount = 1
+  loopCount = 1,
 }: NumberCounterProps) => {
   const [displayValue, setDisplayValue] = useState(start);
   const startTime = useRef<number | null>(null);
@@ -36,7 +36,7 @@ const NumberCounter = ({
   const isMounted = useRef(true);
   const previousDigits = useRef<string[]>([]);
   const loopCounter = useRef(0);
-  
+
   // Animation state flag
   const [isAnimating, setIsAnimating] = useState(true);
 
@@ -45,16 +45,16 @@ const NumberCounter = ({
 
   // Format number with commas and decimals
   const formatNumber = (value: number): string => {
-    return value.toLocaleString('en-US', {
+    return value.toLocaleString("en-US", {
       minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals
+      maximumFractionDigits: decimals,
     });
   };
 
   // Convert number to array of digit characters
   const getDigitsArray = (value: number): string[] => {
     const formatted = formatNumber(value);
-    return formatted.split('');
+    return formatted.split("");
   };
 
   useEffect(() => {
@@ -62,23 +62,23 @@ const NumberCounter = ({
     setDisplayValue(start);
     startTime.current = null;
     setIsAnimating(true); // Ensure animation state is active when starting
-    
+
     // Animation function using requestAnimationFrame
     const animate = (timestamp: number) => {
       if (!startTime.current) {
         startTime.current = timestamp;
       }
-      
+
       const elapsed = timestamp - startTime.current;
       const progress = Math.min(elapsed / duration, 1);
       const easedProgress = easingFn(progress);
-      
+
       // Calculate the current value based on progress
       const range = end - start;
-      const currentValue = Math.floor(start + (easedProgress * range));
-      
+      const currentValue = Math.floor(start + easedProgress * range);
+
       setDisplayValue(currentValue);
-      
+
       // Continue animation until we reach the end
       if (progress < 1 && isMounted.current) {
         animationFrameId.current = requestAnimationFrame(animate);
@@ -94,10 +94,10 @@ const NumberCounter = ({
         setIsAnimating(false); // Animation complete
       }
     };
-    
+
     // Start animation
     animationFrameId.current = requestAnimationFrame(animate);
-    
+
     // Cleanup function
     return () => {
       isMounted.current = false;
@@ -109,27 +109,31 @@ const NumberCounter = ({
 
   // Get current digits
   const digits = getDigitsArray(displayValue);
-  
+
   // Always treat all digits as changed during animation
   // This ensures we get the slot machine effect for all digits
   const changedDigits = digits.map(() => isAnimating);
-  
+
   // Update previous digits reference
   useEffect(() => {
     previousDigits.current = digits;
   }, [digits]);
-  
+
   return (
-    <span 
-      className={`number-counter ${className} ${isAnimating ? 'is-animating' : ''}`}
+    <div
+      className={`number-counter ${className} ${
+        isAnimating ? "is-animating" : ""
+      }`}
       data-animating={isAnimating ? "true" : "false"}
       data-digits={numDigits}
     >
       {prefix}
       {digits.map((digit, index) => (
-        <span 
-          key={`${index}-${digit}`} 
-          className={`digit-container ${changedDigits[index] ? 'digit-changing' : ''}`}
+        <span
+          key={`${index}-${digit}`}
+          className={`digit-container ${
+            changedDigits[index] ? "digit-changing" : ""
+          }`}
           data-digit={digit}
         >
           <div className="digit-slot">
@@ -137,7 +141,9 @@ const NumberCounter = ({
               <div className="digit-reel">
                 {/* Generate numbers 0-9 for the slot reel effect */}
                 {Array.from({ length: 10 }).map((_, i) => (
-                  <div key={i} className="digit-value">{i}</div>
+                  <div key={i} className="digit-value">
+                    {i}
+                  </div>
                 ))}
                 <div className="digit-value final">{digit}</div>
               </div>
@@ -148,7 +154,7 @@ const NumberCounter = ({
         </span>
       ))}
       {suffix}
-    </span>
+    </div>
   );
 };
 

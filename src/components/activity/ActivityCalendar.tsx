@@ -1,10 +1,29 @@
-
 import { useState, useEffect } from "react";
-import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, isToday, parseISO } from "date-fns";
+import {
+  format,
+  addMonths,
+  subMonths,
+  startOfMonth,
+  endOfMonth,
+  eachDayOfInterval,
+  isSameMonth,
+  isSameDay,
+  isToday,
+  parseISO,
+} from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, Ticket } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Calendar as CalendarIcon,
+  ChevronLeft,
+  ChevronRight,
+  Ticket,
+} from "lucide-react";
 import useRaffle from "@/hooks/useRaffle";
 import { UserActivity } from "@/hooks/raffle/raffle-types";
 import ActivityTicketDetails from "./ActivityTicketDetails";
@@ -20,74 +39,47 @@ const ActivityCalendar = () => {
   const { userActivity } = useRaffle();
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [calendarDays, setCalendarDays] = useState<DailyActivity[]>([]);
-  
-  // Create sample future activities for May 17th and 18th, 2025
-  const sampleFutureActivities = [
-    {
-      id: "future-activity-1",
-      type: "purchase" as const,
-      raffleId: "raffle-2025",
-      timestamp: "2025-05-17T12:00:00Z",
-      ticketCount: 8,
-      totalSpent: 8,
-      token: "USDC" as const,
-      isAutoEnrolled: true,
-      autoEnrollId: "auto-enroll-future"
-    },
-    {
-      id: "future-activity-2",
-      type: "purchase" as const,
-      raffleId: "raffle-2026",
-      timestamp: "2025-05-18T12:00:00Z",
-      ticketCount: 12,
-      totalSpent: 12,
-      token: "USDT" as const,
-      isAutoEnrolled: true,
-      autoEnrollId: "auto-enroll-future"
-    }
-  ];
-  
-  // Add sample activities to userActivity for display
-  const allActivities = [...userActivity, ...sampleFutureActivities];
-  
+
   // Group activities by day
   useEffect(() => {
     const startDate = startOfMonth(currentMonth);
     const endDate = endOfMonth(currentMonth);
     const days = eachDayOfInterval({ start: startDate, end: endDate });
-    
-    const daysWithActivity = days.map(day => {
-      const dayActivities = allActivities.filter(activity => {
+
+    const daysWithActivity = days.map((day) => {
+      const dayActivities = userActivity.filter((activity) => {
         const activityDate = new Date(activity.timestamp);
         return isSameDay(activityDate, day);
       });
-      
+
       const ticketCount = dayActivities.reduce((sum, activity) => {
         if (activity.type === "purchase") {
           return sum + (activity.ticketCount || 0);
         }
         return sum;
       }, 0);
-      
-      const hasWinningTicket = dayActivities.some(activity => activity.type === "win");
-      
+
+      const hasWinningTicket = dayActivities.some(
+        (activity) => activity.type === "win"
+      );
+
       return {
         date: day,
         activities: dayActivities,
         ticketCount,
-        hasWinningTicket
+        hasWinningTicket,
       };
     });
-    
+
     setCalendarDays(daysWithActivity);
-  }, [allActivities, currentMonth]);
-  
+  }, [userActivity, currentMonth]);
+
   const nextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
   const prevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
-  
+
   // Days of the week header
   const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  
+
   return (
     <Card className="p-4 shadow-subtle">
       <div className="flex items-center justify-between mb-4">
@@ -104,58 +96,70 @@ const ActivityCalendar = () => {
           </Button>
         </div>
       </div>
-      
+
       {/* Calendar grid */}
       <div className="grid grid-cols-7 gap-1.5">
         {/* Week days header */}
         {weekDays.map((day) => (
-          <div key={day} className="text-center font-medium text-muted-foreground py-1 text-xs">
+          <div
+            key={day}
+            className="text-center font-medium text-muted-foreground py-1 text-xs"
+          >
             {day}
           </div>
         ))}
-        
+
         {/* Calendar days */}
         {calendarDays.map((dayData, i) => {
           const dayOfWeek = dayData.date.getDay();
           const isCurrentMonth = isSameMonth(dayData.date, currentMonth);
-          
+
           // Add empty cells for days before the first of the month
           const emptyDaysBefore = i === 0 ? Array(dayOfWeek).fill(null) : [];
-          
+
           return (
-            <>
-              {i === 0 && 
+            <div key={dayData.date.toISOString()}>
+              {i === 0 &&
                 emptyDaysBefore.map((_, index) => (
-                  <div key={`empty-${index}`} className="h-16 bg-secondary/30 rounded-md border border-border/30"></div>
-                ))
-              }
-              
-              <div 
-                key={dayData.date.toISOString()} 
+                  <div
+                    key={`empty-${index}`}
+                    className="h-16 bg-secondary/30 rounded-md border border-border/30"
+                  ></div>
+                ))}
+
+              <div
                 className={`h-16 p-1.5 rounded-md border relative ${
-                  isCurrentMonth 
-                    ? "border-border" 
+                  isCurrentMonth
+                    ? "border-border"
                     : "border-border/30 bg-secondary/30 opacity-50"
                 } ${
-                  isToday(dayData.date) ? "ring-1 ring-primary ring-offset-1" : ""
+                  isToday(dayData.date)
+                    ? "ring-1 ring-primary ring-offset-1"
+                    : ""
                 }`}
               >
                 <div className="flex justify-between items-start">
-                  <span className={`text-xs font-medium ${
-                    isToday(dayData.date) ? "text-primary" : "text-high-contrast"
-                  }`}>
+                  <span
+                    className={`text-xs font-medium ${
+                      isToday(dayData.date)
+                        ? "text-primary"
+                        : "text-high-contrast"
+                    }`}
+                  >
                     {format(dayData.date, "d")}
                   </span>
-                  
+
                   {dayData.ticketCount > 0 && (
                     <Popover>
                       <PopoverTrigger asChild>
-                        <Button 
-                          size="sm" 
-                          variant={dayData.hasWinningTicket ? "default" : "outline"}
+                        <Button
+                          size="sm"
+                          variant={
+                            dayData.hasWinningTicket ? "default" : "outline"
+                          }
                           className={`h-5 px-1.5 gap-0.5 text-xs ${
-                            dayData.hasWinningTicket 
-                              ? "bg-yellow-500 hover:bg-yellow-600 text-white" 
+                            dayData.hasWinningTicket
+                              ? "bg-yellow-500 hover:bg-yellow-600 text-white"
                               : "text-primary"
                           }`}
                         >
@@ -164,8 +168,8 @@ const ActivityCalendar = () => {
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent className="w-80 p-0">
-                        <ActivityTicketDetails 
-                          activities={dayData.activities} 
+                        <ActivityTicketDetails
+                          activities={dayData.activities}
                           date={dayData.date}
                         />
                       </PopoverContent>
@@ -173,7 +177,7 @@ const ActivityCalendar = () => {
                   )}
                 </div>
               </div>
-            </>
+            </div>
           );
         })}
       </div>

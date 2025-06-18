@@ -1,22 +1,21 @@
-
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Clock, Flame, TrendingUp, Zap } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import NumberCounter from '@/components/animations/NumberCounter';
+import React, { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Clock, Flame, TrendingUp, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
+import NumberCounter from "@/components/animations/NumberCounter";
 
 const LiveStatsSection = () => {
   const [timeLeft, setTimeLeft] = useState({
     hours: 23,
     minutes: 45,
-    seconds: 32
+    seconds: 32,
   });
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(prev => {
+      setTimeLeft((prev) => {
         if (prev.seconds > 0) {
           return { ...prev, seconds: prev.seconds - 1 };
         } else if (prev.minutes > 0) {
@@ -39,12 +38,13 @@ const LiveStatsSection = () => {
             <Flame className="mr-2 h-4 w-4" />
             Live Now
           </Badge>
-          
+
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Current Raffle <span className="text-raffle-blue">Ends Soon</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Don't miss your chance to win! The current raffle is heating up with growing prizes.
+            Don't miss your chance to win! The current raffle is heating up with
+            growing prizes.
           </p>
         </div>
 
@@ -61,21 +61,27 @@ const LiveStatsSection = () => {
               <div className="flex justify-center space-x-8">
                 <div className="text-center">
                   <div className="text-4xl md:text-6xl font-bold text-raffle-blue">
-                    {timeLeft.hours.toString().padStart(2, '0')}
+                    {timeLeft.hours.toString().padStart(2, "0")}
                   </div>
-                  <div className="text-gray-400 uppercase tracking-wide">Hours</div>
+                  <div className="text-gray-400 uppercase tracking-wide">
+                    Hours
+                  </div>
                 </div>
                 <div className="text-center">
                   <div className="text-4xl md:text-6xl font-bold text-raffle-blue">
-                    {timeLeft.minutes.toString().padStart(2, '0')}
+                    {timeLeft.minutes.toString().padStart(2, "0")}
                   </div>
-                  <div className="text-gray-400 uppercase tracking-wide">Minutes</div>
+                  <div className="text-gray-400 uppercase tracking-wide">
+                    Minutes
+                  </div>
                 </div>
                 <div className="text-center">
                   <div className="text-4xl md:text-6xl font-bold text-raffle-blue">
-                    {timeLeft.seconds.toString().padStart(2, '0')}
+                    {timeLeft.seconds.toString().padStart(2, "0")}
                   </div>
-                  <div className="text-gray-400 uppercase tracking-wide">Seconds</div>
+                  <div className="text-gray-400 uppercase tracking-wide">
+                    Seconds
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -99,9 +105,9 @@ const LiveStatsSection = () => {
                   <Zap className="mr-1 h-4 w-4" />
                   +12% in last hour
                 </Badge>
-                <p className="text-gray-400">
+                <div className="text-gray-400">
                   <NumberCounter end={127} /> tickets sold
-                </p>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -109,12 +115,16 @@ const LiveStatsSection = () => {
 
         <div className="text-center">
           <Link to="/">
-            <Button size="lg" className="px-12 py-4 text-xl font-semibold animate-pulse">
+            <Button
+              size="lg"
+              className="px-12 py-4 text-xl font-semibold animate-pulse"
+            >
               Enter Current Raffle
             </Button>
           </Link>
           <p className="text-sm text-gray-400 mt-4">
-            Your odds improve as fewer people participate. Early entry = better chances!
+            Your odds improve as fewer people participate. Early entry = better
+            chances!
           </p>
         </div>
       </div>

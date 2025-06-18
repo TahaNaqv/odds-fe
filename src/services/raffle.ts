@@ -26,6 +26,14 @@ export const raffleApi = {
     return response.data;
   },
 
+  // Get user activity statistics
+  getUserActivityStats: async (walletAddress: string) => {
+    const response = await axiosInstance.get(
+      `${apiUrl}/raffles/user/${walletAddress}/activity/stats`
+    );
+    return response.data;
+  },
+
   // Purchase tickets
   purchaseTicket: async (
     raffleId: number,
@@ -45,18 +53,18 @@ export const raffleApi = {
   },
 
   // Set auto-enrollment
-  setAutoEnroll: async (data: {
-    walletAddress: string;
-    endDate: Date;
-    ticketCount: number;
-    token: string;
-  }) => {
-    const response = await axiosInstance.post(
-      `${apiUrl}/raffles/auto-enroll`,
-      data
-    );
-    return response.data;
-  },
+  // setAutoEnroll: async (data: {
+  //   walletAddress: string;
+  //   endDate: Date;
+  //   ticketCount: number;
+  //   token: string;
+  // }) => {
+  //   const response = await axiosInstance.post(
+  //     `${apiUrl}/raffles/auto-enroll`,
+  //     data
+  //   );
+  //   return response.data;
+  // },
 
   // Get raffle tickets
   getRaffleTickets: async (

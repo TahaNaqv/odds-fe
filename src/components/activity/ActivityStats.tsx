@@ -1,5 +1,5 @@
 import useRaffle from "@/hooks/useRaffle";
-import { useActivityStats } from "@/hooks/useActivityStats";
+import { useActivityStatsFromAPI } from "@/hooks/useActivityStats";
 import ConnectWalletStatsCard from "./stats/ConnectWalletStatsCard";
 import TotalTicketsCard from "./stats/TotalTicketsCard";
 import TotalWinsCard from "./stats/TotalWinsCard";
@@ -7,12 +7,29 @@ import WinRateCard from "./stats/WinRateCard";
 import { useAppKitAccount } from "@reown/appkit/react";
 
 const ActivityStats = () => {
-  const { userActivity } = useRaffle();
-  const { isConnected } = useAppKitAccount();
-  const stats = useActivityStats(userActivity);
+  const { address, isConnected } = useAppKitAccount();
+  const { stats, isLoading, error } = useActivityStatsFromAPI(address);
 
   if (!isConnected) {
     return <ConnectWalletStatsCard />;
+  }
+
+  if (isLoading) {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="h-24 bg-secondary animate-pulse rounded-lg"></div>
+        <div className="h-24 bg-secondary animate-pulse rounded-lg"></div>
+        <div className="h-24 bg-secondary animate-pulse rounded-lg"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-muted-foreground">{error}</p>
+      </div>
+    );
   }
 
   return (

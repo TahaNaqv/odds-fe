@@ -8,6 +8,7 @@ export const useAuth = () => {
   const { address, isConnected } = useAppKitAccount();
   const { walletProvider } = useAppKitProvider("eip155");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const signMessage = useCallback(
     async (message: string) => {
@@ -28,6 +29,12 @@ export const useAuth = () => {
     if (!isConnected || !address) {
       throw new Error("Wallet not connected");
     }
+
+    if (isAuthenticating) {
+      return; // Prevent multiple simultaneous authentication attempts
+    }
+
+    setIsAuthenticating(true);
 
     try {
       // Generate a message for the user to sign
@@ -52,8 +59,10 @@ export const useAuth = () => {
       console.error("Authentication error:", error);
       setIsAuthenticated(false);
       throw error;
+    } finally {
+      setIsAuthenticating(false);
     }
-  }, [isConnected, address, signMessage]);
+  }, [isConnected, address, signMessage, isAuthenticating]);
 
   const logout = useCallback(() => {
     localStorage.removeItem("token");
@@ -86,6 +95,7 @@ export const useAuth = () => {
   return {
     isConnected,
     isAuthenticated,
+    isAuthenticating,
     address,
     authenticate,
     logout,
