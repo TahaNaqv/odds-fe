@@ -33,7 +33,8 @@ import { TOKENS } from "@/utils/constants";
 const TicketPurchase = () => {
   const { isConnected, address } = useAppKitAccount();
   const { isAuthenticated, authenticate } = useAuthContext();
-  const { purchaseTicket, isLoading, currentRaffle } = useRaffle();
+  const { purchaseTicket, isLoading, currentRaffle, activeRaffles } =
+    useRaffle();
   const [ticketCount, setTicketCount] = useState(1);
   const [selectedToken, setSelectedToken] =
     useState<keyof typeof TOKENS>("mUSDC");
@@ -257,7 +258,10 @@ const TicketPurchase = () => {
                 <SelectValue placeholder="Select auto entry count" />
               </SelectTrigger>
               <SelectContent>
-                {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => (
+                {Array.from(
+                  { length: Math.min(activeRaffles.length || 1, 10) },
+                  (_, i) => i + 1
+                ).map((num) => (
                   <SelectItem key={num} value={num.toString()}>
                     {num} {num === 1 ? "Entry" : "Entries"}
                   </SelectItem>
@@ -265,7 +269,8 @@ const TicketPurchase = () => {
               </SelectContent>
             </Select>
             <p className="text-xs text-muted-foreground">
-              Number of consecutive raffles to enter automatically
+              Number of consecutive raffles to enter automatically (
+              {activeRaffles.length || 1} available)
             </p>
           </div>
 

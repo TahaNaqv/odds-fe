@@ -18,8 +18,10 @@ const useRaffle = () => {
     pastRaffles,
     userActivity,
     setUserActivity,
+    activeRaffles,
     fetchCurrentRaffle,
     fetchPastRaffles,
+    fetchActiveRaffles,
     fetchUserActivity,
   } = useRaffleData(address);
 
@@ -43,11 +45,18 @@ const useRaffle = () => {
   useEffect(() => {
     fetchCurrentRaffle();
     fetchPastRaffles();
+    fetchActiveRaffles();
 
     if (isConnected) {
       fetchUserActivity();
     }
-  }, [fetchCurrentRaffle, fetchPastRaffles, fetchUserActivity, isConnected]);
+  }, [
+    fetchCurrentRaffle,
+    fetchPastRaffles,
+    fetchActiveRaffles,
+    fetchUserActivity,
+    isConnected,
+  ]);
 
   // Check if the raffle has completed and needs to refresh
   useEffect(() => {
@@ -56,17 +65,24 @@ const useRaffle = () => {
       const timer = setTimeout(() => {
         fetchCurrentRaffle();
         fetchPastRaffles();
+        fetchActiveRaffles();
       }, 3000);
 
       return () => clearTimeout(timer);
     }
-  }, [currentRaffle?.endTime, fetchCurrentRaffle, fetchPastRaffles]);
+  }, [
+    currentRaffle?.endTime,
+    fetchCurrentRaffle,
+    fetchPastRaffles,
+    fetchActiveRaffles,
+  ]);
 
   return {
     isLoading,
     currentRaffle,
     pastRaffles,
     userActivity,
+    activeRaffles,
     purchaseTicket,
     // Add auto enrollment properties to the returned object
     autoEnrollSettings,
@@ -74,6 +90,7 @@ const useRaffle = () => {
     refreshCurrentRaffle: fetchCurrentRaffle,
     refreshUserActivity: fetchUserActivity,
     refreshPastRaffles: fetchPastRaffles,
+    refreshActiveRaffles: fetchActiveRaffles,
   };
 };
 

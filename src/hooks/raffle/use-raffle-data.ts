@@ -1,11 +1,12 @@
-import { useState, useCallback, useEffect } from 'react';
-import { RaffleData, UserActivity } from './raffle-types';
-import { raffleApi } from '@/services/raffle';
+import { useState, useCallback, useEffect } from "react";
+import { RaffleData, UserActivity } from "./raffle-types";
+import { raffleApi } from "@/services/raffle";
 
 export const useRaffleData = (address?: string | null) => {
   const [currentRaffle, setCurrentRaffle] = useState<RaffleData | null>(null);
   const [pastRaffles, setPastRaffles] = useState<RaffleData[]>([]);
   const [userActivity, setUserActivity] = useState<UserActivity[]>([]);
+  const [activeRaffles, setActiveRaffles] = useState<RaffleData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   // Fetch current raffle data
@@ -15,7 +16,7 @@ export const useRaffleData = (address?: string | null) => {
       const data = await raffleApi.getCurrentRaffle();
       setCurrentRaffle(data);
     } catch (error) {
-      console.error('Error fetching current raffle:', error);
+      console.error("Error fetching current raffle:", error);
     } finally {
       setIsLoading(false);
     }
@@ -28,7 +29,20 @@ export const useRaffleData = (address?: string | null) => {
       const { raffles } = await raffleApi.getPastRaffles();
       setPastRaffles(raffles);
     } catch (error) {
-      console.error('Error fetching past raffles:', error);
+      console.error("Error fetching past raffles:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  // Fetch active raffles
+  const fetchActiveRaffles = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const data = await raffleApi.getActiveRaffles();
+      setActiveRaffles(data.raffles || []);
+    } catch (error) {
+      console.error("Error fetching active raffles:", error);
     } finally {
       setIsLoading(false);
     }
@@ -37,13 +51,13 @@ export const useRaffleData = (address?: string | null) => {
   // Fetch user activity
   const fetchUserActivity = useCallback(async () => {
     if (!address) return;
-    
+
     setIsLoading(true);
     try {
       const data = await raffleApi.getUserActivity(address);
       setUserActivity(data);
     } catch (error) {
-      console.error('Error fetching user activity:', error);
+      console.error("Error fetching user activity:", error);
     } finally {
       setIsLoading(false);
     }
@@ -55,9 +69,11 @@ export const useRaffleData = (address?: string | null) => {
     pastRaffles,
     userActivity,
     setUserActivity,
+    activeRaffles,
     isLoading,
     fetchCurrentRaffle,
     fetchPastRaffles,
-    fetchUserActivity
+    fetchActiveRaffles,
+    fetchUserActivity,
   };
 };

@@ -88,4 +88,10 @@ export const raffleApi = {
     );
     return response.data;
   },
+
+  // Get active raffles
+  getActiveRaffles: async () => {
+    const response = await axiosInstance.get(`${apiUrl}/raffles/active`);
+    return response.data;
+  },
 };
