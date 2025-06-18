@@ -1,134 +1,199 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ToastAction } from "@/components/ui/toast";
+import { Copy, Twitter, MessageCircle } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+import { useTheme } from "@/components/ThemeProvider";
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { ToastAction } from '@/components/ui/toast';
-import { Copy, Twitter, Send } from 'lucide-react';
-import { toast } from '@/hooks/use-toast';
-import { copyToClipboard, shareOnTwitter, shareOnTelegram } from '@/utils/helpers';
-import { useTheme } from '@/components/ThemeProvider';
+// Generate referral link with auto-filled referral code
+const generateReferralLink = (referralCode: string) => {
+  const baseUrl = window.location.origin;
+  return `${baseUrl}/?ref=${referralCode}`;
+};
 
-interface ReferralShareProps {
+// Copy referral link to clipboard
+const copyReferralLink = async (referralLink: string) => {
+  try {
+    await navigator.clipboard.writeText(referralLink);
+    toast({
+      title: "Link copied!",
+      description: "Referral link copied to clipboard",
+      duration: 3000,
+    });
+  } catch (error) {
+    console.error("Failed to copy link:", error);
+    toast({
+      title: "Copy failed",
+      description: "Failed to copy link to clipboard",
+      variant: "destructive",
+    });
+  }
+};
+
+// Share on Twitter
+const shareOnTwitter = (
+  referralLink: string,
+  raffleId: string,
+  ticketCount: number
+) => {
+  const text = `Just purchased ${ticketCount} tickets for Raffle #${raffleId} on Ødds! 🎲\n\nJoin me and get your own referral code:\n${referralLink}\n\n#Web3 #Base #DeFi #Raffle`;
+  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+    text
+  )}`;
+  window.open(url, "_blank");
+};
+
+// Share on Telegram
+const shareOnTelegram = (
+  referralLink: string,
+  raffleId: string,
+  ticketCount: number
+) => {
+  const text = `Just purchased ${ticketCount} tickets for Raffle #${raffleId} on Ødds! 🎲\n\nJoin me and get your own referral code:\n${referralLink}`;
+  const url = `https://t.me/share/url?url=${encodeURIComponent(
+    referralLink
+  )}&text=${encodeURIComponent(text)}`;
+  window.open(url, "_blank");
+};
+
+interface ReferralShareActionProps {
   raffleId: string;
   ticketCount: number;
-  referralLink: string;
-  message: string;
+  referralCode: string;
 }
 
-const ReferralShareToast = ({ raffleId, ticketCount, referralLink, message }: ReferralShareProps) => {
+const ReferralShareAction = ({
+  raffleId,
+  ticketCount,
+  referralCode,
+}: ReferralShareActionProps) => {
+  const { theme } = useTheme();
+  const referralLink = generateReferralLink(referralCode);
+
+  // Theme classes
+  const twitterBgClass =
+    theme === "neon"
+      ? "bg-[#1DA1F2] hover:bg-[#1a94e0]"
+      : theme === "gold"
+      ? "bg-[#1DA1F2] hover:bg-[#1a94e0]"
+      : theme === "cyber"
+      ? "bg-[#1DA1F2] hover:bg-[#1a94e0]"
+      : "bg-[#1DA1F2] hover:bg-[#1a94e0]";
+
+  const telegramBgClass =
+    theme === "neon"
+      ? "bg-[#0088cc] hover:bg-[#007ab8]"
+      : theme === "gold"
+      ? "bg-[#0088cc] hover:bg-[#007ab8]"
+      : theme === "cyber"
+      ? "bg-[#0088cc] hover:bg-[#007ab8]"
+      : "bg-[#0088cc] hover:bg-[#007ab8]";
+
+  return (
+    <div className="flex flex-wrap gap-1.5 justify-end mt-1">
+      <Button
+        onClick={() => shareOnTwitter(referralLink, raffleId, ticketCount)}
+        size="icon"
+        className={`${twitterBgClass} text-white rounded-full h-8 w-8 flex items-center justify-center p-0`}
+        aria-label="Share on Twitter"
+      >
+        <Twitter className="h-4 w-4" />
+      </Button>
+      <Button
+        onClick={() => shareOnTelegram(referralLink, raffleId, ticketCount)}
+        size="icon"
+        className={`${telegramBgClass} text-white rounded-full h-8 w-8 flex items-center justify-center p-0`}
+        aria-label="Share on Telegram"
+      >
+        <MessageCircle className="h-4 w-4" />
+      </Button>
+    </div>
+  );
+};
+
+// Referral link with copy button (for use in description)
+export const ReferralLinkBox = ({ referralCode }: { referralCode: string }) => {
   const [copying, setCopying] = useState(false);
   const { theme } = useTheme();
-  
+  const referralLink = generateReferralLink(referralCode);
+  const borderClass =
+    theme === "neon"
+      ? "neon-border"
+      : theme === "gold"
+      ? "gold-border"
+      : theme === "cyber"
+      ? "cyber-border"
+      : "";
+  const hoverBgClass =
+    theme === "neon"
+      ? "hover:bg-[#C3073F]/20"
+      : theme === "gold"
+      ? "hover:bg-[#FFD700]/20"
+      : theme === "cyber"
+      ? "hover:bg-[#00FFFF]/20"
+      : "";
+  const textColorClass =
+    theme === "neon"
+      ? "text-[#C3073F]"
+      : theme === "gold"
+      ? "text-[#FFD700]"
+      : theme === "cyber"
+      ? "text-[#00FFFF]"
+      : "";
+
   const handleCopyLink = async () => {
     setCopying(true);
-    const success = await copyToClipboard(referralLink);
-    
-    if (success) {
-      toast({
-        title: "Link copied!",
-        description: "Referral link copied to clipboard",
-      });
-    } else {
-      toast({
-        title: "Copy failed",
-        description: "Could not copy the referral link",
-        variant: "destructive",
-      });
-    }
-    
+    await copyReferralLink(referralLink);
     setCopying(false);
   };
-  
-  const handleTwitterShare = () => {
-    shareOnTwitter(message);
-  };
-  
-  const handleTelegramShare = () => {
-    shareOnTelegram(message);
-  };
 
-  // Determine button styles and border classes based on theme
-  const twitterBgClass = theme === 'neon' ? 'bg-[#1DA1F2] hover:bg-[#1a94e0]' : 
-                          theme === 'gold' ? 'bg-[#1DA1F2] hover:bg-[#1a94e0]' : 
-                          theme === 'cyber' ? 'bg-[#1DA1F2] hover:bg-[#1a94e0]' :
-                          'bg-[#1DA1F2] hover:bg-[#1a94e0]';
-                          
-  const telegramBgClass = theme === 'neon' ? 'bg-[#0088cc] hover:bg-[#007ab8]' : 
-                           theme === 'gold' ? 'bg-[#0088cc] hover:bg-[#007ab8]' :
-                           theme === 'cyber' ? 'bg-[#0088cc] hover:bg-[#007ab8]' : 
-                           'bg-[#0088cc] hover:bg-[#007ab8]';
-                           
-  const borderClass = theme === 'neon' ? 'neon-border' : 
-                       theme === 'gold' ? 'gold-border' : 
-                       theme === 'cyber' ? 'cyber-border' : '';
-                       
-  const hoverBgClass = theme === 'neon' ? 'hover:bg-[#C3073F]/20' : 
-                        theme === 'gold' ? 'hover:bg-[#FFD700]/20' : 
-                        theme === 'cyber' ? 'hover:bg-[#00FFFF]/20' : '';
-                        
-  const textColorClass = theme === 'neon' ? 'text-[#C3073F]' : 
-                          theme === 'gold' ? 'text-[#FFD700]' :
-                          theme === 'cyber' ? 'text-[#00FFFF]' : '';
-  
   return (
-    <div className="flex flex-col space-y-3">
-      <p className="font-medium mb-1">Your referral link is ready to share:</p>
-      
-      <div className={`flex items-center justify-between rounded-lg bg-muted p-2 text-xs ${borderClass}`}>
-        <span className="flex-1 truncate mr-2">{referralLink}</span>
-        <Button 
-          onClick={handleCopyLink} 
-          size="sm" 
-          variant="ghost" 
-          className={`h-7 w-7 p-0 ${hoverBgClass}`}
-          disabled={copying}
-        >
-          <Copy className={`h-3.5 w-3.5 ${textColorClass}`} />
-          <span className="sr-only">Copy link</span>
-        </Button>
-      </div>
-      
-      <div className="flex space-x-2 justify-end">
-        <Button 
-          onClick={handleTwitterShare}
-          size="sm" 
-          className={`${twitterBgClass} text-white`}
-        >
-          <Twitter className="mr-1 h-4 w-4" />
-          Twitter
-        </Button>
-        
-        <Button 
-          onClick={handleTelegramShare}
-          size="sm" 
-          className={`${telegramBgClass} text-white`}
-        >
-          <Send className="mr-1 h-4 w-4" />
-          Telegram
-        </Button>
-      </div>
+    <div
+      className={`flex items-center rounded-md bg-muted p-1.5 text-xs ${borderClass} overflow-x-auto max-w-full mt-2`}
+      style={{ WebkitOverflowScrolling: "touch" }}
+    >
+      <span
+        className="flex-1 font-mono text-xs whitespace-nowrap overflow-x-auto max-w-[140px] md:max-w-[220px]"
+        style={{ WebkitOverflowScrolling: "touch" }}
+      >
+        {referralLink}
+      </span>
+      <Button
+        onClick={handleCopyLink}
+        size="sm"
+        variant="ghost"
+        className={`h-5 w-5 p-0 flex-shrink-0 ml-1 ${hoverBgClass}`}
+        disabled={copying}
+      >
+        <Copy className={`h-2.5 w-2.5 ${textColorClass}`} />
+        <span className="sr-only">Copy link</span>
+      </Button>
     </div>
   );
 };
 
 export const showReferralToast = (
-  raffleId: string, 
-  ticketCount: number, 
-  referralLink: string
+  raffleId: string,
+  ticketCount: number,
+  referralCode: string
 ) => {
-  const message = `I'm in Raffle #${raffleId} with ${ticketCount} ticket(s) on Ødds 🎲\nOne ticket. One shot. One win. 💸\n👉 ${referralLink}`;
-  
   toast({
-    title: "Tickets purchased!",
-    description: "Bravo! May the Ødds be in your favor",
+    title: "Tickets purchased! 🎉",
+    description: (
+      <div>
+        <div>{`You've purchased ${ticketCount} tickets for Raffle #${raffleId}. Share your referral link to earn rewards!`}</div>
+        <ReferralLinkBox referralCode={referralCode} />
+      </div>
+    ),
     action: (
       <ToastAction altText="Share referral link">
-        <ReferralShareToast 
+        <ReferralShareAction
           raffleId={raffleId}
           ticketCount={ticketCount}
-          referralLink={referralLink}
-          message={message}
+          referralCode={referralCode}
         />
       </ToastAction>
     ),
+    duration: 15000,
   });
 };

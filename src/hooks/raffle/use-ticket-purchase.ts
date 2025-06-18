@@ -239,11 +239,15 @@ export const useTicketPurchase = (
 
             // Show success message with referral code if this was the first purchase
             if (userReferralCode) {
-              toast({
-                title: "Tickets Purchased! 🎉",
-                description: `You've purchased ${ticketCount} tickets for Raffle #${currentRaffle.id}.\n\nShare your referral link to earn rewards:\n${userReferralCode}`,
-                duration: 10000,
-              });
+              // Import and use the ReferralShareToast component
+              const { showReferralToast } = await import(
+                "@/components/raffle/ReferralShareToast"
+              );
+              showReferralToast(
+                currentRaffle.id,
+                ticketCount,
+                userReferralCode
+              );
             } else {
               toast({
                 title: "Tickets Purchased! 🎉",

@@ -23,17 +23,38 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { Zap, Calendar, DollarSign } from "lucide-react";
+import AutoEnrollDatePicker from "./ticket-purchase/AutoEnrollDatePicker";
+import { RAFFLE } from "@/utils/constants";
+import { TOKENS } from "@/utils/constants";
 
 const TicketPurchase = () => {
   const { isConnected, address } = useAppKitAccount();
   const { isAuthenticated, authenticate } = useAuthContext();
   const { purchaseTicket, isLoading, currentRaffle } = useRaffle();
   const [ticketCount, setTicketCount] = useState(1);
+  const [selectedToken, setSelectedToken] =
+    useState<keyof typeof TOKENS>("mUSDC");
   const [autoEntry, setAutoEntry] = useState(1);
-  const [referralCode, setReferralCode] = useState<string>("");
+  const [referralCode, setReferralCode] = useState("");
   const [referralError, setReferralError] = useState<string | null>(null);
   const [maxTicketsError, setMaxTicketsError] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+
+  // Auto-fill referral code from URL if present
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const refCode = urlParams.get("ref");
+    if (refCode && isValidReferralCode(refCode)) {
+      setReferralCode(refCode);
+      // Clear the ref parameter from URL to avoid confusion
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.delete("ref");
+      window.history.replaceState({}, "", newUrl.toString());
+    }
+  }, []);
 
   const isValidCode = useMemo(() => {
     if (!referralCode) {
@@ -62,7 +83,7 @@ const TicketPurchase = () => {
   }, [ticketCount, autoEntry]);
 
   // Calculate the total cost
-  const totalCost = totalTickets * 1; // $1 per ticket
+  const totalCost = totalTickets * RAFFLE.ticketPrice;
 
   // Check if purchase exceeds maximum available tickets
   useEffect(() => {
@@ -120,7 +141,7 @@ const TicketPurchase = () => {
     try {
       await purchaseTicket({
         ticketCount,
-        token: "USDC",
+        token: selectedToken,
         autoEntry,
         referralCode: referralCode.toLowerCase(),
       });
@@ -130,6 +151,25 @@ const TicketPurchase = () => {
       setIsProcessing(false);
     }
   };
+
+  const handleReferralCodeChange = (value: string) => {
+    setReferralCode(value);
+    if (referralError) {
+      setReferralError(null);
+    }
+  };
+
+  if (!currentRaffle) {
+    return (
+      <Card className="shadow-subtle">
+        <CardContent className="p-6">
+          <div className="text-center">
+            <p className="text-muted-foreground">Loading raffle...</p>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="w-full animate-fade-in shadow-subtle border border-raffle-light-gray">
@@ -158,6 +198,24 @@ const TicketPurchase = () => {
             </div>
           )}
 
+          {/* Token Selection */}
+          {/* <div className="space-y-2">
+            <Label htmlFor="token">Token</Label>
+            <div className="grid grid-cols-3 gap-2">
+              {Object.entries(TOKENS).map(([key, token]) => (
+                <Button
+                  key={key}
+                  variant={selectedToken === key ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setSelectedToken(key as keyof typeof TOKENS)}
+                  className="justify-start"
+                >
+                  {token.symbol}
+                </Button>
+              ))}
+            </div>
+          </div> */}
+
           {/* Referral Code Input */}
           <div className="space-y-2">
             <label
@@ -170,7 +228,7 @@ const TicketPurchase = () => {
               id="referralCode"
               placeholder="Enter 8-character referral code"
               value={referralCode}
-              onChange={(e) => setReferralCode(e.target.value)}
+              onChange={(e) => handleReferralCodeChange(e.target.value)}
               className={referralError ? "border-app-light-pink" : ""}
               disabled={isProcessing}
             />
