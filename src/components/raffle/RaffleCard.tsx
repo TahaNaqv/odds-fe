@@ -77,8 +77,6 @@ const RaffleCard = ({
   isLoading = false,
   isPast = false,
 }: RaffleCardProps) => {
-  const { userActivity = [] } = useRaffle();
-
   // If no raffle data is available, show a message
   if (!raffle && !isLoading) {
     return (
@@ -142,7 +140,7 @@ const RaffleCard = ({
               className="bg-raffle-light-blue text-raffle-blue border-none px-3 py-1.5 flex items-center gap-2"
             >
               <span className="text-base font-medium tracking-wide">
-                Target: {formatCurrency(Number(safeRaffle.totalPrizeAmount))}
+                Target: {formatCurrency(Number(safeRaffle.maxTickets))}
               </span>
             </Badge>
           )}
@@ -219,11 +217,7 @@ const RaffleCard = ({
         {/* Replace winner information section with modal button for past raffles */}
         {isPast && (
           <div className="mt-4">
-            <PastRaffleResultsModal
-              raffleId={String(raffle.id)}
-              totalTickets={raffle.totalTickets}
-              prizePool={raffle.maxTickets}
-            />
+            <PastRaffleResultsModal raffle={safeRaffle} />
           </div>
         )}
 

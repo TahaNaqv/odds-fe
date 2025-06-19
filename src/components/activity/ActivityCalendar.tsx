@@ -168,10 +168,12 @@ const ActivityCalendar = () => {
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent className="w-80 p-0">
-                        <ActivityTicketDetails
-                          activities={dayData.activities}
-                          date={dayData.date}
-                        />
+                        <div style={{ maxHeight: "30rem", overflowY: "auto" }}>
+                          <ActivityTicketDetails
+                            activities={dayData.activities}
+                            date={dayData.date}
+                          />
+                        </div>
                       </PopoverContent>
                     </Popover>
                   )}

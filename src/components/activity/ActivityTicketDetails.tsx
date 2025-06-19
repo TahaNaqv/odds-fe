@@ -93,9 +93,9 @@ const ActivityTicketDetails = ({
                   {formatCurrency(win.prize || 0)}
                 </span>
               </div>
-              {win.ticketIds && win.winningTicket && (
+              {win.tickets && win.winningTicket && (
                 <TicketModal
-                  ticketIds={win.ticketIds}
+                  ticketIds={win.tickets.map((t) => t.id)}
                   winningTicket={win.winningTicket}
                   timestamp={win.timestamp}
                 />
@@ -121,9 +121,9 @@ const ActivityTicketDetails = ({
                   {formatCurrency(purchase.totalSpent || 0)}
                 </span>
               </div>
-              {purchase.ticketIds && (
+              {purchase.tickets && (
                 <TicketModal
-                  ticketIds={purchase.ticketIds}
+                  ticketIds={purchase.tickets.map((t) => t.id)}
                   timestamp={purchase.timestamp}
                 />
               )}

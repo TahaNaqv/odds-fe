@@ -137,16 +137,13 @@ export const useTicketPurchase = (
 
       try {
         // First, create the transaction record
-        const response = await raffleApi.purchaseTicket(
-          parseInt(currentRaffle.id),
-          {
-            ticketCount,
-            token,
-            walletAddress: address.toLowerCase(),
-            autoEntry,
-            referralCode,
-          }
-        );
+        const response = await raffleApi.purchaseTicket(currentRaffle?.id, {
+          ticketCount,
+          token,
+          walletAddress: address.toLowerCase(),
+          autoEntry,
+          referralCode,
+        });
 
         console.log("Response:", response);
 
@@ -223,13 +220,7 @@ export const useTicketPurchase = (
             // Update current raffle only after transaction is confirmed
             const updatedRaffle: RaffleData = {
               ...currentRaffle,
-              ticketsSold: currentRaffle.ticketsSold + ticketCount,
-              prizePool:
-                currentRaffle.prizePool + ticketCount * RAFFLE.ticketPrice,
-              progress:
-                ((currentRaffle.ticketsSold + ticketCount) /
-                  currentRaffle.targetAmount) *
-                100,
+              totalTickets: currentRaffle?.totalTickets + ticketCount,
             };
             setCurrentRaffle(updatedRaffle);
 
@@ -258,8 +249,8 @@ export const useTicketPurchase = (
 
             // Check if raffle is completed
             if (
-              currentRaffle.ticketsSold + ticketCount >=
-              currentRaffle.targetAmount
+              currentRaffle.totalTickets + ticketCount >=
+              currentRaffle.maxTickets
             ) {
               toast({
                 title: "Raffle Complete!",
@@ -282,12 +273,12 @@ export const useTicketPurchase = (
         const newActivity: UserActivity = {
           id: tickets[0].id,
           type: "purchase",
-          raffleId: currentRaffle.id,
+          raffleId: String(currentRaffle.id),
           timestamp: new Date().toISOString(),
           ticketCount,
           totalSpent: ticketCount * RAFFLE.ticketPrice,
           token,
-          ticketIds: tickets.map((t) => t.ticketNumber),
+          tickets: tickets,
           status: "COMPLETED",
         };
       } catch (error: any) {

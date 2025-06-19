@@ -1,16 +1,43 @@
 import { TOKENS } from "@/utils/constants";
 
+export interface Ticket {
+  id: number;
+  ticketNumber: number;
+  groupNumber: number | null;
+  prizeAmount: string;
+  isDistributed: boolean;
+  transactionHash: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface RaffleData {
-  id: string;
-  startTime: string;
-  endTime: string | null; // Now can be null as the raffle ends when target is reached
-  ticketsSold: number;
+  id: number;
+  title: string;
+  description: string;
   maxTickets: number;
-  targetAmount: number; // Target amount to reach ($1000)
-  prizePool: number;
-  progress: number; // Percentage of target reached
-  winner?: string;
-  winningTicket?: number;
+  totalTickets: number;
+  ticketPrice: string; // Keep as string for frontend formatting compatibility
+  status: string;
+  totalPrizeAmount: string;
+  platformFee: string;
+  referralRewards: string;
+  distributedAmount: string;
+  isDistributed: boolean;
+  transactionHash: string;
+  isCreated: boolean;
+  tickets: Array<{
+    id: number;
+    ticketNumber: number;
+    groupNumber: number | null;
+    prizeAmount: string;
+    isDistributed: boolean;
+    transactionHash: string | null;
+    createdAt: string;
+    updatedAt: string;
+  }>;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface UserActivity {
@@ -23,7 +50,7 @@ export interface UserActivity {
   token?: "USDC" | "USDT" | "mUSDC";
   prize?: number;
   winningTicket?: number;
-  ticketIds?: number[];
+  tickets: Ticket[];
   referralCode?: string; // Added referralCode property
   isAutoEnrolled?: boolean;
   autoEnrollId?: string;

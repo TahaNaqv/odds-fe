@@ -60,7 +60,7 @@ const useRaffle = () => {
 
   // Check if the raffle has completed and needs to refresh
   useEffect(() => {
-    if (currentRaffle?.endTime) {
+    if (currentRaffle?.totalTickets) {
       // If the raffle has ended (reached target), refresh after a short delay
       const timer = setTimeout(() => {
         fetchCurrentRaffle();
@@ -71,7 +71,7 @@ const useRaffle = () => {
       return () => clearTimeout(timer);
     }
   }, [
-    currentRaffle?.endTime,
+    currentRaffle?.totalTickets,
     fetchCurrentRaffle,
     fetchPastRaffles,
     fetchActiveRaffles,

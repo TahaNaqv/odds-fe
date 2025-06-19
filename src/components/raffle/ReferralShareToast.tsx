@@ -33,7 +33,7 @@ const copyReferralLink = async (referralLink: string) => {
 // Share on Twitter
 const shareOnTwitter = (
   referralLink: string,
-  raffleId: string,
+  raffleId: number,
   ticketCount: number
 ) => {
   const text = `Just purchased ${ticketCount} tickets for Raffle #${raffleId} on Ødds! 🎲\n\nJoin me and get your own referral code:\n${referralLink}\n\n#Web3 #Base #DeFi #Raffle`;
@@ -46,7 +46,7 @@ const shareOnTwitter = (
 // Share on Telegram
 const shareOnTelegram = (
   referralLink: string,
-  raffleId: string,
+  raffleId: number,
   ticketCount: number
 ) => {
   const text = `Just purchased ${ticketCount} tickets for Raffle #${raffleId} on Ødds! 🎲\n\nJoin me and get your own referral code:\n${referralLink}`;
@@ -57,7 +57,7 @@ const shareOnTelegram = (
 };
 
 interface ReferralShareActionProps {
-  raffleId: string;
+  raffleId: number;
   ticketCount: number;
   referralCode: string;
 }
@@ -173,7 +173,7 @@ export const ReferralLinkBox = ({ referralCode }: { referralCode: string }) => {
 };
 
 export const showReferralToast = (
-  raffleId: string,
+  raffleId: number,
   ticketCount: number,
   referralCode: string
 ) => {
