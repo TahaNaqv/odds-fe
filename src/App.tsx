@@ -7,8 +7,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { ThemeProvider, useTheme } from "@/components/ThemeProvider";
-import { ThemePreviewBanner } from "@/components/ThemePreviewBanner";
 import { AuthProvider } from "@/contexts/AuthContext";
 import Home from "./pages/Home";
 import PastActivity from "./pages/PastActivity";
@@ -21,6 +19,8 @@ import ReferralLeaderboardPage from "./pages/ReferralLeaderboardPage";
 import MarketingLandingPage from "./pages/MarketingLandingPage";
 import MarketingLandingPage2 from "./pages/MarketingLandingPage2";
 import { useEffect } from "react";
+import { ThemeProvider, useTheme } from "@/components/ThemeProvider";
+import { ThemePreviewBanner } from "@/components/ThemePreviewBanner";
 
 // New imports for other footer pages
 const PrivacyPage = () => (
@@ -42,62 +42,62 @@ const LegalityPage = () => (
 );
 
 // Theme preview component
-const ThemeManager = () => {
-  const { setTheme } = useTheme();
-  const location = useLocation();
+// const ThemeManager = () => {
+//   const { setTheme } = useTheme();
+//   const location = useLocation();
 
-  useEffect(() => {
-    // If we're on the neon-nights preview route, set theme to neon
-    if (location.pathname === "/theme/neon-nights") {
-      setTheme("neon");
-      return;
-    }
+//   useEffect(() => {
+//     // If we're on the neon-nights preview route, set theme to neon
+//     if (location.pathname === "/theme/neon-nights") {
+//       setTheme("neon");
+//       return;
+//     }
 
-    // If we're on the digital-gold preview route, set theme to gold
-    if (location.pathname === "/theme/digital-gold") {
-      setTheme("gold");
-      return;
-    }
+//     // If we're on the digital-gold preview route, set theme to gold
+//     if (location.pathname === "/theme/digital-gold") {
+//       setTheme("gold");
+//       return;
+//     }
 
-    // If we're on the vibrant-gradient preview route, set theme to vibrant
-    if (location.pathname === "/theme/vibrant-gradient") {
-      setTheme("vibrant");
-      return;
-    }
+//     // If we're on the vibrant-gradient preview route, set theme to vibrant
+//     if (location.pathname === "/theme/vibrant-gradient") {
+//       setTheme("vibrant");
+//       return;
+//     }
 
-    // If we're on the cyberpunk-glow preview route, set theme to cyber
-    if (location.pathname === "/theme/cyberpunk-glow") {
-      setTheme("cyber");
-      return;
-    }
+//     // If we're on the cyberpunk-glow preview route, set theme to cyber
+//     if (location.pathname === "/theme/cyberpunk-glow") {
+//       setTheme("cyber");
+//       return;
+//     }
 
-    // If we're on the trusty-blues preview route, set theme to trusty
-    if (location.pathname === "/theme/trusty-blues") {
-      setTheme("trusty");
-      return;
-    }
-  }, [location.pathname, setTheme]);
+//     // If we're on the trusty-blues preview route, set theme to trusty
+//     if (location.pathname === "/theme/trusty-blues") {
+//       setTheme("trusty");
+//       return;
+//     }
+//   }, [location.pathname, setTheme]);
 
-  return (
-    <>
-      {location.pathname === "/theme/neon-nights" && (
-        <ThemePreviewBanner themeName="neon" />
-      )}
-      {location.pathname === "/theme/digital-gold" && (
-        <ThemePreviewBanner themeName="gold" />
-      )}
-      {location.pathname === "/theme/vibrant-gradient" && (
-        <ThemePreviewBanner themeName="vibrant" />
-      )}
-      {location.pathname === "/theme/cyberpunk-glow" && (
-        <ThemePreviewBanner themeName="cyber" />
-      )}
-      {location.pathname === "/theme/trusty-blues" && (
-        <ThemePreviewBanner themeName="trusty" />
-      )}
-    </>
-  );
-};
+//   return (
+//     <>
+//       {location.pathname === "/theme/neon-nights" && (
+//         <ThemePreviewBanner themeName="neon" />
+//       )}
+//       {location.pathname === "/theme/digital-gold" && (
+//         <ThemePreviewBanner themeName="gold" />
+//       )}
+//       {location.pathname === "/theme/vibrant-gradient" && (
+//         <ThemePreviewBanner themeName="vibrant" />
+//       )}
+//       {location.pathname === "/theme/cyberpunk-glow" && (
+//         <ThemePreviewBanner themeName="cyber" />
+//       )}
+//       {location.pathname === "/theme/trusty-blues" && (
+//         <ThemePreviewBanner themeName="trusty" />
+//       )}
+//     </>
+//   );
+// };
 
 const queryClient = new QueryClient();
 
@@ -148,8 +148,8 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/marketing" element={<MarketingLandingPage />} />
-              <Route path="/marketing2" element={<MarketingLandingPage2 />} />
-              <Route path="/history" element={<RaffleHistory />} />
+                  <Route path="/marketing2" element={<MarketingLandingPage2 />} />
+                  <Route path="/history" element={<RaffleHistory />} />
                   <Route path="/activity" element={<PastActivity />} />
                   <Route
                     path="/activity-preview"
@@ -166,14 +166,14 @@ function App() {
                     path="/referrals"
                     element={<ReferralLeaderboardPage />}
                   />
-                  <Route path="/theme/neon-nights" element={<Home />} />
+                  {/* <Route path="/theme/neon-nights" element={<Home />} />
                   <Route path="/theme/digital-gold" element={<Home />} />
                   <Route path="/theme/vibrant-gradient" element={<Home />} />
                   <Route path="/theme/cyberpunk-glow" element={<Home />} />
-                  <Route path="/theme/trusty-blues" element={<Home />} />
+                  <Route path="/theme/trusty-blues" element={<Home />} /> */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
-                <ThemeManager />
+                {/* <ThemeManager /> */}
               </BrowserRouter>
             </TooltipProvider>
           </AuthProvider>
