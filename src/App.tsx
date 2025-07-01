@@ -146,9 +146,9 @@ function App() {
               <Sonner />
               <BrowserRouter>
                 <Routes>
-                  <Route path="/" element={<Home />} />
+                  <Route path="/" element={<MarketingLandingPage2 />} />
+                  <Route path="/home" element={<Home />} />
                   <Route path="/marketing" element={<MarketingLandingPage />} />
-                  <Route path="/marketing2" element={<MarketingLandingPage2 />} />
                   <Route path="/history" element={<RaffleHistory />} />
                   <Route path="/activity" element={<PastActivity />} />
                   <Route

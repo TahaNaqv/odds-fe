@@ -37,7 +37,7 @@ const MarketingHeader = () => {
           </Link>
           
           {/* Play Raffle Button */}
-          <Link to="/">
+          <Link to="/home">
             <Button className="marketing2-btn-primary px-6 py-2 text-lg font-semibold">
               Play Raffle
             </Button>
