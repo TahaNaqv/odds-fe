@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Ticket, Clock, History, Trophy, Megaphone } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Header = () => {
   const location = useLocation();
@@ -62,12 +63,16 @@ const Header = () => {
                 <Ticket className="mr-2 h-4 w-4" /> Raffle
               </Button>
             </Link>
-            
+
             <Link to="/marketing">
               <Button
-                variant={isActive('/marketing') ? 'secondary' : 'ghost'}
+                variant={isActive("/marketing") ? "secondary" : "ghost"}
                 size="sm"
-                className={`rounded-lg ${isActive('/marketing') ? 'bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium' : ''}`}
+                className={`rounded-lg ${
+                  isActive("/marketing")
+                    ? "bg-raffle-light-blue text-raffle-blue dark:bg-secondary dark:text-high-contrast font-medium"
+                    : ""
+                }`}
               >
                 <Megaphone className="mr-2 h-4 w-4" /> About
               </Button>
@@ -116,8 +121,11 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Wallet Connection */}
-          <appkit-button />
+          {/* Wallet Connection and Theme Toggle */}
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <appkit-button />
+          </div>
         </div>
       </div>
     </header>
