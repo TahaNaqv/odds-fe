@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Ticket, Clock, History, Trophy, Megaphone } from "lucide-react";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Header = () => {
   const location = useLocation();
@@ -121,9 +120,8 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Wallet Connection and Theme Toggle */}
+          {/* Wallet Connection */}
           <div className="flex items-center gap-2">
-            <ThemeToggle />
             <appkit-button />
           </div>
         </div>
