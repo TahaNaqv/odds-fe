@@ -71,23 +71,8 @@ const ReferralShareAction = ({
   const referralLink = generateReferralLink(referralCode);
 
   // Theme classes
-  const twitterBgClass =
-    theme === "neon"
-      ? "bg-[#1DA1F2] hover:bg-[#1a94e0]"
-      : theme === "gold"
-      ? "bg-[#1DA1F2] hover:bg-[#1a94e0]"
-      : theme === "cyber"
-      ? "bg-[#1DA1F2] hover:bg-[#1a94e0]"
-      : "bg-[#1DA1F2] hover:bg-[#1a94e0]";
-
-  const telegramBgClass =
-    theme === "neon"
-      ? "bg-[#0088cc] hover:bg-[#007ab8]"
-      : theme === "gold"
-      ? "bg-[#0088cc] hover:bg-[#007ab8]"
-      : theme === "cyber"
-      ? "bg-[#0088cc] hover:bg-[#007ab8]"
-      : "bg-[#0088cc] hover:bg-[#007ab8]";
+  const twitterBgClass = "bg-[#1DA1F2] hover:bg-[#1a94e0]";
+  const telegramBgClass = "bg-[#0088cc] hover:bg-[#007ab8]";
 
   return (
     <div className="flex flex-wrap gap-1.5 justify-end mt-1">
@@ -116,30 +101,9 @@ export const ReferralLinkBox = ({ referralCode }: { referralCode: string }) => {
   const [copying, setCopying] = useState(false);
   const { theme } = useTheme();
   const referralLink = generateReferralLink(referralCode);
-  const borderClass =
-    theme === "neon"
-      ? "neon-border"
-      : theme === "gold"
-      ? "gold-border"
-      : theme === "cyber"
-      ? "cyber-border"
-      : "";
-  const hoverBgClass =
-    theme === "neon"
-      ? "hover:bg-[#C3073F]/20"
-      : theme === "gold"
-      ? "hover:bg-[#FFD700]/20"
-      : theme === "cyber"
-      ? "hover:bg-[#00FFFF]/20"
-      : "";
-  const textColorClass =
-    theme === "neon"
-      ? "text-[#C3073F]"
-      : theme === "gold"
-      ? "text-[#FFD700]"
-      : theme === "cyber"
-      ? "text-[#00FFFF]"
-      : "";
+  const borderClass = "";
+  const hoverBgClass = "hover:bg-accent/20";
+  const textColorClass = "text-primary";
 
   const handleCopyLink = async () => {
     setCopying(true);

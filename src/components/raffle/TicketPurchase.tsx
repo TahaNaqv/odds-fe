@@ -91,7 +91,7 @@ const TicketPurchase = () => {
     if (!currentRaffle) return;
 
     const remainingTickets =
-      currentRaffle.targetAmount - currentRaffle.ticketsSold;
+      currentRaffle.maxTickets - currentRaffle.totalTickets;
 
     if (ticketCount > remainingTickets) {
       setMaxTicketsError(`Only ${remainingTickets} tickets are available`);
@@ -127,7 +127,7 @@ const TicketPurchase = () => {
 
     // Validate ticket count against remaining tickets
     const remainingTickets =
-      currentRaffle.targetAmount - currentRaffle.ticketsSold;
+      currentRaffle.maxTickets - currentRaffle.totalTickets;
     if (ticketCount > remainingTickets) {
       toast({
         title: "Too many tickets",
