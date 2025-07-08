@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import MarketingFooter from "@/components/marketing/MarketingFooter";
 import useRaffle from "@/hooks/useRaffle";
 import HeroSection from "@/components/home/HeroSection";
 import MarketingSection from "@/components/home/MarketingSection";
@@ -33,7 +33,7 @@ const Home = () => {
         </div>
       </main>
 
-      <Footer />
+      <MarketingFooter />
     </div>
   );
 };
