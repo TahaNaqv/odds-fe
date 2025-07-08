@@ -17,21 +17,21 @@ const MarketingSection = ({ currentRaffle, isLoading }: MarketingSectionProps) =
           <RaffleCard raffle={currentRaffle} isLoading={isLoading} />
           
           {/* Marketing Copy */}
-          <div className="glass-card p-6 rounded-xl bg-gradient-to-br from-app-purple/20 to-app-blue/20 border border-app-purple/30 animate-fade-in">
+          <div className="marketing2-card p-6 rounded-xl marketing2-gradient-blue animate-fade-in">
             <div className="flex items-start gap-5">
               <div className="flex-shrink-0 relative">
-                <div className="w-16 h-16 rounded-full bg-app-purple/30 flex items-center justify-center animate-pulse-subtle">
-                  <Trophy size={32} className="text-app-bright-purple" />
+                <div className="w-16 h-16 rounded-full marketing2-card flex items-center justify-center animate-pulse-subtle">
+                  <Trophy size={32} className="marketing2-accent" />
                 </div>
-                <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-app-blue flex items-center justify-center">
-                  <Zap size={12} className="text-white" />
+                <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full marketing2-secondary-accent flex items-center justify-center">
+                  <Zap size={12} className="marketing2-headline" />
                 </div>
               </div>
               
               <div>
-                <h3 className="text-xl font-bold mb-2 text-gradient">Three Ways to Win!</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  <span className="font-medium text-white">Each $1 ticket is a unique chance to win big.</span> Your ticket could be randomly selected for the double-prize group, equal-prize group, or try again next time!
+                <h3 className="text-xl font-bold mb-2 marketing2-headline">Three Ways to Win!</h3>
+                <p className="marketing2-body text-sm leading-relaxed">
+                  <span className="font-medium marketing2-headline">Each $1 ticket is a unique chance to win big.</span> Your ticket could be randomly selected for the double-prize group, equal-prize group, or try again next time!
                 </p>
                 
                 <div className="mt-4 grid grid-cols-3 gap-3">
@@ -41,8 +41,8 @@ const MarketingSection = ({ currentRaffle, isLoading }: MarketingSectionProps) =
                     { icon: <Wallet size={16} />, text: "95% to winners" }
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-1.5">
-                      <div className="text-app-purple">{item.icon}</div>
-                      <p className="text-xs font-medium text-white">{item.text}</p>
+                      <div className="marketing2-accent">{item.icon}</div>
+                      <p className="text-xs font-medium marketing2-headline">{item.text}</p>
                     </div>
                   ))}
                 </div>
@@ -50,12 +50,12 @@ const MarketingSection = ({ currentRaffle, isLoading }: MarketingSectionProps) =
             </div>
             
             {/* New referral code explainer */}
-            <div className="mt-4 border-t border-app-purple/30 pt-4">
+            <div className="mt-4 border-t border-white/30 pt-4">
               <div className="flex items-center gap-2 mb-2">
-                <Link size={16} className="text-app-bright-purple" />
-                <h4 className="text-sm font-bold text-white">Need a referral code?</h4>
+                <Link size={16} className="marketing2-accent" />
+                <h4 className="text-sm font-bold marketing2-headline">Need a referral code?</h4>
               </div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs marketing2-body">
                 All tickets require a valid referral code from an existing player. When you purchase tickets, you'll receive your own referral code to share with others.
               </p>
             </div>
