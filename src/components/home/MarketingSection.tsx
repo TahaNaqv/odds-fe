@@ -17,7 +17,7 @@ const MarketingSection = ({ currentRaffle, isLoading }: MarketingSectionProps) =
           <RaffleCard raffle={currentRaffle} isLoading={isLoading} />
           
           {/* Marketing Copy */}
-          <div className="marketing2-card p-6 rounded-xl marketing2-gradient-blue animate-fade-in">
+          <div className="marketing2-card p-6 rounded-xl animate-fade-in">
             <div className="flex items-start gap-5">
               <div className="flex-shrink-0 relative">
                 <div className="w-16 h-16 rounded-full marketing2-card flex items-center justify-center animate-pulse-subtle">
