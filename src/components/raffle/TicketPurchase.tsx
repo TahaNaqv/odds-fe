@@ -91,7 +91,7 @@ const TicketPurchase = () => {
     if (!currentRaffle) return;
 
     const remainingTickets =
-      currentRaffle.targetAmount - currentRaffle.ticketsSold;
+      currentRaffle.maxTickets - currentRaffle.totalTickets;
 
     if (ticketCount > remainingTickets) {
       setMaxTicketsError(`Only ${remainingTickets} tickets are available`);
@@ -127,7 +127,7 @@ const TicketPurchase = () => {
 
     // Validate ticket count against remaining tickets
     const remainingTickets =
-      currentRaffle.targetAmount - currentRaffle.ticketsSold;
+      currentRaffle.maxTickets - currentRaffle.totalTickets;
     if (ticketCount > remainingTickets) {
       toast({
         title: "Too many tickets",
@@ -308,7 +308,7 @@ const TicketPurchase = () => {
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button
-          className="w-full bg-app-purple hover:bg-app-purple/90 text-white shadow-subtle font-medium rounded-xl"
+          className="w-full marketing2-btn-primary shadow-subtle font-medium rounded-xl"
           disabled={
             !isConnected ||
             isLoading ||
