@@ -23,5 +23,5 @@ export const getUserReferralStats = async (
   const response = await axiosInstance.get(
     `/referral/user-stats?wallet=${wallet}`
   );
-  return response.data;
+  return response?.data;
 };
