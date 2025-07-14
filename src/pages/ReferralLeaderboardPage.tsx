@@ -157,18 +157,19 @@ const ReferralLeaderboardPage = () => {
                   <div className="font-medium text-high-contrast">Wallet</div>
                   <div className="flex items-center">
                     <span className="mr-2">
-                      {formatAddress(userReferralData.wallet, 6)}
+                      {userReferralData?.wallet ? formatAddress(userReferralData.wallet, 6) : "N/A"}
                     </span>
                     <Button
                       variant="ghost"
                       size="icon"
                       className="h-6 w-6"
                       onClick={() =>
-                        window.open(
+                        userReferralData?.wallet && window.open(
                           `${NETWORK.blockExplorerUrls[0]}/address/${userReferralData.wallet}`,
                           "_blank"
                         )
                       }
+                      disabled={!userReferralData?.wallet}
                     >
                       <ExternalLink className="h-4 w-4" />
                     </Button>
@@ -179,14 +180,20 @@ const ReferralLeaderboardPage = () => {
                   <div className="font-medium text-high-contrast">
                     Total Referees
                   </div>
-                  <div>{userReferralData.referees}</div>
+                  <div>{typeof userReferralData?.referees === "number" ? userReferralData.referees : 0}</div>
                 </div>
 
                 <div className="flex justify-between items-center">
                   <div className="font-medium text-high-contrast">
                     Lifetime Earnings
                   </div>
-                  <div>${userReferralData.earnings} USDC</div>
+                  <div>
+                    ${
+                      typeof userReferralData?.earnings === "number"
+                        ? userReferralData.earnings.toFixed(2)
+                        : "0.00"
+                    } USDC
+                  </div>
                 </div>
 
                 <div className="flex justify-between items-center">
@@ -195,15 +202,16 @@ const ReferralLeaderboardPage = () => {
                   </div>
                   <div className="flex items-center">
                     <code className="bg-muted px-2 py-1 rounded mr-2">
-                      {userReferralData.referralCode}
+                      {userReferralData?.referralCode ?? "N/A"}
                     </code>
                     <Button
                       variant="ghost"
                       size="icon"
                       className="h-6 w-6"
                       onClick={() =>
-                        handleCopyReferralCode(userReferralData.referralCode)
+                        userReferralData?.referralCode && handleCopyReferralCode(userReferralData.referralCode)
                       }
+                      disabled={!userReferralData?.referralCode}
                     >
                       <Copy className="h-4 w-4" />
                     </Button>
@@ -269,37 +277,47 @@ const ReferralLeaderboardPage = () => {
                       <TableCell>
                         <div className="flex items-center">
                           <span className="mr-1">
-                            {formatAddress(entry.wallet, 4)}
+                            {entry.wallet ? formatAddress(entry.wallet, 4) : "N/A"}
                           </span>
                           <Button
                             variant="ghost"
                             size="icon"
                             className="h-6 w-6"
                             onClick={() =>
-                              window.open(
+                              entry.wallet && window.open(
                                 `${NETWORK.blockExplorerUrls[0]}/address/${entry.wallet}`,
                                 "_blank"
                               )
                             }
+                            disabled={!entry.wallet}
                           >
                             <ExternalLink className="h-3 w-3" />
                           </Button>
                         </div>
                       </TableCell>
-                      <TableCell>{entry.referees}</TableCell>
-                      <TableCell>${entry.earnings} USDC</TableCell>
+                      <TableCell>
+                        {typeof entry.referees === "number" ? entry.referees : 0}
+                      </TableCell>
+                      <TableCell>
+                        ${
+                          typeof entry.earnings === "number"
+                            ? entry.earnings.toFixed(2)
+                            : "0.00"
+                        } USDC
+                      </TableCell>
                       <TableCell>
                         <div className="flex items-center">
                           <code className="bg-muted px-2 py-1 rounded text-xs mr-2">
-                            {entry.referralCode}
+                            {entry.referralCode ?? "N/A"}
                           </code>
                           <Button
                             variant="ghost"
                             size="icon"
                             className="h-6 w-6"
                             onClick={() =>
-                              handleCopyReferralCode(entry.referralCode)
+                              entry.referralCode && handleCopyReferralCode(entry.referralCode)
                             }
+                            disabled={!entry.referralCode}
                           >
                             <Copy className="h-3 w-3" />
                           </Button>
