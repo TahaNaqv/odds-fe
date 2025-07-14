@@ -37,8 +37,8 @@ const Header = () => {
               </Button>
             </Link>
 
-            <Link to="/marketing">
-              <Button variant={isActive("/marketing") ? "secondary" : "ghost"} size="sm" className={`rounded-lg ${isActive("/marketing") ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium" : ""}`}>
+            <Link to="/">
+              <Button variant={isActive("/") ? "secondary" : "ghost"} size="sm" className={`rounded-lg ${isActive("/") ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium" : ""}`}>
                 <Megaphone className="mr-2 h-4 w-4" /> About
               </Button>
             </Link>
