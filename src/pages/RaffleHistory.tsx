@@ -1,7 +1,5 @@
 
 import { useEffect } from 'react';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
 import RaffleCard from '@/components/raffle/RaffleCard';
 import { Button } from '@/components/ui/button';
 import { Clock, RotateCcw } from 'lucide-react';
@@ -21,10 +19,7 @@ const RaffleHistory = () => {
   }, [refreshPastRaffles]);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      
-      <main className="flex-grow px-4 py-10">
+    <main className="flex-grow px-4 py-10">
         <div className="container mx-auto max-w-4xl animate-fade-in">
           <div className="mb-8">
             <h1 className="text-3xl font-bold">Raffle History</h1>
@@ -74,9 +69,6 @@ const RaffleHistory = () => {
           )}
         </div>
       </main>
-      
-      <Footer />
-    </div>
   );
 };
 

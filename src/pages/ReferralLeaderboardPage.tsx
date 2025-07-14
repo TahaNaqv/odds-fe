@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Layout } from "@/components/layout/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -98,8 +97,7 @@ const ReferralLeaderboardPage = () => {
   }, [sortField, sortDirection]);
 
   return (
-    <Layout>
-      <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8 animate-fade-in space-y-8">
+    <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8 animate-fade-in space-y-8">
         <h1 className="text-3xl font-bold mb-6 text-high-contrast">
           Referral Leaderboard
         </h1>
@@ -331,7 +329,6 @@ const ReferralLeaderboardPage = () => {
           </CardContent>
         </Card>
       </div>
-    </Layout>
   );
 };
 

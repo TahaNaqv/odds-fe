@@ -25,8 +25,7 @@ const PastActivity = () => {
   }, [isConnected, refreshUserActivity]);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="flex-grow px-4 py-10">
+    <main className="flex-grow px-4 py-10">
         <div className="container mx-auto max-w-4xl animate-fade-in">
           <div className="flex flex-wrap gap-4 justify-between items-center mb-8">
             <div>
@@ -66,7 +65,6 @@ const PastActivity = () => {
           )}
         </div>
       </main>
-    </div>
   );
 };
 
