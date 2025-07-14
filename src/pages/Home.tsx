@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import MarketingFooter from "@/components/marketing/MarketingFooter";
 import useRaffle from "@/hooks/useRaffle";
 import HeroSection from "@/components/home/HeroSection";
 import MarketingSection from "@/components/home/MarketingSection";
@@ -14,23 +13,19 @@ const Home = () => {
   const { currentRaffle, isLoading } = useRaffle();
 
   return (
-    <div className="marketing2-page flex flex-col min-h-screen">
-      <main className="flex-grow px-4 pb-10">
-        <div className="marketing2-section-hero">
-          <HeroSection />
-        </div>
-        <div className="marketing2-section-problem">
-          <MarketingSection currentRaffle={currentRaffle} isLoading={isLoading} />
-        </div>
-        <div className="marketing2-section-vision">
-          <HowItWorksSection />
-        </div>
-        <div className="marketing2-section-howitworks">
-          <FAQSection />
-        </div>
-      </main>
-
-      <MarketingFooter />
+    <div className="marketing2-page">
+      <div className="marketing2-section-hero">
+        <HeroSection />
+      </div>
+      <div className="marketing2-section-problem">
+        <MarketingSection currentRaffle={currentRaffle} isLoading={isLoading} />
+      </div>
+      <div className="marketing2-section-vision">
+        <HowItWorksSection />
+      </div>
+      <div className="marketing2-section-howitworks">
+        <FAQSection />
+      </div>
     </div>
   );
 };
