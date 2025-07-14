@@ -33,7 +33,7 @@ const HeroSection = () => {
           </span>
         </div>
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 marketing2-headline">
-          Daily Raffles
+          Ødds Genesis Raffle
         </h1>
         <p className="text-lg marketing2-body mb-4 leading-relaxed">
           Play every day with $1 tickets in USDC. Buy more to increase your odds
