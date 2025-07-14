@@ -109,75 +109,69 @@ const ActivityCalendar = () => {
           </div>
         ))}
 
+        {/* Empty cells for days before the first of the month */}
+        {Array(calendarDays[0]?.date.getDay() || 0)
+          .fill(null)
+          .map((_, index) => (
+            <div key={`empty-${index}`} className="h-16"></div>
+          ))}
+
         {/* Calendar days */}
-        {calendarDays.map((dayData, i) => {
-          const dayOfWeek = dayData.date.getDay();
+        {calendarDays.map((dayData) => {
           const isCurrentMonth = isSameMonth(dayData.date, currentMonth);
 
-          // Add empty cells for days before the first of the month
-          const emptyDaysBefore = i === 0 ? Array(dayOfWeek).fill(null) : [];
-
           return (
-            <div key={dayData.date.toISOString()}>
-              {i === 0 &&
-                emptyDaysBefore.map((_, index) => (
-                  <div
-                    key={`empty-${index}`}
-                    className="h-16 bg-secondary/30 rounded-md border border-border/30"
-                  ></div>
-                ))}
+            <div
+              key={dayData.date.toISOString()}
+              className={`h-16 p-1.5 rounded-md border relative ${
+                isCurrentMonth
+                  ? "border-border"
+                  : "border-border/30 bg-secondary/30 opacity-50"
+              } ${
+                isToday(dayData.date)
+                  ? "ring-1 ring-primary ring-offset-1"
+                  : ""
+              }`}
+            >
+              <div className="flex justify-between items-start">
+                <span
+                  className={`text-xs font-medium ${
+                    isToday(dayData.date)
+                      ? "text-primary"
+                      : "text-high-contrast"
+                  }`}
+                >
+                  {format(dayData.date, "d")}
+                </span>
 
-              <div
-                className={`h-16 p-1.5 rounded-md border relative ${
-                  isCurrentMonth
-                    ? "border-border"
-                    : "border-border/30 bg-secondary/30 opacity-50"
-                } ${
-                  isToday(dayData.date)
-                    ? "ring-1 ring-primary ring-offset-1"
-                    : ""
-                }`}
-              >
-                <div className="flex justify-between items-start">
-                  <span
-                    className={`text-xs font-medium ${
-                      isToday(dayData.date)
-                        ? "text-primary"
-                        : "text-high-contrast"
-                    }`}
-                  >
-                    {format(dayData.date, "d")}
-                  </span>
-
-                  {dayData.ticketCount > 0 && (
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          size="sm"
-                          variant={
-                            dayData.hasWinningTicket ? "default" : "outline"
-                          }
-                          className={`h-5 px-1.5 gap-0.5 text-xs ${
-                            dayData.hasWinningTicket
-                              ? "bg-yellow-500 hover:bg-yellow-600 text-white"
-                              : "text-primary"
-                          }`}
-                        >
-                          <Ticket className="h-2.5 w-2.5" />
-                          <span>{dayData.ticketCount}</span>
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-80 p-0">
-                        <div style={{ maxHeight: "30rem", overflowY: "auto" }}>
-                          <ActivityTicketDetails
-                            activities={dayData.activities}
-                            date={dayData.date}
-                          />
-                        </div>
-                      </PopoverContent>
-                    </Popover>
-                  )}
-                </div>
+                {dayData.ticketCount > 0 && (
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        size="sm"
+                        variant={
+                          dayData.hasWinningTicket ? "default" : "outline"
+                        }
+                        className={`h-5 px-1.5 gap-0.5 text-xs ${
+                          dayData.hasWinningTicket
+                            ? "bg-yellow-500 hover:bg-yellow-600 text-white"
+                            : "text-primary"
+                        }`}
+                      >
+                        <Ticket className="h-2.5 w-2.5" />
+                        <span>{dayData.ticketCount}</span>
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-80 p-0">
+                      <div style={{ maxHeight: "30rem", overflowY: "auto" }}>
+                        <ActivityTicketDetails
+                          activities={dayData.activities}
+                          date={dayData.date}
+                        />
+                      </div>
+                    </PopoverContent>
+                  </Popover>
+                )}
               </div>
             </div>
           );
