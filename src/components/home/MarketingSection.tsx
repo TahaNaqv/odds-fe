@@ -34,14 +34,14 @@ const MarketingSection = ({ currentRaffle, isLoading }: MarketingSectionProps) =
                   <span className="font-medium marketing2-headline">Each $1 ticket is a unique chance to win big.</span> Your ticket could be randomly selected for the double-prize group, equal-prize group, or try again next time!
                 </p>
                 
-                <div className="mt-4 grid grid-cols-3 gap-3">
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {[
                     { icon: <Users size={16} />, text: "Three prize groups" },
                     { icon: <Trophy size={16} />, text: "2x prize possible" },
                     { icon: <Wallet size={16} />, text: "95% to winners" }
                   ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-1.5">
-                      <div className="marketing2-accent">{item.icon}</div>
+                    <div key={i} className="flex items-center gap-2">
+                      <div className="marketing2-accent flex-shrink-0">{item.icon}</div>
                       <p className="text-xs font-medium marketing2-headline">{item.text}</p>
                     </div>
                   ))}
