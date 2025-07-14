@@ -72,6 +72,23 @@
     @apply bg-background text-foreground font-sans antialiased transition-colors duration-300;
   }
 
+  /* Custom styling for appkit-button */
+  appkit-button {
+    --w3m-accent: #7C3AED !important;
+    --w3m-color-mix: #8B5CF6 !important;
+    --w3m-color-mix-strength: 20% !important;
+  }
+
+  appkit-button button {
+    background-color: #7C3AED !important;
+    border-color: #7C3AED !important;
+  }
+
+  appkit-button button:hover {
+    background-color: #8B5CF6 !important;
+    border-color: #8B5CF6 !important;
+  }
+
   #root {
     @apply min-h-screen flex flex-col;
   }
