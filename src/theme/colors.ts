@@ -44,31 +44,6 @@ const colors = {
       'bright-purple': '#8B5CF6',
       'vivid-orange': '#F97316',
       'bright-blue': '#1EAEDB',
-      // Neon Nights color palette
-      'jet-black': '#0F0F0F',
-      'dark-charcoal': '#1A1A1D',
-      'crimson': '#C3073F',
-      'maroon': '#6F2232',
-      // Digital Gold color palette - enhanced FFD700 usage
-      'gold': '#FFD700',
-      'orange': '#FFA500',
-      'dark-orange': '#FF8C00',
-      'orange-red': '#FF4500',
-      // Vibrant Gradient color palette
-      'coral': '#FF6F61',
-      'royal-purple': '#6B5B95',
-      'olive-green': '#88B04B',
-      'light-pink': '#F7CAC9',
-      // Cyberpunk Glow color palette
-      'dark-gray': '#2E2E2E',
-      'magenta': '#FF00FF',
-      'cyan': '#00FFFF',
-      'white': '#FFFFFF',
-      // Trusty Blues color palette
-      'dark-blue': '#003366',
-      'medium-blue': '#336699',
-      'light-blue': '#6699CC',
-      'sky-blue': '#99CCFF',
     },
   }
 };
