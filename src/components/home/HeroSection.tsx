@@ -20,7 +20,7 @@ const HeroSection = () => {
   return (
     <section className="container mx-auto py-12 md:py-16 animate-children">
       <div className="text-center max-w-3xl mx-auto">
-        <div className="inline-block marketing2-card px-4 py-1.5 rounded-full mb-8">
+        <div className="inline-block marketing2-hero-badge px-4 py-1.5 rounded-full mb-8">
           <span className="text-sm font-medium marketing2-secondary-accent">
             Base Network
           </span>
