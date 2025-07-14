@@ -10,9 +10,6 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const isMobile = useIsMobile();
-  
-  // Debug logging
-  console.log("Layout: isMobile =", isMobile, "window.innerWidth =", typeof window !== "undefined" ? window.innerWidth : "undefined");
 
   return (
     <div className="flex flex-col min-h-screen">

@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Header from "@/components/layout/Header";
 import MarketingFooter from "@/components/marketing/MarketingFooter";
 import useRaffle from "@/hooks/useRaffle";
 import HeroSection from "@/components/home/HeroSection";
@@ -16,8 +15,6 @@ const Home = () => {
 
   return (
     <div className="marketing2-page flex flex-col min-h-screen">
-      <Header />
-
       <main className="flex-grow px-4 pb-10">
         <div className="marketing2-section-hero">
           <HeroSection />

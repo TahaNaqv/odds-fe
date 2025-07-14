@@ -1,7 +1,5 @@
 
 import React from 'react';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
 import MarketingHeroSection from '@/components/marketing/MarketingHeroSection';
 import Web3BenefitsSection from '@/components/marketing/Web3BenefitsSection';
 import CommunityStatsSection from '@/components/marketing/CommunityStatsSection';
@@ -13,8 +11,6 @@ import CallToActionSection from '@/components/marketing/CallToActionSection';
 const MarketingLandingPage = () => {
   return (
     <div className="flex flex-col min-h-screen bg-app-dark">
-      <Header />
-      
       <main className="flex-grow">
         <MarketingHeroSection />
         <Web3BenefitsSection />
@@ -24,8 +20,6 @@ const MarketingLandingPage = () => {
         <TwitterFeedSection />
         <CallToActionSection />
       </main>
-      
-      <Footer />
     </div>
   );
 };
