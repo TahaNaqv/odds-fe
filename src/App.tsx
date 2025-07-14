@@ -95,12 +95,12 @@ function App() {
               <BrowserRouter>
                 <Routes>
                   <Route path="/" element={<MarketingLandingPage2 />} />
-                  <Route path="/history" element={<RaffleHistory />} />
                   <Route path="*" element={
                     <Layout>
                       <Routes>
                         <Route path="/home" element={<Home />} />
                         <Route path="/marketing" element={<MarketingLandingPage />} />
+                        <Route path="/history" element={<RaffleHistory />} />
                         <Route path="/activity" element={<PastActivity />} />
                         <Route
                           path="/activity-preview"
