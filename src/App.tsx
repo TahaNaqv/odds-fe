@@ -19,6 +19,7 @@ import ReferralLeaderboardPage from "./pages/ReferralLeaderboardPage";
 import MarketingLandingPage from "./pages/MarketingLandingPage";
 import MarketingLandingPage2 from "./pages/MarketingLandingPage2";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Layout } from "@/components/layout/Layout";
 
 // New imports for other footer pages
 const PrivacyPage = () => (
@@ -92,29 +93,31 @@ function App() {
               <Toaster />
               <Sonner />
               <BrowserRouter>
-                <Routes>
-                  <Route path="/" element={<MarketingLandingPage2 />} />
-                  <Route path="/home" element={<Home />} />
-                  <Route path="/marketing" element={<MarketingLandingPage />} />
-                  <Route path="/history" element={<RaffleHistory />} />
-                  <Route path="/activity" element={<PastActivity />} />
-                  <Route
-                    path="/activity-preview"
-                    element={<ActivityPreviewPage />}
-                  />
-                  <Route
-                    path="/activity-calendar"
-                    element={<ActivityCalendarPage />}
-                  />
-                  <Route path="/terms" element={<TermsPage />} />
-                  <Route path="/privacy" element={<PrivacyPage />} />
-                  <Route path="/legality" element={<LegalityPage />} />
-                  <Route
-                    path="/referrals"
-                    element={<ReferralLeaderboardPage />}
-                  />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
+                <Layout>
+                  <Routes>
+                    <Route path="/" element={<MarketingLandingPage2 />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/marketing" element={<MarketingLandingPage />} />
+                    <Route path="/history" element={<RaffleHistory />} />
+                    <Route path="/activity" element={<PastActivity />} />
+                    <Route
+                      path="/activity-preview"
+                      element={<ActivityPreviewPage />}
+                    />
+                    <Route
+                      path="/activity-calendar"
+                      element={<ActivityCalendarPage />}
+                    />
+                    <Route path="/terms" element={<TermsPage />} />
+                    <Route path="/privacy" element={<PrivacyPage />} />
+                    <Route path="/legality" element={<LegalityPage />} />
+                    <Route
+                      path="/referrals"
+                      element={<ReferralLeaderboardPage />}
+                    />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Layout>
               </BrowserRouter>
             </TooltipProvider>
           </AuthProvider>
