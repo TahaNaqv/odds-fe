@@ -72,21 +72,25 @@
     @apply bg-background text-foreground font-sans antialiased transition-colors duration-300;
   }
 
-  /* Custom styling for appkit-button */
-  appkit-button {
-    --w3m-accent: #7C3AED !important;
-    --w3m-color-mix: #8B5CF6 !important;
-    --w3m-color-mix-strength: 20% !important;
-  }
-
-  appkit-button button {
+  /* Force override appkit-button styling */
+  appkit-button,
+  appkit-button *,
+  appkit-button button,
+  appkit-button [role="button"] {
+    background: #7C3AED !important;
     background-color: #7C3AED !important;
     border-color: #7C3AED !important;
+    color: white !important;
   }
 
-  appkit-button button:hover {
+  appkit-button:hover,
+  appkit-button *:hover,
+  appkit-button button:hover,
+  appkit-button [role="button"]:hover {
+    background: #8B5CF6 !important;
     background-color: #8B5CF6 !important;
     border-color: #8B5CF6 !important;
+    color: white !important;
   }
 
   #root {
