@@ -34,7 +34,7 @@ const MarketingSection = ({ currentRaffle, isLoading }: MarketingSectionProps) =
                   <span className="font-medium marketing2-headline">Each $1 ticket is a unique chance to win big.</span> Your ticket could be randomly selected for the double-prize group, equal-prize group, or try again next time!
                 </p>
                 
-                <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="mt-4 grid grid-cols-1 lg:grid-cols-3 gap-3">
                   {[
                     { icon: <Users size={16} />, text: "Three prize groups" },
                     { icon: <Trophy size={16} />, text: "2x prize possible" },
