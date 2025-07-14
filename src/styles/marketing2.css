@@ -79,7 +79,7 @@
 /* Card Styling - Darker backgrounds */
 .marketing2-card {
   background: var(--surface-dark) !important;
-  border: 1px solid rgba(33, 150, 243, 0.2) !important;
+  border: 1px solid #10B981 !important;
   color: var(--pure-white) !important;
 }
 
