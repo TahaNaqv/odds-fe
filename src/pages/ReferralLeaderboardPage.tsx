@@ -186,7 +186,7 @@ const ReferralLeaderboardPage = () => {
                   <div className="font-medium text-high-contrast">
                     Lifetime Earnings
                   </div>
-                  <div>${userReferralData.earnings.toFixed(2)} USDC</div>
+                  <div>${userReferralData.earnings} USDC</div>
                 </div>
 
                 <div className="flex justify-between items-center">
@@ -287,7 +287,7 @@ const ReferralLeaderboardPage = () => {
                         </div>
                       </TableCell>
                       <TableCell>{entry.referees}</TableCell>
-                      <TableCell>${entry.earnings.toFixed(2)} USDC</TableCell>
+                      <TableCell>${entry.earnings} USDC</TableCell>
                       <TableCell>
                         <div className="flex items-center">
                           <code className="bg-muted px-2 py-1 rounded text-xs mr-2">
