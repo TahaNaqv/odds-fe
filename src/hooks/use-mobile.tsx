@@ -1,6 +1,6 @@
 import * as React from "react"
 
-const MOBILE_BREAKPOINT = 768
+const MOBILE_BREAKPOINT = 1024 // Changed to lg breakpoint (1024px) to match header
 
 export function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined)
@@ -8,10 +8,17 @@ export function useIsMobile() {
   React.useEffect(() => {
     const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`)
     const onChange = () => {
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+      const newIsMobile = window.innerWidth < MOBILE_BREAKPOINT
+      console.log("useIsMobile: screen width =", window.innerWidth, "isMobile =", newIsMobile)
+      setIsMobile(newIsMobile)
     }
     mql.addEventListener("change", onChange)
-    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+    
+    // Initial check
+    const initialIsMobile = window.innerWidth < MOBILE_BREAKPOINT
+    console.log("useIsMobile: initial screen width =", window.innerWidth, "initial isMobile =", initialIsMobile)
+    setIsMobile(initialIsMobile)
+    
     return () => mql.removeEventListener("change", onChange)
   }, [])
 
