@@ -21,7 +21,7 @@ const MarketingSection = ({ currentRaffle, isLoading }: MarketingSectionProps) =
             <div className="flex items-start gap-5">
               <div className="flex-shrink-0 relative">
                 <div className="w-16 h-16 rounded-full marketing2-card flex items-center justify-center animate-pulse-subtle">
-                  <Trophy size={32} className="marketing2-accent" />
+                  <Trophy size={32} className="marketing2-trophy-accent" />
                 </div>
                 <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full marketing2-secondary-accent flex items-center justify-center">
                   <Zap size={12} className="marketing2-headline" />
