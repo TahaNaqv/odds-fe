@@ -70,6 +70,11 @@ createAppKit({
   networks,
   projectId,
   metadata,
+  themeVariables: {
+    "--w3m-accent": "#7C3AED",
+    "--w3m-color-mix": "#8B5CF6",
+    "--w3m-color-mix-strength": 20,
+  },
   features: {
     analytics: true, // Optional - defaults to your Cloud configuration
     email: false, // default to true
