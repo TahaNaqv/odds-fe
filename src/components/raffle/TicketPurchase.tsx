@@ -31,24 +31,15 @@ import { RAFFLE } from "@/utils/constants";
 import { TOKENS } from "@/utils/constants";
 
 const TicketPurchase = () => {
-  // Mock active state for design purposes
-  const mockMode = true; // Set to false to restore normal behavior
-  
-  const { isConnected: realIsConnected, address: realAddress } = useAppKitAccount();
-  const { isAuthenticated: realIsAuthenticated, authenticate } = useAuthContext();
+  const { isConnected, address } = useAppKitAccount();
+  const { isAuthenticated, authenticate } = useAuthContext();
   const { purchaseTicket, isLoading, currentRaffle, activeRaffles } =
     useRaffle();
-  
-  // Use mocked values when in mock mode
-  const isConnected = mockMode ? true : realIsConnected;
-  const address = mockMode ? "0x1234567890123456789012345678901234567890" : realAddress;
-  const isAuthenticated = mockMode ? true : realIsAuthenticated;
-  
-  const [ticketCount, setTicketCount] = useState(mockMode ? 5 : 1);
+  const [ticketCount, setTicketCount] = useState(1);
   const [selectedToken, setSelectedToken] =
     useState<keyof typeof TOKENS>("mUSDC");
-  const [autoEntry, setAutoEntry] = useState(mockMode ? 3 : 1);
-  const [referralCode, setReferralCode] = useState(mockMode ? "abc12345" : "");
+  const [autoEntry, setAutoEntry] = useState(1);
+  const [referralCode, setReferralCode] = useState("");
   const [referralError, setReferralError] = useState<string | null>(null);
   const [maxTicketsError, setMaxTicketsError] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
