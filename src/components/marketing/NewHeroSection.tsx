@@ -63,7 +63,7 @@ const NewHeroSection = () => {
             {socialLinks.map((link, index) => (
               <a 
                 key={index}
-                href={index === 0 ? "https://t.me/+RLhhKgpeDYFmZTdh" : "#"}
+                href={index === 0 ? "https://t.me/+RLhhKgpeDYFmZTdh" : "https://x.com/odds_dev"}
                 target="_blank"
                 rel="noopener noreferrer"
               >
