@@ -61,14 +61,21 @@ const NewHeroSection = () => {
           </div>
           <div className="flex flex-wrap justify-center gap-4">
             {socialLinks.map((link, index) => (
-              <Button key={index} variant="outline" size="lg" className="flex items-center justify-center">
-                {link.customIcon ? (
-                  <img src={link.customIcon} alt="" className="h-5 w-5" />
-                ) : (
-                  <link.icon className="h-5 w-5" />
-                )}
-                {link.name}
-              </Button>
+              <a 
+                key={index}
+                href={index === 0 ? "https://t.me/+RLhhKgpeDYFmZTdh" : "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" size="lg" className="flex items-center justify-center">
+                  {link.customIcon ? (
+                    <img src={link.customIcon} alt="" className="h-5 w-5" />
+                  ) : (
+                    <link.icon className="h-5 w-5" />
+                  )}
+                  {link.name}
+                </Button>
+              </a>
             ))}
           </div>
         </div>
