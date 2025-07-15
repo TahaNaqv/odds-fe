@@ -45,7 +45,7 @@ const HeroSection = () => {
 
         {/* Dynamic USDC balance section */}
         <div className="relative z-10 mb-4">
-          <div className="counter-backdrop absolute inset-0 bg-black/40 blur-sm rounded-xl -z-10"></div>
+          
           <div 
             className={`counter-container marketing2-card marketing2-glow-blue px-6 py-4 inline-block rounded-lg relative z-10 ${!isConnected ? 'cursor-pointer hover:scale-105 transition-transform duration-200' : ''}`}
             onClick={handleConnectWallet}
