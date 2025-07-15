@@ -36,36 +36,9 @@ const TicketPurchase = () => {
   const { purchaseTicket, isLoading, currentRaffle: actualCurrentRaffle, activeRaffles: actualActiveRaffles } =
     useRaffle();
   
-  // Mock active raffle data for development
-  const mockCurrentRaffle = {
-    id: 1,
-    title: "Weekly USDC Raffle #42",
-    description: "Win big with our weekly USDC prize pool!",
-    maxTickets: 1000,
-    totalTickets: 647,
-    ticketPrice: "1.00",
-    status: "ACTIVE",
-    totalPrizeAmount: "800.00",
-    platformFee: "100.00",
-    referralRewards: "100.00",
-    distributedAmount: "0.00",
-    isDistributed: false,
-    transactionHash: "0x123...",
-    isCreated: true,
-    tickets: [],
-    createdAt: "2025-01-10T10:00:00Z",
-    updatedAt: "2025-01-15T15:30:00Z"
-  };
-
-  const mockActiveRaffles = [
-    mockCurrentRaffle,
-    { ...mockCurrentRaffle, id: 2, title: "Weekly USDC Raffle #43" },
-    { ...mockCurrentRaffle, id: 3, title: "Weekly USDC Raffle #44" }
-  ];
-
-  // Use mock data for active raffle state
-  const currentRaffle = mockCurrentRaffle;
-  const activeRaffles = mockActiveRaffles;
+  // Use actual raffle data from hooks
+  const currentRaffle = actualCurrentRaffle;
+  const activeRaffles = actualActiveRaffles;
   const [ticketCount, setTicketCount] = useState(1);
   const [selectedToken, setSelectedToken] =
     useState<keyof typeof TOKENS>("mUSDC");
