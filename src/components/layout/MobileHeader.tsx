@@ -2,7 +2,15 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Ticket, Clock, History, Trophy, Megaphone, Menu, X } from "lucide-react";
+import {
+  Ticket,
+  Clock,
+  History,
+  Trophy,
+  Megaphone,
+  Menu,
+  X,
+} from "lucide-react";
 
 const MobileHeader = () => {
   const location = useLocation();
@@ -20,7 +28,12 @@ const MobileHeader = () => {
 
   // Check if a nav item is active
   const isActive = (path: string) => {
-    return location.pathname === path || path === "/activity-calendar" && (location.pathname === "/activity-preview" || location.pathname === "/activity");
+    return (
+      location.pathname === path ||
+      (path === "/activity-calendar" &&
+        (location.pathname === "/activity-preview" ||
+          location.pathname === "/activity"))
+    );
   };
 
   // Close mobile menu when navigating
@@ -29,7 +42,7 @@ const MobileHeader = () => {
   };
 
   const navigationItems = [
-    { path: "/", label: "Raffle", icon: Ticket },
+    { path: "/home", label: "Raffle", icon: Ticket },
     { path: "/marketing", label: "About", icon: Megaphone },
     { path: "/activity-calendar", label: "My Activity", icon: Clock },
     { path: "/history", label: "Raffle History", icon: History },
@@ -37,16 +50,22 @@ const MobileHeader = () => {
   ];
 
   return (
-    <header className={`sticky top-0 z-50 w-full transition-all duration-300 backdrop-blur-md ${scrolled ? "bg-background/80 shadow-subtle dark:bg-background/80" : "bg-transparent"}`}>
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-300 backdrop-blur-md ${
+        scrolled
+          ? "bg-background/80 shadow-subtle dark:bg-background/80"
+          : "bg-transparent"
+      }`}
+    >
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img 
-              alt="Ødds Logo" 
-              className="h-12 md:h-16" 
-              style={{ background: "transparent" }} 
-              src="/lovable-uploads/f9378bd3-3347-43e0-b52d-9c409b502733.png" 
+            <img
+              alt="Ødds Logo"
+              className="h-12 md:h-16"
+              style={{ background: "transparent" }}
+              src="/lovable-uploads/f9378bd3-3347-43e0-b52d-9c409b502733.png"
             />
           </Link>
 
@@ -54,10 +73,14 @@ const MobileHeader = () => {
           <div className="hidden lg:flex items-center space-x-1">
             {navigationItems.map(({ path, label, icon: Icon }) => (
               <Link key={path} to={path}>
-                <Button 
-                  variant={isActive(path) ? "secondary" : "ghost"} 
-                  size="sm" 
-                  className={`rounded-lg ${isActive(path) ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium" : ""}`}
+                <Button
+                  variant={isActive(path) ? "secondary" : "ghost"}
+                  size="sm"
+                  className={`rounded-lg ${
+                    isActive(path)
+                      ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium"
+                      : ""
+                  }`}
                 >
                   <Icon className="mr-2 h-4 w-4" /> {label}
                 </Button>
@@ -78,15 +101,15 @@ const MobileHeader = () => {
                   <span className="sr-only">Toggle navigation menu</span>
                 </Button>
               </SheetTrigger>
-              
+
               <SheetContent side="right" className="w-[280px] sm:w-[300px]">
                 <div className="flex flex-col h-full">
                   {/* Header */}
                   <div className="flex items-center justify-between pb-4 border-b">
                     <h2 className="text-lg font-semibold">Navigation</h2>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
+                    <Button
+                      variant="ghost"
+                      size="sm"
                       onClick={() => setIsOpen(false)}
                       className="p-2"
                     >
@@ -98,11 +121,15 @@ const MobileHeader = () => {
                   <nav className="flex flex-col gap-2 pt-6">
                     {navigationItems.map(({ path, label, icon: Icon }) => (
                       <Link key={path} to={path} onClick={handleNavClick}>
-                        <Button 
-                          variant={isActive(path) ? "secondary" : "ghost"} 
-                          className={`w-full justify-start rounded-lg ${isActive(path) ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium" : ""}`}
+                        <Button
+                          variant={isActive(path) ? "secondary" : "ghost"}
+                          className={`w-full justify-start rounded-lg ${
+                            isActive(path)
+                              ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium"
+                              : ""
+                          }`}
                         >
-                          <Icon className="mr-3 h-5 w-5" /> 
+                          <Icon className="mr-3 h-5 w-5" />
                           {label}
                         </Button>
                       </Link>

@@ -17,46 +17,103 @@ const Header = () => {
 
   // Check if a nav item is active
   const isActive = (path: string) => {
-    return location.pathname === path || path === "/activity-calendar" && (location.pathname === "/activity-preview" || location.pathname === "/activity");
+    return (
+      location.pathname === path ||
+      (path === "/activity-calendar" &&
+        (location.pathname === "/activity-preview" ||
+          location.pathname === "/activity"))
+    );
   };
-  return <header className={`sticky top-0 z-50 w-full transition-all duration-300 backdrop-blur-md ${scrolled ? "bg-background/80 shadow-subtle dark:bg-background/80" : "bg-transparent"}`}>
+  return (
+    <header
+      className={`sticky top-0 z-50 w-full transition-all duration-300 backdrop-blur-md ${
+        scrolled
+          ? "bg-background/80 shadow-subtle dark:bg-background/80"
+          : "bg-transparent"
+      }`}
+    >
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col items-center justify-between md:flex-row">
           {/* Logo with doubled size */}
           <Link to="/" className="flex items-center mb-3 md:mb-0">
-            <img alt="Ødds Logo" className="h-16 md:h-20" style={{
-            background: "transparent"
-          }} src="/lovable-uploads/f9378bd3-3347-43e0-b52d-9c409b502733.png" />
+            <img
+              alt="Ødds Logo"
+              className="h-16 md:h-20"
+              style={{
+                background: "transparent",
+              }}
+              src="/lovable-uploads/f9378bd3-3347-43e0-b52d-9c409b502733.png"
+            />
           </Link>
 
           {/* Navigation - Centered on mobile and right-adjusted on desktop */}
           <div className="pl-20 flex items-center justify-center space-x-1 mb-3 md:mb-0">
-            <Link to="/">
-              <Button variant={isActive("/") ? "secondary" : "ghost"} size="sm" className={`rounded-lg ${isActive("/") ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium" : ""}`}>
+            <Link to="/home">
+              <Button
+                variant={isActive("/home") ? "secondary" : "ghost"}
+                size="sm"
+                className={`rounded-lg ${
+                  isActive("/")
+                    ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium"
+                    : ""
+                }`}
+              >
                 <Ticket className="mr-2 h-4 w-4" /> Raffle
               </Button>
             </Link>
 
             <Link to="/">
-              <Button variant={isActive("/") ? "secondary" : "ghost"} size="sm" className={`rounded-lg ${isActive("/") ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium" : ""}`}>
+              <Button
+                variant={isActive("/") ? "secondary" : "ghost"}
+                size="sm"
+                className={`rounded-lg ${
+                  isActive("/")
+                    ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium"
+                    : ""
+                }`}
+              >
                 <Megaphone className="mr-2 h-4 w-4" /> About
               </Button>
             </Link>
 
             <Link to="/activity-calendar">
-              <Button variant={isActive("/activity-calendar") ? "secondary" : "ghost"} size="sm" className={`rounded-lg ${isActive("/activity-calendar") ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium" : ""}`}>
+              <Button
+                variant={isActive("/activity-calendar") ? "secondary" : "ghost"}
+                size="sm"
+                className={`rounded-lg ${
+                  isActive("/activity-calendar")
+                    ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium"
+                    : ""
+                }`}
+              >
                 <Clock className="mr-2 h-4 w-4" /> My Activity
               </Button>
             </Link>
 
             <Link to="/history">
-              <Button variant={isActive("/history") ? "secondary" : "ghost"} size="sm" className={`rounded-lg ${isActive("/history") ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium" : ""}`}>
+              <Button
+                variant={isActive("/history") ? "secondary" : "ghost"}
+                size="sm"
+                className={`rounded-lg ${
+                  isActive("/history")
+                    ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium"
+                    : ""
+                }`}
+              >
                 <History className="mr-2 h-4 w-4" /> Raffle History
               </Button>
             </Link>
 
             <Link to="/referrals">
-              <Button variant={isActive("/referrals") ? "secondary" : "ghost"} size="sm" className={`rounded-lg ${isActive("/referrals") ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium" : ""}`}>
+              <Button
+                variant={isActive("/referrals") ? "secondary" : "ghost"}
+                size="sm"
+                className={`rounded-lg ${
+                  isActive("/referrals")
+                    ? "bg-[#7C3AED] text-white dark:bg-[#7C3AED] dark:text-white font-medium"
+                    : ""
+                }`}
+              >
                 <Trophy className="mr-2 h-4 w-4" /> Referrals
               </Button>
             </Link>
@@ -68,6 +125,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-    </header>;
+    </header>
+  );
 };
 export default Header;
