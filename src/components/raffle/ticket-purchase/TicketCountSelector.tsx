@@ -50,7 +50,7 @@ const TicketCountSelector = ({ ticketCount, setTicketCount }: TicketCountSelecto
           <Button
             variant="outline"
             size="icon"
-            className="h-6 w-6 rounded-full"
+            className="h-6 w-6 rounded-full flex items-center justify-center"
             onClick={() => setTicketCount(Math.max(1, ticketCount - 1))}
             disabled={ticketCount <= 1}
           >
