@@ -43,10 +43,12 @@ const NewHeroSection = () => {
             </Button>
           </a>
           
-          <Button size="lg" className="marketing2-btn-primary px-8 py-4 text-lg font-semibold">
-            <FileText className="mr-2 h-5 w-5" />
-            Whitepaper
-          </Button>
+          <a href="https://oddswhitepaper.notion.site/dds-Whitepaper-199639bfaaee80f38f66d7115352bd26" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" className="marketing2-btn-primary px-8 py-4 text-lg font-semibold">
+              <FileText className="mr-2 h-5 w-5" />
+              Whitepaper
+            </Button>
+          </a>
         </div>
 
         <div className="text-center">
