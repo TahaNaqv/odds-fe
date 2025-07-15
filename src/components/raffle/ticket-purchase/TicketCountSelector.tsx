@@ -67,7 +67,7 @@ const TicketCountSelector = ({ ticketCount, setTicketCount }: TicketCountSelecto
           <Button
             variant="outline"
             size="icon"
-            className="h-6 w-6 rounded-full"
+            className="h-6 w-6 rounded-full flex items-center justify-center"
             onClick={() => setTicketCount(ticketCount + 1)}
           >
             <PlusCircle className="h-3 w-3" />
