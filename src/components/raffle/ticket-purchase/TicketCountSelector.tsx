@@ -46,33 +46,14 @@ const TicketCountSelector = ({ ticketCount, setTicketCount }: TicketCountSelecto
             </Tooltip>
           </TooltipProvider>
         </div>
-        <div className="flex items-center space-x-2">
-          <Button
-            variant="outline"
-            size="icon"
-            className="h-6 w-6 rounded-full"
-            onClick={() => setTicketCount(Math.max(1, ticketCount - 1))}
-            disabled={ticketCount <= 1}
-          >
-            <MinusCircle className="h-3 w-3" />
-          </Button>
-          <Input
-            id="ticket-count"
-            type="number"
-            value={ticketCount}
-            onChange={handleInputChange}
-            min={1}
-            className="w-20 h-8 text-center"
-          />
-          <Button
-            variant="outline"
-            size="icon"
-            className="h-6 w-6 rounded-full"
-            onClick={() => setTicketCount(ticketCount + 1)}
-          >
-            <PlusCircle className="h-3 w-3" />
-          </Button>
-        </div>
+        <Input
+          id="ticket-count"
+          type="number"
+          value={ticketCount}
+          onChange={handleInputChange}
+          min={1}
+          className="w-20 h-8 text-center"
+        />
       </div>
       <Slider 
         value={[Math.min(ticketCount, 100)]} 
