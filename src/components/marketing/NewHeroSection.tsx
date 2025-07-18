@@ -37,14 +37,18 @@ const NewHeroSection = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <Button size="lg" className="marketing2-btn-primary px-8 py-4 text-lg font-semibold">
-            Join the Waitlist <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          <a href="https://forms.gle/EzsATAaYMTZUYS67A" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" className="marketing2-btn-primary px-8 py-4 text-lg font-semibold">
+              Join the Waitlist <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </a>
           
-          <Button size="lg" className="marketing2-btn-primary px-8 py-4 text-lg font-semibold">
-            <FileText className="mr-2 h-5 w-5" />
-            Whitepaper
-          </Button>
+          <a href="https://oddswhitepaper.notion.site/dds-Whitepaper-199639bfaaee80f38f66d7115352bd26" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" className="marketing2-btn-primary px-8 py-4 text-lg font-semibold">
+              <FileText className="mr-2 h-5 w-5" />
+              Whitepaper
+            </Button>
+          </a>
         </div>
 
         <div className="text-center">
@@ -61,14 +65,21 @@ const NewHeroSection = () => {
           </div>
           <div className="flex flex-wrap justify-center gap-4">
             {socialLinks.map((link, index) => (
-              <Button key={index} variant="outline" size="lg" className="flex items-center justify-center">
-                {link.customIcon ? (
-                  <img src={link.customIcon} alt="" className="h-5 w-5" />
-                ) : (
-                  <link.icon className="h-5 w-5" />
-                )}
-                {link.name}
-              </Button>
+              <a 
+                key={index}
+                href={index === 0 ? "https://t.me/+RLhhKgpeDYFmZTdh" : "https://x.com/odds_dev"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" size="lg" className="flex items-center justify-center">
+                  {link.customIcon ? (
+                    <img src={link.customIcon} alt="" className="h-5 w-5" />
+                  ) : (
+                    <link.icon className="h-5 w-5" />
+                  )}
+                  {link.name}
+                </Button>
+              </a>
             ))}
           </div>
         </div>

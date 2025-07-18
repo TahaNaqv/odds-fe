@@ -50,7 +50,7 @@ const TicketCountSelector = ({ ticketCount, setTicketCount }: TicketCountSelecto
           <Button
             variant="outline"
             size="icon"
-            className="h-6 w-6 rounded-full"
+            className="h-6 w-6 rounded-full flex items-center justify-center"
             onClick={() => setTicketCount(Math.max(1, ticketCount - 1))}
             disabled={ticketCount <= 1}
           >
@@ -62,12 +62,12 @@ const TicketCountSelector = ({ ticketCount, setTicketCount }: TicketCountSelecto
             value={ticketCount}
             onChange={handleInputChange}
             min={1}
-            className="w-20 h-8 text-center"
+            className="w-20 h-8 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
           />
           <Button
             variant="outline"
             size="icon"
-            className="h-6 w-6 rounded-full"
+            className="h-6 w-6 rounded-full flex items-center justify-center"
             onClick={() => setTicketCount(ticketCount + 1)}
           >
             <PlusCircle className="h-3 w-3" />

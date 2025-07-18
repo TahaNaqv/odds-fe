@@ -16,18 +16,22 @@ const FooterCTASection = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Button size="lg" className="marketing2-btn-primary px-12 py-4 text-xl font-semibold">
-              Join the Waitlist
-              <ArrowRight className="ml-2 h-6 w-6" />
-            </Button>
+            <a href="https://forms.gle/EzsATAaYMTZUYS67A" target="_blank" rel="noopener noreferrer">
+              <Button size="lg" className="marketing2-btn-primary px-12 py-4 text-xl font-semibold">
+                Join the Waitlist
+                <ArrowRight className="ml-2 h-6 w-6" />
+              </Button>
+            </a>
             
-            <Button 
-              size="lg" 
-              className="marketing2-btn-primary px-12 py-4 text-xl font-semibold"
-            >
-              <FileText className="mr-2 h-6 w-6" />
-              Whitepaper
-            </Button>
+            <a href="https://oddswhitepaper.notion.site/dds-Whitepaper-199639bfaaee80f38f66d7115352bd26" target="_blank" rel="noopener noreferrer">
+              <Button 
+                size="lg" 
+                className="marketing2-btn-primary px-12 py-4 text-xl font-semibold"
+              >
+                <FileText className="mr-2 h-6 w-6" />
+                Whitepaper
+              </Button>
+            </a>
           </div>
         </Card>
       </div>

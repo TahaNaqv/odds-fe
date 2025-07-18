@@ -33,8 +33,12 @@ import { TOKENS } from "@/utils/constants";
 const TicketPurchase = () => {
   const { isConnected, address } = useAppKitAccount();
   const { isAuthenticated, authenticate } = useAuthContext();
-  const { purchaseTicket, isLoading, currentRaffle, activeRaffles } =
+  const { purchaseTicket, isLoading, currentRaffle: actualCurrentRaffle, activeRaffles: actualActiveRaffles } =
     useRaffle();
+  
+  // Use actual raffle data from hooks
+  const currentRaffle = actualCurrentRaffle;
+  const activeRaffles = actualActiveRaffles;
   const [ticketCount, setTicketCount] = useState(1);
   const [selectedToken, setSelectedToken] =
     useState<keyof typeof TOKENS>("mUSDC");

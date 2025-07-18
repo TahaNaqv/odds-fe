@@ -21,7 +21,7 @@ const Footer = () => {
           <div className="space-y-4 flex flex-col items-end">
             <div className="flex items-center gap-3">
               <a 
-                href="#" 
+                href="https://t.me/+RLhhKgpeDYFmZTdh" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="marketing2-headline hover:marketing2-secondary-accent transition-colors"
