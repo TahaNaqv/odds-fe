@@ -79,10 +79,10 @@ export const useAuth = () => {
       // Check if we already have a token
       const token = getToken();
       if (!token) {
-        // If no token, authenticate
-        authenticate().catch((error) => {
-          console.error("Failed to authenticate:", error);
-        });
+        // REMOVE or COMMENT OUT this block:
+        // authenticate().catch((error) => {
+        //   console.error("Failed to authenticate:", error);
+        // });
       } else {
         setIsAuthenticated(true);
       }
