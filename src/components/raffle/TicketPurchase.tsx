@@ -29,6 +29,8 @@ import { Zap, Calendar, DollarSign } from "lucide-react";
 import AutoEnrollDatePicker from "./ticket-purchase/AutoEnrollDatePicker";
 import { RAFFLE } from "@/utils/constants";
 import { TOKENS } from "@/utils/constants";
+import { useBalance } from "wagmi";
+import { formatUnits } from "viem";
 
 const TicketPurchase = () => {
   const { isConnected, address } = useAppKitAccount();
@@ -94,6 +96,16 @@ const TicketPurchase = () => {
   // Calculate the total cost
   const totalCost = totalTickets * RAFFLE.ticketPrice;
 
+  // USDC balance logic (moved out of handlePurchase)
+  const USDC_ADDRESS = TOKENS.mUSDC.address as `0x${string}`;
+  const { data: balance } = useBalance({
+    address: address as `0x${string}`,
+    token: USDC_ADDRESS,
+  });
+  const formattedBalance = balance
+    ? Number(formatUnits(balance.value, balance.decimals))
+    : 0;
+
   // Check if purchase exceeds maximum available tickets
   useEffect(() => {
     if (!currentRaffle) return;
@@ -140,6 +152,16 @@ const TicketPurchase = () => {
       toast({
         title: "Too many tickets",
         description: `Only ${remainingTickets} tickets are available for this raffle.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Check USDC balance before purchase
+    if (formattedBalance < totalCost) {
+      toast({
+        title: "Insufficient funds",
+        description: "You do not have enough USDC to purchase these tickets.",
         variant: "destructive",
       });
       return;
