@@ -131,7 +131,7 @@ export function isValidReferralCode(code: string): boolean {
 // Format referral link for sharing
 export function formatReferralLink(referralCode: string): string {
   const baseUrl = window.location.origin;
-  return `${baseUrl}/?ref=${referralCode.toLowerCase()}`;
+  return `${baseUrl}/home/?ref=${referralCode.toLowerCase()}`;
 }
 
 // Format social share message for Twitter and Telegram

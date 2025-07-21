@@ -5,5 +5,5 @@ export const generateReferralCode = (walletAddress: string): string => {
  
 export const formatReferralLink = (referralCode: string): string => {
   const baseUrl = window.location.origin;
-  return `${baseUrl}/raffle?ref=${referralCode}`;
+  return `${baseUrl}/home/?ref=${referralCode}`;
 }; 

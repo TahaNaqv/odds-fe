@@ -8,7 +8,7 @@ import { useTheme } from "@/components/ThemeProvider";
 // Generate referral link with auto-filled referral code
 const generateReferralLink = (referralCode: string) => {
   const baseUrl = window.location.origin;
-  return `${baseUrl}/?ref=${referralCode}`;
+  return `${baseUrl}/home/?ref=${referralCode}`;
 };
 
 // Copy referral link to clipboard
