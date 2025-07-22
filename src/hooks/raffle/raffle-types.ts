@@ -7,6 +7,19 @@ export interface Ticket {
   prizeAmount: string;
   isDistributed: boolean;
   transactionHash: string | null;
+  owner: {
+    id: number;
+    walletAddress: string;
+    username: string | null;
+    email: string | null;
+    totalTicketsPurchased: number;
+    totalRafflesWon: number;
+    totalPrizeWon: string;
+    totalReferralEarnings: string;
+    referralPoints: number;
+    createdAt: string;
+    updatedAt: string;
+  };
   createdAt: string;
   updatedAt: string;
 }
@@ -26,16 +39,7 @@ export interface RaffleData {
   isDistributed: boolean;
   transactionHash: string;
   isCreated: boolean;
-  tickets: Array<{
-    id: number;
-    ticketNumber: number;
-    groupNumber: number | null;
-    prizeAmount: string;
-    isDistributed: boolean;
-    transactionHash: string | null;
-    createdAt: string;
-    updatedAt: string;
-  }>;
+  tickets: Ticket[];
   createdAt: string;
   updatedAt: string;
 }

@@ -62,6 +62,19 @@ interface RaffleCardProps {
       prizeAmount: string;
       isDistributed: boolean;
       transactionHash: string | null;
+      owner: {
+        id: number;
+        walletAddress: string;
+        username: string | null;
+        email: string | null;
+        totalTicketsPurchased: number;
+        totalRafflesWon: number;
+        totalPrizeWon: string;
+        totalReferralEarnings: string;
+        referralPoints: number;
+        createdAt: string;
+        updatedAt: string;
+      };
       createdAt: string;
       updatedAt: string;
     }>;
@@ -90,11 +103,6 @@ const RaffleCard = ({
     );
   }
 
-  // Calculate mock stats for past raffles
-  const uniqueWallets = isPast
-    ? Math.floor(raffle.totalTickets * 0.3) + Math.floor(Math.random() * 20)
-    : 0;
-
   if (isLoading) {
     return (
       <Card className="w-full animate-pulse shadow-subtle">
@@ -115,6 +123,12 @@ const RaffleCard = ({
 
   // At this point, we know raffle is not null
   const safeRaffle = raffle!;
+
+  // Calculate actual unique wallets from the tickets array for past raffles
+  const uniqueWallets = isPast
+    ? new Set(safeRaffle.tickets.map((ticket) => ticket.owner.walletAddress))
+        .size
+    : 0;
 
   // Calculate progress percentage
   const progress =
@@ -162,14 +176,14 @@ const RaffleCard = ({
           <div className="flex items-center gap-1">
             <Ticket className="h-4 w-4 text-raffle-blue" />
             <span className="text-sm font-medium">
-              {safeRaffle?.tickets?.length > 0
-                ? `${safeRaffle?.tickets?.length} tickets bought`
+              {safeRaffle.totalTickets > 0
+                ? `${safeRaffle.totalTickets} tickets bought`
                 : "No tickets purchased yet"}
             </span>
           </div>
 
-          {/* Add ticket modal button if user has tickets */}
-          {safeRaffle?.tickets?.length > 0 && (
+          {/* Add ticket modal button only if the raffle is active and user has tickets */}
+          {!isPast && safeRaffle?.tickets?.length > 0 && (
             <TicketModal
               ticketIds={safeRaffle.tickets.map((ticket) => ticket.id)}
               winningTicket={null}

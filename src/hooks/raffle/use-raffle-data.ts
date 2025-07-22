@@ -7,7 +7,7 @@ export const useRaffleData = (address?: string | null) => {
   const [pastRaffles, setPastRaffles] = useState<RaffleData[]>([]);
   const [userActivity, setUserActivity] = useState<UserActivity[]>([]);
   const [activeRaffles, setActiveRaffles] = useState<RaffleData[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Fetch current raffle data
   const fetchCurrentRaffle = useCallback(async () => {
