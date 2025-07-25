@@ -60,16 +60,73 @@ const PastRaffleResultsModal = ({ raffle }: PastRaffleResultsModalProps) => {
                 <Badge className="bg-gray-100 text-gray-800 border-gray-300">
                   All Tickets ({tickets.length})
                 </Badge>
-              </div>
-              <div className="grid grid-cols-8 gap-2">
-                {tickets.map((ticket) => (
-                  <div
-                    key={ticket.id}
-                    className="bg-gray-100 border border-gray-300 text-gray-800 rounded-lg p-2 text-center text-sm font-medium"
-                  >
-                    #{ticket.ticketNumber}
+
+                {/* 🏆 Prize Legend */}
+                <div className="flex items-center gap-2 text-xs">
+                  <div className="flex items-center gap-1">
+                    <div className="w-3 h-3 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded border border-yellow-600"></div>
+                    <span className="text-gray-600">1st Place</span>
                   </div>
-                ))}
+                  <div className="flex items-center gap-1">
+                    <div className="w-3 h-3 bg-gradient-to-r from-gray-300 to-gray-400 rounded border border-gray-500"></div>
+                    <span className="text-gray-600">2nd Place</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <div className="w-3 h-3 bg-red-100 rounded border border-red-300"></div>
+                    <span className="text-gray-600">No Prize</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-8 gap-2">
+                {tickets.map((ticket) => {
+                  const getTicketStyles = (groupNumber) => {
+                    switch (groupNumber) {
+                      case 1: // 🥇 First Place - Gold
+                        return "bg-gradient-to-r from-yellow-400 to-yellow-500 border-yellow-600 text-yellow-900 shadow-lg ring-2 ring-yellow-300";
+                      case 2: // 🥈 Second Place - Silver
+                        return "bg-gradient-to-r from-gray-300 to-gray-400 border-gray-500 text-gray-900 shadow-md ring-2 ring-gray-300";
+                      case 3: // ❌ No Prize - Red
+                        return "bg-red-50 border-red-200 text-red-700";
+                      default: // ⏳ Pending - Gray
+                        return "bg-gray-50 border-gray-200 text-gray-700";
+                    }
+                  };
+
+                  const getTicketIcon = (groupNumber) => {
+                    switch (groupNumber) {
+                      case 1:
+                        return "🥇";
+                      case 2:
+                        return "🥈";
+                      case 3:
+                        return "❌";
+                      default:
+                        return "T";
+                    }
+                  };
+
+                  return (
+                    <div
+                      key={ticket.id}
+                      className={`${getTicketStyles(ticket.groupNumber)} rounded-lg p-2 text-center text-sm font-medium transition-all duration-200 hover:scale-105 relative`}
+                    >
+                      <div className="flex flex-col items-center">
+                        <span className="text-xs">
+                          {getTicketIcon(ticket.groupNumber)}
+                        </span>
+                        <span>#{ticket.ticketNumber}</span>
+                      </div>
+
+                      {/* 💰 Prize amount tooltip */}
+                      {Number(ticket.prizeAmount) > 0 && (
+                        <div className="absolute -top-2 -right-2 bg-green-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-md">
+                          $
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           ) : (
